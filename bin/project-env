@@ -37,6 +37,7 @@ alias gss='git stash save'
 alias gv='grep -v'
 alias gas='git add -A .; git status'
 alias gco='git checkout'
+alias gc='git commit -m'
 alias gd='git diff --color-words --word-diff'
 
 alias dj='cd $pa && python manage.py'
