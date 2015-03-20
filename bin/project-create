@@ -1,0 +1,4 @@
+
+cd ~/Projects/Hammer
+git clone git@github.com:Shrinking-World/Hammer.git
+

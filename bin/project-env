@@ -1,0 +1,80 @@
+#!/bin/bash
+# Start working on the simple project
+
+# Vars
+export p=$HOME/Projects/Hammer
+export gh='Shrinking-World/Hammer'
+export phip=54.244.95.205
+export ph=seaman@$phip
+export pa=$p/app
+export pb=$p/bin
+export pd=$p/doc
+export pt=$p/test
+
+# Use chrome if available
+[ -x /opt/google/chrome/google-chrome ] && 
+export browser=/opt/google/chrome/google-chrome
+
+# Aliases
+alias projecthammer=". ~/Projects/Hammer/bin/project-env"
+alias proot="cd $p"
+alias papp="cd $pa"
+alias pbin="cd $pb"
+alias pdoc="cd $pd"
+alias ptest="cd $pt"
+
+alias pull='git pull'
+alias push='git pull && git push'
+alias gre='git reset HEAD'
+alias grh='git reset --hard'
+alias grm='git rm'
+alias gs='git status'
+alias gsa='git stash apply'
+alias gsc='git stash clear'
+alias gsl='git stash list'
+alias gsp='git stash pop'
+alias gss='git stash save'
+alias gv='grep -v'
+alias gas='git add -A .; git status'
+alias gco='git checkout'
+alias gd='git diff --color-words --word-diff'
+
+alias dj='cd $pa && python manage.py'
+alias s='search'
+alias tres='tresults'
+
+alias ve='. env/bin/activate'
+alias de='deactivate'
+
+
+# Path
+
+export PATH=\
+$p/bin:\
+$p/test:\
+$p/socket:\
+/bin:\
+/sbin:\
+/usr/bin:\
+/usr/local/bin:\
+/opt/local/bin:\
+~/bin
+
+export _OLD_VIRTUAL_PATH=$PATH
+
+export PYTHONPATH=$pb:$p/env/lib/python2.7/site-packages
+
+# Directory
+cd $p
+
+# Show the banner
+cat $pb/welcome
+
+# Use virtualenv
+. $p/env/bin/activate
+echo "python = `which python`"
+echo
+
+path
+
+
