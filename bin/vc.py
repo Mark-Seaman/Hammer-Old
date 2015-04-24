@@ -17,7 +17,8 @@ def vc_delete(argv):
 	'''	
 	Delete the vc.
 	'''
-	print("vc: rm not implemented: ",argv[2])
+	print("Remove files from git",argv[2])
+	system('git rm %s' % argv[2])
 
 
 def vc_edit(argv):
@@ -49,14 +50,14 @@ def vc_list(argv):
 	'''
 	List the parts of the vc source code.
 	'''
-	system('git diff')
+	system('git status')
 
 
 def vc_show(argv):
 	'''	
 	Show the content of a vc.
 	'''
-	system('git status')
+	system('git diff')
 
 
 def vc_command(argv):
