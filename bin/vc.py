@@ -10,7 +10,7 @@ def vc_add(argv):
 	Create a new vc.
 	'''
 	print("New vc:"+argv[2])
-	system('git add -A .; git commit -m"%s"' % argv[2])
+	system('git add -A .; git commit -m"%s"' % ' '.join(argv[2:]))
 
 
 def vc_delete(argv):
