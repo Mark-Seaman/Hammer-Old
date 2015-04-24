@@ -8,7 +8,7 @@ export phip=54.244.95.205
 export ph=seaman@$phip
 export pa=$p/app
 export pb=$p/bin
-export pd=$p/doc
+export pd=$p/docs
 export pt=$p/test
 
 # Use chrome if available

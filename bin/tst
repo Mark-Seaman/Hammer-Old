@@ -1,0 +1,5 @@
+#!/bin/bash
+# Execute a doc script command
+
+python $p/bin/tst.py $*
+
