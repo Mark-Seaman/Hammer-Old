@@ -11,21 +11,23 @@ from os.path import join
 
 
 def vc_add_test():
-	system('vc add xxx')
-
+	#system('vc add xxx')
+	pass
 
 def vc_delete_test():
-	system('vc delete xxx')
+	#system('vc delete xxx')
+	pass
 
 
 def vc_edit_test():
-	system('vc edit xxx')
+	#system('vc edit xxx')
+	pass
 
 
 def vc_list_test():
-	system('vc list xxx')
+	system('vc list > /tmp/vc-test')
 
 
 def vc_show_test():
-	system('vc show xxx')
+	system('vc show > /tmp/vc-test')
 

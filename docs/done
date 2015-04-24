@@ -9,3 +9,9 @@ Project Structure
 * sprint plan
 * build repo
 * project-env
+
+Data type handlers
+* doc.py,  doc_test.py
+* cmd.py,  cmd_test.py
+* tst.py,  tst_test.py
+* vc.py,   vc_test.py

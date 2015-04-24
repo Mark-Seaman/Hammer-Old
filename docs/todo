@@ -2,12 +2,9 @@ Hammer Project - To Do List
 ============================
 
 Project Structure
-* doc.py,  doc_test.py
-* cmd.py,  cmd_test.py
-* vc.py,   vc_test.py
+
 * todo.py, todo_test.py
 * app.py,  app_test.py
-* tst.py,  tst_test.py
 * mkdocs
 * create pycharm project
 * Mac & Linux

@@ -31,3 +31,7 @@ def cmd_list_test():
 def cmd_show_test():
 	system('cmd show xxx')
 
+
+def cmd_python_pip_test():
+	system('pip list')
+

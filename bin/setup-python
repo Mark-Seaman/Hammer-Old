@@ -16,6 +16,8 @@ pip install Django==1.7.3
 pip install requests
 pip install django-floppyforms
 pip install celery redis nose
+pip install mkdocs
+pip install pandocs
 
 # IPython notebook & pandas
 #pip install ipython[notebook]
