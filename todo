@@ -1,0 +1,38 @@
+Hammer Project - To Do List
+============================
+
+Project Structure
+* doc.py,  doc_test.py
+* cmd.py,  cmd_test.py
+* vc.py,   vc_test.py
+* todo.py, todo_test.py
+* app.py,  app_test.py
+* tst.py,  tst_test.py
+* mkdocs
+* create pycharm project
+* Mac & Linux
+* doc outline
+
+Core Components
+* initial components - doc, script, app, test
+* continuous integration
+* automatic version control
+
+App Architecture
+* add Redis Lite to project
+* web service interface
+* angular js front-end
+* views created from models
+
+Test Tools
+* page testing
+* diff testing
+* automatic deployment
+* coverage
+
+Data Types
+* doc
+* tst
+* cmd
+* vc
+* todo
