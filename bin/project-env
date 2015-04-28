@@ -40,8 +40,6 @@ alias gco='git checkout'
 alias gc='git commit -m'
 alias gd='git diff --color-words --word-diff'
 
-alias j='python $pb/jack_script.py'
-alias dj='cd $pa && python manage.py'
 alias s='search'
 alias tres='tresults'
 
@@ -53,8 +51,6 @@ alias de='deactivate'
 
 export PATH=\
 $p/bin:\
-$p/test:\
-$p/socket:\
 /bin:\
 /sbin:\
 /usr/bin:\
