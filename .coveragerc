@@ -1,8 +1,0 @@
-[run]
-branch = True
-source = redislite
-cover_pylib = False
-
-[report]
-ignore-errors = True
-omit = *redis.*
