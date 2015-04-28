@@ -1,0 +1,5 @@
+#!/bin/bash
+# Run nosetests in bin directory
+
+nosetests -v bin/$1
+

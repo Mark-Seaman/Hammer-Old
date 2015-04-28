@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 
 from os import system, listdir, environ
-from os.path import join
+from os.path import join, exists
 from sys import argv
+
+from diff_tests import shell
 
 
 def command_add(argv):
@@ -15,8 +17,11 @@ def command_add(argv):
 	path2 = join(environ['pb'],'prototype.py')
 	command_content = open(path2).read().replace('prototype',command)
 	#print('Content: %s.py \n %s' % (command,command_content))
-	with open(path1,'w') as f:
-		f.write(command_content)
+	if exists(path1):
+		print('File already exists: '+path1)
+	else:
+		with open(path1,'w') as f:
+			f.write(command_content)
 	command_edit(argv)
 
 
@@ -25,7 +30,7 @@ def command_delete(argv):
 	Delete the command.
 	'''
 	print("Command:",argv[2])
-	system('rm bin/%s' % argv[2])
+	print(shell('rm bin/%s.py' % argv[2]))
 
 
 def command_edit(argv):
@@ -33,7 +38,7 @@ def command_edit(argv):
 	Edit the content of a command.
 	'''
 	print("Command:",argv[2])
-	system('e bin/%s.py' % argv[2])
+	print(shell('e bin/%s.py' % argv[2]))
 
 
 def command_help():
@@ -69,7 +74,7 @@ def command_show(argv):
 	Show the content of a command.
 	'''
 	print("Command:",argv[2])
-	system('cat bin/%s' % argv[2])
+	system('cat bin/%s.py' % argv[2])
 
 
 def command_command(argv):

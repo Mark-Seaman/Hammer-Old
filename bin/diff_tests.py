@@ -22,7 +22,7 @@ def shell(command):
     '''
     Execute a shell command and return its output
     '''
-    return Popen(command.split(' '), stdout=PIPE).stdout.read()
+    return str(Popen(command.split(' '), stdout=PIPE).stdout.read())
 
 
 def differences(answer,correct):
@@ -32,13 +32,13 @@ def differences(answer,correct):
     if answer!=correct:
         t1 = '/tmp/diff1'
         t2 = '/tmp/diff2'
-        with open(t1,'w') as file:
+        with open(t1,'wt') as file:
             file.write(answer)
-        with open(t2,'w') as file:
+        with open(t2,'wt') as file:
             file.write(correct)
-        diffs = Popen([ 'diff', t1, t2 ], stdout=PIPE).stdout.read()
+        diffs = str(Popen([ 'diff', t1, t2 ], stdout=PIPE).stdout.read())
         print('< actual     > expected')
-        print diffs
+        print (diffs)
         return diffs
 
 
@@ -49,7 +49,7 @@ def save(name, value=''):
     #print('save',name, value)
     if not exists('test'):
         mkdir('test')
-    with open('test/'+name,'w') as file:
+    with open('test/'+name,'wt') as file:
         file.write(value)
 
 
@@ -61,7 +61,7 @@ def recall(name):
         mkdir('test')
     if exists('test/'+name):
         with open('test/'+name) as file:
-            return file.read()
+            return str(file.read())
 
 
 def show_output(name):
@@ -126,7 +126,7 @@ def system_test():
     run_all_checks({'dummy': dummy_test})
 
 
-def execute_command(my_tests):
+def execute_command(argv, my_tests):
     '''
     Run the appropriate test command
     '''
@@ -134,7 +134,7 @@ def execute_command(my_tests):
         t = argv[2]
         if 'approve'==argv[1]:
             print('approve results '+t)
-            if my_tests.has_key(t):
+            if t in my_tests:
                 approve_results(t, my_tests[t])
             else:
                 print('no test found: '+t)
@@ -148,7 +148,8 @@ def execute_command(my_tests):
     else:
         if len(argv)>1:
             t = argv[1]
-            if my_tests.has_key(t):
+            print(my_tests)
+            if t in my_tests:
                 run_check(t, my_tests[t])
             else:
                 print('no test found: '+t)

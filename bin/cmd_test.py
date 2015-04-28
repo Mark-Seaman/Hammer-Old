@@ -9,29 +9,19 @@ Run all of the tests for the 'cmd' objects.  Output the test results.
 from os import listdir, environ, system
 from os.path import join
 
+from diff_tests import shell
+
 
 def cmd_add_test():
-	#system('cmd add xxx')
-	pass
-
-
-def cmd_delete_test():
-	system('cmd delete xxx')
-
-
-def cmd_edit_test():
-	#system('cmd edit xxx')
-	pass
+    print(shell('cmd add xxx'))
+    print(shell('cmd show xxx'))
+    print(shell('cmd delete xxx'))
 
 
 def cmd_list_test():
-	system('cmd list xxx')
-
-
-def cmd_show_test():
-	system('cmd show xxx')
+	shell('cmd list xxx')
 
 
 def cmd_python_pip_test():
-	system('pip list')
+	shell('pip list')
 

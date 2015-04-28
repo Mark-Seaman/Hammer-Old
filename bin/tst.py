@@ -56,4 +56,4 @@ my_tests = {
 Create a script that can be run from the tst
 '''
 if __name__=='__main__':
-    execute_command(my_tests)
+    execute_command(argv, my_tests)
