@@ -1,9 +1,0 @@
-{
-    "version": "1.0.244",
-    "git_version": "1.0.244",
-    "git_hash": "21ae35a0cedb89cc71bbf7140e39bbba73a7e366",
-    "git_branch": "master",
-    "git_origin": "git@github.com:Shrinking-World/Hammer.git",
-    "redis_bin": "",
-    "redis_server": {}
-}
