@@ -32,14 +32,15 @@ def differences(answer,correct):
     if answer!=correct:
         t1 = '/tmp/diff1'
         t2 = '/tmp/diff2'
-        with open(t1,'wt') as file:
-            file.write(answer)
-        with open(t2,'wt') as file:
-            file.write(correct)
+        with open(t1,'wt') as file1:
+            file1.write(str(answer))
+        with open(t2,'wt') as file2:
+            file2.write(str(correct))
         diffs = str(Popen([ 'diff', t1, t2 ], stdout=PIPE).stdout.read())
-        print('< actual     > expected')
-        print (diffs)
-        return diffs
+        if diffs:
+            print('Differences detected:     < actual     > expected')
+            print (diffs)
+            return diffs
 
 
 def save(name, value=''):
@@ -50,7 +51,7 @@ def save(name, value=''):
     if not exists('test'):
         mkdir('test')
     with open('test/'+name,'wt') as file:
-        file.write(value)
+        file.write(str(value))
 
 
 def recall(name):
@@ -148,7 +149,7 @@ def execute_command(argv, my_tests):
     else:
         if len(argv)>1:
             t = argv[1]
-            print(my_tests)
+            #print(my_tests)
             if t in my_tests:
                 run_check(t, my_tests[t])
             else:

@@ -6,7 +6,7 @@ from subprocess import Popen,PIPE
 from sys import argv
 
 from diff_tests import execute_command, shell, lines
-
+from cmd_test import cmd_python_pip_test, cmd_add_test, cmd_list_test
 
 def pwd_test():
     '''
@@ -38,7 +38,7 @@ def count_source_lines_test():
     Count the lines of source code in the tst.py file
     '''
     text = shell ('cat bin/tst.py')
-    violation = lines(text,55,60)
+    violation = lines(text,55,70)
     if violation:
         return violation+'\n'+text
     return text
@@ -49,6 +49,9 @@ my_tests = {
     'ls': ls_test,
     'source': source_test,
     'lines': count_source_lines_test,
+    'pip': cmd_python_pip_test,
+    'cmd_add': cmd_add_test,
+    'cmd_list': cmd_list_test,
 }
 
 

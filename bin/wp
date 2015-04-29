@@ -1,0 +1,6 @@
+#!/bin/bash
+# Which python am I using?
+
+python --version
+which python
+
