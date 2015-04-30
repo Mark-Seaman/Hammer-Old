@@ -1,0 +1,6 @@
+#!/bin/bash
+# Approve this test result
+
+tst like $1
+
+tst output $1

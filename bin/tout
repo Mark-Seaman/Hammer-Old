@@ -1,0 +1,5 @@
+#!/bin/bash
+# Show the test output for a test
+
+tst output $1
+

@@ -22,7 +22,7 @@ def command_add(argv):
 	else:
 		with open(path1,'w') as f:
 			f.write(command_content)
-	command_edit(argv)
+	#command_edit(argv)
 
 
 def command_delete(argv):
@@ -73,8 +73,12 @@ def command_show(argv):
 	'''	
 	Show the content of a command.
 	'''
-	print("Command:",argv[2])
-	system('cat bin/%s.py' % argv[2])
+	path = join(environ['pb'],argv[2]+'.py')
+	if not exists(path):
+		print('Command not found: '+path)
+	else:
+		print("Command:",path)
+		print(open(path).read())
 
 
 def command_command(argv):
@@ -83,27 +87,33 @@ def command_command(argv):
 	'''
 	if len(argv)>1:
 
-		if argv[1]=='add':
+		if argv[1]=='add-test':
 			command_add(argv)
 			exit(0)
 
-		if argv[1]=='delete':
-			command_delete(argv)
-			exit(0)
-
-		if argv[1]=='edit':
+		elif argv[1]=='add':
+			command_add(argv)
 			command_edit(argv)
 			exit(0)
 
-		if argv[1]=='list':
+		elif argv[1]=='delete':
+			command_delete(argv)
+			exit(0)
+
+		elif argv[1]=='edit':
+			command_edit(argv)
+			exit(0)
+
+		elif argv[1]=='list':
 			command_list(argv)
 			exit(0)
 
-		if argv[1]=='show':
+		elif argv[1]=='show':
 			command_show(argv)
 			exit(0)
 
-		print('No command command found, '+argv[1])
+		else:
+			print('No command command found, '+argv[1])
 		
 	command_help()
 

@@ -7,6 +7,16 @@ from subprocess import Popen,PIPE
 from sys import argv
 
 
+def limit_lines(shell_command, min=None, max=None):
+    text = shell (shell_command)
+    violation = lines(text,min,max)
+    if violation:
+        text = text.split('\n')
+        text = '\n'.join([line[:60] for line in text])
+        return violation+'\n'+text
+    return ''
+
+
 def lines(text, min=None, max=None):
     '''
     Guarantee that there are the correct number of lines in the text.
@@ -22,7 +32,8 @@ def shell(command):
     '''
     Execute a shell command and return its output
     '''
-    return str(Popen(command.split(' '), stdout=PIPE).stdout.read())
+    output = Popen(command.split(' '), stdout=PIPE).stdout
+    return output.read().decode(encoding='UTF-8')
 
 
 def differences(answer,correct):
@@ -36,7 +47,7 @@ def differences(answer,correct):
             file1.write(str(answer))
         with open(t2,'wt') as file2:
             file2.write(str(correct))
-        diffs = str(Popen([ 'diff', t1, t2 ], stdout=PIPE).stdout.read())
+        diffs = shell('diff %s %s' %(t1, t2))
         if diffs:
             print('Differences detected:     < actual     > expected')
             print (diffs)
@@ -82,7 +93,40 @@ def run_check(name, function):
     correct = recall(name+'.correct')
     if not correct:
         save('%s.correct' % name, answer)
-    differences(answer,correct)
+
+
+def show_status(my_tests):
+    '''
+    '''
+    print('\n\nTest Status:')
+    for name in my_tests:
+        answer = recall ('%s.out' % name)
+        correct = recall('%s.correct' % name)
+        if answer==correct:
+            print('    %-20s' % name)
+        else:
+            print('    %-20s FAIL' % name)
+      
+
+def show_diff(name):
+    '''
+    Show the results for one test
+    '''
+    answer = recall ('%s.out' % name)
+    correct = recall('%s.correct' % name)
+    if answer!=correct:
+        print('---------------------------------------------------------')
+        print('diff '+name+'...')
+        print('---------------------------------------------------------')
+        print(differences(answer,correct))
+
+
+def show_differences(my_tests):
+    '''
+    Display all of the unexpected results
+    '''
+    for name in my_tests:
+        show_diff(name)
 
 
 def approve_results(name, function):
@@ -96,8 +140,9 @@ def run_all_checks(my_tests):
     '''
     Execute all of the tests defined in the dictionary.
     '''
+    print('Running tests:')
     for t in my_tests:
-        print('running '+t+'...')
+        print('    running '+t+'...')
         run_check(t, my_tests[t])
 
 
@@ -110,10 +155,11 @@ def tst_help():
 
     examples:
         tst                 # runs all the tests
+        tst results         # display the differences from expected
         tst name            # runs a single test
-        tst approve name    # set the correct results
-        tst answer name     # show the output results
-        tst expected name   # show the correct results
+        tst like name       # set the correct results
+        tst output name     # show the output results
+        tst correct name    # show the correct results
       
             ''')
 
@@ -131,29 +177,54 @@ def execute_command(argv, my_tests):
     '''
     Run the appropriate test command
     '''
-    if len(argv)>2:
+    if len(argv)==1:
+        run_all_checks(my_tests)
+        show_status(my_tests)
+        #show_differences(my_tests)
+
+    if len(argv)==2:
+        t = argv[1]
+
+        if t in my_tests:
+            run_check(t, my_tests[t])
+            show_diff(t)
+
+        elif 'status'==t:
+            show_status(my_tests)
+        
+        elif 'results'==t:
+            print('Test differences: all tests')
+            show_differences(my_tests)
+
+        else:
+            print('no test found: '+t)
+            tst_help()
+
+
+    if len(argv)==3:
+        cmd = argv[1]
         t = argv[2]
-        if 'approve'==argv[1]:
-            print('approve results '+t)
+
+        if 'like'==cmd:
+            print('Like test results for '+t)
             if t in my_tests:
                 approve_results(t, my_tests[t])
             else:
                 print('no test found: '+t)
                 tst_help()
-        if 'answer'==argv[1]:
-            print('output from %s\n-----------------' % t)
+
+        elif 'output'==cmd:
+            print('Output from %s\n-----------------' % t)
             show_output(t)
-        if 'expected'==argv[1]:
-            print('expected from %s\n-----------------' % t)
+
+        elif 'correct'==cmd:
+            print('Expected correct output from %s\n-----------------' % t)
             show_expected(t)
-    else:
-        if len(argv)>1:
-            t = argv[1]
-            #print(my_tests)
-            if t in my_tests:
-                run_check(t, my_tests[t])
-            else:
-                print('no test found: '+t)
-                tst_help()
+
+        elif 'results'==cmd:
+            print('Show results: %s' % t)
+            show_diff(t)
+
         else:
-            run_all_checks(my_tests)
+            print('bad command: '+cmd)
+        

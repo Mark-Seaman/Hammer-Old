@@ -1,0 +1,5 @@
+#!/bin/bash
+# Show the unexpected results
+
+tst results $1
+

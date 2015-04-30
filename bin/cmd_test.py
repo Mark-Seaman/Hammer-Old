@@ -13,11 +13,15 @@ from diff_tests import shell
 
 
 def cmd_add_test():
-    return shell('cmd add xxx') + shell('cmd show xxx') + shell('cmd delete xxx')
+    return shell('cmd add-test xxx') + shell('cmd show xxx') + shell('cmd delete xxx')
 
 
 def cmd_list_test():
-	return shell('cmd list xxx')
+	return shell('cmd list') + shell('cmd show xxx')
+
+
+def cmd_list_test():
+    return shell('cmd list') + shell('cmd show xxx')
 
 
 def cmd_python_pip_test():
