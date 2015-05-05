@@ -84,6 +84,12 @@ def output_test():
     return shell('tst output cmd_add')
 
 
+def vc_test():
+    '''
+    Test the vc command set
+    '''
+    return shell('vc test')
+
 
 '''
 Create a script that can be run from the tst
@@ -103,6 +109,7 @@ if __name__=='__main__':
         'ps': process_status_test,
         'pwd': pwd_test,
         'source': source_test,
+        'vc': vc_test,
     }
 
     execute_command(argv, my_tests)

@@ -38,20 +38,20 @@ def vc_help():
 	Show all the vc vcs and their usage.
 	'''
 	print('''
-	usage: cmd vc [args]
+	usage: vc command [args]
 
     vc:
 
-        add     [file] -- Add a new vc
+        commit  [file] -- Add a new vc
         delete  [file] -- Delete a vc
         edit    [file] -- Edit the vc
-        list    [file] -- List all vcs
+        status  [file] -- List all vcs
         show    [file] -- Show a vc
       
 			''')
 
 
-def vc_list(argv):
+def vc_status(argv):
 	'''
 	List the parts of the vc source code.
 	'''
@@ -63,6 +63,14 @@ def vc_show(argv):
 	Show the content of a vc.
 	'''
 	system('git diff')
+
+
+def vc_test(argv):
+	'''
+	Test the commands for vc
+	'''
+	print('vc testing is OK')
+	system('python $p/bin/vc_test.py')
 
 
 def vc_command(argv):
@@ -83,15 +91,19 @@ def vc_command(argv):
 			vc_edit(argv)
 			exit(0)
 
-		if argv[1]=='list':
-			vc_list(argv)
+		if argv[1]=='status':
+			vc_status(argv)
 			exit(0)
 
 		if argv[1]=='show':
 			vc_show(argv)
 			exit(0)
 
-		print('No vc vc found, '+argv[1])
+		if argv[1]=='test':
+			vc_test(argv)
+			exit(0)
+
+		print('No vc command found, '+argv[1])
 		
 	vc_help()
 
