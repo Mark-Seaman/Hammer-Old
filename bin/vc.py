@@ -5,12 +5,17 @@ from os.path import join
 from sys import argv
 
 
-def vc_add(argv):
+def vc_commit(argv):
 	'''	
-	Create a new vc.
+	Commit all changes and share with others.
 	'''
-	print("New vc:"+argv[2])
-	system('git add -A .; git commit -m"%s"' % ' '.join(argv[2:]))
+	comment = argv[2:]
+	if not comment:
+		comment = 'Automatic commit of Hammer changes'
+	else:
+		comment = ' '.join(argv[2:])
+	print("vc commit:"+comment)
+	system('git add -A .; git commit -m"%s"' % comment)
 
 
 def vc_delete(argv):
@@ -66,8 +71,8 @@ def vc_command(argv):
 	'''
 	if len(argv)>1:
 
-		if argv[1]=='add':
-			vc_add(argv)
+		if argv[1]=='commit':
+			vc_commit(argv)
 			exit(0)
 
 		if argv[1]=='delete':
