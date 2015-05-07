@@ -48,11 +48,11 @@ def read(fname):
 setup(
     name='hammer',
     version="0.1.0",
-    description='A reusable Python application',
+    description='A reusable web application',
     long_description=read("README.rst"),
     author='Mark Seaman',
     author_email='mark.seaman@shrinking-world.com',
-    url='https://github.com/Mark-Seaman/Hammer',
+    url='https://github.com/Shrinking-World/Hammer',
     install_requires=REQUIRES,
     license=read("LICENSE"),
     zip_safe=False,
@@ -69,7 +69,7 @@ setup(
         'Programming Language :: Python :: Implementation :: CPython',
         'Programming Language :: Python :: Implementation :: PyPy'
     ],
-    py_modules=["py_cmd"],
+    py_modules=["hammer"],
     entry_points={
         'console_scripts': [
             "hammer = hammer:main"
