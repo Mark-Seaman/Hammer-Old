@@ -116,7 +116,7 @@ def show_diff(name):
     correct = recall('%s.correct' % name)
     if answer!=correct:
         print('---------------------------------------------------------')
-        print('diff '+name+'...')
+        print('                      '+name)
         print('---------------------------------------------------------')
         print(differences(answer,correct))
 
