@@ -2,24 +2,20 @@
 # Setup the Python Evironment
 
 # Create a Python virtualenv for Python 3
-virtualenv --no-site-packages --distribute -p /usr/bin/python2.7 env
+virtualenv --no-site-packages --distribute -p python3.4 env
 
 # Activate the virutalenv
 . env/bin/activate
 
-# Install components as Super User
-#sudo apt-get build-dep -y python-matplotlib
-#sudo apt-get install -y ipython-notebook
 
 # Install Django and support libraries
-pip install Django==1.7.3 
-pip install requests
-pip install django-floppyforms
 pip install celery redis nose
+pip install cookiecutter
+pip install django-floppyforms
+pip install Django==1.7.3 
+pip install docopt
 pip install mkdocs
 pip install pandocs
+pip install requests
+pip install tox
 
-# IPython notebook & pandas
-#pip install ipython[notebook]
-#pip install pandas
-#pip install matplotlib sympy
