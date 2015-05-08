@@ -113,18 +113,19 @@ def approve_results(name, function):
 
 def run_check(name, function):
     '''   Run the test and check the results   '''
+    print('    running '+name+'...')
     answer = function()
     save('%s.out' % name, answer)
     correct = recall(name+'.correct')
     if not correct:
         save('%s.correct' % name, answer)
+    show_diff(name)
 
 
 def run_all_checks(label, my_tests):
     '''   Execute all of the tests defined in the dictionary.   '''
-    print('Running %s tests:' % label)
+    print('Testing %s:' % label)
     for t in my_tests:
-        print('    running '+t+'...')
         run_check(t, my_tests[t])
 
 
@@ -151,7 +152,12 @@ def system_test():
     run_all_checks('dummy', {'dummy': dummy_test})
 
 
-def run_diff_checks(label, argv, my_tests):
+def run_diff_checks(label, my_tests):
+    '''   Run the appropriate test command   '''
+    run_all_checks(label, my_tests)
+
+
+def execute_tst_command(label, argv, my_tests):
     '''   Run the appropriate test command   '''
     if len(argv)==1:
         run_all_checks(label, my_tests)

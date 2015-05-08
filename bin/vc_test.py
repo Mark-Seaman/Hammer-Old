@@ -13,38 +13,37 @@ from sys import argv
 from diff_tests import run_diff_checks, shell, lines, limit_lines
 
 
-def vc_add_test():
-	pass
+def vc_commit_test():
+	return shell('echo Can not test this command')
 
 def vc_delete_test():
-	pass
+    return shell('echo Can not test this command')
 
 
-def vc_edit_test():
-	pass
+def vc_help_test():
+    return shell('vc help')
+
+
+def vc_show_test():
+    return shell('echo Can not test this command')
 
 
 def vc_status_test():
 	return shell('vc status')
 
 
-def vc_show_test():
-	pass
-
-
-def vc_test():
+def vc_checker():
     '''   Test the vc command set   '''
-    return shell('vc test')
-
-
-def main():
-    '''Execute all the desired diff tests'''
     my_tests = {
-        'vc': vc_test,
+        'vc-commit': vc_commit_test,
+        'vc-delete': vc_delete_test,
+        'vc-help': vc_help_test,
+        'vc-show': vc_show_test,
+        'vc-status': vc_status_test,
     }
-    run_diff_checks('vc', argv, my_tests)
+    run_diff_checks('vc', my_tests)
 
 
 # Create a script that can be run from the tst
 if __name__=='__main__':
-    print('main()')
+    print('vc_checker()')

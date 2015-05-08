@@ -80,7 +80,7 @@ def doc_command(argv):
 			commit_doc(argv)
 
 		elif argv[1]=='test':
-			system('nosetests -v')
+			system('echo nosetests -v')
 
 		else:
 			print('No doc doc found, '+argv[1])

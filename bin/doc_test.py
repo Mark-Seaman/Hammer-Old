@@ -44,7 +44,7 @@ def main():
         'doc-show': doc_show_test,
         'doc-path': doc_path_test,
     }
-	run_diff_checks('doc', argv, my_tests)
+	run_diff_checks('doc', my_tests)
 
 
 # Create a script that can be run from the tst

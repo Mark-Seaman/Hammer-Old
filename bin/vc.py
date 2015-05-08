@@ -4,6 +4,8 @@ from os import system, listdir, environ
 from os.path import join
 from sys import argv
 
+from vc_test import vc_checker
+
 
 def vc_commit(argv):
 	'''	
@@ -26,13 +28,6 @@ def vc_delete(argv):
 	system('git rm %s' % argv[2])
 
 
-def vc_edit(argv):
-	'''	
-	Edit the content of a vc.
-	'''
-	print("vc: edit not implemented: ",argv[2])
-
-
 def vc_help():
 	'''
 	Show all the vc vcs and their usage.
@@ -44,7 +39,7 @@ def vc_help():
 
         commit  [file] -- Add a new vc
         delete  [file] -- Delete a vc
-        edit    [file] -- Edit the vc
+        help    [file] -- See the vc commands
         status  [file] -- List all vcs
         show    [file] -- Show a vc
       
@@ -63,15 +58,7 @@ def vc_show(argv):
 	Show the content of a vc.
 	'''
 	system('git diff')
-
-
-def vc_test(argv):
-	'''
-	Test the commands for vc
-	'''
-	print('vc testing is OK')
-	system('python $p/bin/vc_test.py')
-
+	
 
 def vc_command(argv):
 	'''
@@ -81,31 +68,24 @@ def vc_command(argv):
 
 		if argv[1]=='commit':
 			vc_commit(argv)
-			exit(0)
 
-		if argv[1]=='delete':
+		elif argv[1]=='delete':
 			vc_delete(argv)
-			exit(0)
 
-		if argv[1]=='edit':
-			vc_edit(argv)
-			exit(0)
-
-		if argv[1]=='status':
+		elif argv[1]=='status':
 			vc_status(argv)
-			exit(0)
 
-		if argv[1]=='show':
+		elif argv[1]=='show':
 			vc_show(argv)
-			exit(0)
 
-		if argv[1]=='test':
-			vc_test(argv)
-			exit(0)
+		elif argv[1]=='test':
+			vc_checker()
 
-		print('No vc command found, '+argv[1])
-		
-	vc_help()
+		else:
+			print('No vc command found, '+argv[1])
+			vc_help()
+	else:
+		vc_help()
 
 
 '''

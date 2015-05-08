@@ -46,21 +46,20 @@ def output_test():
 
 
 
-def main():
+def tst_checker():
     '''Execute all tests for the tst command'''
     my_tests = {
         'like': like_test,
         'lines': source_lines_test,
         'ls': ls_test,
-        # 'nose': nose_test_execution,
         'output': output_test,
         'ps': process_status_test,
         'pwd': pwd_test,
     }
-    run_diff_checks('tst', argv, my_tests)
+    run_diff_checks('tst', my_tests)
 
    
 
 # Create a script that can be run from the tst
 if __name__=='__main__':
-    main()
+    tst_checker()

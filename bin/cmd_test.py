@@ -46,7 +46,7 @@ def main():
         'pip': cmd_python_pip_test,
         'source': source_test,
     }
-    run_diff_checks('cmd', argv, my_tests)
+    run_diff_checks('cmd', my_tests)
 
 
 # Create a script that can be run from the tst
