@@ -175,6 +175,13 @@ def tst_help():
         tout       # tst output
         tcorrect   # tst correct
         tst        # systest
+        nose       # nosetests
+
+    Scripts
+        doc        # Documents
+        cmd        # Executable commands
+        vc         # Version control with git
+        tst        # Testing script
 
             ''')
 
