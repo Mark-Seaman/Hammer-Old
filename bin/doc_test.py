@@ -8,31 +8,45 @@ Run all of the tests that are available.  Output the test results.
 
 from os import listdir, environ, system
 from os.path import join, exists
+from sys import argv
 
-from diff_tests import lines, shell
+from doc import doc_path
+from diff_tests import run_diff_checks, shell, lines, limit_lines
 
 
 def doc_add_test():
-	print(shell('doc add xxx_sample_document'))
-	assert(exists(join(environ['pd'],'xxx_sample_document')))
-
-
-def doc_delete_test():
-	print(shell('doc delete xxx_sample_document'))
-	assert(not exists(join(environ['pd'],'xxx_sample_document')))
+	'''Test that a document can be added to the system'''
+	return shell('doc add xxx_sample_document') + shell('doc delete xxx_sample_document')
 
 
 def doc_list_test():
-	doc_list = shell('doc list')
-	violation = lines(doc_list, 4, 6)
-	print('Doc list: %s' % violation)
-	assert(not violation)
+	'''List all of the existing documents '''
+	return limit_lines('doc list', 4, 8)
 
 
 def doc_show_test():
-	text = shell('doc show todo')
-	print(text)
-	x = lines(text,30,37)
-	print('lines: %s' % x)
-	assert(not x)
+	'''Display the todo list document'''
+	return limit_lines('doc show todo')
 
+
+def doc_path_test():
+	'''Validate the document path'''
+	assert doc_path('doc').replace(environ['p'], '') == '/docs/doc'
+
+
+
+def main():
+	'''Execute all the desired diff tests'''
+	my_tests = {
+        'doc-add': doc_add_test,
+        #'doc-delete': doc_delete_test,
+        'doc-list-test': doc_list_test,
+        'doc-show': doc_show_test,
+        'doc-path': doc_path_test,
+    }
+	run_diff_checks('doc', argv, my_tests)
+
+
+# Create a script that can be run from the tst
+if __name__=='__main__':
+    main()

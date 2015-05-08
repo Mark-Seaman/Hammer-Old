@@ -10,7 +10,7 @@ from os import listdir, environ, system
 from os.path import join
 from sys import argv
 
-from diff_tests import execute_command, shell, lines, limit_lines
+from diff_tests import run_diff_checks, shell, lines, limit_lines
 
 
 def vc_add_test():
@@ -32,14 +32,19 @@ def vc_show_test():
 	pass
 
 
+def vc_test():
+    '''   Test the vc command set   '''
+    return shell('vc test')
 
-'''
-Create a test that can be run from the shell
-'''
-if __name__=='__main__':
 
+def main():
+    '''Execute all the desired diff tests'''
     my_tests = {
-        'vc': vc_status_test,
+        'vc': vc_test,
     }
+    run_diff_checks('vc', argv, my_tests)
 
-    execute_command(argv, my_tests)
+
+# Create a script that can be run from the tst
+if __name__=='__main__':
+    print('main()')

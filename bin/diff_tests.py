@@ -8,6 +8,7 @@ from sys import argv
 
 
 def limit_lines(shell_command, min=None, max=None):
+    '''Limit the lines to a certain number or echo all the output'''
     text = shell (shell_command)
     violation = lines(text,min,max)
     if violation:
@@ -18,9 +19,7 @@ def limit_lines(shell_command, min=None, max=None):
 
 
 def lines(text, min=None, max=None):
-    '''
-    Guarantee that there are the correct number of lines in the text.
-    '''
+    '''Guarantee that there are the correct number of lines in the text.'''
     num_lines_output = len(text.split('\n'))
     if min and num_lines_output<min:
         return('Min count lines: actual=%d, min=%d' % (num_lines_output, min))
@@ -29,17 +28,13 @@ def lines(text, min=None, max=None):
 
 
 def shell(command):
-    '''
-    Execute a shell command and return its output
-    '''
+    '''   Execute a shell command and return its output   '''
     output = Popen(command.split(' '), stdout=PIPE).stdout
     return output.read().decode(encoding='UTF-8')
 
 
 def differences(answer,correct):
-    '''
-    Calculate the diff of two strings
-    '''
+    '''   Calculate the diff of two strings   '''
     if answer!=correct:
         t1 = '/tmp/diff1'
         t2 = '/tmp/diff2'
@@ -55,9 +50,7 @@ def differences(answer,correct):
 
 
 def save(name, value=''):
-    '''
-    Save the value by its name
-    '''
+    '''   Save the value by its name   '''
     #print('save',name, value)
     if not exists('test'):
         mkdir('test')
@@ -66,9 +59,7 @@ def save(name, value=''):
 
 
 def recall(name):
-    '''
-    Recall the value by its name
-    '''
+    '''   Recall the value by its name   '''
     if not exists('test'):
         mkdir('test')
     if exists('test/'+name):
@@ -77,27 +68,17 @@ def recall(name):
 
 
 def show_output(name):
+    '''Show the output text for the last test run'''
     print(recall(name+'.out'))
 
 
 def show_expected(name):
+    '''Lookup the expected correct result for this test'''
     print(recall(name+'.correct'))
 
 
-def run_check(name, function):
-    '''
-    Run the test and check the results
-    '''
-    answer = function()
-    save('%s.out' % name, answer)
-    correct = recall(name+'.correct')
-    if not correct:
-        save('%s.correct' % name, answer)
-
-
 def show_status(my_tests):
-    '''
-    '''
+    '''  Display the tests that failed  '''
     print('\n\nTest Status:')
     for name in my_tests:
         answer = recall ('%s.out' % name)
@@ -109,9 +90,7 @@ def show_status(my_tests):
       
 
 def show_diff(name):
-    '''
-    Show the results for one test
-    '''
+    '''   Show the results for one test   '''
     answer = recall ('%s.out' % name)
     correct = recall('%s.correct' % name)
     if answer!=correct:
@@ -122,34 +101,35 @@ def show_diff(name):
 
 
 def show_differences(my_tests):
-    '''
-    Display all of the unexpected results
-    '''
+    '''   Display all of the unexpected results   '''
     for name in my_tests:
         show_diff(name)
 
 
 def approve_results(name, function):
-    '''
-    Approve the test results
-    '''
+    '''   Approve the test results   '''
     save('%s.correct' % name, recall(name+'.out'))
 
 
-def run_all_checks(my_tests):
-    '''
-    Execute all of the tests defined in the dictionary.
-    '''
-    print('Running tests:')
+def run_check(name, function):
+    '''   Run the test and check the results   '''
+    answer = function()
+    save('%s.out' % name, answer)
+    correct = recall(name+'.correct')
+    if not correct:
+        save('%s.correct' % name, answer)
+
+
+def run_all_checks(label, my_tests):
+    '''   Execute all of the tests defined in the dictionary.   '''
+    print('Running %s tests:' % label)
     for t in my_tests:
         print('    running '+t+'...')
         run_check(t, my_tests[t])
 
 
 def tst_help():
-    '''
-    Show the details of the 'tst' command
-    '''
+    '''   Show the details of the 'tst' command   '''
     print('''
     usage: tst [command] [testname]
 
@@ -165,21 +145,17 @@ def tst_help():
 
 
 def system_test():
-    '''
-    Check the checker
-    '''
+    '''   Check the checker   '''
     def dummy_test():
          return 'pass'
-    run_all_checks({'dummy': dummy_test})
+    run_all_checks('dummy', {'dummy': dummy_test})
 
 
-def execute_command(argv, my_tests):
-    '''
-    Run the appropriate test command
-    '''
+def run_diff_checks(label, argv, my_tests):
+    '''   Run the appropriate test command   '''
     if len(argv)==1:
-        run_all_checks(my_tests)
-        show_status(my_tests)
+        run_all_checks(label, my_tests)
+        #show_status(my_tests)
         #show_differences(my_tests)
 
     if len(argv)==2:

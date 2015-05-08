@@ -8,9 +8,7 @@ from diff_tests import shell
 
 
 def command_add(argv):
-	'''	
-	Create a new command.
-	'''
+	'''Create a new command.'''
 	print("Add new command:"+argv[2])
 	command = argv[2]
 	path1 = join(environ['pb'],'%s.py' % command)
@@ -26,25 +24,19 @@ def command_add(argv):
 
 
 def command_delete(argv):
-	'''	
-	Delete the command.
-	'''
+	'''	Delete the command.'''
 	print("Command:",argv[2])
 	print(shell('rm bin/%s.py' % argv[2]))
 
 
 def command_edit(argv):
-	'''	
-	Edit the content of a command.
-	'''
+	'''	Edit the content of a command.'''
 	print("Command:",argv[2])
 	print(shell('e bin/%s.py' % argv[2]))
 
 
 def command_help():
-	'''
-	Show all the command commands and their usage.
-	'''
+	'''Show all the command commands and their usage.'''
 	print('''
 	usage: cmd command [args]
 
@@ -60,19 +52,18 @@ def command_help():
 
 
 def command_list(argv):
-	'''
-	List the parts of the command source code.
-	'''
+	'''List the parts of the command source code.'''
 	print("List the contents of this command")
 	for d in ('bin',):
+		files = listdir(join(environ['p'],d))
+		files = [f for f in files if not f.endswith('.pyc')]
+		files = sorted(files)
 		print(d+':')
-		print('    '+'\n    '.join(listdir(join(environ['p'],d))))
+		print('    '+'\n    '.join(files))
 
 
 def command_show(argv):
-	'''	
-	Show the content of a command.
-	'''
+	'''	Show the content of a command.'''
 	path = join(environ['pb'],argv[2]+'.py')
 	if not exists(path):
 		print('Command not found: '+path)
@@ -82,35 +73,27 @@ def command_show(argv):
 
 
 def command_command(argv):
-	'''
-	Execute all of the command specific commands
-	'''
+	'''Execute all of the command specific commands'''
 	if len(argv)>1:
 
 		if argv[1]=='add-test':
 			command_add(argv)
-			exit(0)
 
 		elif argv[1]=='add':
 			command_add(argv)
 			command_edit(argv)
-			exit(0)
 
 		elif argv[1]=='delete':
 			command_delete(argv)
-			exit(0)
 
 		elif argv[1]=='edit':
 			command_edit(argv)
-			exit(0)
 
 		elif argv[1]=='list':
 			command_list(argv)
-			exit(0)
 
 		elif argv[1]=='show':
 			command_show(argv)
-			exit(0)
 
 		else:
 			print('No command command found, '+argv[1])
@@ -118,8 +101,6 @@ def command_command(argv):
 	command_help()
 
 
-'''
-Create a script that can be run from the shell
-'''
+'''Create a script that can be run from the shell'''
 if __name__=='__main__':
 	command_command(argv)
