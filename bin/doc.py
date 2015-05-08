@@ -1,8 +1,11 @@
 #!/usr/bin/env python
 
 from os import system, listdir, environ
-from os.path import join
+from os.path import join, exists
 from sys import argv
+
+from doc_test import doc_checker
+
 
 def doc_path(doc):
 	'''Return the path name that corresponds to this document.'''
@@ -11,20 +14,26 @@ def doc_path(doc):
 
 def doc_add(argv):
 	'''	Create a new doc.'''
-	print("New doc:"+argv[2])
-	system('echo "Document %s" > docs/%s' % (argv[2],argv[2]))
+	d = doc_path(argv[2])
+	print("New doc:"+d)
+	system('echo "Document %s" > %s' % (d,d))
 
 
 def doc_delete(argv):
 	'''	Delete the doc.'''
-	print("rm docs/"+argv[2])
-	system('rm docs/'+argv[2])
+	d = doc_path(argv[2])
+	if not exists(d):
+		print('doc delete: no file found, '+d)
+	else:
+		print('doc delete: '+d)
+		system('rm '+d)
 
 
 def doc_edit(argv):
 	'''	Edit the content of a doc.'''
-	print("doc:",argv[2])
-	system('e docs/'+argv[2])
+	d = doc_path(argv[2])
+	print("edit:",d)
+	system('e '+d)
 
 
 def doc_help():
@@ -53,9 +62,10 @@ def doc_list(argv):
 
 def doc_show(argv):
 	'''	Show the content of a doc.'''
-	print("doc:",argv[2])
-	system('cat docs/%s' % argv[2])
-
+	d = doc_path(argv[2])
+	print("doc:",d)
+	system('cat '+d)
+	
 
 def doc_command(argv):
 	'''Execute all of the doc specific docs'''
@@ -80,7 +90,7 @@ def doc_command(argv):
 			commit_doc(argv)
 
 		elif argv[1]=='test':
-			system('echo nosetests -v')
+			doc_checker()
 
 		else:
 			print('No doc doc found, '+argv[1])

@@ -4,7 +4,8 @@ from os import system, listdir, environ
 from os.path import join, exists
 from sys import argv
 
-from diff_tests import shell
+from diff_tester import shell
+from cmd_test import cmd_checker
 
 
 def command_add(argv):
@@ -72,7 +73,7 @@ def command_show(argv):
 		print(open(path).read())
 
 
-def command_command(argv):
+def cmd_command(argv):
 	'''Execute all of the command specific commands'''
 	if len(argv)>1:
 
@@ -95,12 +96,17 @@ def command_command(argv):
 		elif argv[1]=='show':
 			command_show(argv)
 
+		elif argv[1]=='test':
+			cmd_checker()
+
 		else:
 			print('No command command found, '+argv[1])
-		
-	command_help()
+			command_help()
+
+	else:
+		command_help()
 
 
 '''Create a script that can be run from the shell'''
 if __name__=='__main__':
-	command_command(argv)
+ 	cmd_command(argv)

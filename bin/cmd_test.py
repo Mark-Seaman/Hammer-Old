@@ -11,7 +11,7 @@ from os import listdir, environ, system
 from os.path import join
 from sys import argv
 
-from diff_tests import run_diff_checks, shell, lines, limit_lines
+from tst import run_diff_checks, shell, lines, limit_lines
 
 
 def cmd_add_test():
@@ -39,7 +39,7 @@ def source_test():
     return '\n'.join(result)+'\n'
 
 
-def main():
+def cmd_checker():
     my_tests = {
         'command-add': cmd_add_test,
         'commands': cmd_list_test,
@@ -51,4 +51,4 @@ def main():
 
 # Create a script that can be run from the tst
 if __name__=='__main__':
-    main()
+    cmd_checker()

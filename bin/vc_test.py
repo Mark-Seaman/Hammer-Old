@@ -10,7 +10,7 @@ from os import listdir, environ, system
 from os.path import join
 from sys import argv
 
-from diff_tests import run_diff_checks, shell, lines, limit_lines
+from tst import run_diff_checks, shell, lines, limit_lines
 
 
 def vc_commit_test():
@@ -46,4 +46,4 @@ def vc_checker():
 
 # Create a script that can be run from the tst
 if __name__=='__main__':
-    print('vc_checker()')
+    print(vc_checker())
