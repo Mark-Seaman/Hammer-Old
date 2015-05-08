@@ -178,6 +178,10 @@ def execute_tst_command(argv):
         elif 'list'==t:
             print(test_list())
 
+        elif 'test'==t:
+            from tst_test import tst_checker
+            tst_checker()
+
         else:
             print('no test found: '+t)
             tst_help()
