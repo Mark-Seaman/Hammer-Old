@@ -165,6 +165,9 @@ def run_diff_checks(label, my_tests):
 def execute_tst_command(argv):
     '''   Execute the appropriate test command   '''
 
+    if len(argv)==1:
+        system('systest')
+
     if len(argv)==2:
         t = argv[1]
 

@@ -24,11 +24,6 @@ def cmd_list_test():
     return shell('cmd list') + shell('cmd show xxx')
 
 
-def cmd_python_pip_test():
-    '''Check the python setup for pip'''
-    return shell('pip list')
-
-
 def source_test():
     '''   List the source files from several directories   '''
     dirs = ['','bin','test']
@@ -41,10 +36,9 @@ def source_test():
 
 def cmd_checker():
     my_tests = {
-        'command-add': cmd_add_test,
-        'commands': cmd_list_test,
-        'pip': cmd_python_pip_test,
-        'source': source_test,
+        'cmd-add': cmd_add_test,
+        'cmd-list': cmd_list_test,
+        'cmd-source': source_test,
     }
     run_diff_checks('cmd', my_tests)
 
