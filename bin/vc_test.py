@@ -14,22 +14,28 @@ from tst import run_diff_checks, shell, lines, limit_lines
 
 
 def vc_commit_test():
-	return shell('echo Can not test this command')
+    '''Test the commits'''
+    return shell('echo Can not test this command')
+
 
 def vc_delete_test():
+    '''Test removing files from version control'''
     return shell('echo Can not test this command')
 
 
 def vc_help_test():
+    '''Test the version command help'''
     return shell('vc help')
 
 
 def vc_show_test():
-    return shell('echo Can not test this command')
+    '''Test showing source code changes'''
+    return shell('vc show')
 
 
 def vc_status_test():
-	return shell('vc status')
+    '''Test the git status command'''
+    return shell('vc status')
 
 
 def vc_checker():
