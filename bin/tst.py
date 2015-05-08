@@ -76,11 +76,13 @@ def recall(name):
 
 def show_output(name):
     '''Show the output text for the last test run'''
+    print('Output from %s\n-----------------' % name)
     print(recall(name+'.out'))
 
 
 def show_expected(name):
     '''Lookup the expected correct result for this test'''
+    print('Expected correct output from %s\n-----------------' % name)
     print(recall(name+'.correct'))
 
 
@@ -154,6 +156,18 @@ def tst_help():
         tst output name     # show the output results
         tst correct name    # show the correct results
       
+    subcommands of tst:
+
+    No args
+        list       # List the tests to run
+        status     # Show the failing tests
+        results    # Show the unexpected results
+
+    One test arg
+        output
+        correct
+
+
             ''')
 
 
@@ -168,7 +182,7 @@ def execute_tst_command(argv):
     if len(argv)==1:
         system('systest')
 
-    if len(argv)==2:
+    elif len(argv)==2:
         t = argv[1]
 
         if 'status'==t:
@@ -179,17 +193,21 @@ def execute_tst_command(argv):
             show_differences(test_list())
 
         elif 'list'==t:
-            print(test_list())
+            for t in sorted(test_list()):
+                print (t)
 
         elif 'test'==t:
             from tst_test import tst_checker
             tst_checker()
 
+        elif 'help'==t:
+            tst_help()
+
         else:
             print('no test found: '+t)
             tst_help()
 
-    if len(argv)==3:
+    elif len(argv)==3:
         cmd = argv[1]
         t = argv[2]
 
@@ -197,11 +215,9 @@ def execute_tst_command(argv):
             approve_results(t)
             
         elif 'output'==cmd:
-            print('Output from %s\n-----------------' % t)
             show_output(t)
 
         elif 'correct'==cmd:
-            print('Expected correct output from %s\n-----------------' % t)
             show_expected(t)
 
         elif 'results'==cmd:
