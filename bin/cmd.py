@@ -4,7 +4,7 @@ from os import system, listdir, environ
 from os.path import join, exists
 from sys import argv
 
-from diff_tester import shell
+from tst import shell
 from cmd_test import cmd_checker
 
 

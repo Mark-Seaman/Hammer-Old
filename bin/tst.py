@@ -120,6 +120,7 @@ def approve_results(name):
         save('%s.correct' % name, answer)
     else:
         print('No output from test: '+name)
+        save('%s.correct' % name, '')
 
 
 def run_check(name, function):

@@ -25,7 +25,7 @@ def doc_list_test():
 
 def doc_show_test():
 	'''Display the todo list document'''
-	return limit_lines('doc show todo')
+	return limit_lines('doc show todo', 30, 52)
 
 
 def doc_checker():
