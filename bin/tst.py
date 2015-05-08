@@ -164,9 +164,17 @@ def tst_help():
         results    # Show the unexpected results
 
     One test arg
-        output
-        correct
+        output     # Show the output
+        correct    # Show the correct output
+        results    # Show the unexpected results
 
+    Shortcut commands
+        tlike      # tst like
+        tres       # tst results
+        tstatus    # tst status
+        tout       # tst output
+        tcorrect   # tst correct
+        tst        # systest
 
             ''')
 
