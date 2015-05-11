@@ -13,15 +13,18 @@ from sys import argv
 from tst import run_diff_checks, shell, lines, limit_lines
 
 
-def book_list_test():
-    '''List all of the existing documents '''
-    #return limit_lines('book list', 4, 8)
-    return shell('book list')
-
+def book_changes_test():
+    '''Make sure there are no uncommitted changes pending'''
+    return shell('book changes')
 
 def book_assemble_test():
     '''Test the assembly of a book from its parts'''
     return shell('book assemble')
+
+
+def book_files_test():
+    '''Show a list of all the source files in the book'''
+    return shell('book book_files')
 
 
 def book_help_test():
@@ -29,9 +32,10 @@ def book_help_test():
     return shell('book help')
 
 
-def book_files_test():
-    '''Show a list of all the source files in the book'''
-    return shell('book book_files')
+def book_list_test():
+    '''List all of the existing documents '''
+    #return limit_lines('book list', 4, 8)
+    return shell('book list')
 
 
 def book_outline_test():
@@ -42,10 +46,11 @@ def book_outline_test():
 def book_checker():
     '''Execute all the desired diff tests'''
     my_tests = {
-        'book-list': book_list_test,
+    'book-changes': book_changes_test,
         'book-assemble': book_assemble_test,
-        'book-help': book_help_test,
         'book-files': book_files_test,
+        'book-help': book_help_test,
+        'book-list': book_list_test,
         'book-outline': book_outline_test,
 
     }
