@@ -24,11 +24,23 @@ def book_assemble_test():
     return shell('book assemble')
 
 
+def book_help():
+    '''Show help for book script'''
+    return shell('book help')
+
+
+def book_files():
+    '''Show a list of all the source files in the book'''
+    return shell('book book_files')
+
+
 def book_checker():
     '''Execute all the desired diff tests'''
     my_tests = {
         'book-list': book_list_test,
         'book-assemble': book_assemble_test,
+        'book-help': book_help,
+        'book-files': book_files,
     }
     run_diff_checks('book', my_tests)
 

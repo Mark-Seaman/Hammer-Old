@@ -82,8 +82,10 @@ def book_help():
 	'''
 	Show all the book commands and their usage.
 	'''
-	print('''usage: bo book-command [args]
-    book-commands:
+	print('''
+    usage: book command [args]
+    
+    commands:
 
         commit [message args] -- Commit all changes to the book
         files                 -- List all of the files
@@ -164,5 +166,6 @@ def book_command(argv):
 		
 		else:
 			print('No book command found, '+argv[1])
+			book_help()
 	else:	
 		book_help()
