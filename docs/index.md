@@ -22,7 +22,7 @@ Hammer Docs uses **pandoc** to reformat the output into the format that you
 need.
 
 
-## Commands
+## Script
 
 Hammer Commands let you create scripts to automate all of the key data types
 that you use in your application.

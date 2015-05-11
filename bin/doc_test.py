@@ -27,6 +27,10 @@ def doc_show_test():
 	'''Display the todo list document'''
 	return limit_lines('doc show todo', 30, 52)
 
+def doc_text_test():
+    '''Display a concatenation of all source files'''
+    return shell('doc text')
+
 
 def doc_checker():
 	'''Execute all the desired diff tests'''
@@ -34,6 +38,7 @@ def doc_checker():
         'doc-add': doc_add_test,
         'doc-list': doc_list_test,
         'doc-show': doc_show_test,
+        'doc-text': doc_text_test,
     }
 	run_diff_checks('doc', my_tests)
 

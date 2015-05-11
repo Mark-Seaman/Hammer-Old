@@ -2,6 +2,7 @@ from os import system
 from re import sub
 from sys import argv
 
+from book_test import book_checker
 from cmd_test import cmd_checker
 from doc_test import doc_checker
 from vc_test import vc_checker
@@ -36,6 +37,7 @@ def system_test_list():
         'sys-nose': nose_test_execution,
         'sys-vc': vc_checker,
         'sys-cmd': cmd_checker,
+        'sys-book': book_checker,
         'sys-doc': doc_checker,
         'sys-tst': tst_checker,
         'sys-pip': cmd_python_pip_test,

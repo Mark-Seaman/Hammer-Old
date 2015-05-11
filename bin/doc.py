@@ -48,6 +48,7 @@ def doc_help():
         edit    [file] -- Edit the doc
         list    [file] -- List all docs
         show    [file] -- Show a doc
+        text           -- Show markdown for all docs
       
 			''')
 
@@ -67,12 +68,23 @@ def doc_show(argv):
 	system('cat '+d)
 	
 
+def doc_text():
+	'''	Show the content of all docs.'''
+	d = doc_path('')
+	for f in listdir(d):
+		print("# doc:",d+f)	
+		system('cat '+d+f)
+	
+
 def doc_command(argv):
 	'''Execute all of the doc specific docs'''
 	if len(argv)>1:
 
 		if argv[1]=='add':
 			doc_add(argv)
+
+		elif argv[1]=='commit':
+			commit_doc(argv)
 
 		elif argv[1]=='delete':
 			doc_delete(argv)
@@ -86,11 +98,11 @@ def doc_command(argv):
 		elif argv[1]=='show':
 			doc_show(argv)
 
-		elif argv[1]=='commit':
-			commit_doc(argv)
-
 		elif argv[1]=='test':
 			doc_checker()
+
+		elif argv[1]=='text':
+			doc_text()
 
 		else:
 			print('No doc doc found, '+argv[1])
