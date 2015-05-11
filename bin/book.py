@@ -1,5 +1,5 @@
 from os import system, listdir, environ, chdir
-from os.path import join
+from os.path import join, isfile
 from sys import argv
 
 from tst import shell
@@ -51,7 +51,7 @@ def doc_commit_comment(argv):
 	'''
 	Select the comment to tag onto the commit.
 	'''
-	if len(argv)>1:
+	if len(argv)>2:
 		return ' '.join(argv[2:])
 	else:
 		return 'Automatic book commit'
@@ -76,6 +76,14 @@ def create_book_pdf():
 		''')
 
 
+def book_edit(argv):
+	'''Edit the book content'''
+	if len(argv)>2:
+	    system('e '+join(environ['book'],argv[2]))
+	else:
+		system('e '+environ['book'])
+
+
 def book_files():
 	'''	
 	List all of the files in the book using the tree command.
@@ -98,6 +106,7 @@ def book_help():
         files                 -- List all of the files
         help                  -- Show the available commands
         list                  -- List the parts of the book
+        outline               -- Show the outline for the book
         pdf                   -- Build a PDF file of the book content
         script                -- List the command scripts
         test                  -- Run all system tests
@@ -112,14 +121,16 @@ def book_list():
 	results = "List the contents of this book\n"
 	for d in ['.', 'book', 'chapters']:
 		book_dir = join(environ['book'],d)
-		results += d+':    \n'+'\n    '.join(listdir(book_dir))
+		files = [f for f in listdir(book_dir) if isfile(join(book_dir,f))]
+		results += '\n'+d+':    \n    '+'\n    '.join(sorted(files))
 	return results
 
 
 def book_outline():
+	system('cat $book/outline/* > $book/Outline.md')
 	results = "Outline of this book\n"
 	outline_dir = join(environ['book'],'outline')
-	for f in listdir(outline_dir):
+	for f in sorted(listdir(outline_dir)):
 		path = join(outline_dir,f)
 		results += '\n\n# '+path+':\n'+open(path).read()
 	return results
@@ -141,7 +152,7 @@ def book_show():
 	'''
 	print("Show the book content in a browswer")
 
-	system('rbg mkdocs serve; sleep 3')
+	system('cd ..; rbg mkdocs serve; sleep 3')
 	system('web http://127.0.0.1:8000/book/Cover/')
 
 
@@ -161,6 +172,9 @@ def book_command(argv):
 
 		elif argv[1]=='commit':
 			doc_commit(argv)
+
+		elif argv[1]=='edit':
+			book_edit(argv)
 
 		elif argv[1]=='files':
 			book_files()
