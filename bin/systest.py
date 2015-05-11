@@ -23,7 +23,7 @@ def nose_test_execution():
 
 def process_status_test():
     '''Make sure that there are not too many processes running'''
-    return limit_lines ('ps -e',190,200)
+    return limit_lines ('ps -e',190,220)
 
 
 def pwd_test():

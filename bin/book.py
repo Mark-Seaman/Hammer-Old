@@ -25,23 +25,29 @@ def assemble_book_parts():
 	return results
 
 
-def commit_command(argv):
+def doc_changes(argv):
 	'''
 	Form the shell script for the commit command.
 	'''
-	comment = commit_comment(argv)
-	command = '''#!/bin/bash
-	# Commit all changes 
+	command = 'git status'
+	return 'List all pending changes to the book\n' +shell(command)
 
-	cd $p
-	git add -A .
-	git commit -m"%s" 
+
+def doc_commit(argv):
+	'''
+	Form the shell script for the commit command.
+	'''
+	comment = doc_commit_comment(argv)
+	command = '''echo Commit all changes from the book project
+		git add -A . &&
+		git commit -m"%s" &&
+		git pull &&
+		git push
 	''' % comment
-	print("Commit all changes from the book project")
 	system(command)
 
 
-def commit_comment(argv):
+def doc_commit_comment(argv):
 	'''
 	Select the comment to tag onto the commit.
 	'''
@@ -55,7 +61,7 @@ def count_words():
 	'''
 	Count all of the words in the book
 	'''
-	system('wc -w docs/book/Book.md')
+	system('wc -w book/Book.md')
 
 
 def create_book_pdf():
@@ -64,7 +70,7 @@ def create_book_pdf():
 	'''
 	system('''
 		rm Book.pdf; 
-		pandoc --toc docs/book/Book.md -o Book.pdf 2> /dev/null; 
+		pandoc --toc book/Book.md -o Book.pdf 2> /dev/null; 
 		ls -l Book.pdf
 		cp Book.pdf /home/seaman/Dropbox/Shrinking_World/Book
 		''')
@@ -87,6 +93,7 @@ def book_help():
     
     commands:
 
+        changes               -- List doc changes 
         commit [message args] -- Commit all changes to the book
         files                 -- List all of the files
         help                  -- Show the available commands
@@ -106,6 +113,15 @@ def book_list():
 	for d in ['.', 'book', 'chapters']:
 		book_dir = join(environ['book'],d)
 		results += d+':    \n'+'\n    '.join(listdir(book_dir))
+	return results
+
+
+def book_outline():
+	results = "Outline of this book\n"
+	outline_dir = join(environ['book'],'outline')
+	for f in listdir(outline_dir):
+		path = join(outline_dir,f)
+		results += '\n\n# '+path+':\n'+open(path).read()
 	return results
 
 
@@ -140,14 +156,20 @@ def book_command(argv):
 		if argv[1]=='assemble':
 			print(assemble_book_parts())
 
+		elif argv[1]=='changes':
+			print(doc_changes(argv))
+
 		elif argv[1]=='commit':
-			commit_command(argv)
+			doc_commit(argv)
 
 		elif argv[1]=='files':
 			book_files()
 
 		elif argv[1]=='list':
 			print(book_list())
+
+		elif argv[1]=='outline':
+			print(book_outline())
 
 		elif argv[1]=='pdf':
 			create_book_pdf()

@@ -24,14 +24,19 @@ def book_assemble_test():
     return shell('book assemble')
 
 
-def book_help():
+def book_help_test():
     '''Show help for book script'''
     return shell('book help')
 
 
-def book_files():
+def book_files_test():
     '''Show a list of all the source files in the book'''
     return shell('book book_files')
+
+
+def book_outline_test():
+    '''Create a book outline'''
+    return shell('book outline')
 
 
 def book_checker():
@@ -39,8 +44,10 @@ def book_checker():
     my_tests = {
         'book-list': book_list_test,
         'book-assemble': book_assemble_test,
-        'book-help': book_help,
-        'book-files': book_files,
+        'book-help': book_help_test,
+        'book-files': book_files_test,
+        'book-outline': book_outline_test,
+
     }
     run_diff_checks('book', my_tests)
 
