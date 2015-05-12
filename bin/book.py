@@ -56,13 +56,6 @@ def book_commit_comment(argv):
 		return 'Automatic book commit'
 	
 
-def count_words():
-	'''
-	Count all of the words in the book
-	'''
-	system('wc -w book/Book.md')
-
-
 def book_dired():
 	'''Use directory editor in emacs to edit the book content'''
 	system('em $book')
@@ -204,6 +197,16 @@ def book_show():
 	system('web http://127.0.0.1:8000/book/Cover/')
 
 
+def book_words():
+	'''
+	Count all of the words in the book
+	'''
+	book = ['book/'+i+'.md' for i in book_read_index('Book')] 
+	chapters = ['chapters/'+i+'.md' for i in book_read_index('Chapters')]
+	for topic in book + chapters + ['Book.md']:
+		system ('wc -w $book/'+topic)
+
+
 def book_command(argv):
 	'''
 	Execute all of the book specific commands
@@ -252,7 +255,7 @@ def book_command(argv):
 			book_checker()
 
 		elif argv[1]=='words':
-			count_words()
+			book_words()
 		
 		else:
 			print('No book command found, '+argv[1])
