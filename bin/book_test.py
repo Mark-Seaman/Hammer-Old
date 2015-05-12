@@ -41,7 +41,7 @@ def book_list_test():
 
 def book_outline_test():
     '''Create a book outline'''
-    return shell('book outline')
+    return limit_lines('book outline', 480,500)
 
 
 def book_pdf():
