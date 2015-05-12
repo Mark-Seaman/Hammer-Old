@@ -5,15 +5,14 @@ from sys import argv
 from tst import shell
 from book_test import book_checker
 
-
 def assemble_book_parts():
 	'''
 	Put together a markdown file from the individual parts
 	'''
 	results = 'Assemble: Index.md\n'
-	parts = ('book/Cover', 'book/Abstract', 'book/Intro', 'book/Outline', 
-		'chapters/Part1', 'chapters/Part2', 'chapters/Part3', 'chapters/Part4',
-		'chapters/Part5', 'book/10Ways')
+	parts = ['book/'+i for i in book_read_index('Book')] + ['chapters/'+i for i in book_read_index('Chapters')]
+	#print('PARTS:', parts)
+
 	with open('Book.md','w') as output_file:
 		for p in parts:
 			output_file.write('\n\n---\n\n# '+p+'\n\n')
@@ -69,9 +68,34 @@ def book_dired():
 	system('em $book')
 
 
+def print_index_entry(category, path, title):
+	print('- [%s.md, "%s", "%s"]' % (category+'/'+path, category, title))
+
+
+def book_read_index(name):
+	'''Read an index from the book directory'''
+	return open(join(environ['book'], name+'.index')).read().split('\n')
+
+def book_index():
+	print('site_name: Software Leverage\n\npages:\n')
+	for i in book_read_index('Book'):
+		print_index_entry('book', i, 'Part '+i)
+	for i in book_read_index('Outline'):
+		print_index_entry('outline', i, 'Outline '+i)	
+	for i in book_read_index('Chapters'):
+		print_index_entry('chapters', i, i)	
+	# print('book:\n   ', '\n    '.join(book_index('Book')))
+	# print('outline:\n   ', '\n    '.join(book_index('Outline')))
+	# print('chapters:\n   ', '\n    '.join(book_index('Chapters')))
+
+
 def book_edit(argv):
 	'''Edit the book content'''
-	if len(argv)>2:
+	if len(argv)>2 and argv[2]=='index':
+		yml = join(environ['book'],'../mkdocs.yml')
+		system('book index > '+yml)
+		system('e '+yml)
+	elif len(argv)>2:
 	    system('e '+join(environ['book'],argv[2]))
 	else:
 		system('e '+environ['book'])
@@ -200,8 +224,8 @@ def book_command(argv):
 		elif argv[1]=='edit':
 			book_edit(argv)
 
-		elif argv[1]=='files':
-			book_files()
+		elif argv[1]=='index':
+			book_index()
 
 		elif argv[1]=='list':
 			print(book_list())
