@@ -25,7 +25,7 @@ def assemble_book_parts():
 	return results
 
 
-def doc_changes(argv):
+def book_changes(argv):
 	'''
 	Form the shell script for the commit command.
 	'''
@@ -33,11 +33,11 @@ def doc_changes(argv):
 	return 'List all pending changes to the book\n' +shell(command)
 
 
-def doc_commit(argv):
+def book_commit(argv):
 	'''
 	Form the shell script for the commit command.
 	'''
-	comment = doc_commit_comment(argv)
+	comment = book_commit_comment(argv)
 	command = '''echo Commit all changes from the book project
 		git add -A . &&
 		git commit -m"%s" &&
@@ -47,7 +47,7 @@ def doc_commit(argv):
 	system(command)
 
 
-def doc_commit_comment(argv):
+def book_commit_comment(argv):
 	'''
 	Select the comment to tag onto the commit.
 	'''
@@ -168,10 +168,10 @@ def book_command(argv):
 			print(assemble_book_parts())
 
 		elif argv[1]=='changes':
-			print(doc_changes(argv))
+			print(book_changes(argv))
 
 		elif argv[1]=='commit':
-			doc_commit(argv)
+			book_commit(argv)
 
 		elif argv[1]=='edit':
 			book_edit(argv)

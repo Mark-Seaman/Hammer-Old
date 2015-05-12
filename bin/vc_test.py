@@ -30,7 +30,7 @@ def vc_help_test():
 
 def vc_show_test():
     '''Test showing source code changes'''
-    return shell('vc show')
+    return limit_lines('vc show',0,10)
 
 
 def vc_status_test():

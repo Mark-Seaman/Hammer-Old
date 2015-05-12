@@ -13,13 +13,14 @@ from sys import argv
 from tst import run_diff_checks, shell, lines, limit_lines
 
 
-def book_changes_test():
-    '''Make sure there are no uncommitted changes pending'''
-    return shell('book changes')
-
 def book_assemble_test():
     '''Test the assembly of a book from its parts'''
     return shell('book assemble')
+
+
+def book_changes_test():
+    '''Make sure there are no uncommitted changes pending'''
+    return shell('book changes')
 
 
 def book_files_test():
@@ -46,7 +47,7 @@ def book_outline_test():
 def book_checker():
     '''Execute all the desired diff tests'''
     my_tests = {
-    'book-changes': book_changes_test,
+        'book-changes': book_changes_test,
         'book-assemble': book_assemble_test,
         'book-files': book_files_test,
         'book-help': book_help_test,
