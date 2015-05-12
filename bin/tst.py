@@ -61,8 +61,9 @@ def save(name, value=''):
     #print('save',name, value)
     if not exists('test'):
         mkdir('test')
-    with open('test/'+name,'wt') as file:
-        file.write(str(value))
+    with open('test/'+name,'w') as file:
+        if value:
+            file.write(value.encode('UTF-8'))
 
 
 def recall(name):
@@ -71,7 +72,7 @@ def recall(name):
         mkdir('test')
     if exists('test/'+name):
         with open('test/'+name) as file:
-            return str(file.read())
+            return file.read()
 
 
 def show_output(name):
