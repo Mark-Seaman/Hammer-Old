@@ -5,7 +5,7 @@ from sys import argv
 from tst import shell
 from book_test import book_checker
 
-def assemble_book_parts():
+def book_assemble():
 	'''
 	Put together a markdown file from the individual parts
 	'''
@@ -191,10 +191,13 @@ def book_script():
 		print('    '+'\n    '.join(listdir(join(environ['p'],d))))
 
 
+def book_read():
+	'''Read the PDF for the book'''
+	system('rbg evince $book/Book.pdf')
+
+
 def book_show():
-	'''
-	Show the pages of the book.  Start the server and point the browser to the page.
-	'''
+	'''Run page server and point the browser to the book.'''
 	print("Show the book content in a browswer")
 
 	system('cd ..; rbg mkdocs serve; sleep 3')
@@ -210,7 +213,7 @@ def book_command(argv):
 		#print(shell('ls -l'))
 
 		if argv[1]=='assemble':
-			print(assemble_book_parts())
+			print(book_assemble())
 
 		elif argv[1]=='changes':
 			print(book_changes(argv))
@@ -235,6 +238,9 @@ def book_command(argv):
 
 		elif argv[1]=='pdf':
 			book_pdf()
+
+		elif argv[1]=='read':
+			book_read()
 
 		elif argv[1]=='script':
 			book_script()
