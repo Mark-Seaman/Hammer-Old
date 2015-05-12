@@ -64,18 +64,6 @@ def count_words():
 	system('wc -w book/Book.md')
 
 
-def create_book_pdf():
-	'''
-	Build the PDF file from the Book markdown file.
-	'''
-	system('''
-		rm Book.pdf; 
-		pandoc --toc book/Book.md -o Book.pdf 2> /dev/null; 
-		ls -l Book.pdf
-		cp Book.pdf /home/seaman/Dropbox/Shrinking_World/Book
-		''')
-
-
 def book_edit(argv):
 	'''Edit the book content'''
 	if len(argv)>2:
@@ -136,6 +124,23 @@ def book_outline():
 	return results
 
 
+def book_pdf():
+	'''
+	Build the PDF file from the Book markdown file.
+	'''
+	system('''
+		rm *.pdf
+		pandoc --toc book/Book.md -o Book.pdf 2> /dev/null
+		pandoc --toc book/Outline.md -o Outline.pdf 2> /dev/null
+		ls -s *.pdf
+		cp Book.pdf /home/seaman/Dropbox/Shrinking_World/Book
+		cp Outline.pdf /home/seaman/Dropbox/Shrinking_World/Book
+		echo Read file with:
+		echo '     pdf $book/Book.pdf'
+		echo '     pdf $book/Outline.pdf'
+		''')
+
+
 def book_script():
 	'''
 	List the command to work on the book.
@@ -186,7 +191,7 @@ def book_command(argv):
 			print(book_outline())
 
 		elif argv[1]=='pdf':
-			create_book_pdf()
+			book_pdf()
 
 		elif argv[1]=='script':
 			book_script()
