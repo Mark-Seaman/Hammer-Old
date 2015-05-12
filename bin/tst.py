@@ -87,16 +87,16 @@ def show_expected(name):
     print(recall(name+'.correct'))
 
 
-def show_status(my_tests):
+def show_status():
     '''  Display the tests that failed  '''
     print('\n\nTest Status:')
-    for name in my_tests:
+    for name in test_list():
         answer = recall ('%s.out' % name)
         correct = recall('%s.correct' % name)
-        if answer==correct:
-            print('    %-20s' % name)
-        else:
+        if answer!=correct:
             print('    %-20s FAIL' % name)
+        # else:
+        #     print('    %-20s' % name)
       
 
 def show_diff(name):
@@ -197,12 +197,13 @@ def execute_tst_command(argv):
 
     if len(argv)==1:
         system('systest')
+        show_status()
 
     elif len(argv)==2:
         t = argv[1]
 
         if 'status'==t:
-            show_status(test_list())
+            show_status()
         
         elif 'results'==t:
             print('Test differences: all tests')
