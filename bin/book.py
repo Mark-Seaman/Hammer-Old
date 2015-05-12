@@ -64,6 +64,11 @@ def count_words():
 	system('wc -w book/Book.md')
 
 
+def book_dired():
+	'''Use directory editor in emacs to edit the book content'''
+	system('em $book')
+
+
 def book_edit(argv):
 	'''Edit the book content'''
 	if len(argv)>2:
@@ -91,6 +96,8 @@ def book_help():
 
         changes               -- List doc changes 
         commit [message args] -- Commit all changes to the book
+        dired                 -- Edit the book content directory
+        edit                  -- Edit the book content
         files                 -- List all of the files
         help                  -- Show the available commands
         list                  -- List the parts of the book
@@ -102,12 +109,17 @@ def book_help():
 			''')
 
 
+def nested_list(name, children):
+	'''Build a string that is a formatted list'''
+	return '\n'+name+':    \n    '+'\n    '.join(sorted(children))
+
+
 def book_list():
 	'''
 	List the parts of the book source code.
 	'''
 	results = "List the contents of this book\n"
-	for d in ['.', 'book', 'chapters']:
+	for d in ['.', 'book', 'outline', 'chapters']:
 		book_dir = join(environ['book'],d)
 		files = [f for f in listdir(book_dir) if isfile(join(book_dir,f))]
 		results += '\n'+d+':    \n    '+'\n    '.join(sorted(files))
@@ -115,12 +127,16 @@ def book_list():
 
 
 def book_outline():
-	system('cat $book/outline/* > $book/Outline.md')
+	#system('cat $book/outline/* > $book/Outline.md')
 	results = "Outline of this book\n"
 	outline_dir = join(environ['book'],'outline')
 	for f in sorted(listdir(outline_dir)):
 		path = join(outline_dir,f)
-		results += '\n\n# '+path+':\n'+open(path).read()
+		title = '# Contents %s' % f.replace('.md','')
+		results += '\n\n'+title+':\n'+open(path).read()
+	outline_file = join(environ['book'],'Outline.md')
+	with open(outline_file,'w') as f:
+		f.write(results+'\n')
 	return results
 
 
@@ -130,8 +146,8 @@ def book_pdf():
 	'''
 	system('''
 		rm *.pdf
-		pandoc --toc book/Book.md -o Book.pdf 2> /dev/null
-		pandoc --toc book/Outline.md -o Outline.pdf 2> /dev/null
+		pandoc --toc Book.md -o Book.pdf 2> /dev/null
+		pandoc --toc Outline.md -o Outline.pdf 2> /dev/null
 		ls -s *.pdf
 		cp Book.pdf /home/seaman/Dropbox/Shrinking_World/Book
 		cp Outline.pdf /home/seaman/Dropbox/Shrinking_World/Book
@@ -177,6 +193,9 @@ def book_command(argv):
 
 		elif argv[1]=='commit':
 			book_commit(argv)
+
+		elif argv[1]=='dired':
+			book_dired()
 
 		elif argv[1]=='edit':
 			book_edit(argv)

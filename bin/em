@@ -1,0 +1,4 @@
+#!/bin/bash
+# Run emacs on this file
+
+rbg emacs $*
