@@ -39,6 +39,11 @@ def book_outline_test():
     return limit_lines('book outline', 500,600)
 
 
+def book_words_test():
+    '''Test the number of words in the book'''
+    return shell('book words')
+
+
 def book_pdf():
     '''Create the PDF for the book'''
     return shell('book pdf')
@@ -53,7 +58,7 @@ def book_checker():
         'book-list': book_list_test,
         'book-outline': book_outline_test,
         'book-pdf': book_pdf,
-
+        'book-words': book_words_test,
     }
     run_diff_checks('book', my_tests)
 
