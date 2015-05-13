@@ -23,11 +23,6 @@ def book_changes_test():
     return shell('book changes')
 
 
-def book_files_test():
-    '''Show a list of all the source files in the book'''
-    return shell('book book_files')
-
-
 def book_help_test():
     '''Show help for book script'''
     return shell('book help')
@@ -41,7 +36,7 @@ def book_list_test():
 
 def book_outline_test():
     '''Create a book outline'''
-    return limit_lines('book outline', 480,500)
+    return limit_lines('book outline', 500,600)
 
 
 def book_pdf():
@@ -54,7 +49,6 @@ def book_checker():
     my_tests = {
         'book-changes': book_changes_test,
         'book-assemble': book_assemble_test,
-        'book-files': book_files_test,
         'book-help': book_help_test,
         'book-list': book_list_test,
         'book-outline': book_outline_test,

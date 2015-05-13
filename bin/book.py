@@ -10,17 +10,16 @@ def book_assemble():
 	Put together a markdown file from the individual parts
 	'''
 	results = 'Assemble: Index.md\n'
-	parts = ['book/'+i for i in book_read_index('Book')] + ['chapters/'+i for i in book_read_index('Chapters')]
-	#print('PARTS:', parts)
-
+	book = ['book/'+i for i in book_read_index('Book')] 
+	chapters = ['chapters/'+i for i in book_read_index('Chapters')]
 	with open('Book.md','w') as output_file:
-		for p in parts:
-			output_file.write('\n\n---\n\n# '+p+'\n\n')
+		for p in book+chapters:
+			output_file.write('\n\n---\n\n')
 			path = p+'.md'
 			results += 'Build '+path+'  ...\n'
 			text = open(path).read()	
-			#print(text)
 			output_file.write(text)
+	book_outline()
 	return results
 
 
@@ -61,15 +60,15 @@ def book_dired():
 	system('em $book')
 
 
-def print_index_entry(category, path, title):
-	print('- [%s.md, "%s", "%s"]' % (category+'/'+path, category, title))
-
-
 def book_read_index(name):
 	'''Read an index from the book directory'''
 	return open(join(environ['book'], name+'.index')).read().split('\n')
 
+
 def book_index():
+	def print_index_entry(category, path, title):
+		print('- [%s.md, "%s", "%s"]' % (category+'/'+path, category, title))
+
 	print('site_name: Software Leverage\n\npages:\n')
 	for i in book_read_index('Book'):
 		print_index_entry('book', i, 'Part '+i)
@@ -77,9 +76,6 @@ def book_index():
 		print_index_entry('outline', i, 'Outline '+i)	
 	for i in book_read_index('Chapters'):
 		print_index_entry('chapters', i, i)	
-	# print('book:\n   ', '\n    '.join(book_index('Book')))
-	# print('outline:\n   ', '\n    '.join(book_index('Outline')))
-	# print('chapters:\n   ', '\n    '.join(book_index('Chapters')))
 
 
 def book_edit(argv):
@@ -94,35 +90,27 @@ def book_edit(argv):
 		system('e '+environ['book'])
 
 
-def book_files():
-	'''	
-	List all of the files in the book using the tree command.
-	'''
-	print("Get a tree listing of the files")
-	system('tree -I env')
-
-
 def book_help():
 	'''
 	Show all the book commands and their usage.
 	'''
 	print('''
-    usage: book command [args]
-    
-    commands:
-
-        changes               -- List doc changes 
-        commit [message args] -- Commit all changes to the book
-        dired                 -- Edit the book content directory
-        edit                  -- Edit the book content
-        files                 -- List all of the files
-        help                  -- Show the available commands
-        list                  -- List the parts of the book
-        outline               -- Show the outline for the book
-        pdf                   -- Build a PDF file of the book content
-        script                -- List the command scripts
-        test                  -- Run all system tests
-        words                 -- Count the words
+*    usage: book command [args]
+* 
+*   commands:
+*
+*     changes               -- List doc changes 
+*     commit [message args] -- Commit all changes to the book
+*     dired                 -- Edit the book content directory
+*     edit                  -- Edit the book content
+*     files                 -- List all of the files
+*     help                  -- Show the available commands
+*     list                  -- List the parts of the book
+*     outline               -- Show the outline for the book
+*     pdf                   -- Build a PDF file of the book content
+*     script                -- List the command scripts
+*     test                  -- Run all system tests
+*     words                 -- Count the words
 			''')
 
 
@@ -144,13 +132,11 @@ def book_list():
 
 
 def book_outline():
-	#system('cat $book/outline/* > $book/Outline.md')
 	results = "Outline of this book\n"
 	outline_dir = join(environ['book'],'outline')
-	for f in sorted(listdir(outline_dir)):
-		path = join(outline_dir,f)
-		title = '# Contents %s' % f.replace('.md','')
-		results += '\n\n'+title+':\n'+open(path).read()
+	for topic in book_read_index('Outline'):
+		path = join(outline_dir,topic+'.md')
+		results += '\n\n'+open(path).read()
 	outline_file = join(environ['book'],'Outline.md')
 	with open(outline_file,'w') as f:
 		f.write(results+'\n')
@@ -174,6 +160,12 @@ def book_pdf():
 		''')
 
 
+def book_read():
+	'''Read the PDF for the book'''
+	system('rbg evince $book/Book.pdf')
+	system('rbg evince $book/Outline.pdf')
+
+
 def book_script():
 	'''
 	List the command to work on the book.
@@ -182,11 +174,6 @@ def book_script():
 	for d in ('bin',):
 		print(d+':')
 		print('    '+'\n    '.join(listdir(join(environ['p'],d))))
-
-
-def book_read():
-	'''Read the PDF for the book'''
-	system('rbg evince $book/Book.pdf')
 
 
 def book_show():
