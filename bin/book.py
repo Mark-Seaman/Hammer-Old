@@ -110,7 +110,6 @@ def book_help():
 *     list                  -- List the parts of the book
 *     outline               -- Show the outline for the book
 *     pdf                   -- Build a PDF file of the book content
-*     script                -- List the command scripts
 *     test                  -- Run all system tests
 *     words                 -- Count the words
             ''')
@@ -169,16 +168,6 @@ def book_read():
     system('rbg evince $book/Outline.pdf')
 
 
-def book_script():
-    '''
-    List the command to work on the book.
-    '''
-    print("List the contents of this book")
-    for d in ('bin',):
-        print(d+':')
-        print('    '+'\n    '.join(listdir(join(environ['p'],d))))
-
-
 def book_show():
     '''Run page server and point the browser to the book.'''
     print("Show the book content in a browswer")
@@ -234,9 +223,6 @@ def book_command(argv):
 
         elif argv[1]=='read':
             book_read()
-
-        elif argv[1]=='script':
-            book_script()
 
         elif argv[1]=='show':
             book_show()

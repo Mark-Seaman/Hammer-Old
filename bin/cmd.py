@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from os import system, listdir, environ
-from os.path import join, exists
+from os.path import join, exists, isfile
 from os import chmod
 import stat
 from sys import argv
@@ -75,13 +75,13 @@ def command_help():
 
 def command_list(argv):
 	'''List the parts of the command source code.'''
-	print("List the contents of this command")
 	for d in ('bin',):
-		files = listdir(join(environ['p'],d))
-		files = [f for f in files if not f.endswith('.pyc')]
+		directory = join(environ['p'],d)
+		files = [join(d,f) for f in listdir(directory)]
+		files = [f for f in files if not f.endswith('.pyc') and not f.endswith('.py')]
+		files = [f for f in files if isfile(join(environ['p'],f))]
 		files = sorted(files)
-		print(d+':')
-		print('    '+'\n    '.join(files))
+		print('\n'.join(files))
 
 
 def command_show(argv):

@@ -1,0 +1,60 @@
+# Hammer Script
+
+## Overview
+
+Hammer defines a language for manipulating the key objects within.  Each type 
+of object is manipulated with command script.  The data types are nouns within 
+the system.  Each noun can support several operations.
+
+
+## Command Scripts
+
+All of the command scripts are located in the **bin** directory.  Each command
+script is a bash script that invokes a python script to act on the arguments 
+passed in.
+
+Every command has a **test** and **help** operation.  If an illegal command is
+attempted then the help text is shown to help train the user on the proper
+interactions.
+
+
+## Book Commands
+
+### book
+
+### chapter
+### outline
+
+
+## Documentation
+
+### doc
+* add
+* commit
+* delete
+* test
+* text
+
+## Scripting
+
+### cmd
+### em
+
+
+## Testing
+
+### tst
+### nose
+### tlike
+### tout
+### tres
+### tstat
+
+
+## Project Context
+
+### project-create
+### project-env
+### vc
+### wp
+### pycharm
