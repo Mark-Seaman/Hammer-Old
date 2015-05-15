@@ -37,6 +37,7 @@ def code_help():
         edit    [file] -- Edit the code
         list    [file] -- List all codes
         show    [file] -- Show a code
+        test           -- Self test
       
 			''')
 

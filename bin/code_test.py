@@ -25,11 +25,11 @@ def code_edit_test():
 
 
 def code_list_test():
-    return shell('echo code list xxx')
+    return shell('code list')
 
 
 def code_show_test():
-    return shell('echo code show xxx')
+    return shell('code show code.py')
 
 
 def code_checker():
