@@ -4,6 +4,8 @@ from os import system, listdir, environ
 from os.path import join
 from sys import argv
 
+from synch_test import synch_checker
+
 
 def synch_add(argv):
 	'''Create a new synch.'''
@@ -35,6 +37,7 @@ def synch_help():
         edit    [file] -- Edit the synch
         list    [file] -- List all synchs
         show    [file] -- Show a synch
+        test           -- Run self test on this file
       
 			''')
 
@@ -71,6 +74,9 @@ def synch_command(argv):
 
 		elif argv[1]=='show':
 			synch_show(argv)
+
+		elif argv[1]=='test':
+			synch_checker()
 
 		else:
 			print('No synch command found, '+argv[1])

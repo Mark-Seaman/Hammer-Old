@@ -4,6 +4,8 @@ from os import system, listdir, environ
 from os.path import join
 from sys import argv
 
+from prototype_test import prototype_checker
+
 
 def prototype_add(argv):
 	'''Create a new prototype.'''
@@ -35,6 +37,7 @@ def prototype_help():
         edit    [file] -- Edit the prototype
         list    [file] -- List all prototypes
         show    [file] -- Show a prototype
+        test           -- Self test
       
 			''')
 
@@ -71,6 +74,9 @@ def prototype_command(argv):
 
 		elif argv[1]=='show':
 			prototype_show(argv)
+
+		elif argv[1]=='test':
+			prototype_checker()
 
 		else:
 			print('No prototype command found, '+argv[1])
