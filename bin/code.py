@@ -19,10 +19,14 @@ def code_complexity(files=None):
 	print ('code_complexity:',files)
 	if not files:
 		files = code_list().split('\n')
-	for f in files:
+	python_files = [f for f in files if f.endswith('.py')]
+	print('File                              Lines  Imports Complexity')
+	for f in sorted(python_files):
 		text = open(join(environ['p'],f)).read()
-		print('Lines: ',len(text.split('\n')), f)
-		
+		lines = text.split('\n')
+		includes = len([i for i in lines if 'import' in i])
+		print('%-30s' % f, '%8d' % len(lines), '%8d' % includes, '%8.0f' % len(lines)**1.2)
+
 
 def code_delete(argv):
 	'''Delete the code.'''
