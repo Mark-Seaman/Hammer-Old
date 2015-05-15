@@ -2,24 +2,44 @@
 
 from os import system, listdir, environ
 from os.path import join, exists
+from os import chmod
+import stat
 from sys import argv
 
 from tst import shell
 from cmd_test import cmd_checker
 
 
+def command_add_script(command):
+	'''Create the executable shell command that runs the python command'''
+	script = '''#!/bin/bash
+# Execute a %s script command
+
+python $p/bin/%s.py $*
+
+	''' % (command,command)
+	path = join(environ['pb'],'%s' % command)
+	if exists(path):
+		print('File already exists: '+path)
+	else:
+		with open(path,'w') as f:
+			f.write(script)
+	chmod (path, stat.S_IRWXU|stat.S_IRGRP|stat.S_IROTH)
+
+
 def command_add(argv):
 	'''Create a new command.'''
 	print("Add new command:"+argv[2])
 	command = argv[2]
-	path1 = join(environ['pb'],'%s.py' % command)
-	path2 = join(environ['pb'],'prototype.py')
-	command_content = open(path2).read().replace('prototype',command)
+	command_add_script(command)
+	script_path = join(environ['pb'],'%s.py' % command)
+	template_path = join(environ['pb'],'prototype.py')
+	command_content = open(template_path).read().replace('prototype',command)
 	#print('Content: %s.py \n %s' % (command,command_content))
-	if exists(path1):
-		print('File already exists: '+path1)
+	if exists(script_path):
+		print('File already exists: '+script_path)
 	else:
-		with open(path1,'w') as f:
+		with open(script_path,'w') as f:
 			f.write(command_content)
 	#command_edit(argv)
 

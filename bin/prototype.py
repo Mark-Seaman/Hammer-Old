@@ -6,33 +6,25 @@ from sys import argv
 
 
 def prototype_add(argv):
-	'''	
-	Create a new prototype.
-	'''
+	'''Create a new prototype.'''
 	print("New prototype:"+argv[2])
 	system('e bin/'+argv[2])
 
 
 def prototype_delete(argv):
-	'''	
-	Delete the prototype.
-	'''
+	'''Delete the prototype.'''
 	print("prototype:",argv[2])
 	system('rm bin/%s' % argv[2])
 
 
 def prototype_edit(argv):
-	'''	
-	Edit the content of a prototype.
-	'''
+	'''Edit the content of a prototype.'''
 	print("prototype:",argv[2])
 	system('e bin/'+argv[2])
 
 
 def prototype_help():
-	'''
-	Show all the prototype prototypes and their usage.
-	'''
+	'''Show all the prototype prototypes and their usage.'''
 	print('''
 	usage: cmd prototype [args]
 
@@ -48,9 +40,7 @@ def prototype_help():
 
 
 def prototype_list(argv):
-	'''
-	List the parts of the prototype source code.
-	'''
+	'''List the parts of the prototype source code.'''
 	print("List the contents of this prototype")
 	for d in ('bin',):
 		print(d+':')
@@ -58,42 +48,36 @@ def prototype_list(argv):
 
 
 def prototype_show(argv):
-	'''	
-	Show the content of a prototype.
-	'''
+	'''Show the content of a prototype.'''
 	print("prototype:",argv[2])
 	system('cat bin/%s' % argv[2])
 
 
 def prototype_command(argv):
-	'''
-	Execute all of the prototype specific prototypes
-	'''
+	'''Execute all of the prototype specific prototypes'''
 	if len(argv)>1:
 
 		if argv[1]=='add':
 			prototype_add(argv)
-			exit(0)
 
-		if argv[1]=='delete':
+		elif argv[1]=='delete':
 			prototype_delete(argv)
-			exit(0)
 
-		if argv[1]=='edit':
+		elif argv[1]=='edit':
 			prototype_edit(argv)
-			exit(0)
 
-		if argv[1]=='list':
+		elif argv[1]=='list':
 			prototype_list(argv)
-			exit(0)
 
-		if argv[1]=='show':
+		elif argv[1]=='show':
 			prototype_show(argv)
-			exit(0)
 
-		print('No prototype prototype found, '+argv[1])
-		
-	prototype_help()
+		else:
+			print('No prototype command found, '+argv[1])
+			prototype_help()
+	else:
+		print('No arguments given')
+		prototype_help()
 
 
 '''
