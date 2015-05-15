@@ -14,18 +14,33 @@ def code_add(argv):
 	system('e bin/'+argv[2])
 
 
+def calculate_complexity(filename):
+	text = open(join(environ['p'],filename)).read()
+	lines = text.split('\n')
+	num_imports = len([i for i in lines if 'import' in i])
+	import_cost = 10  # Equal to 10 lines of code
+	num_lines = len(lines)
+	coupling_cost = 1.2 # Exponential penalty of size
+	complexity = (num_lines + num_imports * import_cost) ** coupling_cost
+	return (num_lines,num_imports,complexity)
+
+
 def code_complexity(files=None):
 	'''Measure the code complexity'''
 	print ('code_complexity:',files)
 	if not files:
 		files = code_list().split('\n')
 	python_files = [f for f in files if f.endswith('.py')]
+	total = (0,0,0)
+
 	print('File                              Lines  Imports Complexity')
+
 	for f in sorted(python_files):
-		text = open(join(environ['p'],f)).read()
-		lines = text.split('\n')
-		includes = len([i for i in lines if 'import' in i])
-		print('%-30s' % f, '%8d' % len(lines), '%8d' % includes, '%8.0f' % len(lines)**1.2)
+		lines,imports,complexity = calculate_complexity(f)
+		total = (total[0]+lines, total[1]+imports, total[2]+complexity)
+		print('%-30s' % f, '%8d' % lines, '%8d' % imports, '%8d' % complexity)
+
+	print('%-30s %8d %8d %8d' % ('Total',total[0], total[1], total[2]))
 
 
 def code_delete(argv):
@@ -55,7 +70,6 @@ def code_help():
         test           -- Self test
       
 			''')
-
 
 
 def code_list(files=None):
