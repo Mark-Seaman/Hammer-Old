@@ -1,0 +1,5 @@
+#!/bin/bash
+# Edit the requested chapter in the book
+
+book edit chapters/Chapter$1.md
+
