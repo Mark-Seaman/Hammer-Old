@@ -89,14 +89,14 @@ def show_expected(name):
 
 def show_status():
     '''  Display the tests that failed  '''
-    print('\n\nTest Status:')
+    failures = []
     for name in test_list():
         answer = recall ('%s.out' % name)
         correct = recall('%s.correct' % name)
         if answer!=correct:
-            print('    %-20s FAIL' % name)
-        # else:
-        #     print('    %-20s' % name)
+            failures.append('    %-20s FAIL' % name)
+    print('\n\nTest Status: %d tests failed' % len(failures))
+    print('   ','\n    '.join(failures))
       
 
 def show_diff(name):
@@ -192,6 +192,27 @@ def run_diff_checks(label, my_tests):
     run_all_checks(label, my_tests)
 
 
+def tst_add(command):
+    '''Create a new test.'''
+    print("Add new test:"+command)
+    script_path = join(environ['pb'],'%s_test.py' % command)
+    template_path = join(environ['pb'],'prototypetest.py')
+    command_content = open(template_path).read().replace('prototype',command)
+    #print('Content: %s.py \n %s' % (command,command_content))
+    if exists(script_path):
+        print('File already exists: '+script_path)
+    else:
+        with open(script_path,'w') as f:
+            f.write(command_content)
+    #command_edit(argv)
+
+
+def tst_edit(command):
+    ''' Edit the content of a test.'''
+    print("Edit:",command)
+    print(shell('e bin/%s_test.py' % command))
+
+
 def execute_tst_command(argv):
     '''   Execute the appropriate test command   '''
 
@@ -228,7 +249,13 @@ def execute_tst_command(argv):
         cmd = argv[1]
         t = argv[2]
 
-        if 'like'==cmd:
+        if 'add'==cmd:
+            tst_add(t)
+
+        elif 'edit'==cmd:
+            tst_edit(t)
+
+        elif 'like'==cmd:
             approve_results(t)
             
         elif 'output'==cmd:

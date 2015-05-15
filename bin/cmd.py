@@ -48,6 +48,7 @@ def command_delete(argv):
 	'''	Delete the command.'''
 	print("Command:",argv[2])
 	print(shell('rm bin/%s.py' % argv[2]))
+	print(shell('rm bin/%s' % argv[2]))
 
 
 def command_edit(argv):
