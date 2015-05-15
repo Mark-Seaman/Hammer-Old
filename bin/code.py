@@ -14,6 +14,16 @@ def code_add(argv):
 	system('e bin/'+argv[2])
 
 
+def code_complexity(files=None):
+	'''Measure the code complexity'''
+	print ('code_complexity:',files)
+	if not files:
+		files = code_list().split('\n')
+	for f in files:
+		text = open(join(environ['p'],f)).read()
+		print('Lines: ',len(text.split('\n')), f)
+		
+
 def code_delete(argv):
 	'''Delete the code.'''
 	print("code:",argv[2])
@@ -72,6 +82,9 @@ def code_command(argv):
 
 		if argv[1]=='add':
 			code_add(argv)
+
+		elif argv[1]=='complexity':
+			code_complexity()
 
 		elif argv[1]=='delete':
 			code_delete(argv)

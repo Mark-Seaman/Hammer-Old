@@ -32,12 +32,17 @@ def code_show_test():
     return shell('code show bin/code.py')
 
 
+def code_complexity_test():
+    return shell('code complexity')
+
+
 def code_checker():
     my_tests = {
         'code-add': code_add_test,
         'code-list': code_list_test,
         'code-delete': code_delete_test,
         'code-show': code_show_test,
+        'code-complexity': code_complexity_test,
     }
     run_diff_checks('code', my_tests)
 
