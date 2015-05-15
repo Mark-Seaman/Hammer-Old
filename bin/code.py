@@ -41,13 +41,15 @@ def code_help():
       
 			''')
 
+from glob import glob
+from os import chdir
 
 def code_list(argv):
 	'''List the parts of the code source code.'''
-	print("List the contents of this code")
 	for d in ('bin',):
-		print(d+':')
-		print('    '+'\n    '.join(listdir(join(environ['p'],d))))
+		chdir(environ['p'])
+		files = [f for f in glob(d+'/*') if not f.endswith('.pyc')]
+		print('\n'.join(files))
 
 
 def code_show(argv):
