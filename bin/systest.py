@@ -4,10 +4,12 @@ from sys import argv
 
 from book_test import book_checker
 from cmd_test import cmd_checker
+from code_test import code_checker
 from doc_test import doc_checker
-from vc_test import vc_checker
+from synch_test import synch_checker
 from tst_test import tst_checker
 from tst import run_diff_checks, shell, lines, limit_lines
+from vc_test import vc_checker
 
 
 def cmd_python_pip_test():
@@ -34,15 +36,17 @@ def pwd_test():
 def system_test_list():
     '''Create a list of tests to manage'''
     return {
-        'sys-nose': nose_test_execution,
-        'sys-vc': vc_checker,
-        'sys-cmd': cmd_checker,
-        'sys-book': book_checker,
-        'sys-doc': doc_checker,
-        'sys-tst': tst_checker,
-        'sys-pip': cmd_python_pip_test,
-        'sys-ps': process_status_test,
-        'sys-pwd': pwd_test,
+        'nose': nose_test_execution,
+        'vc': vc_checker,
+        'cmd': cmd_checker,
+        'book': book_checker,
+        'doc': doc_checker,
+        'tst': tst_checker,
+        'pip': cmd_python_pip_test,
+        'ps': process_status_test,
+        'pwd': pwd_test,
+        'synch': synch_checker,
+        'code': code_checker,
     }
 
 
