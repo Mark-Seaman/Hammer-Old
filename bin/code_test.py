@@ -29,7 +29,7 @@ def code_list_test():
 
 
 def code_show_test():
-    return shell('code show code.py')
+    return shell('code show bin/code.py')
 
 
 def code_checker():
