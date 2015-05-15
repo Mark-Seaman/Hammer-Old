@@ -25,11 +25,11 @@ def doc_list_test():
 
 def doc_show_test():
 	'''Display the todo list document'''
-	return limit_lines('doc show todo', 30, 52)
+	return limit_lines('doc show todo', 30, 50)
 
 def doc_text_test():
     '''Display a concatenation of all source files'''
-    return shell('doc text')
+    return limit_lines('doc show', 200, 300)
 
 
 def doc_checker():

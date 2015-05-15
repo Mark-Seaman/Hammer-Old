@@ -61,19 +61,18 @@ def doc_list(argv):
 		print('    '+'\n    '.join(listdir(join(environ['p'],d))))
 
 
-def doc_show(argv):
+def doc_show(docs):
 	'''	Show the content of a doc.'''
-	d = doc_path(argv[2])
-	print("doc:",d)
-	system('cat '+d)
-	
-
-def doc_text():
-	'''	Show the content of all docs.'''
-	d = doc_path('')
-	for f in listdir(d):
-		print("# doc:",d+f)	
-		system('cat '+d+f)
+	if docs:
+		for d in docs:
+			d = doc_path(d)
+			print("doc:",d)
+			system('cat '+d)
+	else:
+		d = doc_path('')
+		for f in listdir(d):
+			print("# doc:",d+f)	
+			system('cat '+d+f)
 	
 
 def doc_command(argv):
@@ -96,13 +95,10 @@ def doc_command(argv):
 			doc_list(argv)
 
 		elif argv[1]=='show':
-			doc_show(argv)
+			doc_show(argv[2:])
 
 		elif argv[1]=='test':
 			doc_checker()
-
-		elif argv[1]=='text':
-			doc_text()
 
 		else:
 			print('No doc doc found, '+argv[1])

@@ -21,40 +21,93 @@ interactions.
 ## Book Commands
 
 ### book
+* assemble
+* changes
+* commit
+* dired
+* edit
+* files
+* list
+* outline
+* pdf
+* show
+* test
+* words
 
 ### chapter
+Command is a shortcut for 'book edit chapters/Chapter[xxx].md'
+
 ### outline
+Command is a shortcut for 'book edit outline/Chapter[xxx].md'
 
 
 ## Documentation
 
 ### doc
-* add
-* commit
-* delete
-* test
-* text
+* add - Add a new document to the system
+* commit - Commit all documents in the docs directory
+* delete - Delete a document
+* edit - Edit a document
+* list - List the available documents
+* show - Show the requested document
+* test - Run the self test
+
 
 ## Scripting
 
 ### cmd
-### em
+* add - Create a new command script
+* delete - Delete the command script
+* edit - Edit the command script with the configured editor
+* list - List the available scripts
+* show - Display the command content
+* test - Run the self-test
 
+### em
+Run emacs on the requested file.
 
 ## Testing
 
 ### tst
+* <no args> - Run all tests and show results
+* status - Show the failing tests **tstat**
+* list - Show the names of all tests
+* results - Show the difference from expected results **tres**
+* help - Show the command usage
+* add - Add a new test to the system
+* edit - Edit a file in the configured editor
+* like - Approve these new test results **tlike**
+* output - Show the output from the last test run **tout**
+* correct - Show the expected output **tcorrect**
+
 ### nose
-### tlike
-### tout
-### tres
-### tstat
+Execute all of the tests in the source using nose
+
+## Code
+* complexity - Measure the complexity of all the source code
+* list - Create a list of all of the executable code in the system
+* show - Show the source code 
+* test - Execute the self-test
 
 
 ## Project Context
 
-### project-create
-### project-env
 ### vc
+* commit - Commit all code changes with a comment
+* delete - Delete a file from source code
+* show - Show the pending changes
+* status - Show the status of the files
+* test - Run the self-test
+
+### project-create
+Create a new project from a general project template
+
+### project-env
+Run this command in the current shell to set environment variables.
+
 ### wp
+Show the version of Python that will run this system
+
 ### pycharm
+Fire up Py Charm from Jet Brains.
+

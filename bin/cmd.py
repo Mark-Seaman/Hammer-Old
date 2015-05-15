@@ -69,6 +69,7 @@ def command_help():
         edit    [file] -- Edit the command
         list    [file] -- List all commands
         show    [file] -- Show a command
+        test           -- Run the self-test
       
 			''')
 
