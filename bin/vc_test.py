@@ -30,7 +30,9 @@ def vc_help_test():
 
 def vc_show_test():
     '''Test showing source code changes'''
-    return limit_lines('vc show',0,100)
+    differences =  shell('vc show').split('\n')
+    if len(differences)>100:
+        return  'More than 100 differences in the vc show output'
 
 
 def vc_status_test():
