@@ -49,6 +49,11 @@ def book_pdf():
     return shell('book pdf')
 
 
+def book_text():
+    '''Get the text for Chapter 1'''
+    return shell('book text 1')
+
+
 def book_checker():
     '''Execute all the desired diff tests'''
     my_tests = {
@@ -58,6 +63,7 @@ def book_checker():
         'book-list': book_list_test,
         'book-outline': book_outline_test,
         'book-pdf': book_pdf,
+        'book-text': book_text,
         'book-words': book_words_test,
     }
     run_diff_checks('book', my_tests)

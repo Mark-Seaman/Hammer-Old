@@ -175,6 +175,11 @@ def book_show():
     system('cd ..; rbg mkdocs serve; sleep 3')
     system('web http://127.0.0.1:8000/book/Cover/')
 
+def book_text(chapter=1):
+    '''Display the raw text of one chapter'''
+    f = join(environ['book'], 'chapters', 'Chapter%s.md'%chapter)
+    print(open(f).read())
+
 
 def book_words():
     '''
@@ -230,6 +235,12 @@ def book_command(argv):
 
         elif argv[1]=='test':
             book_checker()
+
+        elif argv[1]=='text':
+            if len(argv)>2:
+                book_text(chapter=argv[2])
+            else:
+                book_text()
 
         elif argv[1]=='words':
             book_words()
