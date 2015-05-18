@@ -182,8 +182,9 @@ def book_words():
     '''
     book = ['book/'+i+'.md' for i in book_read_index('Book')] 
     chapters = ['chapters/'+i+'.md' for i in book_read_index('Chapters')]
+    chdir(environ['book'])
     for topic in book + chapters + ['Book.md']:
-        system ('wc -w $book/'+topic)
+        system ('wc -w '+topic)
 
 
 def book_command(argv):
