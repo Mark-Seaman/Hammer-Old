@@ -162,6 +162,9 @@ def book_pdf():
         pandoc --toc Book.md -o Book.pdf 2> /dev/null
         pandoc --toc Outline.md -o Outline.pdf 2> /dev/null
         ls -s *.pdf
+        echo Read file with:
+        echo '     pdf $book/Book.pdf'
+        echo '     pdf $book/Outline.pdf'
         ''')
 
 def book_push():
@@ -169,9 +172,6 @@ def book_push():
     system('''
         cp Book.pdf /home/seaman/Documents/Dropbox/Shrinking_World/Book
         cp Outline.pdf /home/seaman/Documents/Dropbox/Shrinking_World/Book
-        echo Read file with:
-        echo '     pdf $book/Book.pdf'
-        echo '     pdf $book/Outline.pdf'
         ''')
 
 
