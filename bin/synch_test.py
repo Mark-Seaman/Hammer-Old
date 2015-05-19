@@ -29,7 +29,9 @@ def synch_mirror_test():
 
 
 def synch_sync_test():
-	return limit_lines('synch sync test test-xxx', 65, 120)
+    x = limit_lines('synch sync test test-xxx', 65, 120)
+    system('rm -rf test-xxx')
+    return x
 
 
 def synch_checker():
