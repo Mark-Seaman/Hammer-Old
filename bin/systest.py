@@ -20,7 +20,7 @@ def cmd_python_pip_test():
 def nose_test_execution():
     '''Run all nose tests  and report any changes'''
     system('nose 2> /tmp/nose; sleep 1')
-    return sub(r'\.\d\d\ds', r'.xxxs', shell('cat /tmp/nose'))
+    return sub(r'\d\.\d\d\ds', r'x.xxxs', shell('cat /tmp/nose'))
 
 
 def process_status_test():
