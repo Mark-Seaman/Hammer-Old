@@ -117,6 +117,7 @@ def book_help():
 *     help                  -- Show the available commands
 *     list                  -- List the parts of the book
 *     outline               -- Show the outline for the book
+*     push                  -- Push the book to the dropbox
 *     test                  -- Run all system tests
 *     words                 -- Count the words
             ''')
@@ -161,6 +162,11 @@ def book_pdf():
         pandoc --toc Book.md -o Book.pdf 2> /dev/null
         pandoc --toc Outline.md -o Outline.pdf 2> /dev/null
         ls -s *.pdf
+        ''')
+
+def book_push():
+    '''Push the book to the dropbox for distribution'''
+    system('''
         cp Book.pdf /home/seaman/Documents/Dropbox/Shrinking_World/Book
         cp Outline.pdf /home/seaman/Documents/Dropbox/Shrinking_World/Book
         echo Read file with:
@@ -229,7 +235,10 @@ def book_command(argv):
             print(book_list())
 
         elif argv[1]=='outline':
-            print(book_outline())
+            book_outline()
+
+        elif argv[1]=='push':
+            book_push()
 
         elif argv[1]=='read':
             book_read()
