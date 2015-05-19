@@ -12,32 +12,28 @@ from os.path import join
 from tst import run_diff_checks, shell, lines, limit_lines
 
 
-def synch_add_test():
-	return shell('echo synch add xxx')
+def synch_copy_test():
+	return shell('echo synch copy xxx yyy')
 
 
-def synch_delete_test():
-	return shell('echo synch delete xxx')
+def synch_preview_test():
+	return shell('echo synch preview xxx yyy')
 
 
-def synch_edit_test():
-	return shell('echo synch edit xxx')
+def synch_mirror_test():
+	return shell('echo synch mirror xxx yyy')
 
 
-def synch_list_test():
-	return shell('echo synch list xxx')
-
-
-def synch_show_test():
-	return shell('echo synch show xxx')
+def synch_sync_test():
+	return shell('echo synch sync xxx yyy')
 
 
 def synch_checker():
     my_tests = {
-        'synch-add': synch_add_test,
-        'synch-list': synch_list_test,
-        'synch-delete': synch_delete_test,
-        'synch-show': synch_show_test,
+        'synch-copy': synch_copy_test,
+        'synch-preview': synch_preview_test,
+        'synch-mirror': synch_mirror_test,
+        'synch-sync': synch_sync_test,
     }
     run_diff_checks('synch', my_tests)
 

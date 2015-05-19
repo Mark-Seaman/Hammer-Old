@@ -7,22 +7,22 @@ from sys import argv
 from synch_test import synch_checker
 
 
-def synch_add(argv):
+def synch_copy(argv):
 	'''Create a new synch.'''
-	print("New synch:"+argv[2])
-	system('e bin/'+argv[2])
+	print("synch copy:"+argv[2:4])
+	#system('e bin/'+argv[2])
 
 
-def synch_delete(argv):
+def synch_mirror(argv):
 	'''Delete the synch.'''
-	print("synch:",argv[2])
-	system('rm bin/%s' % argv[2])
+	print("synch mirror:",argv[2:4])
+	#system('rm bin/%s' % argv[2])
 
 
-def synch_edit(argv):
+def synch_preview(argv):
 	'''Edit the content of a synch.'''
-	print("synch:",argv[2])
-	system('e bin/'+argv[2])
+	print("synch preview:",argv[2:4])
+	#system('e bin/'+argv[2])
 
 
 def synch_help():
@@ -32,48 +32,35 @@ def synch_help():
 
     synch:
 
-        add     [file] -- Add a new synch
-        delete  [file] -- Delete a synch
-        edit    [file] -- Edit the synch
-        list    [file] -- List all synchs
-        show    [file] -- Show a synch
-        test           -- Run self test on this file
+        copy    dir1 dir2 -- Copy the newer files
+        preview dir1 dir2 -- Preview the files to be copied
+        sync    dir1 dir2 -- Copy the both directions
+        mirror  dir1 dir2 -- Make an exact copy
+        test              -- Run self test on this file
       
 			''')
 
 
-def synch_list(argv):
+def synch_sync(argv):
 	'''List the parts of the synch source code.'''
-	print("List the contents of this synch")
-	for d in ('bin',):
-		print(d+':')
-		print('    '+'\n    '.join(listdir(join(environ['p'],d))))
-
-
-def synch_show(argv):
-	'''Show the content of a synch.'''
-	print("synch:",argv[2])
-	system('cat bin/%s' % argv[2])
-
+	print("synch mirror:",argv[2:4])
+	
 
 def synch_command(argv):
 	'''Execute all of the synch specific synchs'''
 	if len(argv)>1:
 
-		if argv[1]=='add':
-			synch_add(argv)
+		if argv[1]=='copy':
+			synch_copy(argv)
 
-		elif argv[1]=='delete':
-			synch_delete(argv)
+		elif argv[1]=='preview':
+			synch_preview(argv)
 
-		elif argv[1]=='edit':
-			synch_edit(argv)
+		elif argv[1]=='mirror':
+			synch_mirror(argv)
 
-		elif argv[1]=='list':
-			synch_list(argv)
-
-		elif argv[1]=='show':
-			synch_show(argv)
+		elif argv[1]=='sync':
+			synch_sync(argv)
 
 		elif argv[1]=='test':
 			synch_checker()
