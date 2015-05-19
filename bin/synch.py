@@ -9,8 +9,8 @@ from synch_test import synch_checker
 
 def synch_copy(argv):
 	'''Create a new synch.'''
-	print("synch copy:"+argv[2:4])
-	#system('e bin/'+argv[2])
+	print("synch copy: %s %s" % (argv[2],argv[3]))
+	system('rsync -auv %s %s' % (argv[2],argv[3]))
 
 
 def synch_mirror(argv):

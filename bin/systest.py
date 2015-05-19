@@ -36,7 +36,7 @@ def pwd_test():
 def system_test_list():
     '''Create a list of tests to manage'''
     return {
-        'nose': nose_test_execution,
+        #'nose': nose_test_execution,
         'vc': vc_checker,
         'cmd': cmd_checker,
         'book': book_checker,

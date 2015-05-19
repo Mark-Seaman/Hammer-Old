@@ -13,7 +13,9 @@ from tst import run_diff_checks, shell, lines, limit_lines
 
 
 def synch_copy_test():
-	return shell('echo synch copy xxx yyy')
+    x = shell('synch copy test test-xxx')
+    system('rm -rf test-xxx')
+    #return x
 
 
 def synch_preview_test():
