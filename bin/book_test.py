@@ -13,9 +13,9 @@ from sys import argv
 from tst import run_diff_checks, shell, lines, limit_lines
 
 
-def book_assemble_test():
+def book_build_test():
     '''Test the assembly of a book from its parts'''
-    return shell('book assemble')
+    return shell('book build')
 
 
 def book_changes_test():
@@ -44,11 +44,6 @@ def book_words_test():
     return shell('book words')
 
 
-def book_pdf():
-    '''Create the PDF for the book'''
-    return shell('book pdf')
-
-
 def book_text():
     '''Get the text for Chapter 1'''
     return shell('book text 1')
@@ -58,11 +53,10 @@ def book_checker():
     '''Execute all the desired diff tests'''
     my_tests = {
         'book-changes': book_changes_test,
-        'book-assemble': book_assemble_test,
+        'book-build': book_build_test,
         'book-help': book_help_test,
         'book-list': book_list_test,
         'book-outline': book_outline_test,
-        'book-pdf': book_pdf,
         'book-text': book_text,
         'book-words': book_words_test,
     }

@@ -5,11 +5,27 @@ from sys import argv
 from tst import shell
 from book_test import book_checker
 
-def book_assemble():
+
+def book_build():
     '''
     Put together a markdown file from the individual parts
     '''
-    results = 'Assemble: Index.md\n'
+    book_chapters()
+    book_outline()
+    book_pdf()
+
+    
+def book_changes(argv):
+    '''
+    Form the shell script for the commit command.
+    '''
+    command = 'git status'
+    return 'List all pending changes to the book\n' +shell(command)
+
+
+def book_chapters():
+    '''Create the chapter content markdown'''
+    results = 'Build: Index.md\n'
     book = ['book/'+i for i in book_read_index('Book')] 
     chapters = ['chapters/'+i for i in book_read_index('Chapters')]
     with open('Book.md','w') as output_file:
@@ -19,16 +35,7 @@ def book_assemble():
             results += 'Build '+path+'  ...\n'
             text = open(path).read()    
             output_file.write(text)
-    book_outline()
-    return results
-
-
-def book_changes(argv):
-    '''
-    Form the shell script for the commit command.
-    '''
-    command = 'git status'
-    return 'List all pending changes to the book\n' +shell(command)
+    print(results)
 
 
 def book_commit(argv):
@@ -101,6 +108,7 @@ def book_help():
 * 
 *   commands:
 *
+*     build                 -- Build the content of the book
 *     changes               -- List doc changes 
 *     commit [message args] -- Commit all changes to the book
 *     dired                 -- Edit the book content directory
@@ -109,7 +117,6 @@ def book_help():
 *     help                  -- Show the available commands
 *     list                  -- List the parts of the book
 *     outline               -- Show the outline for the book
-*     pdf                   -- Build a PDF file of the book content
 *     test                  -- Run all system tests
 *     words                 -- Count the words
             ''')
@@ -200,8 +207,8 @@ def book_command(argv):
         chdir(environ['book'])
         #print(shell('ls -l'))
 
-        if argv[1]=='assemble':
-            print(book_assemble())
+        if argv[1]=='build':
+            print(book_build())
 
         elif argv[1]=='changes':
             print(book_changes(argv))
@@ -223,9 +230,6 @@ def book_command(argv):
 
         elif argv[1]=='outline':
             print(book_outline())
-
-        elif argv[1]=='pdf':
-            book_pdf()
 
         elif argv[1]=='read':
             book_read()
