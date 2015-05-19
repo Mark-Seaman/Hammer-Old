@@ -13,21 +13,23 @@ from tst import run_diff_checks, shell, lines, limit_lines
 
 
 def synch_copy_test():
-    x = shell('synch copy test test-xxx')
+    shell('synch copy test test-xxx')
     system('rm -rf test-xxx')
-    #return x
 
 
 def synch_preview_test():
-	return shell('echo synch preview xxx yyy')
+	return limit_lines('synch preview test test-xxx', 100, 120)
 
 
 def synch_mirror_test():
-	return shell('echo synch mirror xxx yyy')
+    shell('synch mirror test test-xxx')
+    x = limit_lines('synch mirror test test-xxx', 6, 6)
+    system('rm -rf test-xxx')
+    return x
 
 
 def synch_sync_test():
-	return shell('echo synch sync xxx yyy')
+	return limit_lines('synch sync test test-xxx', 65, 120)
 
 
 def synch_checker():

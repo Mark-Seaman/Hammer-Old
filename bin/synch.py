@@ -10,19 +10,19 @@ from synch_test import synch_checker
 def synch_copy(argv):
 	'''Create a new synch.'''
 	print("synch copy: %s %s" % (argv[2],argv[3]))
-	system('rsync -auv %s %s' % (argv[2],argv[3]))
+	system('rsync -auv %s/ %s' % (argv[2],argv[3]))
 
 
 def synch_mirror(argv):
 	'''Delete the synch.'''
-	print("synch mirror:",argv[2:4])
-	#system('rm bin/%s' % argv[2])
+	print("synch mirror: %s %s" % (argv[2],argv[3]))
+	system('rsync -auv --delete %s/ %s' % (argv[2],argv[3]))
 
 
 def synch_preview(argv):
 	'''Edit the content of a synch.'''
-	print("synch preview:",argv[2:4])
-	#system('e bin/'+argv[2])
+	print("synch preview: %s %s" % (argv[2],argv[3]))
+	system('rsync -nauv --delete %s/ %s' % (argv[2],argv[3]))
 
 
 def synch_help():
@@ -43,7 +43,8 @@ def synch_help():
 
 def synch_sync(argv):
 	'''List the parts of the synch source code.'''
-	print("synch mirror:",argv[2:4])
+	synch_copy(argv)
+	synch_copy(argv[:2]+[argv[3],argv[2]])
 	
 
 def synch_command(argv):

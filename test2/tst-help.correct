@@ -1,0 +1,39 @@
+
+    usage: tst [command] [testname]
+
+    examples:
+        tst                 # runs all the tests
+        tst results         # display the differences from expected
+        tst name            # runs a single test
+        tst like name       # set the correct results
+        tst output name     # show the output results
+        tst correct name    # show the correct results
+      
+    subcommands of tst:
+
+    No args
+        list       # List the tests to run
+        status     # Show the failing tests
+        results    # Show the unexpected results
+
+    One test arg
+        output     # Show the output
+        correct    # Show the correct output
+        results    # Show the unexpected results
+
+    Shortcut commands
+        tlike      # tst like
+        tres       # tst results
+        tstatus    # tst status
+        tout       # tst output
+        tcorrect   # tst correct
+        tst        # systest
+        nose       # nosetests
+
+    Scripts
+        doc        # Documents
+        cmd        # Executable commands
+        vc         # Version control with git
+        tst        # Testing script
+
+            
