@@ -190,7 +190,7 @@ def book_show():
 
 def book_text(chapter=1):
     '''Display the raw text of one chapter'''
-    f = join(environ['book'], 'chapters', 'Chapter%s.md'%chapter)
+    f = join(environ['book'], 'chapters', '%s.md'%chapter)
     print(open(f).read())
 
 
