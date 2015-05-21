@@ -129,9 +129,7 @@ def nested_list(name, children):
 
 
 def book_list():
-    '''
-    List the parts of the book source code.
-    '''
+    '''List the parts of the book source code. '''
     results = "List the contents of this book\n"
     for d in ['.', 'book', 'outline', 'chapters']:
         book_dir = join(environ['book'],d)
@@ -140,13 +138,29 @@ def book_list():
     return results
 
 
-def book_outline():
-    results = "Outline of this book\n"
+def book_outline_fragment(topic):
+    '''Extract the outline from chapter file to make outline file'''
+    print('Outline: ',topic)
+    chapter_dir = join(environ['book'],'chapters')
     outline_dir = join(environ['book'],'outline')
-    for topic in book_read_index('Outline'):
-        path = join(outline_dir,topic+'.md')
-        print('Outline: ',path)
-        results += '\n\n'+open(path).read()
+    path1 = join(chapter_dir,topic+'.md')
+    path2 = join(outline_dir,topic+'.md')
+    text = [t for t in open(path1).read().split('\n') if t.startswith('#')]
+    text = [t.replace('### ','            ') for t in text]
+    text = [t.replace('## ','        ') for t in text]
+    text = [t.replace('# ','    ') for t in text]
+    text = '\n'.join(text)
+    with open(path2,'w') as f:
+        f.write(text+'\n')
+    return text
+
+
+def book_outline():
+    '''Build a new outline from the book text'''
+    results = "Outline of this book\n"
+    for topic in book_read_index('Chapters'):
+        text = book_outline_fragment(topic)
+        results += '\n\n'+text
     outline_file = join(environ['book'],'Outline.md')
     with open(outline_file,'w') as f:
         f.write(results+'\n')
@@ -154,9 +168,7 @@ def book_outline():
 
 
 def book_pdf():
-    '''
-    Build the PDF file from the Book markdown file.
-    '''
+    '''Build the PDF file from the Book markdown file. '''
     system('''
         rm *.pdf
         pandoc --toc Book.md -o Book.pdf 2> /dev/null
@@ -195,9 +207,7 @@ def book_text(chapter=1):
 
 
 def book_words():
-    '''
-    Count all of the words in the book
-    '''
+    '''Count all of the words in the book '''
     book = ['book/'+i+'.md' for i in book_read_index('Book')] 
     chapters = ['chapters/'+i+'.md' for i in book_read_index('Chapters')]
     chdir(environ['book'])
@@ -206,9 +216,7 @@ def book_words():
 
 
 def book_command(argv):
-    '''
-    Execute all of the book specific commands
-    '''
+    '''Execute all of the book specific commands '''
     if len(argv)>1:
         chdir(environ['book'])
         #print(shell('ls -l'))
