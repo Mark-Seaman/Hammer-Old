@@ -12,8 +12,8 @@ from os.path import join
 from tst import run_diff_checks, shell, lines, limit_lines
 
 
-def server_add_test():
-    return shell('echo server add xxx')
+def server_host_test():
+    return shell('server host')
 
 
 def server_delete_test():
@@ -32,12 +32,17 @@ def server_show_test():
     return shell('echo server show xxx')
 
 
+def server_help_test():
+    return shell('server help')
+
+
 def server_checker():
     my_tests = {
-        'server-add': server_add_test,
+        'server-host': server_host_test,
         'server-list': server_list_test,
         'server-delete': server_delete_test,
         'server-show': server_show_test,
+        'server-help': server_help_test,
     }
     run_diff_checks('server', my_tests)
 

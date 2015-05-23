@@ -34,12 +34,17 @@ def synch_sync_test():
     return x
 
 
+def synch_help_test():
+    return shell('synch help')
+
+
 def synch_checker():
     my_tests = {
         'synch-copy': synch_copy_test,
         'synch-preview': synch_preview_test,
         'synch-mirror': synch_mirror_test,
         'synch-sync': synch_sync_test,
+        'synch-help': synch_help_test,
     }
     run_diff_checks('synch', my_tests)
 
