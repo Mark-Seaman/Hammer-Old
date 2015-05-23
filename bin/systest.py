@@ -6,11 +6,11 @@ from book_test import book_checker
 from cmd_test import cmd_checker
 from code_test import code_checker
 from doc_test import doc_checker
+from server_test import server_checker
 from synch_test import synch_checker
 from tst_test import tst_checker
 from tst import run_diff_checks, shell, lines, limit_lines
 from vc_test import vc_checker
-
 
 def cmd_python_pip_test():
     '''Check the python setup for pip'''
@@ -45,6 +45,7 @@ def system_test_list():
         'pip': cmd_python_pip_test,
         'ps': process_status_test,
         'pwd': pwd_test,
+        'server': server_checker,
         'synch': synch_checker,
         'code': code_checker,
     }
