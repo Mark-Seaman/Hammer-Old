@@ -18,7 +18,7 @@ def synch_copy_test():
 
 
 def synch_preview_test():
-	return limit_lines('synch preview test test-xxx', 100, 120)
+	return limit_lines('synch preview test test-xxx', 100, 140)
 
 
 def synch_mirror_test():
@@ -29,7 +29,7 @@ def synch_mirror_test():
 
 
 def synch_sync_test():
-    x = limit_lines('synch sync test test-xxx', 65, 120)
+    x = limit_lines('synch sync test test-xxx', 65, 140)
     system('rm -rf test-xxx')
     return x
 
