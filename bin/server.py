@@ -7,13 +7,14 @@ from sys import argv
 from server_test import server_checker
 from tst import shell
 
-def server_changes(argv):
+
+def server_changes():
 	'''Show the pending changes on the server'''
-	print("server changes:"+argv[2])
-	#system('e bin/'+argv[2])
+	print("server changes:")
+	server_do('cd Documents; git status; hostname')
 
 
-def server_console(argv):
+def server_console():
 	'''Show the console on the server'''
 	print("server console:"+argv[2])
 	#system('e bin/'+argv[2])
@@ -28,7 +29,7 @@ def server_deploy(argv):
 def server_do(command):
 	'''Run a command on the server'''
 	#print("server do: "+command)
-	system('ssh '+environ['ph']+command)
+	system('ssh '+environ['ph']+' "'+command+'"')
 
 	
 def server_help():
@@ -62,10 +63,10 @@ def server_restart(argv):
 	#system('e bin/'+argv[2])
 
 
-def server_status(argv):
+def server_status():
 	'''Show the status of the server'''
-	print("server status:"+argv[2])
-	#system('e bin/'+argv[2])
+	print("server status:")
+	server_do('ps -ef|grep apache; hostname')
 	
 
 def server_command(argv):
@@ -73,7 +74,7 @@ def server_command(argv):
 	if len(argv)>1:
 
 		if argv[1]=='changes':
-			server_changes(argv)
+			server_changes()
 
 		elif argv[1]=='console':
 			server_console(argv)
@@ -82,7 +83,7 @@ def server_command(argv):
 			server_deploy(argv)
 
 		elif argv[1]=='do':
-			command = ' "'+' '.join(argv[2:])+'"'
+			command = ' '.join(argv[2:])
 			server_do(command)
 
 		elif argv[1]=='host':
@@ -92,7 +93,7 @@ def server_command(argv):
 			server_restart(argv)
 
 		elif argv[1]=='status':
-			server_status(argv)
+			server_status()
 
 		elif argv[1]=='test':
 			server_checker()

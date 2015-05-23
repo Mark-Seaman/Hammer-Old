@@ -16,12 +16,12 @@ def server_host_test():
     return shell('server host')
 
 
-def server_delete_test():
-    return shell('echo server delete xxx')
+def server_status_test():
+    return limit_lines('server status', 10,10)
 
 
-def server_edit_test():
-    return shell('echo server edit xxx')
+def server_changes_test():
+    return shell('server changes')
 
 
 def server_list_test():
@@ -39,8 +39,8 @@ def server_help_test():
 def server_checker():
     my_tests = {
         'server-host': server_host_test,
-        'server-list': server_list_test,
-        'server-delete': server_delete_test,
+        'server-status': server_status_test,
+        'server-changes': server_changes_test,
         'server-show': server_show_test,
         'server-help': server_help_test,
     }
