@@ -17,7 +17,7 @@ def server_host_test():
 
 
 def server_status_test():
-    return limit_lines('server status', 10,10)
+    return limit_lines('server status', 10,20)
 
 
 def server_changes_test():
