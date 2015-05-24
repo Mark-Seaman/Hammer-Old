@@ -47,10 +47,15 @@ def doc_help():
         delete  [file] -- Delete a doc
         edit    [file] -- Edit the doc
         list    [file] -- List all docs
+        path    [file] -- Show path to document
         show    [file] -- Show a doc
         text           -- Show markdown for all docs
       
 			''')
+
+
+def doc_path(filename=''):
+	return join(environ['mb'], filename)
 
 
 def doc_list(argv):
@@ -93,6 +98,9 @@ def doc_command(argv):
 
 		elif argv[1]=='list':
 			doc_list(argv)
+
+		elif argv[1]=='path':
+			print('path:'+doc_path(argv[2]))
 
 		elif argv[1]=='show':
 			doc_show(argv[2:])

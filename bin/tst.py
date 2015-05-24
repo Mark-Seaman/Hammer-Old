@@ -96,7 +96,7 @@ def show_status():
         if answer!=correct:
             failures.append('    %-20s FAIL' % name)
     print('\n\nTest Status: %d tests failed' % len(failures))
-    print('   ','\n    '.join(failures))
+    print('   '+'\n    '.join(failures))
       
 
 def show_diff(name):

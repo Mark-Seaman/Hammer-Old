@@ -23,6 +23,9 @@ def doc_list_test():
 	return limit_lines('doc list', 4, 8)
 
 
+def doc_path_test():
+	return shell('doc path test_this') + shell('doc path test_that')
+
 def doc_show_test():
 	'''Display the todo list document'''
 	return limit_lines('doc show todo', 30, 50)
@@ -37,6 +40,7 @@ def doc_checker():
 	my_tests = {
         'doc-add': doc_add_test,
         'doc-list': doc_list_test,
+        'doc-path': doc_path_test,
         'doc-show': doc_show_test,
         'doc-text': doc_text_test,
     }
