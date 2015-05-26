@@ -61,6 +61,7 @@ $p/socket:\
 /usr/bin:\
 /usr/local/bin:\
 /opt/local/bin:\
+/usr/local/texlive/2014basic/bin/universal-darwin/:\
 ~/bin
 
 export _OLD_VIRTUAL_PATH=$PATH

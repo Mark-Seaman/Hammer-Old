@@ -14,25 +14,21 @@ from tst import run_diff_checks, shell, lines, limit_lines
 
 
 def doc_add_test():
-	'''Test that a document can be added to the system'''
 	return shell('doc add xxx_sample_document') + shell('doc delete xxx_sample_document')
 
 
 def doc_list_test():
-	'''List all of the existing documents '''
 	return limit_lines('doc list', 4, 8)
 
 
 def doc_path_test():
 	return shell('doc path test_this') + shell('doc path test_that')
 
-def doc_show_test():
-	'''Display the todo list document'''
-	return limit_lines('doc show todo', 30, 50)
 
-def doc_text_test():
-    '''Display a concatenation of all source files'''
-    return limit_lines('doc show', 200, 300)
+def doc_show_test():
+	text = limit_lines('doc show Leverage/Book.index', 6, 6)
+	text += limit_lines('doc show Leverage/Chapters.index', 14, 14) 
+	return text
 
 
 def doc_checker():
@@ -42,7 +38,6 @@ def doc_checker():
         'doc-list': doc_list_test,
         'doc-path': doc_path_test,
         'doc-show': doc_show_test,
-        'doc-text': doc_text_test,
     }
 	run_diff_checks('doc', my_tests)
 

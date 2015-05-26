@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from os import system, listdir, environ
-from os.path import join, exists
+from os.path import join, exists, isdir
 from sys import argv
 
 from doc_test import doc_checker
@@ -60,10 +60,12 @@ def doc_path(filename=''):
 
 def doc_list(argv):
 	'''List the parts of the doc source code.'''
-	print("List the contents of this doc")
-	for d in ('docs',):
+	print("List the contents of this doc - "+doc_path())
+	directories = [d for d in listdir(doc_path()) if isdir(join(doc_path(),d))]
+	for d in directories:
 		print(d+':')
-		print('    '+'\n    '.join(listdir(join(environ['p'],d))))
+		files = [join(d,f) for f in listdir(doc_path(d))]
+		print('    '+'\n    '.join(files))
 
 
 def doc_show(docs):
@@ -71,12 +73,12 @@ def doc_show(docs):
 	if docs:
 		for d in docs:
 			d = doc_path(d)
-			print("doc:",d)
+			print("doc:"+d)
 			system('cat '+d)
 	else:
 		d = doc_path('')
 		for f in listdir(d):
-			print("# doc:",d+f)	
+			print("# doc:"+d+f)	
 			system('cat '+d+f)
 	
 

@@ -7,18 +7,14 @@ from book_test import book_checker
 
 
 def book_build():
-    '''
-    Put together a markdown file from the individual parts
-    '''
+    '''Put together a markdown file from the individual parts '''
     book_chapters()
     book_outline()
     book_pdf()
 
     
 def book_changes(argv):
-    '''
-    Form the shell script for the commit command.
-    '''
+    '''Form the shell script for the commit command. '''
     command = 'git status'
     return 'List all pending changes to the book\n' +shell(command)
 
@@ -39,9 +35,7 @@ def book_chapters():
 
 
 def book_commit(argv):
-    '''
-    Form the shell script for the commit command.
-    '''
+    '''Form the shell script for the commit command. '''
     comment = book_commit_comment(argv)
     command = '''echo Commit all changes from the book project
         git add -A . &&
@@ -53,13 +47,10 @@ def book_commit(argv):
 
 
 def book_commit_comment(argv):
-    '''
-    Select the comment to tag onto the commit.
-    '''
-        return ' '.join(argv[2:])
+    '''Select the comment to tag onto the commit. '''
     if len(argv)>2:
-    else:
-        return 'Automatic book commit'
+        return ' '.join(argv[2:])
+	return 'Automatic book commit'
     
 
 def book_dired():
@@ -100,9 +91,7 @@ def book_edit(argv):
 
 
 def book_help():
-    '''
-    Show all the book commands and their usage.
-    '''
+    '''Show all the book commands and their usage. '''
     print('''
 *    usage: book command [args]
 * 
