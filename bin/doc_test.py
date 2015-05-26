@@ -26,8 +26,7 @@ def doc_path_test():
 
 
 def doc_show_test():
-	text = limit_lines('doc show Leverage/Book.index', 6, 6)
-	text += limit_lines('doc show Leverage/Chapters.index', 14, 14) 
+	text = limit_lines('doc show Hammer/docs/index.md', 19, 19)
 	return text
 
 
