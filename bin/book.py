@@ -56,8 +56,8 @@ def book_commit_comment(argv):
     '''
     Select the comment to tag onto the commit.
     '''
-    if len(argv)>2:
         return ' '.join(argv[2:])
+    if len(argv)>2:
     else:
         return 'Automatic book commit'
     

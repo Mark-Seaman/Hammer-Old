@@ -19,22 +19,20 @@ def calculate_complexity(filename):
 	return (num_lines,num_imports,complexity)
 
 
-def code_complexity(files=None):
+def code_complexity(code_dirs=None):
 	'''Measure the code complexity'''
-	print ('code_complexity:',files)
-	if not files:
-		files = code_list().split('\n')
+	files = code_list(code_dirs).split('\n')
+	print ('code_complexity:')
 	python_files = [f for f in files if f.endswith('.py')]
 	total = (0,0,0)
 
 	print('File                              Lines  Imports Complexity')
-
 	for f in sorted(python_files):
 		lines,imports,complexity = calculate_complexity(f)
 		total = (total[0]+lines, total[1]+imports, total[2]+complexity)
-		print('%-30s' % f, '%8d' % lines, '%8d' % imports, '%8d' % complexity)
+		print('%-30s %8d %8d %8d' % (f, lines, imports, complexity))
 
-	print('%-30s %8d %8d %8d' % ('Total',total[0], total[1], total[2]))
+	print('%-30s %8d %8d %8d' % ('Total', total[0], total[1], total[2]))
 
 
 def code_help():
@@ -60,7 +58,8 @@ def code_list(files=None):
 		chdir(environ['p'])
 		files = [f for f in glob(d+'/*') if not isdir(f)]
 		files = [f for f in files if not f.endswith('.pyc')]
-		results.append('\n'.join(files))
+		if files:
+			results.append('\n'.join(files))
 	return '\n'.join(results)
 
 
