@@ -10,6 +10,7 @@ def book_build():
     '''Put together a markdown file from the individual parts '''
     book_chapters()
     book_outline()
+    book_project()
     book_pdf()
 
     
@@ -21,7 +22,7 @@ def book_changes(argv):
 
 def book_chapters():
     '''Create the chapter content markdown'''
-    results = 'Build: Index.md\n'
+    results = 'Build: Book.md\n'
     book = ['book/'+i for i in book_read_index('Book')] 
     chapters = ['chapters/'+i for i in book_read_index('Chapters')]
     with open('Book.md','w') as output_file:
@@ -160,13 +161,31 @@ def book_pdf():
     '''Build the PDF file from the Book markdown file. '''
     system('''
         rm *.pdf
-        pandoc --toc Book.md -o Book.pdf 2> /dev/null
+        pandoc --toc Book.md    -o Book.pdf    2> /dev/null
         pandoc --toc Outline.md -o Outline.pdf 2> /dev/null
-        ls -s *.pdf
+        pandoc --toc Project.md -o Project.pdf 2> /dev/null
+        ls -s Book.pdf
+        ls -s Outline.pdf
+        ls -s Project.pdf
         echo Read file with:
         echo '     pdf $book/Book.pdf'
         echo '     pdf $book/Outline.pdf'
+        echo '     pdf $book/Project.pdf'
         ''')
+
+def book_project():
+    '''Create the chapter content markdown'''
+    results = 'Build: Project.md\n'
+    project = [i for i in book_read_index('Project')] 
+    with open('Project.md','w') as output_file:
+        for p in project:
+            output_file.write('\n\n---\n\n')
+            path = p+'.md'
+            results += 'Build '+path+'  ...\n'
+            text = open(path).read()    
+            output_file.write(text)
+    print(results)
+
 
 def book_push():
     '''Push the book to the dropbox for distribution'''
@@ -180,6 +199,7 @@ def book_read():
     '''Read the PDF for the book'''
     system('rbg evince $book/Book.pdf')
     system('rbg evince $book/Outline.pdf')
+    system('rbg evince $book/Project.pdf')
 
 
 def book_show():
