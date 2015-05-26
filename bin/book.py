@@ -50,7 +50,7 @@ def book_commit_comment(argv):
     '''Select the comment to tag onto the commit. '''
     if len(argv)>2:
         return ' '.join(argv[2:])
-	return 'Automatic book commit'
+    return 'Automatic book commit'
     
 
 def book_dired():
