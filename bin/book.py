@@ -140,7 +140,7 @@ def book_list():
 
 def book_outline_fragment(topic):
     '''Extract the outline from chapter file to make outline file'''
-    print('Outline: ',topic)
+    print('Outline: '+topic)
     chapter_dir = join(environ['book'],'chapters')
     outline_dir = join(environ['book'],'outline')
     path1 = join(chapter_dir,topic+'.md')
