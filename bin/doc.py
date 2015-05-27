@@ -58,12 +58,15 @@ def doc_path(filename=''):
 	return join(environ['mb'], filename)
 
 
+from os.path import isdir
 def doc_list(argv):
 	'''List the parts of the doc source code.'''
 	print("List the contents of this doc")
-	for d in ('docs',):
-		print(d+':')
-		print('    '+'\n    '.join(listdir(join(environ['p'],d))))
+	for d in listdir(doc_path()):
+		x = join(doc_path(),d)
+		if isdir(x):
+			print(d+':')	
+			print('    '+'\n    '.join(listdir(x)))
 
 
 def doc_show(docs):
