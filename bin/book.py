@@ -7,30 +7,27 @@ from book_test import book_checker
 
 
 def book_build():
-    '''
-    Put together a markdown file from the individual parts
-    '''
+    '''Put together a markdown file from the individual parts '''
     book_chapters()
     book_outline()
+    book_project()
     book_pdf()
 
     
 def book_changes(argv):
-    '''
-    Form the shell script for the commit command.
-    '''
+    '''Form the shell script for the commit command. '''
     command = 'git status'
     return 'List all pending changes to the book\n' +shell(command)
 
 
 def book_chapters():
     '''Create the chapter content markdown'''
-    results = 'Build: Index.md\n'
+    results = 'Build: Book.md\n'
     book = ['book/'+i for i in book_read_index('Book')] 
     chapters = ['chapters/'+i for i in book_read_index('Chapters')]
     with open('Book.md','w') as output_file:
         for p in book+chapters:
-            output_file.write('\n\n---\n\n')
+            output_file.write('\n\n\\newpage\n---\n\n')
             path = p+'.md'
             results += 'Build '+path+'  ...\n'
             text = open(path).read()    
@@ -39,9 +36,7 @@ def book_chapters():
 
 
 def book_commit(argv):
-    '''
-    Form the shell script for the commit command.
-    '''
+    '''Form the shell script for the commit command. '''
     comment = book_commit_comment(argv)
     command = '''echo Commit all changes from the book project
         git add -A . &&
@@ -53,13 +48,10 @@ def book_commit(argv):
 
 
 def book_commit_comment(argv):
-    '''
-    Select the comment to tag onto the commit.
-    '''
+    '''Select the comment to tag onto the commit. '''
     if len(argv)>2:
         return ' '.join(argv[2:])
-    else:
-        return 'Automatic book commit'
+    return 'Automatic book commit'
     
 
 def book_dired():
@@ -100,9 +92,7 @@ def book_edit(argv):
 
 
 def book_help():
-    '''
-    Show all the book commands and their usage.
-    '''
+    '''Show all the book commands and their usage. '''
     print('''
 *    usage: book command [args]
 * 
@@ -140,7 +130,7 @@ def book_list():
 
 def book_outline_fragment(topic):
     '''Extract the outline from chapter file to make outline file'''
-    print('Outline: ',topic)
+    print('Outline: '+topic)
     chapter_dir = join(environ['book'],'chapters')
     outline_dir = join(environ['book'],'outline')
     path1 = join(chapter_dir,topic+'.md')
@@ -160,7 +150,7 @@ def book_outline():
     results = "Outline of this book\n"
     for topic in book_read_index('Chapters'):
         text = book_outline_fragment(topic)
-        results += '\n\n'+text
+        results += text+'\n\n\\newpage\n'
     outline_file = join(environ['book'],'Outline.md')
     with open(outline_file,'w') as f:
         f.write(results+'\n')
@@ -171,13 +161,30 @@ def book_pdf():
     '''Build the PDF file from the Book markdown file. '''
     system('''
         rm *.pdf
-        pandoc --toc Book.md -o Book.pdf 2> /dev/null
-        pandoc --toc Outline.md -o Outline.pdf 2> /dev/null
-        ls -s *.pdf
+        pandoc Book.md    -o Book.pdf    2> /dev/null
+        pandoc Outline.md -o Outline.pdf 2> /dev/null
+        pandoc Project.md -o Project.pdf 2> /dev/null
+        ls -s Book.pdf
+        ls -s Outline.pdf
+        ls -s Project.pdf
         echo Read file with:
         echo '     pdf $book/Book.pdf'
         echo '     pdf $book/Outline.pdf'
+        echo '     pdf $book/Project.pdf'
         ''')
+
+def book_project():
+    '''Create the chapter content markdown'''
+    results = 'Build: Project.md\n'
+    project = [i for i in book_read_index('Project')] 
+    with open('Project.md','w') as output_file:
+        for p in project:
+            path = p+'.md'
+            results += 'Build '+path+'  ...\n'
+            text = open(path).read()    
+            output_file.write(text+'\n\n---\\newpage\n\n')
+    print(results)
+
 
 def book_push():
     '''Push the book to the dropbox for distribution'''
@@ -191,6 +198,7 @@ def book_read():
     '''Read the PDF for the book'''
     system('rbg evince $book/Book.pdf')
     system('rbg evince $book/Outline.pdf')
+    system('rbg evince $book/Project.pdf')
 
 
 def book_show():
