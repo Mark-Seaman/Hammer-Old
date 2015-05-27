@@ -27,7 +27,7 @@ def book_chapters():
     chapters = ['chapters/'+i for i in book_read_index('Chapters')]
     with open('Book.md','w') as output_file:
         for p in book+chapters:
-            output_file.write('\n\n---\n\n')
+            output_file.write('\n\n\\newpage\n---\n\n')
             path = p+'.md'
             results += 'Build '+path+'  ...\n'
             text = open(path).read()    
@@ -150,7 +150,7 @@ def book_outline():
     results = "Outline of this book\n"
     for topic in book_read_index('Chapters'):
         text = book_outline_fragment(topic)
-        results += '\n\n'+text
+        results += text+'\n\n\\newpage\n'
     outline_file = join(environ['book'],'Outline.md')
     with open(outline_file,'w') as f:
         f.write(results+'\n')
@@ -161,9 +161,9 @@ def book_pdf():
     '''Build the PDF file from the Book markdown file. '''
     system('''
         rm *.pdf
-        pandoc --toc Book.md    -o Book.pdf    2> /dev/null
-        pandoc --toc Outline.md -o Outline.pdf 2> /dev/null
-        pandoc --toc Project.md -o Project.pdf 2> /dev/null
+        pandoc Book.md    -o Book.pdf    2> /dev/null
+        pandoc Outline.md -o Outline.pdf 2> /dev/null
+        pandoc Project.md -o Project.pdf 2> /dev/null
         ls -s Book.pdf
         ls -s Outline.pdf
         ls -s Project.pdf
@@ -179,11 +179,10 @@ def book_project():
     project = [i for i in book_read_index('Project')] 
     with open('Project.md','w') as output_file:
         for p in project:
-            output_file.write('\n\n---\n\n')
             path = p+'.md'
             results += 'Build '+path+'  ...\n'
             text = open(path).read()    
-            output_file.write(text)
+            output_file.write(text+'\n\n---\\newpage\n\n')
     print(results)
 
 
