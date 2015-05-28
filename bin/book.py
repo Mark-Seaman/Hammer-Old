@@ -182,7 +182,7 @@ def book_project():
             path = p+'.md'
             results += 'Build '+path+'  ...\n'
             text = open(path).read()    
-            output_file.write(text+'\n\n---\\newpage\n\n')
+            output_file.write(text+'\n\n---\n\n\\newpage\n\n')
     print(results)
 
 
