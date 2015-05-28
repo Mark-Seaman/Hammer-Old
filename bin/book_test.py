@@ -46,7 +46,7 @@ def book_words_test():
 
 def book_text():
     '''Get the text for Chapter 1'''
-    return shell('book text Culture')
+    return shell('book text Teamwork')
 
 
 def book_checker():
