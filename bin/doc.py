@@ -21,8 +21,7 @@ def doc_add(argv):
 
 def doc_changes():
     '''Form the shell script for the commit command. '''
-    chdir(doc_path())
-    command = 'git status'
+    command = 'cd $mb; git status'
     return 'List all pending changes to the book\n' +shell(command)
 
 
@@ -32,8 +31,8 @@ def doc_commit(argv):
         comment =  ' '.join(argv[2:])
     else:
     	comment = 'Automatic book commit'
-    chdir(doc_path())
-    command = '''echo Commit all changes from the book project
+    command = '''cd $mb
+    	echo Commit all changes from the book project
         git add -A . &&
         git commit -m"%s" &&
         git pull &&
