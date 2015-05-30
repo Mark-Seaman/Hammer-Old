@@ -22,7 +22,8 @@ def doc_add(argv):
 def doc_changes():
     '''Form the shell script for the commit command. '''
     command = 'cd $mb; git status'
-    return 'List all pending changes to the book\n' +shell(command)
+    print('List all pending changes to the book')
+    system(command)
 
 
 def doc_commit(argv):
@@ -121,7 +122,7 @@ def doc_command(argv):
 			doc_add(argv)
 
 		elif argv[1]=='changes':
-			print(doc_changes())
+			doc_changes()
 
 		elif argv[1]=='commit':
 			doc_commit(argv)
