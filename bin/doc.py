@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 
-from os import system, listdir, environ
+from os import system, listdir, environ, chdir
 from os.path import join, exists, isdir
 from sys import argv
 
-from doc_test import doc_checker
+from doc_test import doc_checker, shell
 
 
-def doc_path(doc):
+def doc_path(doc=''):
 	'''Return the path name that corresponds to this document.'''
 	return join(environ['pd'],doc)
 
@@ -17,6 +17,29 @@ def doc_add(argv):
 	d = doc_path(argv[2])
 	print("New doc:"+d)
 	system('echo "Document %s" > %s' % (d,d))
+
+
+def doc_changes():
+    '''Form the shell script for the commit command. '''
+    chdir(doc_path())
+    command = 'git status'
+    return 'List all pending changes to the book\n' +shell(command)
+
+
+def doc_commit(argv):
+    '''Form the shell script for the commit command. '''
+    if len(argv)>2:
+        comment =  ' '.join(argv[2:])
+    else:
+    	comment = 'Automatic book commit'
+    chdir(doc_path())
+    command = '''echo Commit all changes from the book project
+        git add -A . &&
+        git commit -m"%s" &&
+        git pull &&
+        git push
+    ''' % comment
+    system(command)
 
 
 def doc_delete(argv):
@@ -43,13 +66,15 @@ def doc_help():
 
     doc:
 
-        add     [file] -- Add a new doc
-        delete  [file] -- Delete a doc
-        edit    [file] -- Edit the doc
-        list    [file] -- List all docs
-        path    [file] -- Show path to document
-        show    [file] -- Show a doc
-        text           -- Show markdown for all docs
+        add     [file] 		# Add a new doc
+        changes        		# List doc changes 
+        commit [message args] # Commit all changes to the book
+        delete  [file]      # Delete a doc
+        edit    [file]      # Edit the doc
+        list    [file]      # List all docs
+        path    [file]      # Show path to document
+        show    [file]      # Show a doc
+        text                # Show markdown for all docs
       
 			''')
 
@@ -73,13 +98,20 @@ def doc_show(docs):
 	if docs:
 		for d in docs:
 			d = doc_path(d)
+			if not exists(d):
+				print('File not found, '+d)
+				return
 			print("doc:"+d)
 			system('cat '+d)
 	else:
-		d = doc_path('')
+		d = doc_path('Hammer/docs')
 		for f in listdir(d):
-			print("# doc:"+d+f)	
-			system('cat '+d+f)
+			path = join(d,f)
+			if not exists(path):
+				print('File not found, '+d)
+				return
+			print("# doc:"+path)	
+			system('cat '+path)
 	
 
 def doc_command(argv):
@@ -89,8 +121,11 @@ def doc_command(argv):
 		if argv[1]=='add':
 			doc_add(argv)
 
+		elif argv[1]=='changes':
+			print(doc_changes())
+
 		elif argv[1]=='commit':
-			commit_doc(argv)
+			doc_commit(argv)
 
 		elif argv[1]=='delete':
 			doc_delete(argv)
