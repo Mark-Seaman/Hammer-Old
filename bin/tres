@@ -1,5 +1,6 @@
 #!/bin/bash
 # Show the unexpected results
 
-tst results $1
+tst results $1 | less
 
+tst status

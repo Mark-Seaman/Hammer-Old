@@ -17,6 +17,10 @@ def doc_add_test():
 	return shell('doc add xxx_sample_document') + shell('doc delete xxx_sample_document')
 
 
+def doc_changes_test():
+    return shell('doc changes')
+
+
 def doc_list_test():
 	return limit_lines('doc list', 20, 25)
 
@@ -26,7 +30,8 @@ def doc_path_test():
 
 
 def doc_show_test():
-	text = limit_lines('doc show Hammer/docs/index.md', 19, 19)
+	text = limit_lines('doc show Hammer/docs/index.md', 99, 99)
+	text += limit_lines('doc show', 99, 99)
 	return text
 
 
@@ -34,6 +39,7 @@ def doc_checker():
 	'''Execute all the desired diff tests'''
 	my_tests = {
         'doc-add': doc_add_test,
+        'doc-changes': doc_changes_test,
         'doc-list': doc_list_test,
         'doc-path': doc_path_test,
         'doc-show': doc_show_test,
