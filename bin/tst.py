@@ -6,6 +6,8 @@ from os.path import join, exists
 from subprocess import Popen,PIPE
 from sys import argv
 
+from store import save, recall, expire, expiration
+
 
 def limit_lines(shell_command, min=None, max=None):
     '''Limit the lines to a certain number or echo all the output'''
@@ -56,23 +58,23 @@ def test_list():
     return [f.replace('.out','').replace('test/','') for f in glob('test/*.out')]
 
 
-def save(name, value=''):
-    """Save the value by its name"""
-    #print('save',name, value)
-    if not exists('test'):
-        mkdir('test')
-    with open('test/'+name,'w') as file:
-        if value:
-            file.write(value)
+# def save(name, value=''):
+#     """Save the value by its name"""
+#     #print('save',name, value)
+#     if not exists('test'):
+#         mkdir('test')
+#     with open('test/'+name,'w') as file:
+#         if value:
+#             file.write(value)
 
 
-def recall(name):
-    '''   Recall the value by its name   '''
-    if not exists('test'):
-        mkdir('test')
-    if exists('test/'+name):
-        with open('test/'+name) as file:
-            return file.read()
+# def recall(name):
+#     '''   Recall the value by its name   '''
+#     if not exists('test'):
+#         mkdir('test')
+#     if exists('test/'+name):
+#         with open('test/'+name) as file:
+#             return file.read()
 
 
 def show_output(name):
