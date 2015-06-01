@@ -58,25 +58,6 @@ def test_list():
     return [f.replace('.out','').replace('test/','') for f in glob('test/*.out')]
 
 
-# def save(name, value=''):
-#     """Save the value by its name"""
-#     #print('save',name, value)
-#     if not exists('test'):
-#         mkdir('test')
-#     with open('test/'+name,'w') as file:
-#         if value:
-#             file.write(value)
-
-
-# def recall(name):
-#     '''   Recall the value by its name   '''
-#     if not exists('test'):
-#         mkdir('test')
-#     if exists('test/'+name):
-#         with open('test/'+name) as file:
-#             return file.read()
-
-
 def show_output(name):
     '''Show the output text for the last test run'''
     print('Output from %s\n-----------------' % name)
