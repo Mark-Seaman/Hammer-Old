@@ -1,0 +1,63 @@
+Notes for Concepts to Add
+---------------------------
+
+books
+    Web Operations
+    Scalable Internet Architectures
+    Art of Scalability
+
+Open Source software
+Microservices
+Pathology
+Same problems with different solutions
+Scalability
+    dynamic content & applications
+    databases
+    concurrent & complex systems
+Multiple solution alternatives
+staffing: operations 4, design 4, development 40
+awareness is a prerequisite for understanding
+transparency avoids unreasonable requirements
+over-engineering products are wasteful
+operations is critical to every business
+knowledge, tools, experience, discipline
+good judgment comes from experience, experience comes from bad judgement - chinese proverb
+safety is required for learning
+how people deal with failure is what counts most
+discipline - behavior resulting from training, study, practice
+version control is absolutely necessary
+understand is true source code
+a tool is just a tool
+know your system
+code must be instrumented - testability
+build self-awareness and monitor it
+layers to monitor: system, application, business
+optimization: take a reasoned path
+avoid problems that do not need to be solved
+use caching strategically
+cat all your static assets in a single files (version the cat file with long expiring times)
+DNS & Cookie DB can be viewed as a distributed database
+data caching - think through the underlying problem
+inaccuracies are far more serious than slow
+data - you must understand how the data will be written and read
+you need to understand unspoken requirements - that come later
+who will consume this data and how will they use it
+managing technology proliferation 
+technologies are building blocks
+I need an engineer not a programmer
+people latch onto specific technologies
+map the risk to your experience with the technologies
+you need to understand the operational differences
+don't put images in the database; use an appropriate technology
+vertical scaling: files, noSQL, cookies, non-ACID databases
+only use RDMS for relationships
+OLTP & Map Reduce do not go together
+partitioning data introduces new issues
+key-value stores work well for non-relational data
+eventual consistency
+measure success in business terms
+build in finer granularity; solve small problems
+moving from RDBMS to Key value requires rethinking the problem
+noSQL systems are built to handle system failures
+performance is bad in failure modes
+people are blinded to the reality of new tech
