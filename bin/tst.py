@@ -96,7 +96,7 @@ def show_status():
         if answer!=correct:
             failures.append('    %-20s FAIL' % name)
     print('\n\nTest Status: %d tests failed' % len(failures))
-    print('   '+'\n    '.join(failures))
+    print('  '+'\n    '.join(failures))
       
 
 def show_diff(name):
@@ -208,19 +208,14 @@ def tst_add(command):
 
 
 def tst_edit(command):
-    ''' Edit the content of a test.'''
+    '''Edit the content of a test.'''
     print("Edit:",command)
     print(shell('e bin/%s_test.py' % command))
 
 
 def execute_tst_command(argv):
-    '''   Execute the appropriate test command   '''
-
-    if len(argv)==1:
-        system('systest')
-        show_status()
-
-    elif len(argv)==2:
+    '''Execute the appropriate test command'''
+    if len(argv)==2:
         t = argv[1]
 
         if 'status'==t:
@@ -274,4 +269,10 @@ def execute_tst_command(argv):
 
 # Create a script that can be run from the tst
 if __name__=='__main__':
+
+    if len(argv)==1:
+        from systest import system_checker
+        system_checker()
+        show_status()
+
     execute_tst_command(argv)
