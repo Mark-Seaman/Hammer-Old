@@ -17,7 +17,7 @@ def vc_commit(argv):
 	else:
 		comment = ' '.join(argv[2:])
 	print("vc commit:"+comment)
-	system('git add -A .; git commit -m"%s" && git pull && git push' % comment)
+	system('commit %s "%s"' % (environ['p'], comment))
 
 
 def vc_delete(argv):
