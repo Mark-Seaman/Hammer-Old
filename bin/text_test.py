@@ -12,6 +12,8 @@ def text_outline_test():
 def text_headings_test():
 	return shell('text headings')
 	
+def text_index_test():
+	return shell('text index')
 
 def text_show_test():
 	return shell('text show')
@@ -23,6 +25,7 @@ def text_checker():
 		'text': text_test,
         'text-outline': text_outline_test,
         'text-headings': text_headings_test,
+        'text-index': text_index_test,
         'text-show': text_show_test,
     }
 	run_diff_checks('text', my_tests)

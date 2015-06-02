@@ -8,6 +8,17 @@ from text_test import text_checker
 from book import book_read_index
 
 
+def text_index():
+    '''Convert the content outline to markdown'''
+    print('Build the text index of headings from content outline')
+    f = join(environ['book'], 'content', 'Outline.md')
+    text = open(f).read()
+    print(text)
+    outline_file = join(environ['book'],'Outline.outline')
+    with open(outline_file,'w') as f:
+        f.write(text)
+
+
 def text_convert_to_outline(topic):
     '''Convert headings to outline indents'''
     print('Outline: '+topic)
@@ -77,8 +88,8 @@ def text_help():
 
 def text_show(chapter):
     '''Show the content of a text.'''
-    print("text:",argv[2])
-    f = join(environ['book'], 'chapters', '%s.md'%chapter)
+    print("text:"+chapter)
+    f = join(environ['book'], '%s'%chapter)
     print(open(f).read())
 
 
@@ -87,7 +98,7 @@ def text_command(argv):
     if len(argv)>1:
 
         if argv[1]=='index':
-            text_index(argv)
+            text_index()
 
         elif argv[1]=='headings':
             text_headings()
