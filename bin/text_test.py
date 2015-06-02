@@ -13,7 +13,7 @@ def text_headings_test():
 	return shell('text headings')
 	
 def text_index_test():
-	return shell('text index')
+	return limit_lines ('text index', 450,460)
 
 def text_show_test():
 	return shell('text show')
