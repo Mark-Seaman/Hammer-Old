@@ -9,8 +9,8 @@ from book_test import book_checker
 def book_build():
     '''Put together a markdown file from the individual parts '''
     book_chapters()
-    book_outline()
-    book_project()
+    #book_outline()
+    #book_project()
     book_pdf()
 
     

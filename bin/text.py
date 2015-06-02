@@ -20,6 +20,18 @@ def text_convert_to_outline(topic):
     return text
 
 
+def text_outline():
+    '''Build a new outline from the book text'''
+    results = "Outline of this book\n"
+    for topic in book_read_index('Chapters'):
+        results += text_convert_to_outline(topic)+'\n\n'
+    outline_file = join(environ['book'],'Outline.outline')
+    with open(outline_file,'w') as f:
+        f.write(results+'\n')
+    system('e $book/Outline.outline')
+    return results
+
+
 def extract_headings(topic):
     '''Extract the outline from chapter file to make outline file'''
     print('Outline: '+topic)
@@ -32,18 +44,6 @@ def extract_headings(topic):
     with open(path2,'w') as f:
         f.write(text+'\n')
     return text
-
-
-def text_outline():
-    '''Build a new outline from the book text'''
-    results = "Outline of this book\n"
-    for topic in book_read_index('Chapters'):
-        results += text_convert_to_outline(topic)+'\n\n'
-    outline_file = join(environ['book'],'Outline.outline')
-    with open(outline_file,'w') as f:
-        f.write(results+'\n')
-    system('e $book/Outline.outline')
-    return results
 
 
 def text_headings():
