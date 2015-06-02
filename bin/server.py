@@ -16,15 +16,25 @@ def server_changes():
 
 def server_console():
 	'''Show the console on the server'''
-	print("server console:"+argv[2])
-	#system('e bin/'+argv[2])
+	print("server console: ssh ubuntu@seamantech.com")
+	system('ssh ubuntu@seamantech.com')
 
 
 def server_deploy(argv):
-	'''Deploy code on the server'''
-	print("server deploy:"+argv[2])
-	#system('e bin/'+argv[2])
-
+	'''Deploy code to the server'''
+	print("server deploy:")
+	system('''# Local operations
+		cd ~/Projects/Hammer
+		git add -A . 
+		git commit -m 'Deploy the Hammer code'
+		git pull && git push
+		''')
+	server_do('''# Remote operations
+		hostname &&
+		cd ~/Projects/Hammer &&
+		pwd &&
+		git pull
+		''')
 	
 def server_do(command):
 	'''Run a command on the server'''
@@ -57,17 +67,34 @@ def server_host():
 	server_do(' hostname')
 
 
-def server_restart(argv):
+def server_publish():
+	'''Push the documents to the server'''
+	print("server publish:")
+	system('''# Local operations
+		cd ~/Documents
+		git add -A . 
+		git commit -m 'Publish my book'
+		git pull && git push
+		''')
+	server_do('''# Remote operations
+		hostname &&
+		cd ~/Documents &&
+		pwd &&
+		git pull
+		''')
+	
+
+def server_restart():
 	'''Run a command on the server'''
-	print("server restart:"+argv[2])
-	#system('e bin/'+argv[2])
+	print("server restart:")
+	server_do('~/base-bin/restart-apache')
 
 
 def server_status():
 	'''Show the status of the server'''
 	print("server status:")
 	server_do('ps -ef|grep apache; hostname')
-	
+
 
 def server_command(argv):
 	'''Execute all of the server specific servers'''
@@ -77,7 +104,7 @@ def server_command(argv):
 			server_changes()
 
 		elif argv[1]=='console':
-			server_console(argv)
+			server_console()
 
 		elif argv[1]=='deploy':
 			server_deploy(argv)
@@ -89,8 +116,11 @@ def server_command(argv):
 		elif argv[1]=='host':
 			server_host()
 
+		elif argv[1]=='publish':
+			server_publish()
+
 		elif argv[1]=='restart':
-			server_restart(argv)
+			server_restart()
 
 		elif argv[1]=='status':
 			server_status()
