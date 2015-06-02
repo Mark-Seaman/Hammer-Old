@@ -8,8 +8,13 @@ def text_test():
 def text_outline_test():
 	return shell('text outline')
 	
+
 def text_headings_test():
 	return shell('text headings')
+	
+
+def text_show_test():
+	return shell('text show')
 	
 
 def text_checker():
@@ -18,8 +23,9 @@ def text_checker():
 		'text': text_test,
         'text-outline': text_outline_test,
         'text-headings': text_headings_test,
+        'text-show': text_show_test,
     }
-	run_diff_checks('doc', my_tests)
+	run_diff_checks('text', my_tests)
 
 
 # Create a script that can be run from the tst

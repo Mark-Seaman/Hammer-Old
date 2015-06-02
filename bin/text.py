@@ -28,7 +28,7 @@ def text_outline():
     outline_file = join(environ['book'],'Outline.outline')
     with open(outline_file,'w') as f:
         f.write(results+'\n')
-    system('e $book/Outline.outline')
+    #system('e $book/Outline.outline')
     return results
 
 
@@ -55,7 +55,7 @@ def text_headings():
     outline_file = join(environ['book'],'Outline.md')
     with open(outline_file,'w') as f:
         f.write(results+'\n')
-    system('e $book/Outline.md')
+    #system('e $book/Outline.md')
     return results
 
 
