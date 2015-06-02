@@ -112,7 +112,11 @@ def doc_show(docs):
 				return
 			print("# doc:"+path)	
 			system('cat '+path)
-	
+
+
+def doc_web():	
+    system('web http://mybookonline.org/static/book/Hammer')
+
 
 def doc_command(argv):
 	'''Execute all of the doc specific docs'''

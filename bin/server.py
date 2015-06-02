@@ -24,17 +24,19 @@ def server_deploy(argv):
 	'''Deploy code to the server'''
 	print("server deploy:")
 	system('''# Local operations
-		cd ~/Projects/Hammer
+		cd ~/Projects/seamantech
 		git add -A . 
 		git commit -m 'Deploy the Hammer code'
 		git pull && git push
 		''')
 	server_do('''# Remote operations
+		cd ~/Projects/seamantech
 		hostname &&
-		cd ~/Projects/Hammer &&
 		pwd &&
 		git pull
 		''')
+	server_restart()
+	
 	
 def server_do(command):
 	'''Run a command on the server'''
