@@ -59,7 +59,7 @@ def reset_test_names():
 def record_test_names(tests):
     '''Add this test to the list of available tests'''
     with open('.test','a') as openfile:
-        openfile.write('\n'.join(tests))
+        openfile.write('\n'.join(tests)+'\n')
 
 
 def test_list():
