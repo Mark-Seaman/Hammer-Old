@@ -34,9 +34,9 @@ def book_list_test():
     return shell('book list')
 
 
-def book_outline_test():
-    '''Create a book outline'''
-    return limit_lines('book outline', 14,15)
+# def book_outline_test():
+#     '''Create a book outline'''
+#     return limit_lines('book outline', 14,15)
 
 
 def book_words_test():
@@ -56,7 +56,7 @@ def book_checker():
         'book-build': book_build_test,
         'book-help': book_help_test,
         'book-list': book_list_test,
-        'book-outline': book_outline_test,
+        # 'book-outline': book_outline_test,
         'book-text': book_text,
         'book-words': book_words_test,
     }
