@@ -2,13 +2,14 @@
 # Setup the Python Evironment
 
 # Create a Python virtualenv for Python 3
-virtualenv --no-site-packages --distribute -p python3.4 env
+virtualenv --no-site-packages --distribute -p python2.7 env
 
 # Activate the virutalenv
 . env/bin/activate
 
 
 # Install Django and support libraries
+pip install --upgrade pip
 pip install celery redis nose
 pip install cookiecutter
 pip install django-floppyforms
