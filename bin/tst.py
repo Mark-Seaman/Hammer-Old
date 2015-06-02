@@ -51,11 +51,23 @@ def differences(answer,correct):
             return diffs
 
 
+def reset_test_names():
+    '''Reset the list of available tests'''
+    open('.test','w').close()
+
+
+def record_test_names(tests):
+    '''Add this test to the list of available tests'''
+    with open('.test','a') as openfile:
+        openfile.write('\n'.join(tests))
+
+
 def test_list():
     '''Generate a list of test names'''
-    if not exists('test'):
-        mkdir('test')
-    return [f.replace('.out','').replace('test/','') for f in glob('test/*.out')]
+    #if not exists('test'):
+    #    mkdir('test')
+    #return [f.replace('.out','').replace('test/','') for f in glob('test/*.out')]
+    return open('.test').read().split('\n')
 
 
 def show_output(name):
@@ -125,6 +137,7 @@ def run_all_checks(label, my_tests):
     print('Testing %s:' % label)
     for t in my_tests:
         run_check(t, my_tests[t])
+    record_test_names(my_tests.keys())
 
 
 def tst_help():
@@ -254,8 +267,11 @@ def execute_tst_command(argv):
 if __name__=='__main__':
 
     if len(argv)==1:
+        reset_test_names()
         from systest import system_checker
         system_checker()
+        print('Tests:' +'\n    '.join(test_list()))
+
         show_status()
     else:
         execute_tst_command(argv)
