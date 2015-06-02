@@ -4,7 +4,7 @@ from os import system, listdir, environ
 from os.path import join
 from sys import argv
 
-#from text_test import text_checker
+from text_test import text_checker
 from book import book_read_index
 
 
