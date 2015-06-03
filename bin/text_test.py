@@ -9,11 +9,17 @@ def text_outline_test():
 	return shell('text outline')
 	
 
+def text_outline_diff_test():
+	return shell('text outline-diff')
+
+
 def text_headings_test():
 	return shell('text headings')
 	
+
 def text_index_test():
 	return limit_lines ('text index', 850,900)
+
 
 def text_show_test():
 	return shell('text show')
@@ -23,6 +29,7 @@ def text_checker():
 	'''Execute all the desired diff tests'''
 	my_tests = {
 		'text': text_test,
+		'text-outline-diff': text_outline_diff_test,
         'text-outline': text_outline_test,
         'text-headings': text_headings_test,
         'text-index': text_index_test,

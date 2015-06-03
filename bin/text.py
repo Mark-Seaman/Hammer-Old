@@ -8,6 +8,18 @@ from text_test import text_checker
 from book import book_read_index
 
 
+#-------------------------------
+# outline differences
+
+def text_outline_diff():
+    for topic in book_read_index('Chapters'):
+        print('outline diff: '+topic)
+        system('diff $book/content/%s.md $book/outline/%s.md' % (topic,topic))
+
+
+#-------------------------------
+# content directory
+
 def convert_to_headings(topic):
     '''Convert the content outline to markdown'''
     print('Build the text index of headings from an outline '+topic)
@@ -30,6 +42,9 @@ def text_index():
     for topic in book_read_index('Chapters'):
         convert_to_headings(topic)
     
+
+#-------------------------------
+# outline directory
 
 def text_convert_to_outline(topic):
     '''Convert headings to outline indents'''
@@ -54,6 +69,9 @@ def text_outline():
     #system('e $book/Outline.outline')
     return results
 
+
+#-------------------------------
+# chapters directory
 
 def extract_headings(topic):
     '''Extract the outline from chapter file to make outline file'''
@@ -82,6 +100,10 @@ def text_headings():
     return results
 
 
+#-------------------------------
+# text command processing
+
+
 def text_help():
     '''Show all the text texts and their usage.'''
     print('''
@@ -92,6 +114,7 @@ def text_help():
         index     [file] -- Convert from outline to markdown
         headings  [file] -- Extract headings from text content
         outline   [file] -- Convert from markdown to outline
+        outline-diff     -- Find the differences in the outlines
         show      [file] -- Show the text
         test             -- Self test
       
@@ -117,6 +140,9 @@ def text_command(argv):
 
         elif argv[1]=='outline':
             text_outline()
+
+        elif argv[1]=='outline-diff':
+            text_outline_diff()
 
         elif argv[1]=='show' and len(argv)>2:
             text_show(argv[2])
