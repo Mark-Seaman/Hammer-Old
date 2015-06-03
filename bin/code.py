@@ -7,6 +7,14 @@ from sys import argv
 
 from code_test import code_checker
 
+def extract_functions():
+	filename = 'bin/cmd.py'
+	text = open(join(environ['p'],filename)).read()
+	lines = text.split('\n')
+	for i,line in enumerate(lines):
+		if 'def' in line:
+			print('DEF  %d: %s' %(i,line))
+
 
 def calculate_complexity(filename):
 	text = open(join(environ['p'],filename)).read()
@@ -78,6 +86,9 @@ def code_command(argv):
 
 		if argv[1]=='complexity':
 			code_complexity()
+
+		if argv[1]=='functions':
+			extract_functions()
 
 		elif argv[1]=='list':
 			print(code_list())
