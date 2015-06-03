@@ -10,11 +10,13 @@ from code_test import code_checker
    
 
 def read_source(filename):
+	'''Read the source code file, remove blanks and split lines'''
 	text = open(join(environ['p'],filename)).read()
 	return [x for x in text.split('\n') if x.replace(' ','')]
 
 
 def extract_functions(lines):
+	'''Extract all of the functions from the source and count their length'''
 	for i,line in enumerate(lines):
 		if line.strip().startswith('def'):
 			pat = compile(r"\s*def (.*)\s*\(.*")
@@ -23,28 +25,48 @@ def extract_functions(lines):
 	yield((i,''))
 
 
+def complexity(lines):
+	'''Measure the complexity of a single file'''
+	total_cost = 0
+	summary = '\n'
+	name = None
+	for x in extract_functions(lines):
+		if name:
+			num_lines = x[0]-start
+			cost = num_lines ** 1.2 # Exponential penalty of size
+			total_cost += cost
+			summary += '    %-26s %8d %8d\n' % (name, num_lines, cost)
+			start = x[1]
+		name = x[1]
+		start = x[0]
+	num_lines = len(lines)
+	cost = num_lines ** 1.2 # Exponential penalty of size
+	num_imports = len([i for i in lines if 'import' in i])
+	import_cost = num_imports * 10  # Equal to 10 lines of code
+	total_cost += cost + import_cost
+	return (num_lines, total_cost, summary)
+
+
 def function_sizes():
+	'''Measure the complexity based on the function sizes within the module'''
+	print('File                              Lines  Complexity')
+	total_cost = 0
+	total_lines = 0
 	for filename in python_source():
-		total_cost = 0
 		lines = read_source(filename)
-		summary = ''
-		name = None
-		for x in extract_functions(lines):
-			if name:
-				num_lines = x[0]-start
-				cost = num_lines ** 1.2 # Exponential penalty of size
-				total_cost += cost
-				summary += '    %d, %d, %s\n' % (cost, num_lines, name)
-				start = x[1]
-			name = x[1]
-			start = x[0]
-		num_lines = len(lines)
-		cost = num_lines ** 1.2 # Exponential penalty of size
+		num_lines, cost, summary = complexity(lines)	
+		show_functions = False
+		if show_functions:	
+			print('%-30s %8d %8d %s' % (filename, num_lines, cost, summary))
+		else:
+			print('%-30s %8d %8d' % (filename, num_lines, cost))
+		total_lines += num_lines
 		total_cost += cost
-		print('\n%d - %d - %s\n%s' % (total_cost, len(lines), filename, summary))
+	print('%-30s %8d %8d' % ('   total', total_lines, total_cost))
 
 
 def calculate_complexity(filename):
+	'''Calculate the overall complexity of the Python code'''
 	text = open(join(environ['p'],filename)).read()
 	lines = text.split('\n')
 	num_imports = len([i for i in lines if 'import' in i])
@@ -57,13 +79,12 @@ def calculate_complexity(filename):
 
 def code_complexity(code_dirs=None):
 	'''Measure the code complexity'''
-	files = code_list(code_dirs).split('\n')
+	files = python_source(code_dirs)
 	print ('code_complexity:')
-	python_files = [f for f in files if f.endswith('.py')]
 	total = (0,0,0)
 
 	print('File                              Lines  Imports Complexity')
-	for f in sorted(python_files):
+	for f in sorted(files):
 		lines,imports,complexity = calculate_complexity(f)
 		total = (total[0]+lines, total[1]+imports, total[2]+complexity)
 		print('%-30s %8d %8d %8d' % (f, lines, imports, complexity))
@@ -85,9 +106,9 @@ def code_help():
 			''')
 
 
-def python_source(iles=None):
+def python_source(files=None):
 	'''Return a list of the python source files'''
-	return [f for f in code_source() if f.endswith('.py')]
+	return [f for f in code_source(files) if f.endswith('.py')]
 
 
 def code_source(files=None):
@@ -133,7 +154,7 @@ def code_command(argv):
 		if argv[1]=='complexity':
 			code_complexity()
 
-		if argv[1]=='functions':
+		elif argv[1]=='functions':
 			function_sizes()
 
 		elif argv[1]=='list':
