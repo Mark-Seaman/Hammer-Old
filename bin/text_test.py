@@ -10,7 +10,7 @@ def text_outline_test():
 	
 
 def text_outline_diff_test():
-	return limit_lines('text outline-diff', 540,550)
+	return limit_lines('text outline-diff', 500,550)
 
 
 def text_headings_test():
@@ -18,7 +18,7 @@ def text_headings_test():
 	
 
 def text_index_test():
-	return limit_lines ('text index', 850,900)
+	return limit_lines ('text index', 800,850)
 
 
 def text_show_test():

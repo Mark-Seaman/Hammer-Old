@@ -17,6 +17,7 @@ def text_outline_diff():
         print('                      '+topic)
         print('---------------------------------------------------------')
         system('diff $book/content/%s.md $book/outline/%s.md' % (topic,topic))
+       #system('diff $book/content/%s.md $book/outline/%s.md | sed -e "/^> $/d"| sed -e "/^< $/d"' % (topic,topic))
 
 
 #-------------------------------
@@ -31,6 +32,7 @@ def convert_to_headings(topic):
     text = [t.replace('            ','### ') for t in text]
     text = [t.replace('        ','## ') for t in text]
     text = [t.replace('    ','# ') for t in text]
+    text = [t.strip() for t in text if t.strip()]
     text = '\n'.join(text)
     print(text)
     with open(outline_file,'w') as f:
