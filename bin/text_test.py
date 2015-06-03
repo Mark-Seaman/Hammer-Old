@@ -10,7 +10,7 @@ def text_outline_test():
 	
 
 def text_outline_diff_test():
-	return shell('text outline-diff')
+	return limit_lines('text outline-diff', 540,550)
 
 
 def text_headings_test():
