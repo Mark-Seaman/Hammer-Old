@@ -2,7 +2,10 @@
 # Edit the requested outline for the book
 
 
+text headings
+text outline
 text index
+
 book edit chapters/$1.md
 book edit outline/$1.md
 book edit content/$1.md
