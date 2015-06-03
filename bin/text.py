@@ -13,7 +13,9 @@ from book import book_read_index
 
 def text_outline_diff():
     for topic in book_read_index('Chapters'):
-        print('outline diff: '+topic)
+        print('---------------------------------------------------------')
+        print('                      '+topic)
+        print('---------------------------------------------------------')
         system('diff $book/content/%s.md $book/outline/%s.md' % (topic,topic))
 
 
