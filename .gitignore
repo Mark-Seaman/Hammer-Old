@@ -2,6 +2,7 @@
 env
 test/
 .idea
+.test
 *.db
 *.py[cod]
 *.so
