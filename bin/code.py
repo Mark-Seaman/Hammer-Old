@@ -5,29 +5,43 @@ from os import system, listdir, environ, chdir
 from os.path import join, isdir
 from re import sub,compile,DOTALL,IGNORECASE
 from sys import argv
-
+   
 from code_test import code_checker
+   
 
-def extract_functions():
-	filename = 'bin/code.py'
+def read_source(filename):
 	text = open(join(environ['p'],filename)).read()
-	lines = text.split('\n')
+	return [x for x in text.split('\n') if x.replace(' ','')]
+
+
+def extract_functions(lines):
 	for i,line in enumerate(lines):
-		if 'def' in line:
+		if line.strip().startswith('def'):
 			pat = compile(r"\s*def (.*)\s*\(.*")
-			name = pat.sub(r'\1',line)  #line = sub(r'^\* ', r' * ', line)
+			name = pat.sub(r'\1',line)
 			yield ((i,name))
 	yield((i,''))
 
 
 def function_sizes():
-	name = None
-	for x in extract_functions():
-		if name:
-			print('%d=%d-%d, %s' % (x[0]-start, start, x[0], name))
-			start = x[1]
-		name = x[1]
-		start = x[0]
+	for filename in python_source():
+		total_cost = 0
+		lines = read_source(filename)
+		summary = ''
+		name = None
+		for x in extract_functions(lines):
+			if name:
+				num_lines = x[0]-start
+				cost = num_lines ** 1.2 # Exponential penalty of size
+				total_cost += cost
+				summary += '    %d, %d, %s\n' % (cost, num_lines, name)
+				start = x[1]
+			name = x[1]
+			start = x[0]
+		num_lines = len(lines)
+		cost = num_lines ** 1.2 # Exponential penalty of size
+		total_cost += cost
+		print('\n%d - %d - %s\n%s' % (total_cost, len(lines), filename, summary))
 
 
 def calculate_complexity(filename):
@@ -69,6 +83,24 @@ def code_help():
         test           -- Self test
       
 			''')
+
+
+def python_source(iles=None):
+	'''Return a list of the python source files'''
+	return [f for f in code_source() if f.endswith('.py')]
+
+
+def code_source(files=None):
+	'''List the files of source code.'''
+	if not files:
+		files = ['bin']
+	for d in files:
+		chdir(environ['p'])
+		files = [f for f in glob(d+'/*') if not isdir(f)]
+		files = [f for f in files if not f.endswith('.pyc')]
+		if files:
+			for f in files:
+				yield((f))
 
 
 def code_list(files=None):
