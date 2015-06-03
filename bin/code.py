@@ -47,49 +47,21 @@ def complexity(lines):
 	return (num_lines, total_cost, summary)
 
 
-def function_sizes():
+def function_sizes(show_functions = False):
 	'''Measure the complexity based on the function sizes within the module'''
 	print('File                              Lines  Complexity')
 	total_cost = 0
 	total_lines = 0
 	for filename in python_source():
 		lines = read_source(filename)
-		num_lines, cost, summary = complexity(lines)	
-		show_functions = False
+		num_lines, cost, summary = complexity(lines)		
 		if show_functions:	
 			print('%-30s %8d %8d %s' % (filename, num_lines, cost, summary))
 		else:
 			print('%-30s %8d %8d' % (filename, num_lines, cost))
 		total_lines += num_lines
 		total_cost += cost
-	print('%-30s %8d %8d' % ('   total', total_lines, total_cost))
-
-
-def calculate_complexity(filename):
-	'''Calculate the overall complexity of the Python code'''
-	text = open(join(environ['p'],filename)).read()
-	lines = text.split('\n')
-	num_imports = len([i for i in lines if 'import' in i])
-	import_cost = 10  # Equal to 10 lines of code
-	num_lines = len(lines)
-	coupling_cost = 1.2 # Exponential penalty of size
-	complexity = (num_lines + num_imports * import_cost) ** coupling_cost
-	return (num_lines,num_imports,complexity)
-
-
-def code_complexity(code_dirs=None):
-	'''Measure the code complexity'''
-	files = python_source(code_dirs)
-	print ('code_complexity:')
-	total = (0,0,0)
-
-	print('File                              Lines  Imports Complexity')
-	for f in sorted(files):
-		lines,imports,complexity = calculate_complexity(f)
-		total = (total[0]+lines, total[1]+imports, total[2]+complexity)
-		print('%-30s %8d %8d %8d' % (f, lines, imports, complexity))
-
-	print('%-30s %8d %8d %8d' % ('Total', total[0], total[1], total[2]))
+	print('%-30s %8d %8d' % ('    total', total_lines, total_cost))
 
 
 def code_help():
@@ -152,10 +124,10 @@ def code_command(argv):
 	if len(argv)>1:
 
 		if argv[1]=='complexity':
-			code_complexity()
+			function_sizes()
 
 		elif argv[1]=='functions':
-			function_sizes()
+			function_sizes(True)
 
 		elif argv[1]=='list':
 			print(code_list())
