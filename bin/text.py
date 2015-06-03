@@ -8,11 +8,11 @@ from text_test import text_checker
 from book import book_read_index
 
 
-def text_index():
+def convert_to_headings(topic):
     '''Convert the content outline to markdown'''
-    print('Build the text index of headings from content outline')
-    f = join(environ['book'], 'content', 'Outline.outline')
-    text = open(f).read().split('\n')
+    print('Build the text index of headings from an outline '+topic)
+    input_file = join(environ['book'], 'content', f+'.outline')
+    text = open(input_file).read().split('\n')
     text = [t.replace('            ','### ') for t in text]
     text = [t.replace('        ','## ') for t in text]
     text = [t.replace('    ','# ') for t in text]
@@ -22,6 +22,12 @@ def text_index():
     with open(outline_file,'w') as f:
         f.write(text)
 
+
+def text_index():
+    '''Convert the content outline to markdown'''
+    print('Build the text index of headings from content outline')
+    convert_to_headings('Outline')
+    
 
 def text_convert_to_outline(topic):
     '''Convert headings to outline indents'''
