@@ -12,7 +12,7 @@ def convert_to_headings(topic):
     '''Convert the content outline to markdown'''
     print('Build the text index of headings from an outline '+topic)
     input_file   = join(environ['book'], 'content', topic+'.outline')
-    outline_file = join(environ['book'],' content', topic+'.md')
+    outline_file = join(environ['book'], 'content', topic+'.md')
     text = open(input_file).read().split('\n')
     text = [t.replace('            ','### ') for t in text]
     text = [t.replace('        ','## ') for t in text]
@@ -27,6 +27,8 @@ def text_index():
     '''Convert the content outline to markdown'''
     print('Build the text index of headings from content outline')
     convert_to_headings('Outline')
+    for topic in book_read_index('Chapters'):
+        convert_to_headings(topic)
     
 
 def text_convert_to_outline(topic):

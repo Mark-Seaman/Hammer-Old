@@ -2,5 +2,6 @@
 # Edit the requested outline for the book
 
 book edit outline/$1.md
-book edit content/Outline.md
 
+book edit content/$1.md
+book edit content/Outline.outline
