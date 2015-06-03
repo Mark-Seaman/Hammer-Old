@@ -3,17 +3,31 @@
 from glob import glob
 from os import system, listdir, environ, chdir
 from os.path import join, isdir
+from re import sub,compile,DOTALL,IGNORECASE
 from sys import argv
 
 from code_test import code_checker
 
 def extract_functions():
-	filename = 'bin/cmd.py'
+	filename = 'bin/code.py'
 	text = open(join(environ['p'],filename)).read()
 	lines = text.split('\n')
 	for i,line in enumerate(lines):
 		if 'def' in line:
-			print('DEF  %d: %s' %(i,line))
+			pat = compile(r"\s*def (.*)\s*\(.*")
+			name = pat.sub(r'\1',line)  #line = sub(r'^\* ', r' * ', line)
+			yield ((i,name))
+	yield((i,''))
+
+
+def function_sizes():
+	name = None
+	for x in extract_functions():
+		if name:
+			print('%d=%d-%d, %s' % (x[0]-start, start, x[0], name))
+			start = x[1]
+		name = x[1]
+		start = x[0]
 
 
 def calculate_complexity(filename):
@@ -88,7 +102,7 @@ def code_command(argv):
 			code_complexity()
 
 		if argv[1]=='functions':
-			extract_functions()
+			function_sizes()
 
 		elif argv[1]=='list':
 			print(code_list())
