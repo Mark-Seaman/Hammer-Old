@@ -36,7 +36,7 @@ def convert_to_headings(topic):
     text = '\n'.join(text)
     print(text)
     with open(outline_file,'w') as f:
-        f.write(text)
+        f.write(text+'\n')
 
 
 def text_index():
