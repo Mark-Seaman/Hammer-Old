@@ -11,14 +11,14 @@ from book import book_read_index
 def convert_to_headings(topic):
     '''Convert the content outline to markdown'''
     print('Build the text index of headings from an outline '+topic)
-    input_file = join(environ['book'], 'content', f+'.outline')
+    input_file   = join(environ['book'], 'content', topic+'.outline')
+    outline_file = join(environ['book'],' content', topic+'.md')
     text = open(input_file).read().split('\n')
     text = [t.replace('            ','### ') for t in text]
     text = [t.replace('        ','## ') for t in text]
     text = [t.replace('    ','# ') for t in text]
     text = '\n'.join(text)
     print(text)
-    outline_file = join(environ['book'],'content','Outline.md')
     with open(outline_file,'w') as f:
         f.write(text)
 
