@@ -24,11 +24,16 @@ def code_complexity_test():
     return shell('code complexity')
 
 
+def code_functions_test():
+    return shell('code functions')
+
+
 def code_checker():
     my_tests = {
         'code-list': code_list_test,
         'code-show': code_show_test,
         'code-complexity': code_complexity_test,
+        'code-functions': code_functions_test,
     }
     run_diff_checks('code', my_tests)
 
