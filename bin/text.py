@@ -6,6 +6,7 @@ from sys import argv
 
 from text_test import text_checker
 from book import book_read_index
+from tst import shell
 
 
 #-------------------------------
@@ -16,7 +17,7 @@ def text_outline_diff():
         print('---------------------------------------------------------')
         print('                      '+topic)
         print('---------------------------------------------------------')
-        system('diff -b $book/outline/%s.md $book/content/%s.md' % (topic,topic))
+        print(shell('diff -b $book/outline/%s.md $book/content/%s.md' % (topic,topic)))
        #system('diff $book/content/%s.md $book/outline/%s.md | sed -e "/^> $/d"| sed -e "/^< $/d"' % (topic,topic))
 
 
