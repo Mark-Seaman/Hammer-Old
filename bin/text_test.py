@@ -18,7 +18,7 @@ def text_headings_test():
 	
 
 def text_index_test():
-	return limit_lines ('text index', 800,850)
+	return limit_lines ('text index', 900,1000)
 
 
 def text_show_test():
