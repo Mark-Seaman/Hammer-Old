@@ -13,12 +13,15 @@ from tst import shell
 # outline differences
 
 def text_outline_diff():
+    text_index()
+    text_headings()
     for topic in book_read_index('Chapters'):
-        print('---------------------------------------------------------')
-        print('                      '+topic)
-        print('---------------------------------------------------------')
-        print(shell('diff -b $book/outline/%s.md $book/content/%s.md' % (topic,topic)))
-       #system('diff $book/content/%s.md $book/outline/%s.md | sed -e "/^> $/d"| sed -e "/^< $/d"' % (topic,topic))
+        system('''
+            echo '---------------------------------------------------------'
+            echo '                      %s'
+            echo '---------------------------------------------------------'
+            diff -b $book/outline/%s.md $book/content/%s.md
+            ''' % (topic,topic,topic))
 
 
 #-------------------------------
@@ -71,7 +74,6 @@ def text_outline():
     outline_file = join(environ['book'],'Outline.outline')
     with open(outline_file,'w') as f:
         f.write(results+'\n')
-    #system('e $book/Outline.outline')
     return results
 
 
@@ -101,7 +103,6 @@ def text_headings():
     outline_file = join(environ['book'],'Outline.md')
     with open(outline_file,'w') as f:
         f.write(results+'\n')
-    #system('e $book/Outline.md')
     return results
 
 
