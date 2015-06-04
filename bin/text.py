@@ -29,10 +29,10 @@ def convert_to_headings(topic):
     input_file   = join(environ['book'], 'content', topic+'.outline')
     outline_file = join(environ['book'], 'content', topic+'.md')
     text = open(input_file).read().split('\n')
+    text = [t for t in text if t.strip()]
     text = [t.replace('            ','### ') for t in text]
     text = [t.replace('        ','## ') for t in text]
     text = [t.replace('    ','# ') for t in text]
-    text = [t.strip() for t in text if t.strip()]
     text = '\n'.join(text)
     print(text)
     with open(outline_file,'w') as f:
