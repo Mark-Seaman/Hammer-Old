@@ -16,7 +16,7 @@ def text_outline_diff():
         print('---------------------------------------------------------')
         print('                      '+topic)
         print('---------------------------------------------------------')
-        system('diff $book/content/%s.md $book/outline/%s.md' % (topic,topic))
+        system('diff -b $book/outline/%s.md $book/content/%s.md' % (topic,topic))
        #system('diff $book/content/%s.md $book/outline/%s.md | sed -e "/^> $/d"| sed -e "/^< $/d"' % (topic,topic))
 
 
