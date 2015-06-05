@@ -270,7 +270,7 @@ if __name__=='__main__':
         reset_test_names()
         from systest import system_checker
         system_checker()
-        system('text test')
+        system('outline test')
         print('Tests:' +'\n    '.join(test_list()))
 
         show_status()

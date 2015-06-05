@@ -4,7 +4,7 @@ from os import system, listdir, environ
 from os.path import join
 from sys import argv
 
-from text_test import text_checker
+from outline_test import outline_checker
 from book import book_read_index
 from tst import shell
 
@@ -13,9 +13,9 @@ from tst import shell
 # outline differences
 
 
-def text_outline_diff(files):
-    system('text index > /dev/null')
-    system('text headings > /dev/null')
+def outline_diff(files):
+    system('outline index > /dev/null')
+    system('outline headings > /dev/null')
     if not files:
         files = book_read_index('Chapters')
     for topic in files:
@@ -46,7 +46,7 @@ def convert_to_headings(topic):
         f.write(text+'\n')
 
 
-def text_index():
+def outline_index():
     '''Convert the content outline to markdown'''
     print('Build the text index of headings from content outline')
     convert_to_headings('Outline')
@@ -57,7 +57,7 @@ def text_index():
 #-------------------------------
 # outline directory
 
-def text_convert_to_outline(topic):
+def outline_convert_to_outline(topic):
     '''Convert headings to outline indents'''
     print('Outline: '+topic)
     topics = join(environ['book'],'outline',topic+'.md')
@@ -69,11 +69,11 @@ def text_convert_to_outline(topic):
     return text
 
 
-def text_outline():
+def outline_outline():
     '''Build a new outline from the book text'''
     results = "Outline of this book\n"
     for topic in book_read_index('Chapters'):
-        results += text_convert_to_outline(topic)+'\n\n'
+        results += outline_convert_to_outline(topic)+'\n\n'
     outline_file = join(environ['book'],'Outline.outline')
     with open(outline_file,'w') as f:
         f.write(results+'\n')
@@ -97,7 +97,7 @@ def extract_headings(topic):
     return text
 
 
-def text_headings():
+def outline_headings():
     '''Build a new outline from the book text'''
     results = "Outline of this book\n"
     for topic in book_read_index('Chapters'):
@@ -110,65 +110,65 @@ def text_headings():
 
 
 #-------------------------------
-# text command processing
+# outline command processing
 
 
-def text_help():
-    '''Show all the text texts and their usage.'''
+def outline_help():
+    '''Show all the outline outlines and their usage.'''
     print('''
-    usage:  text cmd [args]
+    usage:  outline cmd [args]
 
-    text:
+    outline:
 
         index     [file] -- Convert from outline to markdown
-        headings  [file] -- Extract headings from text content
+        headings  [file] -- Extract headings from outline content
         outline   [file] -- Convert from markdown to outline
         diff      [file] -- Find the differences in the outlines
-        show      [file] -- Show the text
+        show      [file] -- Show the outline
         test             -- Self test
       
             ''')
 
 
-def text_show(chapter):
-    '''Show the content of a text.'''
-    print("text:"+chapter)
+def outline_show(chapter):
+    '''Show the content of a outline.'''
+    print("outline:"+chapter)
     f = join(environ['book'], '%s'%chapter)
     print(open(f).read())
 
 
-def text_command(argv):
-    '''Execute all of the text specific texts'''
+def outline_command(argv):
+    '''Execute all of the outline specific outlines'''
     if len(argv)>1:
 
         if argv[1]=='index':
-            text_index()
+            outline_index()
 
         elif argv[1]=='headings':
-            text_headings()
+            outline_headings()
 
         elif argv[1]=='outline':
-            text_outline()
+            outline_outline()
 
         elif argv[1]=='diff':
-            text_outline_diff(argv[2:])
+            outline_diff(argv[2:])
 
         elif argv[1]=='show' and len(argv)>2:
-            text_show(argv[2])
+            outline_show(argv[2])
 
         elif argv[1]=='test':
-            text_checker()
+            outline_checker()
 
         else:
-            print('No text command found, '+argv[1])
-            text_help()
+            print('No outline command found, '+argv[1])
+            outline_help()
     else:
         print('No arguments given')
-        text_help()
+        outline_help()
 
 
 '''
 Create a script that can be run from the shell
 '''
 if __name__=='__main__':
-    text_command(argv)
+    outline_command(argv)

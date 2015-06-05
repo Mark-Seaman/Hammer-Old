@@ -190,7 +190,7 @@ def book_push():
     '''Push the book to the dropbox for distribution'''
     system('''
         cp Book.pdf $HOME/Documents/Dropbox/Shrinking_World/Book
-        cp content/Outline.outline $HOME/Documents/Dropbox/Shrinking_World/Book/Outline.docx
+        cp content/Outline.outline $HOME/Documents/Dropbox/Shrinking_World/Book/Outline.txt
         ''')
 
 
