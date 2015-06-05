@@ -12,10 +12,12 @@ from tst import shell
 #-------------------------------
 # outline differences
 
-def text_outline_diff():
+def text_outline_diff(files):
     system('text index > /dev/null')
     system('text headings > /dev/null')
-    for topic in book_read_index('Chapters'):
+    if not files:
+        files = book_read_index('Chapters')
+    for topic in files:
         system('''
             echo '---------------------------------------------------------'
             echo '                      %s'
@@ -120,7 +122,7 @@ def text_help():
         index     [file] -- Convert from outline to markdown
         headings  [file] -- Extract headings from text content
         outline   [file] -- Convert from markdown to outline
-        outline-diff     -- Find the differences in the outlines
+        diff      [file] -- Find the differences in the outlines
         show      [file] -- Show the text
         test             -- Self test
       
@@ -147,8 +149,8 @@ def text_command(argv):
         elif argv[1]=='outline':
             text_outline()
 
-        elif argv[1]=='outline-diff':
-            text_outline_diff()
+        elif argv[1]=='diff':
+            text_outline_diff(argv[2:])
 
         elif argv[1]=='show' and len(argv)>2:
             text_show(argv[2])
