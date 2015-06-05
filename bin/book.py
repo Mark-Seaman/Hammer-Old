@@ -228,7 +228,7 @@ def book_words():
     chapters = ['chapters/'+i+'.md' for i in book_read_index('Chapters')]
     outlines = ['']
     chdir(environ['book'])
-    book_calculate_words('chapters',chapters)
+    #book_calculate_words('chapters',chapters)
     for topic in book + chapters + ['Book.md','Project.md','Outline.md']:
         system ('wc -w '+topic)
 
