@@ -10,8 +10,28 @@ from tst import shell
 
 
 #-------------------------------
-# outline differences
+# outline contents
 
+def outline_content(depth=1, files=None):
+    if not files:
+        files = book_read_index('Chapters')
+    for topic in files:
+        system('''
+            echo '---------------------------------------------------------'
+            echo '                      %s'
+            echo '---------------------------------------------------------'
+            #cat $book/content/%s.outline
+            echo
+            echo
+            ''' % (topic,topic))
+        filename = join(environ['book'],'content','%s.outline' % topic)
+        text = open(filename).read().split('\n')
+        text = [t for t in text if not t.startswith('    '*(1+depth))]
+        text = '\n'.join(text)
+        print(text)
+
+#-------------------------------
+# outline differences
 
 def outline_diff(files):
     system('outline index > /dev/null')
@@ -120,6 +140,7 @@ def outline_help():
 
     outline:
 
+        content   [file] -- Show the table of contents
         index     [file] -- Convert from outline to markdown
         headings  [file] -- Extract headings from outline content
         outline   [file] -- Convert from markdown to outline
@@ -141,7 +162,10 @@ def outline_command(argv):
     '''Execute all of the outline specific outlines'''
     if len(argv)>1:
 
-        if argv[1]=='index':
+        if argv[1]=='content':
+            outline_content(2, argv[2:])
+
+        elif argv[1]=='index':
             outline_index()
 
         elif argv[1]=='headings':
