@@ -73,7 +73,7 @@ def book_index():
     print('site_name: Software Leverage\n\npages:\n')
     for i in book_read_index('Book'):
         print_index_entry('book', i, 'Part '+i)
-    for i in book_read_index('Outline'):
+    for i in book_read_index('Chapters'):
         print_index_entry('outline', i, 'Outline '+i)   
     for i in book_read_index('Chapters'):
         print_index_entry('chapters', i, i) 
@@ -151,7 +151,7 @@ def book_outline():
     for topic in book_read_index('Chapters'):
         text = book_outline_fragment(topic)
         results += text+'\n\n\\newpage\n'
-    outline_file = join(environ['book'],'Outline.md')
+    outline_file = join(environ['book'],'outline','Outline.md')
     with open(outline_file,'w') as f:
         f.write(results+'\n')
     return results
@@ -162,14 +162,14 @@ def book_pdf():
     system('''
         rm *.pdf
         pandoc Book.md    -o Book.pdf    2> /dev/null
-        pandoc Outline.md -o Outline.pdf 2> /dev/null
+        #pandoc outline/Outline.md -o Outline.pdf 2> /dev/null
         #pandoc Project.md -o Project.pdf 2> /dev/null
         ls -s Book.pdf
-        ls -s Outline.pdf
+        #ls -s Outline.pdf
         #ls -s Project.pdf
         echo Read file with:
         echo '     pdf $book/Book.pdf'
-        echo '     pdf $book/Outline.pdf'
+        #echo '     pdf $book/Outline.pdf'
         #echo '     pdf $book/Project.pdf'
         ''')
 
