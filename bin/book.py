@@ -11,7 +11,7 @@ def book_build():
     book_chapters()
     #book_outline()
     #book_project()
-    book_pdf()
+    #book_pdf()
 
     
 def book_changes(argv):
@@ -163,14 +163,14 @@ def book_pdf():
         rm *.pdf
         pandoc Book.md    -o Book.pdf    2> /dev/null
         pandoc Outline.md -o Outline.pdf 2> /dev/null
-        pandoc Project.md -o Project.pdf 2> /dev/null
+        #pandoc Project.md -o Project.pdf 2> /dev/null
         ls -s Book.pdf
         ls -s Outline.pdf
-        ls -s Project.pdf
+        #ls -s Project.pdf
         echo Read file with:
         echo '     pdf $book/Book.pdf'
         echo '     pdf $book/Outline.pdf'
-        echo '     pdf $book/Project.pdf'
+        #echo '     pdf $book/Project.pdf'
         ''')
 
 def book_project():
@@ -189,8 +189,8 @@ def book_project():
 def book_push():
     '''Push the book to the dropbox for distribution'''
     system('''
-        cp Book.pdf /home/seaman/Documents/Dropbox/Shrinking_World/Book
-        cp Outline.pdf /home/seaman/Documents/Dropbox/Shrinking_World/Book
+        cp Book.pdf $HOME/Documents/Dropbox/Shrinking_World/Book
+        cp content/Outline.outline $HOME/Documents/Dropbox/Shrinking_World/Book/Outline.docx
         ''')
 
 
