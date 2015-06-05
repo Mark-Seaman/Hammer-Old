@@ -13,8 +13,8 @@ from tst import shell
 # outline differences
 
 def text_outline_diff():
-    text_index()
-    text_headings()
+    system('text index > /dev/null')
+    system('text headings > /dev/null')
     for topic in book_read_index('Chapters'):
         system('''
             echo '---------------------------------------------------------'
