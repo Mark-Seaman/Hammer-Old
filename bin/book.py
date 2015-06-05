@@ -216,7 +216,7 @@ def book_text(chapter=1):
 
 def book_calculate_words(label,files):
     '''Measure the words for a file set'''
-    print('label:'+label)
+    print('XXXXXXX label:'+label)
     for topic in files:
         f = [label+'/'+topic+'.md' for topic in files]
         print('file:'+topic)
@@ -226,9 +226,11 @@ def book_words():
     '''Count all of the words in the book '''
     book = ['book/'+i+'.md' for i in book_read_index('Book')] 
     chapters = ['chapters/'+i+'.md' for i in book_read_index('Chapters')]
-    outlines = ['']
+    outlines = ['outline/'+i+'.md'  for i in book_read_index('Chapters')]
+    content  = ['content/'+i+'.md'  for i in book_read_index('Chapters')]
+    print ('book = %s, chapters = %s, outline = %s, content = %s' % (book,chapters,outlines,content))
     chdir(environ['book'])
-    #book_calculate_words('chapters',chapters)
+    book_calculate_words('chapters',chapters)
     for topic in book + chapters + ['Book.md','Project.md','Outline.md']:
         system ('wc -w '+topic)
 
