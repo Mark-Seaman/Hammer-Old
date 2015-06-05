@@ -12,6 +12,7 @@ from tst import shell
 #-------------------------------
 # outline differences
 
+
 def text_outline_diff(files):
     system('text index > /dev/null')
     system('text headings > /dev/null')
