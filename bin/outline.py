@@ -12,18 +12,38 @@ from tst import shell
 #-------------------------------
 # outline contents
 
-def outline_content(depth=1, files=None):
-    if not files:
-        files = book_read_index('Chapters')
+def heading_string(topic):
+    return '\n\n%s\n%s\n%s\n\n' % ('-'*60, ' '*20+topic, '-'*60)
+
+
+def content_filename(depth):
+    return join(environ['book'],'content','Content-%d.outline' % depth)
+
+
+def outline_write_content(depth, files, content_file=None):
+    if content_file:
+        open(content_file, 'w').close()
     for topic in files:
-        print('-'*60)
-        print(' '*20+topic)
-        print('-'*60)
         filename = join(environ['book'],'content','%s.outline' % topic)
         text = open(filename).read().split('\n')
         text = [t for t in text if not t.startswith('    '*(1+depth)) and t.strip()]
         text = '\n'.join(text)
-        print(text)
+        if content_file:
+            with open(content_file,'a') as f:
+                f.write(heading_string(topic)+text+'\n')
+        else:
+            print(heading_string(topic)+text)
+
+
+def outline_content(files=None):
+    if not files:
+        files = book_read_index('Chapters')
+        outline_write_content(1, files, content_filename(1))
+        outline_write_content(2, files, content_filename(2))
+        outline_write_content(3, files, content_filename(3))
+    else:
+        outline_write_content(3, files)
+
 
 #-------------------------------
 # outline differences
@@ -158,7 +178,7 @@ def outline_command(argv):
     if len(argv)>1:
 
         if argv[1]=='content':
-            outline_content(3, argv[2:])
+            outline_content(argv[2:])
 
         elif argv[1]=='index':
             outline_index()

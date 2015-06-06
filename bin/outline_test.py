@@ -1,7 +1,9 @@
 from tst import run_diff_checks, shell, lines, limit_lines
 
 
-	
+def outline_content_test():
+	return shell('outline content')
+
 
 def outline_test():
 	return shell('outline') + shell('outline outline')
@@ -27,6 +29,7 @@ def outline_checker():
 	'''Execute all the desired diff tests'''
 	my_tests = {
 		'outline': outline_test,
+		'outline-content': outline_content_test,
 		'outline-diff': outline_diff_test,
         'outline-headings': outline_headings_test,
         'outline-index': outline_index_test,
