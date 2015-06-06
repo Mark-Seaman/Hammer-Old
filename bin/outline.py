@@ -16,17 +16,12 @@ def outline_content(depth=1, files=None):
     if not files:
         files = book_read_index('Chapters')
     for topic in files:
-        system('''
-            echo '---------------------------------------------------------'
-            echo '                      %s'
-            echo '---------------------------------------------------------'
-            #cat $book/content/%s.outline
-            echo
-            echo
-            ''' % (topic,topic))
+        print('-'*60)
+        print(' '*20+topic)
+        print('-'*60)
         filename = join(environ['book'],'content','%s.outline' % topic)
         text = open(filename).read().split('\n')
-        text = [t for t in text if not t.startswith('    '*(1+depth))]
+        text = [t for t in text if not t.startswith('    '*(1+depth)) and t.strip()]
         text = '\n'.join(text)
         print(text)
 
@@ -163,7 +158,7 @@ def outline_command(argv):
     if len(argv)>1:
 
         if argv[1]=='content':
-            outline_content(2, argv[2:])
+            outline_content(3, argv[2:])
 
         elif argv[1]=='index':
             outline_index()
