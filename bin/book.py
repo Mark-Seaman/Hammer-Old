@@ -217,8 +217,8 @@ def book_text(chapter=1):
 def book_calculate_words(label,files):
     '''Measure the words for a file set'''
     print('\n'+label)
-    for topic in files:
-        system('wc -w '+topic)
+    text = [shell('wc -w '+topic) for topic in files]
+    print(''.join(text))
 
 
 def book_words():
