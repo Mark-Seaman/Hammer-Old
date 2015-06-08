@@ -16,11 +16,21 @@ def heading_string(topic):
     return '\n\n%s\n%s\n%s\n\n' % ('-'*60, ' '*20+topic, '-'*60)
 
 
+def assemble_files(input_path,output_path):
+    '''Create an agregate file by concatenating other files'''
+    with open(output_path,'w') as f:
+        for topic in book_read_index('Chapters'):
+            text = heading_string(topic) + open(input_path % topic).read()
+            f.write(text+'\n')
+
+
 def content_filename(depth):
+    '''Form the file name for the contents of a certain depth'''
     return join(environ['book'],'content','Content-%d.outline' % depth)
 
 
 def outline_write_content(depth, files, content_file=None):
+    '''Write the outline for this chapter'''
     if content_file:
         open(content_file, 'w').close()
     for topic in files:
@@ -54,15 +64,13 @@ def outline_diff(files):
     if not files:
         files = book_read_index('Chapters')
     for topic in files:
-        system('''
-            echo '---------------------------------------------------------'
-            echo '                      %s'
-            echo '---------------------------------------------------------'
-            diff -B $book/outline/%s.outline $book/content/%s.outline > $book/outline/%s.diff
-            ''' % (topic,topic,topic))
-
-#def outline_diff_save(topic, text):
-
+        print('Diff: '+topic)
+        cmd = 'diff -B $book/outline/%s.outline $book/content/%s.outline > $book/outline/%s.diff'
+        system(cmd % (topic,topic,topic))
+    path1 = join(environ['book'],'outline','%s.diff')
+    path2 = join(environ['book'],'outline','Outline.diff')
+    assemble_files(path1, path2)
+    print(open(path2).read())
 
 #-------------------------------
 # content directory
@@ -143,18 +151,6 @@ def book_outline_fragment(topic):
     return text
 
 
-def book_outline():
-    '''Build a new outline from the book text'''
-    results = "Outline of this book\n"
-    for topic in book_read_index('Chapters'):
-        text = book_outline_fragment(topic)
-        results += text+'\n\n\\newpage\n'
-    outline_file = join(environ['book'],'outline','Outline.outline')
-    with open(outline_file,'w') as f:
-        f.write(results+'\n')
-    return results
-
-
 def extract_headings(topic):
     '''Extract the outline from chapter file to make outline file'''
     print('Outline: '+topic)
@@ -169,16 +165,29 @@ def extract_headings(topic):
     return text
 
 
+def book_outline():
+    '''Build a new outline from the book text'''
+    results = "Outline of this book\n"
+    for topic in book_read_index('Chapters'):
+        text = book_outline_fragment(topic)
+        results += text+'\n\n\\newpage\n'
+    outline_file = join(environ['book'],'outline','Outline.outline')
+    with open(outline_file,'w') as f:
+        f.write(results+'\n')
+    return results
+
+
 def outline_headings():
     '''Build a new outline from the book text'''
     results = "Outline of this book\n"
     for topic in book_read_index('Chapters'):
         text = extract_headings(topic)
         results += text+'\n\n\\newpage\n'
-    outline_file = join(environ['book'],'Outline.md')
-    with open(outline_file,'w') as f:
-        f.write(results+'\n')
-    return results
+
+    path1 = join(environ['book'],'outline','%s.md')
+    path2 = join(environ['book'],'outline','Outline.md')
+    assemble_files(path1, path2)
+    print(open(path2).read())
 
 
 #-------------------------------
