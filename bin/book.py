@@ -136,7 +136,7 @@ def book_outline_fragment(topic):
     path1 = join(chapter_dir,topic+'.md')
     path2 = join(outline_dir,topic+'.outline')
     text = [t for t in open(path1).read().split('\n') if t.startswith('#')]
-    text = [t.replace('#### ','                 ') for t in text]
+    text = [t.replace('#### ','                ') for t in text]
     text = [t.replace('### ','            ') for t in text]
     text = [t.replace('## ','        ') for t in text]
     text = [t.replace('# ','    ') for t in text]
