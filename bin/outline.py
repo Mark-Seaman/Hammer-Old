@@ -58,7 +58,7 @@ def outline_diff(files):
             echo '---------------------------------------------------------'
             echo '                      %s'
             echo '---------------------------------------------------------'
-            diff -Bb $book/outline/%s.outline $book/content/%s.outline
+            diff -B $book/outline/%s.outline $book/content/%s.outline
             ''' % (topic,topic,topic))
 
 
@@ -72,6 +72,7 @@ def convert_to_headings(topic):
     outline_file = join(environ['book'], 'content', topic+'.md')
     text = open(input_file).read().split('\n')
     text = [t for t in text if t.strip()]
+    text = [t.replace('                ','#### ') for t in text]
     text = [t.replace('            ','### ') for t in text]
     text = [t.replace('        ','## ') for t in text]
     text = [t.replace('    ','# ') for t in text]
@@ -97,6 +98,7 @@ def outline_convert_to_outline(topic):
     print('Outline: '+topic)
     topics = join(environ['book'],'outline',topic+'.md')
     text = open(topics).read().split('\n')
+    text = [t.replace('#### ','                ') for t in text]
     text = [t.replace('### ','            ') for t in text]
     text = [t.replace('## ','        ') for t in text]
     text = [t.replace('# ','    ') for t in text]
