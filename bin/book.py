@@ -14,12 +14,6 @@ def book_build():
     #book_pdf()
 
     
-def book_changes(argv):
-    '''Form the shell script for the commit command. '''
-    command = 'git status'
-    return 'List all pending changes to the book\n' +shell(command)
-
-
 def book_chapters():
     '''Create the chapter content markdown'''
     results = 'Build: Book.md\n'
@@ -33,6 +27,10 @@ def book_chapters():
             text = open(path).read()    
             output_file.write(text)
     print(results)
+
+
+def book_changes():
+    return 'Changes to Book content' + shell('git diff')
 
 
 def book_commit(argv):
@@ -179,6 +177,12 @@ def book_show():
     system('cd ..; rbg mkdocs serve; sleep 3')
     system('web http://127.0.0.1:8000/book/Cover/')
 
+
+def book_status():
+    '''Form the shell script for the commit command. '''
+    return 'List all pending changes to the book\n' +shell('git status')
+
+
 def book_text(chapter=1):
     '''Display the raw text of one chapter'''
     f = join(environ['book'], 'chapters', '%s.md'%chapter)
@@ -217,7 +221,7 @@ def book_command(argv):
             print(book_build())
 
         elif argv[1]=='changes':
-            print(book_changes(argv))
+            print(book_changes())
 
         elif argv[1]=='commit':
             book_commit(argv)
@@ -245,6 +249,9 @@ def book_command(argv):
 
         elif argv[1]=='show':
             book_show()
+
+        elif argv[1]=='status':
+            print(book_status())
 
         elif argv[1]=='test':
             book_checker()
