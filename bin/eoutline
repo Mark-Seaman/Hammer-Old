@@ -2,12 +2,16 @@
 # Edit the requested outline for the book
 
 
+book outline
 outline headings
 outline outline
 outline index
 
 book edit chapters/$1.md
+
 book edit outline/$1.md
+book edit outline/$1.outline
+
 book edit content/$1.md
 book edit content/$1.outline
 book edit content/Outline.outline
