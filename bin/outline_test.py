@@ -4,6 +4,8 @@ from tst import run_diff_checks, shell, lines, limit_lines
 def outline_content_test():
 	return shell('outline content')
 
+def book_outline_test():
+	return limit_lines('outline book', 14,15)
 
 def outline_test():
 	return shell('outline') + shell('outline outline')
@@ -34,6 +36,7 @@ def outline_checker():
         'outline-headings': outline_headings_test,
         'outline-index': outline_index_test,
         'outline-show': outline_show_test,
+        'outline-book': book_outline_test,
     }
 	run_diff_checks('outline', my_tests)
 

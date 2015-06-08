@@ -120,6 +120,39 @@ def outline_outline():
 #-------------------------------
 # chapters directory
 
+
+
+
+def book_outline_fragment(topic):
+    '''Extract the outline from chapter file to make outline file'''
+    print('Outline: '+topic)
+    chapter_dir = join(environ['book'],'chapters')
+    outline_dir = join(environ['book'],'outline')
+    path1 = join(chapter_dir,topic+'.md')
+    path2 = join(outline_dir,topic+'.outline')
+    text = [t for t in open(path1).read().split('\n') if t.startswith('#')]
+    text = [t.replace('#### ','                ') for t in text]
+    text = [t.replace('### ','            ') for t in text]
+    text = [t.replace('## ','        ') for t in text]
+    text = [t.replace('# ','    ') for t in text]
+    text = '\n'.join(text)
+    with open(path2,'w') as f:
+        f.write(text+'\n')
+    return text
+
+
+def book_outline():
+    '''Build a new outline from the book text'''
+    results = "Outline of this book\n"
+    for topic in book_read_index('Chapters'):
+        text = book_outline_fragment(topic)
+        results += text+'\n\n\\newpage\n'
+    outline_file = join(environ['book'],'outline','Outline.outline')
+    with open(outline_file,'w') as f:
+        f.write(results+'\n')
+    return results
+
+
 def extract_headings(topic):
     '''Extract the outline from chapter file to make outline file'''
     print('Outline: '+topic)
@@ -157,6 +190,7 @@ def outline_help():
 
     outline:
 
+        book             -- Extract an outline from the chapter text
         content   [file] -- Show the table of contents
         index     [file] -- Convert from outline to markdown
         headings  [file] -- Extract headings from outline content
@@ -179,7 +213,10 @@ def outline_command(argv):
     '''Execute all of the outline specific outlines'''
     if len(argv)>1:
 
-        if argv[1]=='content':
+        if argv[1]=='book':
+            book_outline()
+
+        elif argv[1]=='content':
             outline_content(argv[2:])
 
         elif argv[1]=='index':

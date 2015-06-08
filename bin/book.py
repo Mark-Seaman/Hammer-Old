@@ -128,36 +128,6 @@ def book_list():
     return results
 
 
-def book_outline_fragment(topic):
-    '''Extract the outline from chapter file to make outline file'''
-    print('Outline: '+topic)
-    chapter_dir = join(environ['book'],'chapters')
-    outline_dir = join(environ['book'],'outline')
-    path1 = join(chapter_dir,topic+'.md')
-    path2 = join(outline_dir,topic+'.outline')
-    text = [t for t in open(path1).read().split('\n') if t.startswith('#')]
-    text = [t.replace('#### ','                ') for t in text]
-    text = [t.replace('### ','            ') for t in text]
-    text = [t.replace('## ','        ') for t in text]
-    text = [t.replace('# ','    ') for t in text]
-    text = '\n'.join(text)
-    with open(path2,'w') as f:
-        f.write(text+'\n')
-    return text
-
-
-def book_outline():
-    '''Build a new outline from the book text'''
-    results = "Outline of this book\n"
-    for topic in book_read_index('Chapters'):
-        text = book_outline_fragment(topic)
-        results += text+'\n\n\\newpage\n'
-    outline_file = join(environ['book'],'outline','Outline.md')
-    with open(outline_file,'w') as f:
-        f.write(results+'\n')
-    return results
-
-
 def book_pdf():
     '''Build the PDF file from the Book markdown file. '''
     system('''
