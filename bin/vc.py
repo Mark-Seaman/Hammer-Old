@@ -83,9 +83,9 @@ def vc_command(argv):
 
 		else:
 			print('No vc command found, '+argv[1])
-			vc_help()
+			vc_commit(['commit']+argv)
 	else:
-		vc_help()
+		vc_commit(['commit'])
 
 
 '''
