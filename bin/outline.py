@@ -58,7 +58,7 @@ def outline_diff(files):
             echo '---------------------------------------------------------'
             echo '                      %s'
             echo '---------------------------------------------------------'
-            diff -b $book/outline/%s.outline $book/content/%s.outline
+            diff -Bb $book/outline/%s.outline $book/content/%s.outline
             ''' % (topic,topic,topic))
 
 
