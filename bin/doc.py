@@ -21,6 +21,13 @@ def doc_add(argv):
 
 def doc_changes():
     '''Form the shell script for the commit command. '''
+    command = 'cd $mb; git diff --color-words --word-diff'
+    print('List all pending changes to the book')
+    system(command)
+
+
+def doc_status():
+    '''Form the shell script for the commit command. '''
     command = 'cd $mb; git status'
     print('List all pending changes to the book')
     system(command)
@@ -74,6 +81,7 @@ def doc_help():
         list    [file]      # List all docs
         path    [file]      # Show path to document
         show    [file]      # Show a doc
+        status             # List doc changes 
         text                # Show markdown for all docs
       
             ''')
@@ -159,6 +167,9 @@ def doc_command(argv):
 
         elif argv[1]=='show':
             doc_show(argv[2:])
+
+        elif argv[1]=='status':
+            doc_status()
 
         elif argv[1]=='web':
             doc_web()
