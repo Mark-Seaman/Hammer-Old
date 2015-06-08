@@ -15,7 +15,7 @@ from tst import run_diff_checks, shell, lines, limit_lines
 
 def vc_commit_test():
     '''Test the commits'''
-    return shell('echo Can not test this command')
+    return shell('vc')
 
 
 def vc_delete_test():

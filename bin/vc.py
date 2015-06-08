@@ -72,6 +72,9 @@ def vc_command(argv):
 		elif argv[1]=='delete':
 			vc_delete(argv)
 
+		elif argv[1]=='help':
+			vc_help()
+
 		elif argv[1]=='status':
 			vc_status(argv)
 
