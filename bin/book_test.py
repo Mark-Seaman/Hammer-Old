@@ -37,7 +37,7 @@ def book_list_test():
 def book_words_test():
     '''Test the number of words in the book'''
     return shell('book words')
-
+    
 
 def book_text():
     '''Get the text for Chapter 1'''
@@ -51,7 +51,6 @@ def book_checker():
         'book-build': book_build_test,
         'book-help': book_help_test,
         'book-list': book_list_test,
-        # 
         'book-text': book_text,
         'book-words': book_words_test,
     }
