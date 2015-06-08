@@ -7,6 +7,13 @@ from sys import argv
 from vc_test import vc_checker
 
 
+
+def vc_changes():
+    '''Form the shell script for the commit command. '''
+    print('List all pending changes to the book')
+    system('cd $p; git diff --color-words --word-diff')
+
+
 def vc_commit(argv):
 	'''	
 	Commit all changes and share with others.
@@ -37,6 +44,7 @@ def vc_help():
 
     vc:
 
+        changes        -- Run git diff to show changes
         commit  [file] -- Add a new vc
         delete  [file] -- Delete a vc
         help    [file] -- See the vc commands
@@ -66,7 +74,10 @@ def vc_command(argv):
 	'''
 	if len(argv)>1:
 
-		if argv[1]=='commit':
+		if argv[1]=='changes':
+			vc_changes()
+
+		elif argv[1]=='commit':
 			vc_commit(argv)
 
 		elif argv[1]=='delete':
