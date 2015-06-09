@@ -137,15 +137,11 @@ def book_pdf():
     system('''
         rm *.pdf
         pandoc Book.md    -o Book.pdf    2> /dev/null
-        #pandoc outline/Outline.md -o Outline.pdf 2> /dev/null
-        #pandoc Project.md -o Project.pdf 2> /dev/null
+        pandoc Extra.md    -o Extra.pdf    2> /dev/null
         ls -s Book.pdf
-        #ls -s Outline.pdf
-        #ls -s Project.pdf
         echo Read file with:
         echo '     pdf $book/Book.pdf'
-        #echo '     pdf $book/Outline.pdf'
-        #echo '     pdf $book/Project.pdf'
+        echo '     pdf $book/Extra.pdf'
         ''')
 
 def book_project():
@@ -171,7 +167,9 @@ def book_push():
 
 def book_read():
     '''Read the PDF for the book'''
+    book_pdf()
     system('pdf $book/Book.pdf')
+    system('pdf $book/Extra.pdf')
 
 
 def book_show():
