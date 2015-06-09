@@ -18,15 +18,21 @@ export pt=$p/test
 export browser=/opt/google/chrome/google-chrome
 
 # Aliases
-alias projecthammer=". ~/Projects/Hammer/bin/project-env"
-alias proot="cd $p"
-alias papp="cd $pa"
-alias pbin="cd $pb"
-alias pdoc="cd $pd"
-alias ptest="cd $pt"
-
-alias pull='git pull'
-alias push='git pull && git push'
+alias be='book edit'
+alias br='book read'
+alias bt='book test'
+alias ce='cmd edit'
+alias cl='cmd list'
+alias cs='cmd show'
+alias ct='cmd test'
+alias de='doc edit'
+alias dl='doc list'
+alias dt='doc test'
+alias g='grep'
+alias gas='git add -A .; git status'
+alias gc='git commit -m'
+alias gco='git checkout'
+alias gd='git diff --color-words --word-diff'
 alias gre='git reset HEAD'
 alias grh='git reset --hard'
 alias grm='git rm'
@@ -37,17 +43,23 @@ alias gsl='git stash list'
 alias gsp='git stash pop'
 alias gss='git stash save'
 alias gv='grep -v'
-alias gas='git add -A .; git status'
-alias gco='git checkout'
-alias gc='git commit -m'
-alias gd='git diff --color-words --word-diff'
-
-alias j='python $pb/jack_script.py'
-alias dj='cd $pa && python manage.py'
+alias hammer=". ~/Projects/Hammer/bin/project-env"
+alias od='outline diff'
+alias oe='outline edit'
+alias os='outline show'
+alias ot='outline test'
+alias papp="cd $pa"
+alias pbin="cd $pb"
+alias pdoc="cd $pd"
+alias proot="cd $p"
+alias ptest="cd $pt"
+alias pull='git pull'
+alias push='git pull && git push'
 alias s='search'
-
-alias ve='. env/bin/activate'
-alias de='deactivate'
+alias te='tst edit'
+alias tl='tlike'
+alias tre='tst list; tstat'
+alias ts='tst show'
 
 
 # Path
