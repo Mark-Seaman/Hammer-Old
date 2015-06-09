@@ -117,17 +117,17 @@ def extract_headings(text):
     return '\n'.join(text)
 
 
-def book_outline():
-    '''Build a new outline from the book text'''
-    results = "Outline of this book\n"
-    for topic in book_read_index('Chapters'):
-        text = read_outline_fragment(topic)
-        results += text+'\n\n\\newpage\n'
-        save_outline ()
-    outline_file = join(environ['book'],'outline','Outline.outline')
-    with open(outline_file,'w') as f:
-        f.write(results+'\n')
-    return results
+# def book_outline():
+#     '''Build a new outline from the book text'''
+#     results = "Outline of this book\n"
+#     for topic in book_read_index('Chapters'):
+#         text = read_outline_fragment(topic)
+#         results += text+'\n\n\\newpage\n'
+#         save_outline ()
+#     outline_file = join(environ['book'],'outline','Outline.outline')
+#     with open(outline_file,'w') as f:
+#         f.write(results+'\n')
+#     return results
 
 
 def outline_edit(chapter=None):
@@ -184,10 +184,13 @@ def update_outline_files():
     '''Build a new outline from the book text'''
     results = "Outline of this book\n"
     for topic in book_read_index('Chapters'):
+
+        print('Outline: '+topic)
         text = read_chapter(topic)
         text = extract_headings(text)
         save_headings('outline', topic, text)
-        save_outline('outline', topic, convert_to_outline(text))
+
+        save_outline('outline', topic, text)
         update_diff_file(topic)
         text = read_outline(topic)
         save_headings('content', topic, extract_headings(text))
@@ -220,11 +223,11 @@ def outline_command(argv):
     '''Execute all of the outline specific outlines'''
     if len(argv)>1:
 
-        if argv[1]=='book':
-            book_outline()
+        # if argv[1]=='book':
+        #     book_outline()
 
-        elif argv[1]=='content':
-            outline_content(argv[2:])
+        if argv[1]=='content':
+            update_outline_files()
 
         elif argv[1]=='edit':
             outline_edit(argv[2:])

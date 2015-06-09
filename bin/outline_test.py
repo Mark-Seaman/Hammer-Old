@@ -2,10 +2,13 @@ from tst import run_diff_checks, shell, lines, limit_lines
 
 
 def outline_content_test():
-	return shell('outline content')
+	return shell('''
+		outline content
+		cat $book/content/Content-1.outline
+		cat $book/content/Content-2.outline
+		cat $book/content/Content-3.outline
+		''')
 
-def book_outline_test():
-	return limit_lines('outline book', 14,15)
 
 def outline_test():
 	return shell('outline') + shell('outline outline')
