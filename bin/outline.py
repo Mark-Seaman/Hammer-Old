@@ -35,6 +35,9 @@ def content_filename(depth):
     return join(environ['book'],'content','Content-%d.outline' % depth)
 
 
+#-------------------------------
+# converters 
+
 def outline_content(files=None):
 
     def outline_write_content(depth, files, content_file=None):
@@ -61,21 +64,15 @@ def outline_content(files=None):
         outline_write_content(3, files)
 
 
-#-------------------------------
-# outline differences
 
 def outline_diff(files):
     path1 = join(environ['book'],'outline','%s.diff')
     path2 = join(environ['book'],'outline','Outline.diff')
     join_files(path1, path2)
 
-
-#-------------------------------
-# converters 
-
 def convert_to_headings(text):
     '''Convert the content outline to markdown'''
-    print('Build the text index of headings from an outline '+topic)
+    #print('Build the text index of headings from an outline ')
     text = text.split('\n')
     text = [t for t in text if t.strip()]
     text = [t.replace('                ','#### ') for t in text]
@@ -84,14 +81,6 @@ def convert_to_headings(text):
     text = [t.replace('    ','# ') for t in text]
     return '\n'.join(text)
     
-
-# def outline_index():
-#     '''Convert the content outline to markdown'''
-#     print('Build the text index of headings from content outline')
-#     convert_to_headings('Outline')
-#     for topic in book_read_index('Chapters'):
-#         convert_to_headings(topic)
-
 
 def convert_to_outline(headings):
     '''Extract the outline from chapter file to make outline file'''
@@ -109,6 +98,14 @@ def extract_headings(text):
     return '\n'.join(text)
 
 
+# def outline_index():
+#     '''Convert the content outline to markdown'''
+#     print('Build the text index of headings from content outline')
+#     convert_to_headings('Outline')
+#     for topic in book_read_index('Chapters'):
+#         convert_to_headings(topic)
+
+
 # def book_outline():
 #     '''Build a new outline from the book text'''
 #     results = "Outline of this book\n"
@@ -121,6 +118,8 @@ def extract_headings(text):
 #         f.write(results+'\n')
 #     return results
 
+#--------------------------------
+# Files
 
 def outline_edit(chapter=None):
     update_outline_files()
@@ -135,9 +134,7 @@ def outline_edit(chapter=None):
 def outline_show(chapter=None):
     '''Show the content of a outline.'''
     update_outline_files()
-    path1 = join(environ['book'],'content','%s.outline')
-    path2 = join(environ['book'],'content','Outline.outline')
-    join_files(path1, path2)
+    path = join(environ['book'],'content','Content-3.outline')
 
 
 def read_chapter(topic):
@@ -178,14 +175,12 @@ def update_outline_files():
     for topic in book_read_index('Chapters'):
 
         print('Outline: '+topic)
-        text = read_chapter(topic)
-        text = extract_headings(text)
+        text = extract_headings(read_chapter(topic))
         save_headings('outline', topic, text)
-
         save_outline('outline', topic, text)
         update_diff_file(topic)
-        text = read_outline(topic)
-        save_headings('content', topic, convert_to_headings(outline))
+        text = convert_to_headings(read_outline(topic))
+        save_headings('content', topic, text)
 
     path1 = join(environ['book'],'outline','%s.md')
     path2 = join(environ['book'],'outline','Outline.md')
