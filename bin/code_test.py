@@ -21,7 +21,7 @@ def code_show_test():
 
 
 def code_complexity_test():
-    return shell('code complexity') + shell('code functions')
+    return shell('code complexity')
 
 
 def code_checker():
