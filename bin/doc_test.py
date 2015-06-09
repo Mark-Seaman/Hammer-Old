@@ -18,7 +18,7 @@ def doc_add_test():
 
 
 def doc_changes_test():
-    return shell('doc changes')
+    return limit_lines('doc changes', 0, 100)
 
 
 def doc_list_test():
@@ -30,8 +30,7 @@ def doc_path_test():
 
 
 def doc_show_test():
-	text = limit_lines('doc show Hammer/docs/index.md', 99, 99)
-	text += limit_lines('doc show', 99, 99)
+	text = limit_lines('doc show', 99, 99)
 	return text
 
 
