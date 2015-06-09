@@ -101,7 +101,7 @@ def outline_edit(chapter=None):
         system('e '+join(environ['book'],'content','%s.outline' % chapter[0]))
         system('e '+join(environ['book'],'outline','%s.outline' % chapter[0]))
     else:
-        system('e '+join(environ['book'],'content','Outline.outline'))
+        system('e '+join(environ['book'],'content','Content-3.outline'))
         system('e '+join(environ['book'],'outline','Outline.outline'))
  
 
@@ -109,6 +109,7 @@ def outline_show(chapter=None):
     '''Show the content of a outline.'''
     update_outline_files()
     path = join(environ['book'],'content','Content-3.outline')
+    print(open(path).read())
 
 
 def read_chapter(topic):
