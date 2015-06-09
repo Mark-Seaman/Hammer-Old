@@ -71,35 +71,27 @@ def outline_diff(files):
 
 
 #-------------------------------
-# content directory
+# converters 
 
-def convert_to_headings(topic):
+def convert_to_headings(text):
     '''Convert the content outline to markdown'''
     print('Build the text index of headings from an outline '+topic)
-    input_file   = join(environ['book'], 'content', topic+'.outline')
-    outline_file = join(environ['book'], 'content', topic+'.md')
-    text = open(input_file).read().split('\n')
+    text = text.split('\n')
     text = [t for t in text if t.strip()]
     text = [t.replace('                ','#### ') for t in text]
     text = [t.replace('            ','### ') for t in text]
     text = [t.replace('        ','## ') for t in text]
     text = [t.replace('    ','# ') for t in text]
-    text = '\n'.join(text)
-    print(text)
-    with open(outline_file,'w') as f:
-        f.write(text+'\n')
+    return '\n'.join(text)
+    
 
+# def outline_index():
+#     '''Convert the content outline to markdown'''
+#     print('Build the text index of headings from content outline')
+#     convert_to_headings('Outline')
+#     for topic in book_read_index('Chapters'):
+#         convert_to_headings(topic)
 
-def outline_index():
-    '''Convert the content outline to markdown'''
-    print('Build the text index of headings from content outline')
-    convert_to_headings('Outline')
-    for topic in book_read_index('Chapters'):
-        convert_to_headings(topic)
-
-
-#-------------------------------
-# converters 
 
 def convert_to_outline(headings):
     '''Extract the outline from chapter file to make outline file'''
@@ -193,7 +185,7 @@ def update_outline_files():
         save_outline('outline', topic, text)
         update_diff_file(topic)
         text = read_outline(topic)
-        save_headings('content', topic, extract_headings(text))
+        save_headings('content', topic, convert_to_headings(outline))
 
     path1 = join(environ['book'],'outline','%s.md')
     path2 = join(environ['book'],'outline','Outline.md')
