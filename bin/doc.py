@@ -21,7 +21,7 @@ def doc_add(argv):
 
 def doc_changes():
     '''Form the shell script for the commit command. '''
-    command = 'cd $mb; git diff --color-words --word-diff'
+    command = 'cd $mb; git diff --word-diff'
     print('List all pending changes to the book')
     system(command)
 
