@@ -92,26 +92,6 @@ def extract_headings(text):
     return '\n'.join(text)
 
 
-# def outline_index():
-#     '''Convert the content outline to markdown'''
-#     print('Build the text index of headings from content outline')
-#     convert_to_headings('Outline')
-#     for topic in book_read_index('Chapters'):
-#         convert_to_headings(topic)
-
-
-# def book_outline():
-#     '''Build a new outline from the book text'''
-#     results = "Outline of this book\n"
-#     for topic in book_read_index('Chapters'):
-#         text = read_outline_fragment(topic)
-#         results += text+'\n\n\\newpage\n'
-#         save_outline ()
-#     outline_file = join(environ['book'],'outline','Outline.outline')
-#     with open(outline_file,'w') as f:
-#         f.write(results+'\n')
-#     return results
-
 #--------------------------------
 # Files
 
