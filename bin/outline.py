@@ -60,8 +60,9 @@ def outline_content(files=None):
         outline_write_content(1, files, content_filename(1))
         outline_write_content(2, files, content_filename(2))
         outline_write_content(3, files, content_filename(3))
+        outline_write_content(4, files, content_filename(4))
     else:
-        outline_write_content(3, files)
+        outline_write_content(4, files)
 
 
 def convert_to_headings(text):
