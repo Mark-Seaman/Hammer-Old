@@ -153,8 +153,6 @@ def update_outline_files():
     '''Build a new outline from the book text'''
     results = "Outline of this book\n"
     for topic in book_read_index('Chapters'):
-
-        print('Outline: '+topic)
         text = extract_headings(read_chapter(topic))
         save_headings('outline', topic, text)
         save_outline('outline', topic, text)
