@@ -18,7 +18,9 @@ export pt=$p/test
 export browser=/opt/google/chrome/google-chrome
 
 # Aliases
+alias bc='book commit'
 alias be='book edit'
+alias bl='book list'
 alias br='book read'
 alias bt='book test'
 alias ce='cmd edit'
