@@ -33,7 +33,6 @@ def outline_show_test():
 def outline_checker():
 	'''Execute all the desired diff tests'''
 	my_tests = {
-		'outline': outline_test,
 		'outline-content': outline_content_test,
 		'outline-diff': outline_diff_test,
         'outline-headings': outline_headings_test,
