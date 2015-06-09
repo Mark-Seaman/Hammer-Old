@@ -200,7 +200,7 @@ def book_calculate_words(label,files):
 
 def book_words():
     '''Count all of the words in the book '''
-    book = ['Book.md'] + ['book/'+i+'.md' for i in book_read_index('Book')] 
+    book = ['Book.md', 'Extra.md'] + ['book/'+i+'.md' for i in book_read_index('Book')] 
     chapters = ['chapters/'+i+'.md' for i in book_read_index('Chapters')]
     outlines = ['outline/'+i+'.md'  for i in book_read_index('Chapters')]
     content  = ['content/'+i+'.md'  for i in book_read_index('Chapters')]
