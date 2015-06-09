@@ -64,12 +64,6 @@ def outline_content(files=None):
         outline_write_content(3, files)
 
 
-
-def outline_diff(files):
-    path1 = join(environ['book'],'outline','%s.diff')
-    path2 = join(environ['book'],'outline','Outline.diff')
-    join_files(path1, path2)
-
 def convert_to_headings(text):
     '''Convert the content outline to markdown'''
     #print('Build the text index of headings from an outline ')
@@ -163,10 +157,15 @@ def save_outline(directory, topic, headings):
         f.write(outline+'\n')
 
 
-def update_diff_file(topic):
-    print('Diff: '+topic)
-    cmd = 'diff -B $book/outline/%s.outline $book/content/%s.outline > $book/outline/%s.diff'
-    system(cmd % (topic,topic,topic))
+def outline_diff(files):
+    update_outline_files()
+    for topic in book_read_index('Chapters'):
+        cmd = 'diff -B $book/outline/%s.outline $book/content/%s.outline > $book/outline/%s.diff'
+        system(cmd % (topic,topic,topic))
+    path1 = join(environ['book'],'outline','%s.diff')
+    path2 = join(environ['book'],'outline','Outline.diff')
+    join_files(path1, path2)
+    system('rm $book/outline/*.diff')
 
 
 def update_outline_files():
@@ -178,7 +177,6 @@ def update_outline_files():
         text = extract_headings(read_chapter(topic))
         save_headings('outline', topic, text)
         save_outline('outline', topic, text)
-        update_diff_file(topic)
         text = convert_to_headings(read_outline(topic))
         save_headings('content', topic, text)
 
