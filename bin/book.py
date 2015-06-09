@@ -171,9 +171,7 @@ def book_push():
 
 def book_read():
     '''Read the PDF for the book'''
-    system('rbg evince $book/Book.pdf')
-    system('rbg evince $book/Outline.pdf')
-    system('rbg evince $book/Project.pdf')
+    system('pdf $book/Book.pdf')
 
 
 def book_show():
