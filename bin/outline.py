@@ -140,13 +140,20 @@ def save_outline(directory, topic, headings):
 
 
 def outline_diff(files):
+    '''Show the differences between the written outline and book chapters'''
     update_outline_files()
-    for topic in book_read_index('Chapters'):
+    if files:
+        topic = files[0]
         cmd = 'diff -B $book/outline/%s.outline $book/content/%s.outline > $book/outline/%s.diff'
         system(cmd % (topic,topic,topic))
-    path1 = join(environ['book'],'outline','%s.diff')
-    path2 = join(environ['book'],'outline','Outline.diff')
-    join_files(path1, path2)
+        print (open(join(environ['book'],'outline',topic+'.diff')).read())
+    else:
+        for topic in book_read_index('Chapters'):
+            cmd = 'diff -B $book/outline/%s.outline $book/content/%s.outline > $book/outline/%s.diff'
+            system(cmd % (topic,topic,topic))
+        path1 = join(environ['book'],'outline','%s.diff')
+        path2 = join(environ['book'],'outline','Outline.diff')
+        join_files(path1, path2)
     system('rm $book/outline/*.diff')
 
 
@@ -187,9 +194,6 @@ def outline_help():
 def outline_command(argv):
     '''Execute all of the outline specific outlines'''
     if len(argv)>1:
-
-        # if argv[1]=='book':
-        #     book_outline()
 
         if argv[1]=='content':
             update_outline_files()
