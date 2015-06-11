@@ -271,6 +271,7 @@ if __name__=='__main__':
         from systest import system_checker
         system_checker()
         system('outline test')
+        system('extra test')
         print('Tests:' +'\n    '.join(test_list()))
 
         show_status()
