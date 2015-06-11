@@ -41,9 +41,9 @@ def differences(answer,correct):
         t1 = '/tmp/diff1'
         t2 = '/tmp/diff2'
         with open(t1,'wt') as file1:
-            file1.write(str(answer))
+            file1.write(str(answer)+'\n')
         with open(t2,'wt') as file2:
-            file2.write(str(correct))
+            file2.write(str(correct)+'\n')
         diffs = shell('diff %s %s' %(t1, t2))
         if diffs:
             print('Differences detected:     < actual     > expected')
