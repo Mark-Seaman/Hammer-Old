@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from os import system, listdir, environ
+from os import system, listdir, environ, chdir
 from os.path import join
 from sys import argv
 
@@ -180,8 +180,6 @@ def outline_help():
 
     outline:
 
-        book             -- Extract an outline from the chapter text
-        content   [file] -- Show the table of contents
         edit      [file] -- Edit the nested outlines for the book
         headings  [file] -- Extract headings from outline content
         outline   [file] -- Convert from markdown to outline
@@ -191,14 +189,19 @@ def outline_help():
       
             ''')
 
+def outline_size():
+    '''Show the lines in each outline file'''
+    files  = [i+'.outline'  for i in book_read_index('Chapters')]
+    chdir(join(environ['book'], 'content'))
+    text = [shell('wc -l '+ topic).replace('.outline','') for topic in files]
+    print(''.join(text))
+   
+
 def outline_command(argv):
     '''Execute all of the outline specific outlines'''
     if len(argv)>1:
 
-        if argv[1]=='content':
-            update_outline_files()
-
-        elif argv[1]=='edit':
+        if argv[1]=='edit':
             outline_edit(argv[2:])
 
         elif argv[1]=='diff':
@@ -214,8 +217,7 @@ def outline_command(argv):
             print('No outline command found, '+argv[1])
             outline_help()
     else:
-        print('No arguments given')
-        outline_help()
+        outline_size()
 
 
 '''
