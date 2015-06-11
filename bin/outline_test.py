@@ -2,7 +2,7 @@ from tst import run_diff_checks, shell, lines, limit_lines
 
 
 def outline_content_test():
-	return limit_lines('outline show', 460, 470)
+	return limit_lines('outline show', 400, 500)
 	
 
 def outline_diff_test():
