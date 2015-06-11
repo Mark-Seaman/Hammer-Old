@@ -17,8 +17,8 @@ def doc_add_test():
 	return shell('doc add xxx_sample_document') + shell('doc delete xxx_sample_document')
 
 
-def doc_changes_test():
-    return limit_lines('doc changes', 0, 100)
+def doc_status_test():
+    return limit_lines('doc status', 0, 100)
 
 
 def doc_list_test():
@@ -38,7 +38,7 @@ def doc_checker():
 	'''Execute all the desired diff tests'''
 	my_tests = {
         'doc-add': doc_add_test,
-        'doc-changes': doc_changes_test,
+        'doc-status': doc_status_test,
         'doc-list': doc_list_test,
         'doc-path': doc_path_test,
         'doc-show': doc_show_test,
