@@ -272,7 +272,7 @@ if __name__=='__main__':
         system_checker()
         system('outline test')
         system('extra test')
-        print('Tests:' +'\n    '.join(test_list()))
+        #print('Tests:' +'\n    '.join(test_list()))
 
         show_status()
     else:
