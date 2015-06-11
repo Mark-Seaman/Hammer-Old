@@ -132,6 +132,14 @@ def book_list():
     return results
 
 
+def book_outline(topic):
+    '''Build a new outline from the book text'''
+    from outline import extract_headings, convert_to_outline
+    f = join(environ['book'], 'chapters', '%s.md'%topic)
+    headings = extract_headings(open(f).read())
+    print(convert_to_outline(headings))
+   
+
 def book_pdf():
     '''Build the PDF file from the Book markdown file. '''
     system('''
@@ -242,8 +250,8 @@ def book_command(argv):
         elif argv[1]=='list':
             print(book_list())
 
-        elif argv[1]=='outline':
-            book_outline()
+        elif len(argv)>2 and argv[1]=='outline':
+            book_outline(argv[2])
 
         elif argv[1]=='push':
             book_push()

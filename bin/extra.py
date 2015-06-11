@@ -4,16 +4,17 @@ from os.path import join
 
 from outline import extract_headings, convert_to_outline
 
-def extra_edit(topics):
-	if topics:
-		system('e $book/extra/'+topics[0]+'.md')
+
+def extra_edit(topic):
+	if topic:
+		system('e $book/extra/'+topic+'.md')
 	else:
 		system('e $book/extra')
 
 
 def extra_show(topics):
-	if topics:
-		system('cat $book/extra/'+topics[0]+'.md')
+	if topic:
+		system('cat $book/extra/'+topics[1]+'.md')
 	else:
 		system('wc -w $book/extra/*')
 
