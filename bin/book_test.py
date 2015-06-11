@@ -18,9 +18,9 @@ def book_build_test():
     return shell('book build')
 
 
-def book_changes_test():
+def book_status_test():
     '''Make sure there are no uncommitted changes pending'''
-    return shell('book changes')
+    return shell('book status')
 
 
 def book_help_test():
@@ -47,7 +47,7 @@ def book_text():
 def book_checker():
     '''Execute all the desired diff tests'''
     my_tests = {
-        'book-changes': book_changes_test,
+        'book-status': book_status_test,
         'book-build': book_build_test,
         'book-help': book_help_test,
         'book-list': book_list_test,
