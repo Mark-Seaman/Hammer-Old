@@ -1,7 +1,7 @@
 #!/bin/bash
 # Setup the Python Evironment
 
-# Create a Python virtualenv for Python 3
+# Create a Python virtualenv for Python 2.7
 virtualenv --no-site-packages --distribute -p python2.7 env
 
 # Activate the virutalenv
@@ -16,7 +16,7 @@ pip install django-floppyforms
 pip install Django==1.7.3 
 pip install docopt
 pip install mkdocs
-pip install pandocs
+pip install pandoc
 pip install requests
 pip install tox
 
