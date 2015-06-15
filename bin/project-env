@@ -87,7 +87,7 @@ export PYTHONPATH=$pb:$p/env/lib/python2.7/site-packages
 cd $p
 
 # Show the banner
-cat $pb/welcome
+welcome
 
 # Use virtualenv
 . $p/env/bin/activate
