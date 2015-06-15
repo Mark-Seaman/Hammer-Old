@@ -1,0 +1,14 @@
+#!/bin/bash
+# Commit all changes to the remote repo
+
+dir=$1
+comment=$2
+[ "$1" == '' ] && dir=$p
+[ "$2" == "" ] && comment='Automatic document commit'
+
+cd $dir             
+git add -A .        &&  
+git commit -m"$comment"   
+
+git pull            &&
+git push
