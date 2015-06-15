@@ -3,6 +3,7 @@
 
 [ `hostname` == seaman-macbook.local ]  && echo macbook|figlet && exit
 [ `hostname` == seaman-mini.local ]  && echo macmini|figlet && exit
+[ `hostname` == Erics-MacBookPro.local ]  && echo EricMacBook|figlet && exit
 
 hostname | sed 's/\-/\n/' | figlet
 
