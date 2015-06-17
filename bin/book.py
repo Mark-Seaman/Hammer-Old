@@ -199,7 +199,7 @@ def book_words():
     content  = ['content/'+i+'.outline'  for i in book_read_index('Chapters')]
     extra    = ['extra/'+i   for i in listdir(join(environ['book'],'extra'))]
     chdir(environ['book'])
-    book_calculate_words('manuscript',['Book.md', 'Extra.md'] )
+    book_calculate_words('manuscript',['Book.md'] )
     book_calculate_words('chapters',chapters)
     book_calculate_words('content',content)
     book_calculate_words('outline',outlines)
