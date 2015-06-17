@@ -8,21 +8,6 @@ from book_test import book_checker
 
 def book_build():
     '''Put together a markdown file from the individual parts '''
-    book_chapters()
-    book_build_extra()
-
-
-def book_build_extra():
-    chapters = ['extra/'+i for i in book_read_index('Chapters')]
-    with open('Extra.md','w') as output_file:
-        for p in chapters:
-            path = p+'.md'
-            text = open(path).read()    
-            output_file.write(text+'\n\n\\newpage\n---\n\n')
-    
-
-def book_chapters():
-    '''Create the chapter content markdown'''
     results = 'Build: Book.md\n'
     book = ['book/'+i for i in book_read_index('Book')] 
     chapters = ['chapters/'+i for i in book_read_index('Chapters')]
