@@ -144,12 +144,12 @@ def outline_diff(files):
     update_outline_files()
     if files:
         topic = files[0]
-        cmd = 'diff -Bb $book/outline/%s.outline $book/content/%s.outline > $book/outline/%s.diff'
+        cmd = 'diff -B $book/outline/%s.outline $book/content/%s.outline > $book/outline/%s.diff'
         system(cmd % (topic,topic,topic))
         print (open(join(environ['book'],'outline',topic+'.diff')).read())
     else:
         for topic in book_read_index('Chapters'):
-            cmd = 'diff -Bb $book/outline/%s.outline $book/content/%s.outline > $book/outline/%s.diff'
+            cmd = 'diff -B $book/outline/%s.outline $book/content/%s.outline > $book/outline/%s.diff'
             system(cmd % (topic,topic,topic))
         path1 = join(environ['book'],'outline','%s.diff')
         path2 = join(environ['book'],'outline','Outline.diff')
