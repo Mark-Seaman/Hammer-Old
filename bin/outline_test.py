@@ -6,7 +6,7 @@ def outline_content_test():
 	
 
 def outline_diff_test():
-	return limit_lines('outline diff', 100,200)
+	return limit_lines('outline diff', 100,170)
 
 
 def outline_show_test():
