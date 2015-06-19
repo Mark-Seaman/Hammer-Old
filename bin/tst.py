@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from glob import glob
-from os import system, listdir, environ, mkdir
+from os import system, listdir, environ, mkdir, getcwd
 from os.path import join, exists
 from subprocess import Popen,PIPE
 from sys import argv
@@ -111,24 +111,29 @@ def show_differences(my_tests):
         show_diff(name)
 
 
+def save_key(key,value):
+    '''Save the value with a key prefixed to the current directory'''
+    save(join(getcwd(), key), value)
+
+
 def approve_results(name):
     '''   Approve the test results   '''
     answer = recall(name+'.out')
     if answer:
-        save('%s.correct' % name, answer)
+        save_key('%s.correct' % name, answer)
     else:
         print('No output from test: '+name)
-        save('%s.correct' % name, '')
+        save_key('%s.correct' % name, 'No output')
 
 
 def run_check(name, function):
     '''   Run the test and check the results   '''
     print('    running '+name+'...')
     answer = function()
-    save('%s.out' % name, answer)
+    save_key('%s.out' % name, answer)
     correct = recall(name+'.correct')
     if not correct:
-        save('%s.correct' % name, answer)
+        save_key('%s.correct' % name, answer)
     show_diff(name)
 
 
@@ -205,7 +210,6 @@ def tst_add(command):
 
 def tst_edit(command):
     '''Edit the content of a test.'''
-    print("Edit:",command)
     print(shell('e bin/%s_test.py' % command))
 
 
