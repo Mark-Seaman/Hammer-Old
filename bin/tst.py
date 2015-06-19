@@ -118,7 +118,7 @@ def save_key(key,value):
 
 def recall_key(key):
     '''recall_key the value with a key prefixed to the current directory'''
-    print ('RECALL: '+ join(getcwd(), key))
+    #print ('RECALL: '+ join(getcwd(), key))
     return recall(join(getcwd(), key))
 
 
@@ -276,7 +276,6 @@ def execute_tst_command(argv):
 # Create a script that can be run from the tst
 if __name__=='__main__':
 
-    print ('xxxxxxxxxxxxxxxx')   
     if len(argv)==1:
         reset_test_names()
         from systest import system_checker
