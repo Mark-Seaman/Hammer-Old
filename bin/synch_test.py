@@ -18,7 +18,7 @@ def synch_copy_test():
 
 
 def synch_preview_test():
-	return limit_lines('synch preview test test-xxx',7, 10)
+	return limit_lines('synch preview test test-xxx',130, 140)
 
 
 def synch_mirror_test():
