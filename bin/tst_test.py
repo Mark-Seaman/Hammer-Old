@@ -10,11 +10,6 @@ from re import sub
 from tst import run_diff_checks, shell, lines, limit_lines
 
 
-def ls_test():
-    '''   List files in the current directory   '''
-    return shell('ls')
-
-
 def lines_test():
     '''   Count the lines of source code in the tst.py file   '''
     return limit_lines ('cat bin/tst.py',200,300)
@@ -29,9 +24,9 @@ def like_test():
     return ''
 
  
-def list_tests():
-    '''Make a list of all tests to run'''
-    return shell('tst list')
+# def list_tests():
+#     '''Make a list of all tests to run'''
+#     return shell('tst list')
 
 
 def output_test():
@@ -48,8 +43,7 @@ def tst_checker():
     my_tests = {
         'tst-like': like_test,
         'tst-lines': lines_test,
-        'tst-ls': ls_test,
-        'tst-list': list_tests,
+        #'tst-list': list_tests,
         'tst-help': help_test,
         'tst-output': output_test,
     }
