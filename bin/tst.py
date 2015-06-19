@@ -73,21 +73,21 @@ def test_list():
 def show_output(name):
     '''Show the output text for the last test run'''
     print('Output from %s\n-----------------' % name)
-    print(recall(name+'.out'))
+    print(recall_key(name+'.out'))
 
 
 def show_expected(name):
     '''Lookup the expected correct result for this test'''
     print('Expected correct output from %s\n-----------------' % name)
-    print(recall(name+'.correct'))
+    print(recall_key(name+'.correct'))
 
 
 def show_status():
     '''  Display the tests that failed  '''
     failures = []
     for name in test_list():
-        answer = recall ('%s.out' % name)
-        correct = recall('%s.correct' % name)
+        answer = recall_key ('%s.out' % name)
+        correct = recall_key('%s.correct' % name)
         if answer!=correct:
             failures.append('    %-20s FAIL' % name)
     print('\n\nTest Status: %d tests failed' % len(failures))
@@ -96,8 +96,8 @@ def show_status():
 
 def show_diff(name):
     '''   Show the results for one test   '''
-    answer = recall ('%s.out' % name)
-    correct = recall('%s.correct' % name)
+    answer = recall_key ('%s.out' % name)
+    correct = recall_key('%s.correct' % name)
     if answer!=correct:
         print('---------------------------------------------------------')
         print('                      '+name)
@@ -116,9 +116,15 @@ def save_key(key,value):
     save(join(getcwd(), key), value)
 
 
+def recall_key(key):
+    '''recall_key the value with a key prefixed to the current directory'''
+    print ('RECALL: '+ join(getcwd(), key))
+    return recall(join(getcwd(), key))
+
+
 def approve_results(name):
     '''   Approve the test results   '''
-    answer = recall(name+'.out')
+    answer = recall_key(name+'.out')
     if answer:
         save_key('%s.correct' % name, answer)
     else:
@@ -131,7 +137,7 @@ def run_check(name, function):
     print('    running '+name+'...')
     answer = function()
     save_key('%s.out' % name, answer)
-    correct = recall(name+'.correct')
+    correct = recall_key(name+'.correct')
     if not correct:
         save_key('%s.correct' % name, answer)
     show_diff(name)
@@ -270,6 +276,7 @@ def execute_tst_command(argv):
 # Create a script that can be run from the tst
 if __name__=='__main__':
 
+    print ('xxxxxxxxxxxxxxxx')   
     if len(argv)==1:
         reset_test_names()
         from systest import system_checker
