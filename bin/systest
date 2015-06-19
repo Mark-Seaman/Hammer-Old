@@ -1,5 +1,0 @@
-#!/bin/bash
-# Run all of the diff tests across the system
-
-python $pb/systest.py
-
