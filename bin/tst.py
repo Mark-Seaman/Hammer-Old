@@ -129,7 +129,7 @@ def approve_results(name):
         save_key('%s.correct' % name, answer)
     else:
         print('No output from test: '+name)
-        save_key('%s.correct' % name, 'No output')
+        save_key('%s.correct' % name, '')
 
 
 def run_check(name, function):
