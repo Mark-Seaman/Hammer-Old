@@ -3,7 +3,7 @@
 
 # Vars
 export p=$HOME/Projects/Hammer
-export book=$HOME/Documents/Leverage/docs
+export book=$HOME/Documents/Dropbox/Leverage/docs
 export mb=$HOME/Documents/book
 export gh='Shrinking-World/Hammer'
 export phip=54.244.95.205
