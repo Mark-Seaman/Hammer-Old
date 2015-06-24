@@ -12,9 +12,14 @@ from os.path import join
 from tst import run_diff_checks, shell, lines, limit_lines
 
 
-def synch_copy_test():
-    shell('synch copy test test-xxx')
+def clean_up():
     system('rm -rf test-xxx')
+    
+
+def synch_copy_test():
+    x = limit_lines('synch copy test test-xxx')
+    clean_up()
+    return x
 
 
 def synch_preview_test():
@@ -24,13 +29,13 @@ def synch_preview_test():
 def synch_mirror_test():
     shell('synch mirror test test-xxx')
     x = limit_lines('synch mirror test test-xxx', 6, 6)
-    system('rm -rf test-xxx')
+    clean_up()
     return x
 
 
 def synch_sync_test():
     x = limit_lines('synch sync test test-xxx', 7, 15)
-    system('rm -rf test-xxx')
+    clean_up()
     return x
 
 
