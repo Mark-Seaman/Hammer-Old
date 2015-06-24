@@ -1,0 +1,16 @@
+No server command found, help
+
+	usage: server cmd  [args]
+
+    server:
+
+        changes		-- show pending changes
+        console		-- run a console window for the server
+        deploy 		-- deploy the server code
+        do          -- run a shell command on the remote server
+        host     	-- get the hostname of the server
+        restart		-- restart the web server
+        status		-- show the remote server status
+        test        -- Self test
+      
+			

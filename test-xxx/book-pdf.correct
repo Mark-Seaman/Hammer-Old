@@ -1,0 +1,5 @@
+296 Book.pdf
+128 Outline.pdf
+Read file with:
+     pdf $book/Book.pdf
+     pdf $book/Outline.pdf

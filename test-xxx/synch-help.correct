@@ -1,0 +1,13 @@
+No synch command found, help
+
+	usage: cmd synch [args]
+
+    synch:
+
+        copy    dir1 dir2 -- Copy the newer files
+        preview dir1 dir2 -- Preview the files to be copied
+        sync    dir1 dir2 -- Copy the both directions
+        mirror  dir1 dir2 -- Make an exact copy
+        test              -- Run self test on this file
+      
+			
