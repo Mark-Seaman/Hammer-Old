@@ -29,7 +29,7 @@ def synch_mirror_test():
 
 
 def synch_sync_test():
-    x = limit_lines('synch sync test test-xxx 2>&1', 7, 15)
+    x = limit_lines('synch sync test test-xxx', 7, 15)
     system('rm -rf test-xxx')
     return x
 
