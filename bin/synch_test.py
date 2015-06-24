@@ -34,7 +34,7 @@ def synch_mirror_test():
 
 
 def synch_sync_test():
-    x = limit_lines('synch sync test test-xxx', 7, 15)
+    x = limit_lines('synch sync test test-xxx', 120, 150)
     clean_up()
     return x
 
