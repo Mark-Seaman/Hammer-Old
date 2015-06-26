@@ -1,0 +1,6 @@
+#!/bin/bash
+# Execute a system script command
+
+python $p/bin/system.py $*
+
+	
