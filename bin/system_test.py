@@ -14,7 +14,8 @@ from tst import run_diff_checks, shell, lines, limit_lines
 
 def system_add_test():
     f = join(environ['b'],'xxx')
-    return shell('touch $b/xxx') + shell('system add xxx') + shell('system delete xxx')
+    open(f,'w').write('xxx')
+    return shell('system add xxx') + shell('system delete xxx')
 
 
 def system_delete_test():
