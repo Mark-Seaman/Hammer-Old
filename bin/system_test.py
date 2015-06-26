@@ -27,11 +27,11 @@ def system_edit_test():
 
 
 def system_list_test():
-    return shell('echo system list xxx')
+    return shell('system list xxx')
 
 
 def system_show_test():
-    return shell('echo system show xxx')
+    return shell('system show project-env')
 
 
 def system_checker():
