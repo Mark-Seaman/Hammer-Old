@@ -31,8 +31,11 @@ def system_delete(argv):
 
 def system_edit(argv):
     '''Edit the content of a system.'''
-    print("system:",argv[2])
-    system('e bin/'+argv[2])
+    f = join(environ['b'],argv[2])
+    if not exists(f):
+        print('No file exists, '+f)
+    else:
+        system('e '+f)
 
 
 def system_help():
@@ -54,16 +57,18 @@ def system_help():
 
 def system_list(argv):
     '''List the parts of the system source code.'''
-    print("List the contents of this system")
-    for d in ('bin',):
-        print(d+':')
-        print('    '+'\n    '.join(listdir(join(environ['p'],d))))
+    for p in listdir(environ['b']):
+        print(p)
 
 
 def system_show(argv):
     '''Show the content of a system.'''
-    print("system:",argv[2])
-    system('cat bin/%s' % argv[2])
+    f = join(environ['b'],argv[2])
+    if not exists(f):
+        print('No file exists, '+f)
+    else:
+        system('echo File Contents: '+f)
+        system('cat '+f)
 
 
 def system_command(argv):
