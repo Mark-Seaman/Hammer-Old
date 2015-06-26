@@ -14,7 +14,6 @@ from tst import run_diff_checks, shell, lines, limit_lines
 
 def system_add_test():
     f = join(environ['b'],'xxx')
-    shell()
     return shell('echo xxx > ' + f + '; system add xxx; system delete xxx')
 
 
