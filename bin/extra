@@ -1,6 +1,0 @@
-#!/bin/bash
-# Execute a extra script command
-
-python $p/bin/extra.py $*
-
-	

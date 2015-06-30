@@ -85,6 +85,13 @@ def command_list(argv):
 		print('\n'.join(files))
 
 
+def command_search(argv):
+	'''Search the commands for the requested text'''
+	pattern = ' '.join(argv)
+	print('cmd search:  '+pattern)
+	system('grep ' + pattern + ' $pb/*.py')
+
+
 def command_show(argv):
 	'''	Show the content of a command.'''
 	path = join(environ['pb'],argv[2]+'.py')
@@ -114,6 +121,9 @@ def cmd_command(argv):
 
 		elif argv[1]=='list':
 			command_list(argv)
+
+		elif argv[1]=='search':
+			command_search(argv[2:])
 
 		elif argv[1]=='show':
 			command_show(argv)
