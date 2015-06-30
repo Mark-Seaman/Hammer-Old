@@ -285,16 +285,6 @@ if __name__=='__main__':
         reset_test_names()
         for c in command_names():
             system ('python bin/'+c)
-
-        # system('book test')
-        # system('cmd test')
-        # system('code test')
-        # system('outline test')
-        # system('server test')
-        # system('synch test')
-        # system('system test')
-        # system('tst test')
-        # system('vc test')
         show_status()
     else:
         execute_tst_command(argv)
