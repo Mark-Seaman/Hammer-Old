@@ -274,24 +274,27 @@ def execute_tst_command(argv):
 
 
 def command_names():
-    return [c for c in listdir(environ['pb']) if c.endswith('.py')]
+    '''Enumerate all of the commands'''
+    return [c for c in listdir(environ['pb']) if c.endswith('_test.py')]
+
 
 # Create a script that can be run from the tst
 if __name__=='__main__':
 
     if len(argv)==1:
         reset_test_names()
-        print (command_names())
+        for c in command_names():
+            system ('python bin/'+c)
 
-        system('book test')
-        system('cmd test')
-        system('code test')
-        system('outline test')
-        system('server test')
-        system('synch test')
-        system('system test')
-        system('tst test')
-        system('vc test')
+        # system('book test')
+        # system('cmd test')
+        # system('code test')
+        # system('outline test')
+        # system('server test')
+        # system('synch test')
+        # system('system test')
+        # system('tst test')
+        # system('vc test')
         show_status()
     else:
         execute_tst_command(argv)
