@@ -280,11 +280,13 @@ if __name__=='__main__':
         reset_test_names()
         system('python $pb/systest.py')
         system('book test')
+        system('cmd test')
         system('code test')
         system('outline test')
+        system('server test')
         system('system test')
-        #print('Tests:' +'\n    '.join(test_list()))
-
+        system('tst test')
+        system('vc test')
         show_status()
     else:
         execute_tst_command(argv)
