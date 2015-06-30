@@ -39,8 +39,6 @@ def system_test_list():
         #'nose': nose_test_execution,
         'vc': vc_checker,
         'cmd': cmd_checker,
-        'book': book_checker,
-        'doc': doc_checker,
         'tst': tst_checker,
         'pip': cmd_python_pip_test,
         'ps': process_status_test,
