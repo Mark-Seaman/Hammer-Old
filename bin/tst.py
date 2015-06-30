@@ -279,6 +279,7 @@ if __name__=='__main__':
     if len(argv)==1:
         reset_test_names()
         system('python $pb/systest.py')
+        system('book test')
         system('outline test')
         system('system test')
         #print('Tests:' +'\n    '.join(test_list()))
