@@ -273,11 +273,16 @@ def execute_tst_command(argv):
             print('bad command: '+cmd)
 
 
+def command_names():
+    return listdir(environ['pb'])
+
 # Create a script that can be run from the tst
 if __name__=='__main__':
 
     if len(argv)==1:
         reset_test_names()
+        print (command_names())
+
         system('book test')
         system('cmd test')
         system('code test')
