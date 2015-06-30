@@ -278,10 +278,8 @@ if __name__=='__main__':
 
     if len(argv)==1:
         reset_test_names()
-        from systest import system_checker
-        system_checker()
+        system('python $pb/systest.py')
         system('outline test')
-        system('extra test')
         system('system test')
         #print('Tests:' +'\n    '.join(test_list()))
 

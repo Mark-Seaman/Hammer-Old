@@ -51,7 +51,6 @@ def system_test_list():
     }
 
 
-def system_checker():
-    '''Execute all tests for the tst command'''
-    my_tests = system_test_list()
-    run_diff_checks('system', my_tests)
+'''Execute all tests for the tst command'''
+if __name__=='__main__':
+    run_diff_checks('system', system_test_list())
