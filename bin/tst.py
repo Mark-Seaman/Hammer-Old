@@ -287,6 +287,7 @@ if __name__=='__main__':
         system('system test')
         system('tst test')
         system('vc test')
+        system('synch test')
         show_status()
     else:
         execute_tst_command(argv)

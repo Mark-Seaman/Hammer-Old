@@ -37,13 +37,9 @@ def system_test_list():
     '''Create a list of tests to manage'''
     return {
         #'nose': nose_test_execution,
-        'tst': tst_checker,
         'pip': cmd_python_pip_test,
         'ps': process_status_test,
         'pwd': pwd_test,
-        'server': server_checker,
-        'synch': synch_checker,
-        'code': code_checker,
     }
 
 
