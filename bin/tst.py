@@ -278,16 +278,15 @@ if __name__=='__main__':
 
     if len(argv)==1:
         reset_test_names()
-        system('python $pb/systest.py')
         system('book test')
         system('cmd test')
         system('code test')
         system('outline test')
         system('server test')
+        system('synch test')
         system('system test')
         system('tst test')
         system('vc test')
-        system('synch test')
         show_status()
     else:
         execute_tst_command(argv)
