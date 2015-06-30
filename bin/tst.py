@@ -284,7 +284,7 @@ if __name__=='__main__':
     if len(argv)==1:
         reset_test_names()
         for c in command_names():
-            system ('python bin/'+c)
+            shell ('python bin/'+c)
         show_status()
     else:
         execute_tst_command(argv)
