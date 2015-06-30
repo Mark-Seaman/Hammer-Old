@@ -274,7 +274,7 @@ def execute_tst_command(argv):
 
 
 def command_names():
-    return listdir(environ['pb'])
+    return [c for c in listdir(environ['pb']) if c.endswith('.py')]
 
 # Create a script that can be run from the tst
 if __name__=='__main__':
