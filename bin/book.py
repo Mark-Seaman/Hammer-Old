@@ -195,16 +195,11 @@ def book_words():
     '''Count all of the words in the book '''
     book = ['book/'+i+'.md' for i in book_read_index('Book')] 
     chapters = ['chapters/'+i+'.md' for i in book_read_index('Chapters')]
-    outlines = ['outline/'+i+'.outline'  for i in book_read_index('Chapters')]
     content  = ['content/'+i+'.outline'  for i in book_read_index('Chapters')]
-    extra    = ['extra/'+i   for i in listdir(join(environ['book'],'extra'))]
     chdir(environ['book'])
     book_calculate_words('manuscript',['Book.md'] )
     book_calculate_words('chapters',chapters)
     book_calculate_words('content',content)
-    book_calculate_words('outline',outlines)
-    book_calculate_words('book',book)
-    book_calculate_words('extra', extra)
     print('\n')
 
 
