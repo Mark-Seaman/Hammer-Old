@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 
 from os import system, listdir, environ, chdir
-from os.path import join
+from os.path import join, exists
+from shutil import copyfile
 from sys import argv
+
 
 from outline_test import outline_checker
 from book import book_read_index
@@ -70,9 +72,9 @@ def convert_to_headings(text):
     #print('Build the text index of headings from an outline ')
     text = text.split('\n')
     text = [t for t in text if t.strip()]
-    text = [t.replace('                ','#### ') for t in text]
-    text = [t.replace('            ','### ') for t in text]
-    text = [t.replace('        ','## ') for t in text]
+    text = [t.replace('                ','\n#### ') for t in text]
+    text = [t.replace('            ','\n\n### ') for t in text]
+    text = [t.replace('        ','\n\n\n## ') for t in text]
     text = [t.replace('    ','# ') for t in text]
     return '\n'.join(text)
     
@@ -117,6 +119,9 @@ def read_chapter(topic):
     '''Read chapter text'''
     chapter_dir = join(environ['book'],'chapters')
     path = join(chapter_dir,topic+'.md')
+    if not exists(path):
+        copyfile(path.replace('chapters','content'), path)
+        return 'path = '+path
     return open(path).read()
 
 
