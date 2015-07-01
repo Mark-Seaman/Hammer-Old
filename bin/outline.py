@@ -81,7 +81,7 @@ def convert_to_headings(text):
 
 def convert_to_outline(headings):
     '''Extract the outline from chapter file to make outline file'''
-    text = [t for t in headings.split('\n') if t.startswith('#')]
+    text = [t.rstrip() for t in headings.split('\n') if t.startswith('#')]
     text = [t.replace('#### ','                ') for t in text]
     text = [t.replace('### ','            ') for t in text]
     text = [t.replace('## ','        ') for t in text]
@@ -91,7 +91,7 @@ def convert_to_outline(headings):
 
 def extract_headings(text):
     '''Extract the outline from chapter file to make outline file'''
-    text = [t for t in text.split('\n') if t.startswith('#')]
+    text = [t.rstrip() for t in text.split('\n') if t.startswith('#')]
     return '\n'.join(text)
 
 
@@ -154,7 +154,8 @@ def outline_diff(files):
         print (open(join(environ['book'],'outline',topic+'.diff')).read())
     else:
         for topic in book_read_index('Chapters'):
-            cmd = 'diff -B $book/outline/%s.outline $book/content/%s.outline > $book/outline/%s.diff'
+            cmd = 'diff -B $book/outline/%s.outline $book/content/%s.outline' + \
+                  ' > $book/outline/%s.diff'
             system(cmd % (topic,topic,topic))
         path1 = join(environ['book'],'outline','%s.diff')
         path2 = join(environ['book'],'outline','Outline.diff')
