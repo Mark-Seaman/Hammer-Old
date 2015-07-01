@@ -113,7 +113,7 @@ def book_list():
     for d in ['.', 'book', 'outline', 'chapters']:
         book_dir = join(environ['book'],d)
         files = [f for f in listdir(book_dir) if isfile(join(book_dir,f))]
-        results += '\n'+d+':    \n    '+'\n    '.join(sorted(files))
+        results += '\n\n'+d+':    \n    '+'\n    '.join(sorted(files))
     return results
 
 
