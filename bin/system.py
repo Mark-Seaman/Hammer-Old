@@ -19,6 +19,21 @@ def system_add(argv):
         system('e ' + f)
 
 
+def system_commit(argv):
+    '''Do a big commit with the provided comment'''
+    comment = 'Auto commit all changes in Documents '
+    if len(argv)>2:
+        comment = ' '.join(argv[2:])
+    command = '''echo Commit all changes to documents
+        cd $HOME/Documents
+        git add -A . &&
+        git commit -m"%s" &&
+        git pull &&
+        git push
+    ''' % comment
+    system(command)
+
+
 def system_delete(argv):
     '''Delete the system.'''
     f = join(environ['b'],argv[2])
@@ -46,6 +61,7 @@ def system_help():
     system:
 
         add     [file] -- Add a new system script
+        commit  [comment] -- Words for git commit comments
         delete  [file] -- Delete a system script
         edit    [file] -- Edit the system script
         list    [file] -- List all system scripts
@@ -53,6 +69,7 @@ def system_help():
         test           -- Self test all the scripts
       
             ''')
+
 
 
 def system_list(argv):
@@ -77,6 +94,9 @@ def system_command(argv):
 
         if argv[1]=='add':
             system_add(argv)
+
+        elif argv[1]=='commit':
+            system_commit(argv)
 
         elif argv[1]=='delete':
             system_delete(argv)
