@@ -17,7 +17,7 @@ def clean_up():
     
 
 def synch_bin_test():
-    return shell('synch bin')
+    return limit_lines('synch bin', 2, 5)
 
 
 def synch_copy_test():
