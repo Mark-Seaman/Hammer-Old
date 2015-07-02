@@ -16,6 +16,10 @@ def clean_up():
     system('rm -rf test-xxx')
     
 
+def synch_bin_test():
+    return shell('synch bin')
+
+
 def synch_copy_test():
     x = limit_lines('synch copy test test-xxx')
     clean_up()
@@ -45,6 +49,7 @@ def synch_help_test():
 
 def synch_checker():
     my_tests = {
+        'synch-bin': synch_bin_test,
         'synch-copy': synch_copy_test,
         'synch-preview': synch_preview_test,
         'synch-mirror': synch_mirror_test,

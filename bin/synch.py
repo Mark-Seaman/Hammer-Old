@@ -6,6 +6,11 @@ from sys import argv
 
 from synch_test import synch_checker
 
+def synch_bin():
+	'''Copy the commands to the bin directory'''
+	print('synch to the home bin directory')
+	synch_copy([ 'synch','bin', environ['pb'],environ['b'] ])
+
 
 def synch_copy(argv):
 	'''Create a new synch.'''
@@ -53,6 +58,9 @@ def synch_command(argv):
 
 		if argv[1]=='copy':
 			synch_copy(argv)
+
+		elif argv[1]=='bin':
+			synch_bin()
 
 		elif argv[1]=='preview':
 			synch_preview(argv)
