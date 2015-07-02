@@ -51,6 +51,21 @@ def differences(answer,correct):
             return diffs
 
 
+def is_cached(testname):
+    '''Check the cache to see if result is available'''
+    cache = join(getcwd(), testname+'.cache')
+    if expiration(cache):
+        print "Used Cached results for %s seconds"%(expiration(cache))
+        return True
+    else:
+        return False
+
+def clear_cache(testname):
+    '''Clear the cache for all tests'''
+    cache = join(getcwd(), testname+'.cache')
+    expire(cache,1)
+
+
 def reset_test_names():
     '''Reset the list of available tests'''
     open('.test','w').close()
