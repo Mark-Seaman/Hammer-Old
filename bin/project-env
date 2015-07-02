@@ -85,6 +85,7 @@ export PYTHONPATH=$pb:$p/env/lib/python2.7/site-packages
 
 # Directory
 cd $p
+echo "Project: $p"
 
 # Show the banner
 welcome

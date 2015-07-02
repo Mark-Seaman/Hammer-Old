@@ -55,7 +55,7 @@ def is_cached(testname):
     '''Check the cache to see if result is available'''
     cache = join(getcwd(), testname+'.cache')
     if expiration(cache):
-        print "Used Cached results for %s seconds"%(expiration(cache))
+        print("Used Cached results for %s seconds"%(expiration(cache)))
         return True
     else:
         return False
