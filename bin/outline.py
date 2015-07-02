@@ -144,6 +144,13 @@ def save_outline(directory, topic, headings):
         f.write(outline+'\n')
 
 
+def filter_trailing_spaces(path):
+    text = [x.rstrip() for x in open(path).read().split('\n')]
+    f = open(path,'w')
+    f.write('\n'.join(text))
+    f.close()
+
+
 def outline_diff(files):
     '''Show the differences between the written outline and book chapters'''
     update_outline_files()
@@ -154,6 +161,8 @@ def outline_diff(files):
         print (open(join(environ['book'],'outline',topic+'.diff')).read())
     else:
         for topic in book_read_index('Chapters'):
+            print ('path:'+join(environ['book'],'outline',topic+'.outline'))
+            filter_trailing_spaces(join(environ['book'],'outline',topic+'.outline'))
             cmd = 'diff -B $book/outline/%s.outline $book/content/%s.outline' + \
                   ' > $book/outline/%s.diff'
             system(cmd % (topic,topic,topic))
