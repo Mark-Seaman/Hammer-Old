@@ -64,7 +64,7 @@ def book_headlines():
     for i in book_read_index('Chapters'):
         path = join(environ['book'],'chapters',i+'.md')
         headline = open(path).read().split('\n')[0]
-        print(i+': '+ headline)
+        print('%-15s ' % i + headline)
 
 
 def book_index():
