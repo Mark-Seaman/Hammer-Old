@@ -48,18 +48,24 @@ def book_dired():
     system('em $book')
 
 
-def book_read_index(name):
-    '''Read an index from the book directory'''
-    topics = open(join(environ['book'], name+'.index')).read()
-    topics = [t for t in topics.split('\n') if t]
-    return topics
+def book_edit(argv):
+    '''Edit the book content'''
+    if len(argv)>2 and argv[2]=='index':
+        yml = join(environ['book'],'../mkdocs.yml')
+        system('book index > '+yml)
+        system('e '+yml)
+    elif len(argv)>2:
+        system('e '+join(environ['book'],argv[2]))
+    else:
+        system('e '+environ['book'])
 
 
 def book_headlines():
     for i in book_read_index('Chapters'):
         path = join(environ['book'],'chapters',i+'.md')
         headline = open(path).read().split('\n')[0]
-        print('Headline: '+ headline)
+        print(i+': '+ headline)
+
 
 def book_index():
     def print_index_entry(category, path, title):
@@ -72,18 +78,6 @@ def book_index():
         print_index_entry('outline', i, 'Outline '+i)   
     for i in book_read_index('Chapters'):
         print_index_entry('chapters', i, i) 
-
-
-def book_edit(argv):
-    '''Edit the book content'''
-    if len(argv)>2 and argv[2]=='index':
-        yml = join(environ['book'],'../mkdocs.yml')
-        system('book index > '+yml)
-        system('e '+yml)
-    elif len(argv)>2:
-        system('e '+join(environ['book'],argv[2]))
-    else:
-        system('e '+environ['book'])
 
 
 def book_help():
@@ -169,6 +163,13 @@ def book_read():
     book_pdf()
     system('pdf $book/Book.pdf')
     system('pdf $book/Extra.pdf')
+
+
+def book_read_index(name):
+    '''Read an index from the book directory'''
+    topics = open(join(environ['book'], name+'.index')).read()
+    topics = [t for t in topics.split('\n') if t]
+    return topics
 
 
 def book_show():
