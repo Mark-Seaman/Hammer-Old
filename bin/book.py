@@ -55,6 +55,12 @@ def book_read_index(name):
     return topics
 
 
+def book_headlines():
+    for i in book_read_index('Chapters'):
+        path = join(environ['book'],'chapters',i+'.md')
+        headline = open(path).read().split('\n')[0]
+        print('Headline: '+ headline)
+
 def book_index():
     def print_index_entry(category, path, title):
         print('- [%s.md, "%s", "%s"]' % (category+'/'+path, category, title))
@@ -226,6 +232,9 @@ def book_command(argv):
 
         elif argv[1]=='index':
             book_index()
+
+        elif argv[1]=='headlines':
+            book_headlines()
 
         elif argv[1]=='list':
             print(book_list())

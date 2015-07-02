@@ -22,8 +22,10 @@ def assemble_files(input_path,output_path):
     '''Create an agregate file by concatenating other files'''
     with open(output_path,'w') as f:
         for topic in book_read_index('Chapters'):
-            text = heading_string(topic) + open(input_path % topic).read()
-            f.write(text+'\n')
+            text = open(input_path % topic).read()
+            if text:
+                text = heading_string(topic) + text
+                f.write(text+'\n')
 
 
 def join_files(path1,path2):

@@ -14,28 +14,25 @@ from tst import run_diff_checks, shell, lines, limit_lines
 
 
 def book_build_test():
-    '''Test the assembly of a book from its parts'''
     return shell('book build')
 
 
 def book_status_test():
-    '''Make sure there are no uncommitted changes pending'''
     return shell('book status')
 
 
 def book_help_test():
-    '''Show help for book script'''
     return shell('book help')
+
+def book_headlines_test():
+    return shell('book headlines')
 
 
 def book_list_test():
-    '''List all of the existing documents '''
-    #return limit_lines('book list', 4, 8)
     return shell('book list')
 
 
 def book_words_test():
-    '''Test the number of words in the book'''
     return shell('book words')
     
 
@@ -49,6 +46,7 @@ def book_checker():
     my_tests = {
         'book-status': book_status_test,
         'book-build': book_build_test,
+        'book-headlines': book_headlines_test,
         'book-help': book_help_test,
         'book-list': book_list_test,
         'book-text': book_text,
