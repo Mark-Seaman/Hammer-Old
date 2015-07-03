@@ -56,7 +56,8 @@ def system_show_test():
 
 
 def system_shell_test():
-    print('Test directory: ' + environ['pt'])
+    dir = [ 'Test directory: ' + environ['pt'] ]
+    return '\n'.join (dir + glob(join(environ['pt'], '*.tst')))
 
 
 def system_checker():
