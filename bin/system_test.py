@@ -8,6 +8,7 @@ Run all of the tests for the 'system' objects.  Output the test results.
 
 from os import listdir, environ, system
 from os.path import join
+from glob import glob
 
 from tst import run_diff_checks, shell, lines, limit_lines
 
