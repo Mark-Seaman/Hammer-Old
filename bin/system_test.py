@@ -55,6 +55,10 @@ def system_show_test():
     return shell('system show project-env')
 
 
+def system_shell_test():
+    print('Test directory: ' + environ['pt'])
+
+
 def system_checker():
     my_tests = {
         #'nose': nose_test_execution,
@@ -65,6 +69,7 @@ def system_checker():
         'system-list': system_list_test,
         'system-delete': system_delete_test,
         'system-show': system_show_test,
+        'system-shell': system_shell_test,
     }
     run_diff_checks('system', my_tests)
 
