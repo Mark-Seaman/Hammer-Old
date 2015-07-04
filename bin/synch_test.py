@@ -21,13 +21,13 @@ def synch_bin_test():
 
 
 def synch_copy_test():
-    x = limit_lines('synch copy test test-xxx')
+    x = limit_lines('synch copy test test-xxx',130,300)
     clean_up()
     return x
 
 
 def synch_preview_test():
-	return limit_lines('synch preview test test-xxx',130, 140)
+	return limit_lines('synch preview test test-xxx',130, 300)
 
 
 def synch_mirror_test():
@@ -38,7 +38,7 @@ def synch_mirror_test():
 
 
 def synch_sync_test():
-    x = limit_lines('synch sync test test-xxx', 120, 150)
+    x = limit_lines('synch sync test test-xxx', 120, 300)
     clean_up()
     return x
 
