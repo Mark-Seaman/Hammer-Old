@@ -128,7 +128,7 @@ def book_outline(topic):
 def book_pdf():
     '''Build the PDF file from the Book markdown file. '''
     system('''
-        rm *.pdf
+        rm ../*.pdf
         pandoc Book.md    -o ../Book.pdf    2> /dev/null
         ls -s ../Book.pdf
         echo Read file with:
@@ -146,13 +146,6 @@ def book_project():
             text = open(path).read()    
             output_file.write(text+'\n\n---\n\n\\newpage\n\n')
     print(results)
-
-
-def book_push():
-    '''Push the book to the dropbox for distribution'''
-    system('''
-        cp Book.pdf $HOME/Documents/Dropbox/Leverage/Book.pdf
-        ''')
 
 
 def book_read():
@@ -238,9 +231,6 @@ def book_command(argv):
 
         elif len(argv)>2 and argv[1]=='outline':
             book_outline(argv[2])
-
-        elif argv[1]=='push':
-            book_push()
 
         elif argv[1]=='read':
             book_read()
