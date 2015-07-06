@@ -129,13 +129,11 @@ def book_pdf():
     '''Build the PDF file from the Book markdown file. '''
     system('''
         rm *.pdf
-        pandoc Book.md    -o Book.pdf    2> /dev/null
-        pandoc Extra.md    -o Extra.pdf    2> /dev/null
-        ls -s Book.pdf
+        pandoc Book.md    -o ../Book.pdf    2> /dev/null
+        ls -s ../Book.pdf
         echo Read file with:
-        echo '     pdf $book/Book.pdf'
-        echo '     pdf $book/Extra.pdf'
-        ''')
+        echo '     pdf $book/../Book.pdf'
+         ''')
 
 def book_project():
     '''Create the chapter content markdown'''
@@ -153,16 +151,14 @@ def book_project():
 def book_push():
     '''Push the book to the dropbox for distribution'''
     system('''
-        cp Book.pdf $HOME/Documents/Dropbox/Shrinking_World/Book
-        cp content/Outline.outline $HOME/Documents/Dropbox/Shrinking_World/Book/Outline.txt
+        cp Book.pdf $HOME/Documents/Dropbox/Leverage/Book.pdf
         ''')
 
 
 def book_read():
     '''Read the PDF for the book'''
     book_pdf()
-    system('pdf $book/Book.pdf')
-    system('pdf $book/Extra.pdf')
+    system('pdf $book/../Book.pdf')
 
 
 def book_read_index(name):
