@@ -103,11 +103,11 @@ def extract_headings(text):
 def outline_edit(chapter=None):
     update_outline_files()
     if chapter:
-        system('e '+join(environ['book'],'content','%s.outline' % chapter[0]))
         system('e '+join(environ['book'],'outline','%s.outline' % chapter[0]))
+        system('e '+join(environ['book'],'content','%s.outline' % chapter[0]))
     else:
-        system('e '+join(environ['book'],'content','Content-3.outline'))
         system('e '+join(environ['book'],'outline','Outline.outline'))
+        system('e '+join(environ['book'],'content','Content-3.outline'))
  
 
 def outline_show(chapter=None):
