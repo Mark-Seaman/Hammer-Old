@@ -1,36 +1,21 @@
 Hammer Project - To Do List
 ============================
 
-Project Structure
-* debug on Mac & Linux
-* create pycharm project
+Microprojects for hammer
+
+* run all scripts on Mac & Linux
+* isolate core scripts and other scripts
+* create pycharm project file
 * initial components - doc, script, app, test
 * continuous integration
-* automatic version control
-
-Doc
-* build doc,  doc.py,  doc_test.py
-* build todo, todo.py, todo_test.py
-* mkdocs
-* create PDF
-* create HTML
-* doc outline
-
-Script
-* build cmd, cmd.py, cmd_test.py
-* build vc, vc.py, vc_test.py
-* docopt - command arg parsing
-
-Test
+* host mkdocs web site on $sws
 * tox to test on Py27, Py34
 * page testing
-* diff testing
+* chaching of test results
 * automatic deployment
 * coverage
-
-App
 * add Redis Lite to project
 * web service interface
 * angular js front-end
 * views created from models
-* build app, app.py, app_test.py
+* build app structure
