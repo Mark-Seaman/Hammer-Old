@@ -103,8 +103,8 @@ def code_list(files=None):
 		files = ['bin']
 	for d in files:
 		chdir(environ['p'])
-		files = [f for f in glob(d+'/*') if not isdir(f)]
-		files = [f for f in files if not f.endswith('.pyc')]
+		files = [f for f in glob(d+'/*.py') if not isdir(f)]
+		files = [f for f in files if not f.endswith('_test.py')]
 		if files:
 			results.append('\n'.join(files))
 	return '\n'.join(results)
