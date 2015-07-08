@@ -248,7 +248,10 @@ def execute_tst_command(argv):
     if len(argv)==2:
         t = argv[1]
 
-        if 'status'==t:
+        if 'accept'==t:
+            approve_all_answers()
+
+        elif 'status'==t:
             show_status()
         
         elif 'results'==t:
@@ -274,10 +277,7 @@ def execute_tst_command(argv):
         cmd = argv[1]
         t = argv[2]
 
-        if 'accept'==cmd:
-            approve_all_answers()
-
-        elif 'add'==cmd:
+        if 'add'==cmd:
             tst_add(t)
 
         elif 'edit'==cmd:
