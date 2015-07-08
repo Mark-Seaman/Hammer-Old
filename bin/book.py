@@ -28,10 +28,12 @@ def book_commit(argv):
     '''Form the shell script for the commit command. '''
     comment = book_commit_comment(argv)
     command = '''echo Commit all changes from the book project
+        git stash save &&
         git add -A . &&
         git commit -m"%s" &&
         git pull &&
-        git push
+        git push &&
+        git stash apply
     ''' % comment
     system(command)
 
