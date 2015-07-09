@@ -9,7 +9,7 @@ from synch_test import synch_checker
 def synch_bin():
 	'''Copy the commands to the bin directory'''
 	print('synch to the home bin directory')
-	synch_copy([ 'synch','bin', environ['pb'],environ['b'] ])
+	synch_sync([ 'synch','bin', environ['pb'],environ['b'] ])
 
 
 def synch_copy(argv):
