@@ -9,7 +9,9 @@ from synch_test import synch_checker
 def synch_bin():
 	'''Copy the commands to the bin directory'''
 	print('synch to the home bin directory')
-	synch_sync([ 'synch','bin', environ['pb'],environ['b'] ])
+	project_bin = join(environ['HOME'],'Projects/Hammer/bin')
+	home_bin = environ['b']
+	synch_sync([ 'synch','bin', project_bin, home_bin])
 
 
 def synch_copy(argv):
