@@ -1,6 +1,0 @@
-#!/bin/bash
-# Run the control panel for setting up AWS
-
-# MS1959am
-w https://console.aws.amazon.com/console/home?region=us-west-2#
-

@@ -1,6 +1,0 @@
-#!/bin/bash
-# Edit Window
-echo Edit Window
-
-cat >> /tmp/ewin$$
-e /tmp/ewin$$

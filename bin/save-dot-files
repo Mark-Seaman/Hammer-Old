@@ -1,9 +1,0 @@
-#!/bin/bash
-# Save all of the home config files
-echo Save all of the home config files
-
-d=/home/seaman/bin/config/dot-files/`hostname`
-mkdir -p /home/seaman/bin/config/dot-files $d
-
-cd
-cp -r /home/seaman/.[a-z]* $d

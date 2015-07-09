@@ -1,9 +1,0 @@
-#!/bin/bash
-# Run the default web browser
-echo Run the default web browser
-
-[ `hostname` == 'seaman-hammer' ] &&
-rbg google-chrome $* &&
-exit 0
-
-open -a "Google Chrome" $*

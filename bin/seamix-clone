@@ -1,8 +1,0 @@
-#!/bin/bash
-# Create a clone
-
-ip=$1
-echo "Create a clone on $ip"
-
-# Clone the Documents
-rsync -auv --delete Documents $ip:.

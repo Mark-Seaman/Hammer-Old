@@ -1,7 +1,0 @@
-#!/bin/bash
-# List files about prayer
-
-cd $br
-grep -sli pray `src-brain`
-
-

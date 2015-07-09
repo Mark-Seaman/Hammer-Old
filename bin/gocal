@@ -1,5 +1,0 @@
-#!/bin/bash
-# Google Calendar
-
-wf https://www.google.com/calendar/render?pli=1
-

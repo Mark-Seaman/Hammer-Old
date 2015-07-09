@@ -1,5 +1,0 @@
-if [ "$1" == "" ] ; then
-    rbg firefox ~/Books/Bible/index.html
-else
-    rbg firefox ~/Books/Bible/$1.html
-fi

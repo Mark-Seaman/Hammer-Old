@@ -1,5 +1,0 @@
-#!/bin/bash
-# Run Tomboy notes
-echo Run Tomboy notes
-
-rbg tomboy

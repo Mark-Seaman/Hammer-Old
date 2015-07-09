@@ -1,7 +1,0 @@
-#!/bin/bash
-# List music tracks
-
-cd ~/FileShare/Music/Rock
-find "$1" -iname "*.mp3"
-
- 

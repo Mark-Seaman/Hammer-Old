@@ -1,8 +1,0 @@
-
-#!/bin/bash
-# Create a new archive
-
-cd ~/LiveSync/$1
-git init
-git add .
-git commit -m "Initial archive"

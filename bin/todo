@@ -1,7 +1,0 @@
-#!/bin/bash
-# Add a to do item
-
-f=$pd/ToDo
-
-echo "$*" >> $f
-e $f

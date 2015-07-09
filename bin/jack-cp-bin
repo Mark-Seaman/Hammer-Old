@@ -1,6 +1,0 @@
-#!/bin/bash
-# Copy files from the Jack hammer project
-echo Copy files from the Jack hammer project
-
-mkdir -p $p/bin
-cptree ~/Projects/jack-hammer/bin $p/bin   

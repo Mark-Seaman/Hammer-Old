@@ -1,6 +1,0 @@
-#!/bin/bash
-# Find all of the JPG images on this system
-
-find /home/seaman -path /home/seaman/wme/platform-git -prune -type f -iname '*.jpg' -print |
-grep -v '/home/seaman/wme/.*-git'|
-grep -v '/home/seaman/Pictures'

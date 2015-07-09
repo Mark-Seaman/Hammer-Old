@@ -1,5 +1,0 @@
-#!/bin/bash
-#  Login to a terminal on the remote book site
-echo  Login to a terminal on the remote book site
-
-t root@mybook.tklapp.com

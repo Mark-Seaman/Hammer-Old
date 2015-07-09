@@ -1,5 +1,0 @@
-#!/bin/bash
-# Git add
-
-git add -A $*
-

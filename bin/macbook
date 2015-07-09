@@ -1,5 +1,0 @@
-#!/bin/bash
-# Get a console window and login to the macbook
-
-ssh $macbook
-

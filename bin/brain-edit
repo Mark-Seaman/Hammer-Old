@@ -1,4 +1,0 @@
-#!/bin/bash
-# Edit brains topics (alias bh)
-cd $br
-e $* > /dev/null

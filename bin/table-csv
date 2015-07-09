@@ -1,5 +1,0 @@
-#!/bin/bash
-# Convert a table of text to csv
-echo Convert a table of text to csv
-
-sed 's/   */,/g' $1

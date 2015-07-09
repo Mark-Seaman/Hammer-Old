@@ -1,5 +1,0 @@
-#!/bin/bash
-# Use curl to get a json doc
-
-curl -i $1
-

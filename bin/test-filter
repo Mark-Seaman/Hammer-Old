@@ -1,4 +1,0 @@
-#!/bin/bash
-# Filter the results
-
-sed 's/[0-9][0-9]\.[0-9][0-9][0-9]s/xx.xxxs/'

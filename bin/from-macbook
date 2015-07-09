@@ -1,6 +1,0 @@
-#!/bin/bash
-# Copy a file from the mac book
-
-echo scp $macbook:~/$1 ~/$1
-scp $macbook:~/$1 ~/$1
-

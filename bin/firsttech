@@ -1,5 +1,0 @@
-#!/bin/bash
-# Log in to first tech
-echo Log in to first tech
-
-web http://firsttechfed.com

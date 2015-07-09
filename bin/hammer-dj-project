@@ -1,8 +1,0 @@
-#!/bin/bash
-# Start working on the project
-
-export p=~/Projects/hammer/django-hammer/
-
-figlet 'HAMMER - Django style'
-
-cd $p

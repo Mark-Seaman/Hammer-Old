@@ -1,6 +1,0 @@
-#!/bin/bash
-# Pick master during a merge
-echo Pick master during a merge on file $1
-
-git checkout -f master $1
-

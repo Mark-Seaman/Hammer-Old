@@ -1,8 +1,0 @@
-#!/bin/bash
-
-if [ $# -ne 2 ] ; then echo "usage: merge from-dir to-dir"; exit 1; fi
-if [ ! -d "$1" ] ; then echo "no directory, $1"; exit 1; fi
-if [ ! -d "$2" ] ; then mkdir -p "$2"; fi
-
-cptree "$1" "$2" && \
-rm -rf "$1"

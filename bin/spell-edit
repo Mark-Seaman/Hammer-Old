@@ -1,5 +1,0 @@
-#!/bin/bash
-# Edit the file with the specific typo 
-
-e `grep -l $1 *`
-

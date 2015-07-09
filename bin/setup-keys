@@ -1,8 +1,0 @@
-#!/bin/bash
-# Configure the ssh keys for this computer
-echo Configure the ssh keys for this computer
-
-cptree  ~/bin/dot-ssh ~/.ssh
-chmod 700 .ssh
-chmod 600 .ssh/*
-ssh $chute

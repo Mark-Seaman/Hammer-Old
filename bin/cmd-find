@@ -1,5 +1,0 @@
-#!/bin/bash
-# Find a command containing a string (cn)
-echo Find a command containing a string
-
-ls ~/bin/*$1*

@@ -1,9 +1,0 @@
-#!/bin/bash
-# Put the docs on the file server
-
-echo "Put docs"
-prune-docs
-echo 'prune-docs' | ssh $z 2>&1 |grep -v 'Pseudo'
-
-rsync -au --exclude .git /home/seaman/Documents/ $z:/home/seaman/Documents
-

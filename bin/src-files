@@ -1,5 +1,0 @@
-#!/bin/bash
-# Find text in the requested src files
-
-grep -sl $1 `src-$2`
-

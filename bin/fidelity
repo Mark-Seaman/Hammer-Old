@@ -1,5 +1,0 @@
-#!/bin/bash
-# Browse to fidelity website
-
-web https://oltx.fidelity.com/ftgw/fbc/oftop/portfolio#summary
-

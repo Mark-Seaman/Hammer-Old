@@ -1,5 +1,0 @@
-#!/bin/bash
-# Setup notes for creating a new system
-echo Setup notes for creating a new system
-
-brain-edit 'SetupChute'

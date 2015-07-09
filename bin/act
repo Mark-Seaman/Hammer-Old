@@ -1,5 +1,0 @@
-#!/bin/bash
-# Select an activity to do next
-
-suggest|shuf -n 3
-

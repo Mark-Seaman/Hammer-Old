@@ -1,7 +1,0 @@
-#!/bin/bash
-# Select a prayer prompting
-
-echo 'Focus for prayer:'
-echo -n "Pray for "
-cat  $br/PrayerPrompting | random
-

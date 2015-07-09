@@ -1,5 +1,0 @@
-#!/bin/bash
-# Edit the patterns
-echo Edit the patterns
-
-e $y/Patterns

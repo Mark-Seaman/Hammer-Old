@@ -1,5 +1,0 @@
-#!/bin/bash
-# Edit watermill notes
-
-e $plan/Watermill/Index
-

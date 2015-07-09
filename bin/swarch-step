@@ -1,7 +1,0 @@
-#!/bin/bash
-# Go to a known state
-echo Go to a known state
-
-cd ~/Archive/swarch &&
-git checkout $1     &&
-rsync -auv --exclude .git ./ ~/swarch

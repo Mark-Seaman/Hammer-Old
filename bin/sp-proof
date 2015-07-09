@@ -1,6 +1,0 @@
-#!/bin/bash
-# Proofread request
-echo Proofread request
-
-f=/tmp/proof-read
-sp-send  "mark@seamanfamily.org" $1 "Spiritual Email: $2"

@@ -1,7 +1,0 @@
-#!/usr/bin/env python
-# Create a tabbed view of a user document
-
-from sys        import argv
-from util.tabs  import print_tab_doc
-
-print_tab_doc(argv[1])

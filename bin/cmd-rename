@@ -1,7 +1,0 @@
-#!/bin/bash
-# Rename command
-echo Rename a command "$1" to "$2"
-
-cd $b
-git mv "$1" "$2"
-replace "$1" "$2" -- *

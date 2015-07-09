@@ -1,4 +1,0 @@
-#!/bin/bash
-# Test the installation of LAMP
-
-rbg firefox http://localhost http://localhost/phpmyadmin 

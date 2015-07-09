@@ -1,1 +1,0 @@
-sudo mount -t cifs -o umask=755,uid=1000,gid=1000,username=Mark,password=sws959WI //192.168.1.104/Public /mnt/flashy

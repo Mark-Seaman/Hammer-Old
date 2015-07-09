@@ -1,4 +1,0 @@
-#!/bin/bash
-# Review the content
-echo Review the content
-brain-edit SeamansLog

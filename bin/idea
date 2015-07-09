@@ -1,4 +1,0 @@
-#!/bin/bash
-# Record an idea while it is fresh
-echo "$*" >> $br/Ideas
-cat  $br/Ideas

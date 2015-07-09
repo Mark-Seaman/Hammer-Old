@@ -1,6 +1,0 @@
-#!/usr/bin/env python
-# Reset the cache of test results
-print "Reset the cache of test results"
-
-from util.systest import reset_cache
-reset_cache()

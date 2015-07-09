@@ -1,8 +1,0 @@
-#!/usr/bin/python
-# Show the expenses for this year
-
-from sys import argv
-from util.expenses_2012 import create_expense_listing
-
-# Create the report
-create_expense_listing(argv[1], argv[1]+'.csv')

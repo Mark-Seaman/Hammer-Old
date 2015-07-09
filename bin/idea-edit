@@ -1,5 +1,0 @@
-#!/bin/bash
-# Edit the list of ideas
-echo Edit the list of ideas
-
-brain-edit Ideas

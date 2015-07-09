@@ -1,8 +1,0 @@
-# get current list of installed packages
-sudo dpkg --get-selections > ~/Documents/logs/package.selections
-
-# restore with: 
-# cd ~/Documents/logs
-# sudo dpkg --set-selections < package.selections && \
-# apt-get dselect-upgrade
-

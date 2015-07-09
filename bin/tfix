@@ -1,6 +1,0 @@
-#!/bin/bash
-# Push all changes after fixing tests
-
-commit "Issue #100: Fix tests"
-
-tst

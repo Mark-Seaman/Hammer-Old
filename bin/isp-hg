@@ -1,5 +1,0 @@
-#!/bin/bash
-# Go to the Web Faction Setup view
-echo  Go to the Web Faction Setup view
-
-w http://shrinking-world.net/cpanel http://shrinking-world.net/whm

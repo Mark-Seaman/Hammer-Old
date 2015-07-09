@@ -1,6 +1,0 @@
-#!/bin/bash
-# Copy a directory from the mac-mini computer
-
-rsync -auv $macbook:$1/ $1
-
-

@@ -1,5 +1,0 @@
-#!/bin/bash
-# Select a prayer practice
-
-echo "Try this..."
-brain-edit `brain-tag Prayer|random`

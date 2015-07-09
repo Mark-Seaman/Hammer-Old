@@ -1,7 +1,0 @@
-#!/bin/bash
-# Move a topic in the brain
-echo Move $1 topic to $2
-cd $br
-git mv $1 $2
-replace $1 $2 -- $br/*
-

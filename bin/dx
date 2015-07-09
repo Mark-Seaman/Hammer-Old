@@ -1,5 +1,0 @@
-#!/bin/bash
-# Diff this command to ~/bin
-echo Diff this command to ~/bin
-
-diff $1 ~/bin/$1

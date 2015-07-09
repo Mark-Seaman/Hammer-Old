@@ -1,3 +1,0 @@
-echo "ssh root@$millip" > /tmp/target
-chmod 700 /tmp/target
-gnome-terminal --window-with-profile=Target --geometry=90x50

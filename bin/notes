@@ -1,7 +1,0 @@
-#!/bin/bash
-# View notes on App Thumper
-echo View notes on App Thumper
-
-. ~/Projects/thumper/bin/project
-#git pull
-run

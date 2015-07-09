@@ -1,5 +1,0 @@
-#!/bin/bash
-# Find all the topics for a tag
-grep 'See also' ~/Documents/Brain/* |
-grep $* |
-sed 's/:.*$//' | sed 's/.*\///' 

@@ -1,7 +1,0 @@
-#!/bin/bash
-# Get the commands from the file server
-
-echo "Get bin"
-rsync -au --exclude .git $z:/home/seaman/bin/ /home/seaman/bin
-prune-bin
-echo 'prune-bin' | ssh $z 2>&1 |grep -v 'Pseudo'

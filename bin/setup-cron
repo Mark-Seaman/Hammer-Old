@@ -1,9 +1,0 @@
-#!/bin/bash
-# Setup the crontab with tasks for Support Center
-
-cat <<EOF | crontab
-0  *  *  * * ~/bin/hourly
-30 6  *  * * ~/bin/daily
-20 7  *  * 1 ~/bin/weekly
-10 10 1  * * ~/bin/monthly
-EOF

@@ -1,6 +1,0 @@
-#!/bin/bash
-# Execute a dropbox script command
-
-python $p/bin/dropbox.py $*
-
-	

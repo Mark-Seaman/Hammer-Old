@@ -1,7 +1,0 @@
-#!/bin/bash
-# Display the iPython notebooks (run the notebook server)
-
-cd ~/Projects/pycon &&
-. env/bin/activate  && 
-ps-terminate notebook
-ipython notebook --pylab inline

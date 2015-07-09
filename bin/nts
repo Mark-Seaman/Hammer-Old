@@ -1,5 +1,0 @@
-#!/bin/bash
-# Note to self: Send email in two hours
-echo Note to self: Send email in two hours
-
-echo tellme "$*" | at -v "NOW + 1 HOUR" 

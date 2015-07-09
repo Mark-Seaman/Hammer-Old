@@ -65,6 +65,7 @@ def server_help():
 
 def server_host():
 	'''Run hostname command on the server'''
+	print("server host: ",)
 	server_do(' hostname')
 
 

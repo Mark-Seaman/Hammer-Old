@@ -1,4 +1,0 @@
-#!/bin/bash
-# List the process ID for a script
-
-echo `ps -ef|grep $1|egrep -v grep\|pid |awk '{print \$2;}'`

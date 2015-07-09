@@ -1,5 +1,0 @@
-#!/bin/bash
-# Pull a file from Jack Hammer
-echo Pull a file from Jack Hammer
-
-cp ~/Projects/jack-hammer/$1 $p/$1

@@ -1,7 +1,0 @@
-grep -r href .          |
-grep '\.html'           | 
-sed 's/\:.*href\=/:/'   | 
-sed 's/>.*$//'          | 
-sed 's/^\(.*\):\(.*\)$/\2\t\1/' |
-expand -50              |
-sort

@@ -1,7 +1,0 @@
-#!/bin/bash
-# Search for music with name that matches
-
-find ~/Music | grep $1
-
-find ~/FileShare/Music | grep $1
-

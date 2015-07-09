@@ -1,5 +1,0 @@
-#!/bin/bash
-# Visit the Seamans Log online
-echo Visit the Seamans Log online
-
-w seamanslog.com

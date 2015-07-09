@@ -1,5 +1,0 @@
-#!/bin/bash
-# Record a completed action
-echo Record a completed action
-
-echo "`date`: $*" >> /home/seaman/Projects/thumper/doc/seaman/planner/Work/Done

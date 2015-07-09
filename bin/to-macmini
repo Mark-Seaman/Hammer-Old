@@ -1,6 +1,0 @@
-#!/bin/bash
-# Copy a file to the mac mini
-
-echo  scp ~/$1 $macmini:~/$1
-scp ~/$1 $macmini:~/$1
-

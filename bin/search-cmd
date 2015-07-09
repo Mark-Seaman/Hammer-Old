@@ -1,5 +1,0 @@
-#!/bin/bash
-# Search for text within commands
-echo Search for text within commands
-cd $b
-grep -s "$*" *

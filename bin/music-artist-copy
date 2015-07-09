@@ -1,6 +1,0 @@
-#!/bin/bash
-# Copy this artist to Music directory
-echo Copy artist "$1"
-
-mkdir -p  ~/Music/Artist/
-rsync -auv ~/FileShare/Music/Rock/\"$1\"/ ~/Music/Artist

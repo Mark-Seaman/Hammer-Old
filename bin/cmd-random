@@ -1,4 +1,0 @@
-#!/bin/bash
-# Edit a random command
-
-e `ls $b/*|random`

@@ -1,5 +1,0 @@
-#!/bin/bash
-# Edit using Note Thumper
-echo Edit using Note Thumper
-
-e ~/Projects/thumper/doc/seaman/notes   

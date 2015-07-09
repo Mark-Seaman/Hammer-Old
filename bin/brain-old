@@ -1,3 +1,0 @@
-#!/bin/bash
-# List the oldest brain topics
-ls -lt $br | tail -30

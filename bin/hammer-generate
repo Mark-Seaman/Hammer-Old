@@ -1,9 +1,0 @@
-#!/bin/bash
-# page generator for HTML
-
-generator=$1
-doc=$2
-
-echo "page generator for $generator"
-enumerate-tests $doc
-

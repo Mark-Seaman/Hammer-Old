@@ -1,5 +1,0 @@
-#!/bin/bash
-# Get a videon from chute
-
-scp Archive/AngularJS/vids/Video\ 4.mp4 $ultra:Desktop
-

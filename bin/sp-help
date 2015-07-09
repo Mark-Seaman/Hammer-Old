@@ -1,4 +1,0 @@
-#!/bin/bash
-# List commands for Spiritual Log
-echo List commands for Spiritual Log
-cmd-help sp-

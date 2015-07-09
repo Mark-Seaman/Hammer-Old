@@ -1,8 +1,0 @@
-#!/usr/bin/env python
-# Rename files to remove spaces
-
-from os import rename
-from util.files import list_files
-
-for f in list_files('.'):
-    rename(f,f.replace(' ','_'))

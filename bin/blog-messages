@@ -1,5 +1,0 @@
-#!/bin/bash
-# Count the messages sent
-echo Count the messages sent
-
-wc -l $cs/SeamansLogHistory $cs/SpiritualLogHistory

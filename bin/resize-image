@@ -1,4 +1,0 @@
-#!/bin/bash
-# Resize a image file
-echo Resize image $1 to $2 with $3 pixels
-convert -resize $3 $1 $2

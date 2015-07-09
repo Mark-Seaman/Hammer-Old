@@ -1,6 +1,0 @@
-#!/bin/bash
-# Edit the spiritual growth docs
-
-e $mybook/SpiritualGrowth
-
-

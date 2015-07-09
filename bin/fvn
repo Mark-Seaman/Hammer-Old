@@ -1,8 +1,0 @@
-#!/bin/bash
-# 
-echo 
-for f in `ls`
-do
-    cat $f | perl -pi -e 's/(.*vend.*\=).*/\1 0/' > x
-    mv x $f
-done

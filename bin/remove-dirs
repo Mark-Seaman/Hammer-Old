@@ -1,4 +1,0 @@
-#!/bin/bash
-# Remove all of the directories that are found in this tree.
-echo "Removing directories named $1"
-find . -name $1 -type d -print0|xargs -0 /bin/rm -rf

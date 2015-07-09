@@ -1,4 +1,0 @@
-#!/bin/bash
-# Show the remote pages for SeamansLog
-
-wf seamanslog.com/$1

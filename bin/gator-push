@@ -1,5 +1,0 @@
-#!/bin/bash
-# Push a file to host gator server
-
-scp -P 2222 $1 seaman@shrinking-world.com:$2
-

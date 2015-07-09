@@ -1,6 +1,0 @@
-#!/bin/bash
-# List the files in Documents-2014
-
-du -s ~/Documents-2014
-du -s ~/Documents-2014/*|sort -nr
-

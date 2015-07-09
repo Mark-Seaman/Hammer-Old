@@ -1,3 +1,0 @@
-#!/bin/bash
-# Tell me something at a specific time
-echo tellme "$*" | at -v "$1" 

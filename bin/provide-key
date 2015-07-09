@@ -1,6 +1,0 @@
-#!/bin/bash
-# Send an ssh key to the requested computer
-echo Send an ssh key to the requested computer
-
-ssh-copy-id -i ~/.ssh/id_dsa.pub "$1"
-

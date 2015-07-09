@@ -1,8 +1,0 @@
-#!/bin/bash
-# Clear the system vars
-
-f=$pd/vars-data
-
-rm -f $f    
-touch $f
-

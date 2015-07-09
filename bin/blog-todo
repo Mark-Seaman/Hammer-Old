@@ -1,4 +1,0 @@
-#!/bin/bash
-# Edit the todo list for writing projects
-brain-edit WritingTasks
-

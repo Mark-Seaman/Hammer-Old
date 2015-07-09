@@ -1,4 +1,0 @@
-#!/bin/bash
-# Make a file executable
-chmod +x $*
-

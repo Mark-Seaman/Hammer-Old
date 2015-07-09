@@ -1,5 +1,0 @@
-#!/bin/bash
-# Edit the git config
-
-e $p/.git/config
-

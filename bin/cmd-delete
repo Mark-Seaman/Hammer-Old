@@ -1,4 +1,0 @@
-#!/bin/bash
-# Rename command
-echo Delete a command "$1" to "$2"
-git rm "$b/$1"

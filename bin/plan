@@ -1,5 +1,0 @@
-#!/bin/bash
-# Show the local version of my plan
-cd ~/Documents/MyBook/seaman/MyPlan
-e Index
-

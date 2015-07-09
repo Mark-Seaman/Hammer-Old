@@ -1,7 +1,0 @@
-#!/bin/bash
-# Select a page for posting on G+
-echo Select a page for posting on G+
-
-f=`work-flow -v publish | grep $1 | shuf -n1 | sed 's/,.*//'`
-f=`mb-domain $f`
-w $f

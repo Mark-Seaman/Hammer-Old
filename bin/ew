@@ -1,5 +1,0 @@
-#!/bin/bash
-# Edit command found by which
-echo Edit command found by which
-
-e `which $1`

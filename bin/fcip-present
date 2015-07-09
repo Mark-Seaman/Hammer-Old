@@ -1,8 +1,0 @@
-#!/bin/bash
-# View the presentation
-
-f=web-dev
-slide-build $f
-
-nohup firefox ~/Documents/Slides/$f/$f-timed.html  1> /dev/null 2>&1 &
-

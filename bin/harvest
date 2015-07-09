@@ -1,5 +1,0 @@
-#!/bin/bash
-# Harvest from my business
-
-web http://shrinkingworld.harvestapp.com
-

@@ -1,4 +1,0 @@
-#!/bin/bash
-# List the music artists
-echo ls $l/Music/Rock/|ssh $z
-

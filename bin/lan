@@ -1,6 +1,0 @@
-#!/bin/bash
-# Execute a lan script command
-
-python $p/bin/lan.py $*
-
-	

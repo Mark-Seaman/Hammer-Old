@@ -1,9 +1,0 @@
-#!/bin/bash
-# Find the unique directories that are in the current directory tree
-
-find -type f -exec basename '{}' \; | \
-sort | \
-uniq --count | \
-sort -nr | \
-tee ~/Documents/logs/uniq-`basename $PWD`.log
-

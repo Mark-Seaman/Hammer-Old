@@ -1,6 +1,0 @@
-#!/bin/bash
-# View the presentation
-
-slide-build web-dev
-slide-view  web-dev
-

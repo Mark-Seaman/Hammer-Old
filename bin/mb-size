@@ -1,9 +1,0 @@
-#!/bin/bash
-# List size of all books
-mb-books | while read b 
-do 
-    words=`cat $y/$b/* 2> /dev/null|wc -w` 
-    (( pages=words/250 ))
-    echo "$b	 $words words	$pages pages"|expand -20
-done
-

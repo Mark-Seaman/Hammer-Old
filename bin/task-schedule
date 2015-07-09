@@ -1,8 +1,0 @@
-#!/bin/bash
-# Set a burst timer series
-echo 'Set a timer series for 16 burst cycles (over 8 hours)'
-
-echo 'task-burst-timer'   | at -v '8:00'
-echo 'task-burst-timer'   | at -v '10:00'
-echo 'task-burst-timer'   | at -v '13:00'
-echo 'task-burst-timer'   | at -v '15:00'

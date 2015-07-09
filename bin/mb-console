@@ -1,5 +1,0 @@
-#!/bin/bash
-# Create a console on the web faction site
-echo Create a console on the web faction site
-
-ssh $ms

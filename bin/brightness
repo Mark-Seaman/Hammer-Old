@@ -1,8 +1,0 @@
-#!/bin/bash
-# Set the brightness
-
-x=$1
-[[ "$1" == "" ]] && x=5
-
-echo Set the brightness to $x
-sudo su -c "echo $x > /sys/class/backlight/acpi_video0/brightness"

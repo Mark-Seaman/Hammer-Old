@@ -1,5 +1,0 @@
-#!/bin/bash
-# Get the accounting data
-echo Get the accounting data >> ~/acct-data
-date >> ~/acct-data
-sc-milldo 3006 'milldata accounting' >> ~/acct-data

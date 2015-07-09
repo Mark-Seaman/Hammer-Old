@@ -1,4 +1,0 @@
-#!/bin/bash
-# Login to New Line music server
-echo Login to New Line music server
-ssh mark@24.9.33.57  #linetechnicalinnovations.com

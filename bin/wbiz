@@ -1,6 +1,0 @@
-#!/bin/bash
-# Show the local biz page
-echo Show the local biz page
-
-. ~/Projects/mybook/bin/project &&
-run BizPlan/Index   

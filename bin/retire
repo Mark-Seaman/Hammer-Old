@@ -1,4 +1,0 @@
-#!/bin/bash
-# Retire an unused command file
-cd $b
-git mv $1 retired

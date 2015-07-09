@@ -1,6 +1,0 @@
-#!/bin/bash
-# Execute a music script command
-
-python $p/bin/music.py $*
-
-	

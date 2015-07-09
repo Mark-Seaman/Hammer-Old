@@ -1,9 +1,0 @@
-#!/bin/bash
-# Move an article from the brain 
-echo Move an article from the brain 
-
-cd $br
-[[ -f $br/$1 ]] || ( echo "No file: $br/$1"; exit 1; )
-[[ -d $y/$2 ]]  || ( echo "No directory: $y/$1"; exit 1; ) 
-git mv  $br/$1 $y/$2/$1 &&
-ls -l $y/$2/*

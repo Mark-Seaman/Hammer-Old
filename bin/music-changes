@@ -1,9 +1,0 @@
-#!/bin/bash
-# List all music changes
-echo Music changes
-
-. /home/seaman/bin/bash-vars
-
-cd ~/FileShare/Music
-git status | mklog music-changes
-

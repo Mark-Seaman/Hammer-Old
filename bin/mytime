@@ -1,5 +1,0 @@
-#!/bin/bash
-# Open the invoices spreadsheet
-
-o "$HOME/Dropbox/Personal/2015/Time.xlsx"
-

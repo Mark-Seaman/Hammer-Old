@@ -1,5 +1,0 @@
-#!/bin/bash
-# Edit my plan
-echo Edit my plan
-
-e ~/Documents/Brain/AppThumper/planner

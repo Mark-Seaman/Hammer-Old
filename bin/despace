@@ -1,5 +1,0 @@
-perl -pi -e 's/ +/ /g' |
-perl -pi -e 's/^ *//' |
-perl -pi -e 's/ *([>\/])/\1/' |
-sed '/^ *$/d'
-

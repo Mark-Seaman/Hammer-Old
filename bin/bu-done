@@ -1,5 +1,0 @@
-#!/bin/bash
-# Edit the monthly objectives file
-echo Edit the monthly objectives file
-
-brain-edit 2013-04

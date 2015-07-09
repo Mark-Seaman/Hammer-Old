@@ -1,5 +1,0 @@
-#!/bin/bash
-# Run the kindle cloud reader
-echo Run the kindle cloud reader
-
-w https://read.amazon.com/

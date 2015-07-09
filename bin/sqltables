@@ -1,5 +1,0 @@
-#!/bin/bash
-# Show the SQL databases
-project=$1
-echo 'show tables;'| mysql seaman_$project -useaman_$project -p`cat $b/sqluser`
-

@@ -1,4 +1,0 @@
-#!/bin/bash
-# List the matching topics (alias bf)
-cd $br
-ls *$1*

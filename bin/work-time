@@ -1,5 +1,0 @@
-#!/bin/bash
-# Update work time record
-
-e $biz/History/2014-08-Time
-

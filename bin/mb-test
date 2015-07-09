@@ -1,7 +1,0 @@
-#!/bin/bash
-# Test all of the mybook code
-echo Test all of the mybook code
-
-test-all     $mb
-test-results $mb
-

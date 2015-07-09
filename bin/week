@@ -1,7 +1,0 @@
-#!/usr/bin/env python
-# Print out lines for this week
-from datetime import datetime
-
-print "Time now = %s" % datetime.now().strftime("%c")
-
-

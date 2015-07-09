@@ -1,6 +1,0 @@
-#!/bin/bash
-# Find all of the files and sort by time
-
-cd $pb
-find $1 -type f -print |
-python -c 'from util.search import find_time; find_time()'

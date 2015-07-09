@@ -1,4 +1,0 @@
-#!/bin/bash
-# Start the django server
-
-rbg firefox localhost:$port/$1

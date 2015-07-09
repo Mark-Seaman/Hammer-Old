@@ -1,5 +1,0 @@
-#!/bin/bash
-# Go to the documents github page
-
-chrome http://github.com/$gh/issues
-

@@ -1,7 +1,0 @@
-#!/bin/bash
-# Add hammer scripts to project
-echo Add hammer scripts to project
-
-cd ~/bin
-cp ~/Projects/thumper/bin/hammer-* .
-

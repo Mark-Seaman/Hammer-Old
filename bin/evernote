@@ -1,7 +1,0 @@
-#!/bin/bash
-# Send a file to evernote inbox
-
-cp $1 /tmp/evernote
-. ~/Projects/seamantech/bin/project > /dev/null
-rs evernote /tmp/evernote
-

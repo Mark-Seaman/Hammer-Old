@@ -1,5 +1,0 @@
-#!/bin/bash
-# Show the formatted brain article
-echo Show the formatted brain article
-
-paragraphs $br/$1

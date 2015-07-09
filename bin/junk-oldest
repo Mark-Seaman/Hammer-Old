@@ -1,6 +1,0 @@
-#!/bin/bash
-# Junk the ten oldest files
-echo Junk the ten oldest files
-
-ls -lt|tail
-j `ls -t|tail`

@@ -1,5 +1,0 @@
-#!/bin/bash
-# Go to meetup.com
-echo Go to meetup.com
-
-w http://meetup.com

@@ -1,4 +1,0 @@
-#!/bin/bash
-# Select a random topic
-
-brain-edit `ls $br|random`

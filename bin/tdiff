@@ -1,7 +1,0 @@
-#!/usr/bin/env python
-# Compare the last output with the correct output
-
-from sys import argv
-from util.systest import diff
-
-diff (argv[1])

@@ -1,5 +1,0 @@
-#!/bin/bash
-# Show the Dr Prof Tips history
-echo Show the Seamans Log history
-
-e $cs/SeamansLogHistory

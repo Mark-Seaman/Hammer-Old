@@ -1,3 +1,0 @@
-#!/bin/bash
-# List the recent brain topics
-ls -lt $b/ | head -40

@@ -1,5 +1,0 @@
-#!/bin/bash
-# Banner health portal
-
-w https://patient.bannerhealth.com/MyMessages
-

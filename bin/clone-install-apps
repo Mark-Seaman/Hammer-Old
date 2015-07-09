@@ -1,6 +1,0 @@
-#!/bin/bash
-# Install all of the default applications
-echo Install all of the default applications
-
-# Install all of the core applications
-setup-core

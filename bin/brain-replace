@@ -1,6 +1,0 @@
-#!/bin/bash
-# Replace string in all topics
-echo Replace string $1 in all topics with $2
-cd $br
-replace $1 $2 -- $br/*
-

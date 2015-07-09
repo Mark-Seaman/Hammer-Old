@@ -1,5 +1,0 @@
-#!/bin/bash
-# Go to the music directory
-
-cd $music && ls -l
-

@@ -1,5 +1,0 @@
-#!/bin/bash
-# Open the invoices spreadsheet
-
-lo ~/Dropbox/Personal/2015/Money.xlsx
-

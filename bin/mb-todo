@@ -1,4 +1,0 @@
-#!/bin/bash
-# Edit the todo list for mybook
-e $br/MyBook
-

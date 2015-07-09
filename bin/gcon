@@ -1,5 +1,0 @@
-#!/bin/bash
-# Show the git config
-
-cd $p && pwd && cat .git/config
-

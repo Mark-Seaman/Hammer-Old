@@ -1,9 +1,0 @@
-pip install numpy 
-pip install scipy 
-pip install tornado 
-pip install pyzmq 
-pip install pandas 
-pip install ipython 
-pip install pygments 
-pip install matplotlib
-pip install redis

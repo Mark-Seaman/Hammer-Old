@@ -1,5 +1,0 @@
-#!/bin/bash
-# JSON pretty printer
-
-python -mjson.tool
-

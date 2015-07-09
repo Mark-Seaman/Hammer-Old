@@ -1,5 +1,0 @@
-#!/bin/bash
-# Display a chunk of the file
-echo Display a chunk of the file
-
-head $1 | tail $2

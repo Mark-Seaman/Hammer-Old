@@ -1,2 +1,0 @@
-rsync -nauv $1/ $2 |egrep -v '(^sending )|(^$)|(^sent )|(^total)|(\/$)'
-

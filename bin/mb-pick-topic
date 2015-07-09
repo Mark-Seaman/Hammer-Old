@@ -1,9 +1,0 @@
-#!/bin/bash
-# Select a random topic from my books
-
-# Select a random book
-[[ "$1" == "" ]] && mb-topics `mb-books|random`|random && exit 0
-
-# Use the requested book
-mb-topics $1 | random
-

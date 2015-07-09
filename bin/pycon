@@ -1,7 +1,0 @@
-#!/bin/bash
-# Go to Pycon notes file
-echo Go to Pycon notes file
-
-e ~/Documents/MyBook/seaman/PyCon
-
-cd ~/Projects/pycon/bin

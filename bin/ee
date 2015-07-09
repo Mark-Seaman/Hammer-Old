@@ -1,5 +1,0 @@
-#!/bin/bash
-# Edit emacs configuration
-echo Edit emacs configuration
-
-e ~/bin/emacs.conf

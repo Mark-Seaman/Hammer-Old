@@ -1,4 +1,0 @@
-#!/bin/bash
-# Send a message to stacie
-
-send stacie@seamanfamily.org "$1"

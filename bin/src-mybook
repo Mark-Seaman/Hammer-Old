@@ -1,5 +1,0 @@
-#!/bin/bash
-# Find all of the topics in MyBook
-
-grep -rl 'muse' $mybook | sed "s/\/home\/seaman\/Documents\/MyBook\///"
-

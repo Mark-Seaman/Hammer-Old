@@ -1,7 +1,0 @@
-#!/bin/bash
-# Update the logs in git
-echo Update the logs in git
-
-cd  /home/seaman/Documents/logs
-git add .
-git commit -m 'Logs'

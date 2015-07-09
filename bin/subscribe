@@ -1,7 +1,0 @@
-#!/bin/bash
-# Subscribe an email to dr prof tips
-
-echo Subscribe $1
-
-tellme send "$1" welcome message
-echo $1 >> $br/SeamansLogSubscribers

@@ -1,5 +1,0 @@
-#!/bin/bash
-# Save the wiki text for the requested file
-
-cat > $p/doc/$1
-

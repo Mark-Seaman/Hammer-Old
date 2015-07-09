@@ -1,5 +1,0 @@
-#!/bin/bash
-# Edit the ideas file
-echo Edit the ideas file
-
-brain-edit PrayerIdeas

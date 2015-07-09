@@ -1,3 +1,0 @@
-#!/bin/bash
-rsync -auv --delete ~/bin/ $1:bin
-echo 'ln -f bin/bashrc    .bashrc'      | ssh $1  2>&1 |grep -v 'Pseudo'

@@ -1,8 +1,0 @@
-#!/bin/bash
-# List all the source code
-
-{
-cd $p
-find bin  -type f | grep -v '.pyc'
-} | sort
-

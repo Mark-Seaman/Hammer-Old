@@ -1,5 +1,0 @@
-#!/bin/bash
-# Show differences by doing a three-way merge
-echo Show differences by doing a three-way merge
-
-meld ../master/$1 $1 ../5.10/$1 &> /dev/null &

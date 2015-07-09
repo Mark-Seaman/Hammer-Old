@@ -1,5 +1,0 @@
-#!/bin/bash
-# Go to the Support Center control panel
-echo Go to the Support Center control panel
-
-rbg firefox https://my.webfaction.com

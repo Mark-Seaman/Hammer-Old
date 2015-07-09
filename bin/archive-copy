@@ -1,6 +1,0 @@
-#!/bin/bash
-# Copy the archive to $z
-echo Copy the archive to $z
-{ 
-    synchronize /home/seaman/LiveSync/Git       $z:LiveSync/Git
-}| mklog archive-copy

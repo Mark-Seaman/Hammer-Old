@@ -1,5 +1,0 @@
-#!/bin/bash
-# Push code to the Django hammer project
-
-cp $p/$1 ~/Projects/django-hammer/$1
-

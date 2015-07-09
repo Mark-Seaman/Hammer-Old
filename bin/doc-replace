@@ -1,6 +1,0 @@
-#!/bin/bash
-# Replace text in all of the doc files
-
-echo $*
-
-

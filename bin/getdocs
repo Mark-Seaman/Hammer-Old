@@ -1,9 +1,0 @@
-#!/bin/bash
-# Get the docs from the file server
-
-echo "Get docs"
-rsync -au --exclude .git $z:/home/seaman/Documents/ /home/seaman/Documents
-
-prune-docs
-echo 'prune-docs' | ssh $z 2>&1 |grep -v 'Pseudo'
-

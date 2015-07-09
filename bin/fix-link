@@ -1,8 +1,0 @@
-#!/bin/bash
-# Fix all the links in a MyBook page
-
-base="$1"
-
-sed "s/href\='\//href='http:\/\/$base\//" |
-sed "s/href\=\"\([^h\/]\)/href=\"http:\/\/$base\/\1/" |
-sed "s/href\=\"\//href=\"http:\/\/$base\//" 

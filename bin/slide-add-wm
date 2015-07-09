@@ -1,9 +1,0 @@
-#!/bin/bash
-# Add existing watermill slides
-echo Add existing watermill slides
-
-ls $su/slides/text |
-while read f
-do
-     sc slides-new ${f/.txt/} MarkSeaman  $su/slides/text/$f 
-done

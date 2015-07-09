@@ -1,3 +1,0 @@
-#!/bin/bash
-# Show the request log file
-e ~/Documents/logs/`hostname`/$1
