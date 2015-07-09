@@ -1,0 +1,6 @@
+#!/bin/bash
+# List lessons for living
+echo List lessons for living
+
+cat ~/Documents/MyBook/SeamansLog/LifeLessons
+

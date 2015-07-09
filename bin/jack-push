@@ -1,0 +1,5 @@
+#!/bin/bash
+# Push a file to Jack Hammer
+echo Push a file to Jack Hammer
+
+cp $p/$1 ~/Projects/jack-hammer/$1

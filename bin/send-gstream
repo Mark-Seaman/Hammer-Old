@@ -1,0 +1,11 @@
+#!/bin/bash
+# Post to facebook through email
+echo Post to Google+ stream through email
+
+# Select the text to post
+text=$1
+[[ "$text" == "" ]] && text=`cat /tmp/mb-passage`
+[[ "$text" == "" ]] && echo "usage: $0 'text to post'" && exit 1
+
+# Post using email
+cat /tmp/mb-passage | send mark.b.seaman+gstream@gmail.com "Post to GStream"

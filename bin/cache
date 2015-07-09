@@ -1,0 +1,78 @@
+#!/bin/bash
+# Caching system for frequenty used data
+
+[ $# -lt 1 ] && 
+echo 'usage: requires at least 1 arguments (read,write,test,show,clear)' && 
+exit 1
+
+function=$1
+name=$2
+
+cache_dir=$p/cache
+
+# create cache dir if needed
+mkdir -p $cache_dir
+
+# read 
+[ $function = "read" ] &&
+{
+   [ $# -ne 2 ] && echo 'usage: cache read "nameOfCache"' && exit 1
+   cat $cache_dir/$name.cache
+   exit
+}
+
+# write
+[ $function = "write" ] &&
+{
+   [ $# -ne 2 ] && echo 'usage: cache write "nameOfCache"' && exit 1
+   cat - > $cache_dir/$name.cache 
+   exit
+}
+
+# filename
+[ $function = "filename" ] &&
+{
+   [ $# -ne 2 ] && echo 'usage: cache write "nameOfCache"' && exit 1
+   echo $cache_dir/$name.cache
+   exit
+}
+
+# test
+[ $function = "test" ] &&
+{
+   [ $# -ne 3 ] && echo 'usage: cache test "nameOfCache" 60' && exit 1
+   hours=$3
+   declare -i hours
+   let mins=$hours*60
+   [ ! -f $cache_dir/$name.cache ] && exit 1 # cache file doesn't exist
+   findResults=`find $cache_dir/$name.cache -mmin -$mins`
+   [ -z $findResults ] && exit 1  # cache file is too old
+   exit 0
+}
+
+# show
+[ $function = "show" ] &&
+{
+   [ $# -ne 1 ] && echo 'usage: cache show' && exit 1
+   ls -lrt $cache_dir
+   exit
+}
+  
+
+# clear
+[ $function = "clear" ] &&
+{
+
+   [ $# -ne 2 ] && echo 'usage: cache clear "nameOfCache"' && exit 1
+   rm -rf $cache_dir/$name.cache
+   exit
+}
+
+
+#clearall
+[ $function = "clearall" ] &&
+{
+   [ $# -ne 1 ] && echo 'usage: cache clearall' && exit 1
+   rm -rf $cache_dir/*
+   exit
+}

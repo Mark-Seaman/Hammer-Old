@@ -1,0 +1,15 @@
+#!/bin/bash
+# Publish new docs to seaman-sws
+
+# Local actions
+cd ~/Documents
+git add -A . 
+git commit -m "Publish my book"
+git pull && git push
+
+# Remote commands
+ssh ubuntu@seamantech.com 'hostname &&
+cd ~/Documents &&
+echo "Docs: `pwd`" &&
+git pull'
+

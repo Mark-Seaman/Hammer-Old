@@ -1,0 +1,16 @@
+#!/bin/bash
+# List books
+cat <<EOF
+Automate
+MarkSeaman
+SuperPower
+Brain
+MyBookOnline
+Software
+BitRot
+SpiritualLog
+Ideas
+Patterns
+Guides
+SeamansLog
+EOF

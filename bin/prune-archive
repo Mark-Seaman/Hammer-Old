@@ -1,0 +1,88 @@
+#!/bin/bash
+# Remove old files from the archive and merge directories together
+
+. /home/seaman/bin/bash-vars
+
+# Make sure you are running from Archive
+d=$l/Archive
+
+if [ ! -d "$d" ] 
+then
+    echo "Directory does not exist, $d"
+    exit 1
+fi
+
+
+# If this directory exists then prune it
+function merge_dir {
+    if [ ! -d "$1" ] ; then return; fi
+    if [ ! -d "$2" ] ; then mkdir -p "$2"; fi
+    rsync -auv "$1/" "$2" && rm -rf "$1"
+}
+
+#---------------------------------------------------------------------
+function prune_2011
+{
+    cd $d/2011
+}
+
+#---------------------------------------------------------------------
+function prune_2010
+{
+    cd $d/2010
+    rm -rf Code/sites/estate
+    rm -rf Downloads
+    rm -rf wme
+    rm -rf Tools
+}
+
+#---------------------------------------------------------------------
+function prune_2009
+{
+    cd $d/2009
+}
+
+#---------------------------------------------------------------------
+function prune_2008
+{
+    cd $d/2008
+    rm Documents/WinFiles
+    mv Doc HP-notes
+    rm Mail*200*
+    mv Outlook.pst Mail
+    rm bin.zip
+    rm Brief*
+    mv Docs HP-notes
+    mv tools Tools
+    mv Work* HP
+    mv HP-notes HP
+    merge Seaman5 HP
+    merge HP/HP-notes HP/Docs
+    rm -rf wm/home/seaman/Desktop
+    merge action SWS/action
+    merge SWS/Business Business
+    rm -rf Stacie/Mail/extra
+    merge Business Documents/Business
+    merge Code Documents/Code
+    merge SWS Documents
+    rm -rf Stacie/__BadFiles__
+    rm -rf Documents/tar
+    merge Documents/Tools Tools
+    merge Documents/tools Tools
+    merge Personal Documents/Personal
+    merge Tools ~/LiveSync/Installers/2008
+}
+
+#---------------------------------------------------------------------
+{
+    echo "Starting prune-archive"
+    date
+
+    prune_2011
+    prune_2010 
+    prune_2009 
+    prune_2008
+
+    echo "Done with prune-archive"
+    date
+} | mklog prune-archive 

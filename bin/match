@@ -1,0 +1,15 @@
+#!/bin/bash
+# Pattern matcher (files, include, exclude)
+
+files=$1 && 
+include=$2 && 
+exclude=$3 &&
+xargs grep -f $include < $files 2>&1 > xmatch
+
+[ -z "$exclude" ] &&
+cat xmatch
+
+[ ! -z "$exclude" ] &&
+cat xmatch | grep -v -f $exclude
+
+rm xmatch

@@ -1,0 +1,5 @@
+#!/bin/bash
+# Show the page log
+
+tail -20 $p/logs/user/page.log
+

@@ -1,0 +1,6 @@
+#!/bin/bash
+# Copy files from the Jack hammer project
+echo Copy files from the Jack hammer project
+
+cptree ~/Projects/jack-hammer/doc doc
+

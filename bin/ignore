@@ -1,0 +1,5 @@
+#!/bin/bash
+# Edit the .gitignore file
+
+e $p/.gitignore
+

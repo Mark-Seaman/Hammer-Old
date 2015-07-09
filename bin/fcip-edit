@@ -1,0 +1,5 @@
+#!/bin/bash
+# Edit the content for FCIP
+
+e $f
+

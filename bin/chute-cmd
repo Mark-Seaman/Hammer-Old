@@ -1,0 +1,5 @@
+#!/bin/bash
+# Execute a command on chute
+echo Execute a command on chute
+
+ssh $chute ". bin/bash-vars && $1"

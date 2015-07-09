@@ -1,0 +1,198 @@
+#!/bin/bash
+# Test the list-expenses script
+echo Test the list-expenses script
+
+# Create sample input for the list-expenses script
+cat <<EOF > /tmp/list-expenses-input
+* Expenses 2011 *                 -*-muse-*-
+
+**Comcast**
+01-05,Comcast,142.59
+02-05,Comcast,142.57
+03-05,Comcast,142.57
+04-05,Comcast,142.57
+05-05,Comcast,142.57
+06-05,Comcast,142.57
+07-05,Comcast,142.57
+08-05,Comcast,142.57
+09-05,Comcast,142.57
+10-05,Comcast,142.57
+11-05,Comcast,142.57
+12-05,Comcast,142.57
+
+**Verizon**
+01-22,Verizon,163.91
+02-17,Verizon,194.04
+03-22,Verizon,193.22
+04-22,Verizon,199.90
+05-22,Verizon,199.50
+06-22,Verizon,194.62
+07-22,Verizon,195.72
+08-22,Verizon,236.41
+09-22,Verizon,225.74
+10-22,Verizon,225.87
+11-22,Verizon,225.66
+12-22,Verizon,225.66
+
+**Safari**
+01-24,Safari Books Online,42.99
+02-24,Safari Books Online,42.72
+03-24,Safari Books Online,42.99
+04-24,Safari Books Online,42.99
+05-24,Safari Books Online,42.99
+06-24,Safari Books Online,42.99
+07-24,Safari Books Online,42.99
+08-24,Safari Books Online,42.99
+
+**Well Fargo**
+01-25,Wells Fargo,25
+01-31,Wells Fargo,12
+02-28,Wells Fargo,12
+03-31,Wells Fargo,12
+04-29,Wells Fargo,12
+05-31,Wells Fargo,12
+06-30,Wells Fargo,12
+07-31,Wells Fargo,12
+08-25,Wells Fargo,25
+08-31,Wells Fargo,12
+09-30,Wells Fargo,12
+10-31,Wells Fargo,12
+11-25,Wells Fargo,25
+11-30,Wells Fargo,12
+12-31,Wells Fargo,12
+
+**Host Gator**
+01-01,Host Gator,39.95
+02-22,Host Gator,24.95
+03-22,Host Gator,24.95
+04-22,Host Gator,24.95
+05-22,Host Gator,24.95
+06-22,Host Gator,24.95
+07-22,Host Gator,24.95
+08-22,Host Gator,24.95
+09-22,Host Gator,24.95
+10-22,Host Gator,24.95
+11-22,Host Gator,24.95
+12-22,Host Gator,24.95
+12-16,Host Gator,15
+
+**Other Expenses**
+01-12,Hunan,10.00
+01-09,Barnes & Noble,60.29
+02-02,Go Daddy,11.62
+02-04,Go Daddy,114.29
+02-22,Borders,36.55
+02-27,Barnes & Noble,118.60
+05-05,Auto-owners Insurance,195.00
+05-29.Go Daddy,11.62
+06-24,Best Buy (computer),364.38
+06-11,Anderson & Whitney,650
+07-01,Go Daddy,11.62
+07-28,CO state,10
+08-12,Go Daddy,160.41
+08-20,Go Daddy,49.99
+08-13,Verizon (tablet),672.20
+08-03,Guadalajara,25
+08-17,Verizon(keyboard),96
+09-09,Office Depot,117.53
+10-19,Wayne Ball,100
+10-31,Amazon marketplace(battery),65.36
+11-21,Pay Pal,20
+12-16,Best Buy,443.10
+12-27,Go Daddy,138.17
+
+EOF
+
+# Create sample output
+cat <<EOF > /tmp/list-expenses-output
+01-05	Comcast	142.57
+02-05	Comcast	142.57
+03-05	Comcast	142.57
+04-05	Comcast	142.57
+05-05	Comcast	142.57
+06-05	Comcast	142.57
+07-05	Comcast	142.57
+08-05	Comcast	142.57
+09-05	Comcast	142.57
+10-05	Comcast	142.57
+11-05	Comcast	142.57
+12-05	Comcast	142.57
+01-22	Verizon	163.91
+02-17	Verizon	194.04
+03-22	Verizon	193.22
+04-22	Verizon	199.90
+05-22	Verizon	199.50
+06-22	Verizon	194.62
+07-22	Verizon	195.72
+08-22	Verizon	236.41
+09-22	Verizon	225.74
+10-22	Verizon	225.87
+11-22	Verizon	225.66
+12-22	Verizon	225.66
+01-24	Safari Books Online	42.99
+02-24	Safari Books Online	42.72
+03-24	Safari Books Online	42.99
+04-24	Safari Books Online	42.99
+05-24	Safari Books Online	42.99
+06-24	Safari Books Online	42.99
+07-24	Safari Books Online	42.99
+08-24	Safari Books Online	42.99
+01-25	Wells Fargo	25
+01-31	Wells Fargo	12
+02-28	Wells Fargo	12
+03-31	Wells Fargo	12
+04-29	Wells Fargo	12
+05-31	Wells Fargo	12
+06-30	Wells Fargo	12
+07-31	Wells Fargo	12
+08-25	Wells Fargo	25
+08-31	Wells Fargo	12
+09-30	Wells Fargo	12
+10-31	Wells Fargo	12
+11-25	Wells Fargo	25
+11-30	Wells Fargo	12
+12-31	Wells Fargo	12
+01-01	Host Gator	39.95
+02-22	Host Gator	24.95
+03-22	Host Gator	24.95
+04-22	Host Gator	24.95
+05-22	Host Gator	24.95
+06-22	Host Gator	24.95
+07-22	Host Gator	24.95
+08-22	Host Gator	24.95
+09-22	Host Gator	24.95
+10-22	Host Gator	24.95
+11-22	Host Gator	24.95
+12-22	Host Gator	24.95
+12-16	Host Gator	15
+01-12	Hunan	10.00
+01-09	Barnes & Noble	60.29
+02-02	Go Daddy	11.62
+02-04	Go Daddy	114.29
+02-22	Borders	36.55
+02-27	Barnes & Noble	118.60
+05-05	Auto-owners Insurance	195.00
+06-24	Best Buy (computer)	364.38
+06-11	Anderson & Whitney	650
+07-01	Go Daddy	11.62
+07-28	CO state	10
+08-12	Go Daddy	160.41
+08-20	Go Daddy	49.99
+08-13	Verizon (tablet)	672.20
+08-03	Guadalajara	25
+08-17	Verizon(keyboard)	96
+09-09	Office Depot	117.53
+10-19	Wayne Ball	100
+10-31	Amazon marketplace(battery)	65.36
+11-21	Pay Pal	20
+12-16	Best Buy	443.10
+12-27	Go Daddy	138.17
+
+Total = \$8553.25,   82  transactions,   \$104.31 average
+EOF
+
+# Run the conversion script
+list-expenses /tmp/list-expenses-input > /tmp/list-expenses-output2
+
+# Compare the actual and expected output
+diff /tmp/list-expenses-output /tmp/list-expenses-output2

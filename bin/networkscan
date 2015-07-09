@@ -1,0 +1,12 @@
+#!/bin/bash
+# Scan the network for computers
+
+# Linksys box
+nmap -sP 10.0.0.0/24
+
+# Netgear box
+nmap -sP 172.16.0.0/24
+
+
+#nmap -sP 192.168.1.0/24
+

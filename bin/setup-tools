@@ -1,0 +1,9 @@
+#!/bin/bash
+# Install all applications for a new computer
+
+#setup-core
+setup-media
+setup-emacs
+setup-developer
+setup-python
+setup-nodejs

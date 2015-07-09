@@ -1,0 +1,5 @@
+#!/usr/bin/env python
+# Calculate the summary of log entries
+
+from util.invoice import time_summary
+time_summary()

@@ -1,0 +1,6 @@
+#!/bin/bash
+# Copy a file to the mac mini
+
+echo scp $hammersys:~/$1 ~/$1
+scp $hammersys:~/$1 ~/$1
+

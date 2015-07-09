@@ -1,0 +1,9 @@
+#!/bin/bash
+# Set up the aliases, vars, and functions
+#echo "Set the default environment variables"
+
+# Set the same .bashrc everywhere
+rm  ~/.bashrc ~/.profile
+ln -f ~/bin/bashrc      ~/.bashrc
+ln -f ~/bin/bashrc      ~/.profile
+ln -f ~/bin/emacs.conf  ~/.emacs

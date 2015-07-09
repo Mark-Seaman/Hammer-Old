@@ -1,0 +1,7 @@
+#!/usr/bin/env python
+# Run selenium headless and grab some web pages
+print "Run selenium headless and grab some web pages"
+
+
+from util.pages_test import selenium_page_test
+selenium_page_test()

@@ -1,0 +1,11 @@
+#!/bin/bash
+# Show files to be copied by 'c'
+
+# Show the directory sizes
+# du -sh $1 $2
+
+# Show the items that should be deleted
+#rsync -nauv --ignore-existing --delete $1/ $2
+
+# Show the files that are new
+rsync -nauv $1/ $2 | egrep -v '/$'

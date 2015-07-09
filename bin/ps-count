@@ -1,0 +1,4 @@
+#!/bin/bash
+# Count the processes that are running
+
+echo "There are `ps -ef|wc -l` process are running" 

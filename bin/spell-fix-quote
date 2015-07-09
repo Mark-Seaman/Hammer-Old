@@ -1,0 +1,9 @@
+#!/bin/bash
+# Fix the quotes in a single file that has been mangled by MS Word
+
+mv $1 /tmp/spell-fix-quote
+cat  /tmp/spell-fix-quote | 
+tr '’' \' |
+tr '“' \' | 
+tr '”' \' | 
+tr -s \' > $1

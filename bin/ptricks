@@ -1,0 +1,5 @@
+#!/bin/bash
+# Go to the Tricks content
+
+cd $mybook/50-Tricks
+

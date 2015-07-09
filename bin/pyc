@@ -1,0 +1,4 @@
+#!/bin/bash
+# Pycharm 
+echo Pycharm 
+rbg ~/Tools/PyCharm/pycharm-2.7.1/bin/pycharm.sh

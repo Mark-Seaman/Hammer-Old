@@ -1,0 +1,26 @@
+#!/bin/bash
+# Run the hourly task as seaman
+
+# To run this command manually use:
+#   nohup /home/seaman/bin/hourly &> /dev/null&
+
+. $HOME/bin/bash-vars
+
+{
+    echo `date` `id` " - $0 Started"
+
+    # Remove autosave files
+    #rmas ~
+
+    # Commit changes
+    commit ~/Documents 'Hourly commit'
+    commit ~/Projects/Hammer 'Hourly Hammer commit'
+    
+
+    # Send a brain topic to evernote
+    #tst | mklog tst-home
+    #log-note
+
+    echo `date` " - $0 All done"
+} 2>&1 | mklog hourly > /dev/null
+

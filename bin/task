@@ -1,0 +1,5 @@
+#!/bin/bash
+# Task Master
+echo Task Master
+
+brain-edit WmTaskMaster

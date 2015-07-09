@@ -1,0 +1,18 @@
+#!/bin/bash
+# Create a new shared GIT branch
+echo Create a new shared GIT branch $1
+
+newbranch=$1
+
+# Create the branch
+git branch   $newbranch
+git checkout $newbranch
+
+# Push the branch
+git push origin  $newbranch
+
+# Track the branch
+git checkout master
+git branch -D       $newbranch
+git branch --track  $newbranch origin/$newbranch
+git checkout        $newbranch

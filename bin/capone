@@ -1,0 +1,6 @@
+#!/bin/bash
+# Capital One credit card
+echo Capital One credit card
+
+#w http://capitalone.com
+web https://servicing.capitalone.com/c1/accounts/summary.aspx

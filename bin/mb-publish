@@ -1,0 +1,6 @@
+#!/bin/bash
+# Publish the content for the mybook on the server
+
+. ~/Projects/mybook/bin/project
+publish
+

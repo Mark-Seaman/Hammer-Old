@@ -1,0 +1,6 @@
+#!/bin/bash
+# Remove automatically compiled python files
+
+echo Remove automatically compiled python files
+x=`find $1 -name "*.pyc"`
+[[ ! -z "$x" ]] && echo $x && rm $x

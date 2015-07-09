@@ -1,0 +1,10 @@
+#!/bin/bash
+# Search for the content in the brain
+
+cd ~/Documents/Brain
+grep -is $* `src-brain`
+
+
+
+
+

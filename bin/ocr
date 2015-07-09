@@ -1,0 +1,7 @@
+#!/bin/bash
+# Convert a file to text
+echo Convert file "$1" to text
+
+echo tesseract $1 ${1/.jpg/}
+tesseract "$1" "${1/.jpg/}"
+cat "${1/.jpg/.txt}"

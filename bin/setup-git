@@ -1,0 +1,15 @@
+#!/bin/bash
+# Configure git for this project
+
+machine=`hostname`
+echo "Configure $machine git"
+
+# configure git user
+git config --global push.default matching
+git config --global user.name    "Mark Seaman"
+git config --global user.email   "seaman@$machine"
+git config --global user.editor vi
+git config -l
+
+git pull
+git push

@@ -1,0 +1,35 @@
+#!/usr/bin/python
+# Process the expenses for this year from the downloaded info from Well Fargo Checking
+
+from sys import argv
+from util.list import text_to_table, table_to_text
+from util.expenses import substitute, read_semicolon_file, read_columns_file
+from util.expenses import save_report, print_report, select_income, select_expenses
+
+
+# Create a report for fixed columns
+table = read_columns_file('SWS-Visa'+'.txt')
+text = print_report(table)
+print '\n\nVisa:'
+print text
+
+table = read_semicolon_file('SWS-Checking'+'.bank')
+text = print_report(table)
+print '\n\nChecking:'
+print text
+
+table = read_semicolon_file('SWS-Checking'+'.bank') 
+table = select_income(table)
+text = print_report(table)
+print '\n\nIncome:'
+print text
+
+table = read_semicolon_file('SWS-Checking'+'.bank') 
+table = select_expenses(table)
+table2 = read_columns_file('SWS-Visa'+'.txt')
+table2 = select_income(table2)
+table3 = read_columns_file('SWS-cash'+'.csv')
+table = table3
+text = print_report(table)
+print '\n\nExpenses:'
+print text

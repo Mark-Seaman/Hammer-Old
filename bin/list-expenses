@@ -1,0 +1,58 @@
+#!/usr/bin/python
+# Show the expenses for this year
+
+from sys import argv
+
+# Read text into an array of lines
+def read_file(f):
+    return  [line[:-1] for line in open(f).readlines()]
+
+# Split each line into columns
+def create_table(text):
+    return map (lambda x: x.split(','), text)  
+
+# Select the transactions with three columns
+def select_transactions(rows):
+     return filter(lambda x: len(x)==3, rows)    
+
+# Join the columns of text with tabs to form one row
+def format_row(row):
+    return '\t'.join(row)
+
+# Join row together as text
+def format_table(table):
+    return '\n'.join (map(format_row, table))
+
+# Print a table of row and columns
+def print_table(table):
+    print format_table(table)
+
+# Remove any extra spaces
+def read_dollar_value(row):
+    return float(row[2].strip())
+
+# Calculate the total, number of transaction, and average
+def calculate_summary(table):
+    expenses = map (read_dollar_value, table)
+    total =  reduce (lambda x,y: x+y, expenses)
+    average = total/len(expenses)    
+    return [total, len(expenses), average]
+
+# Print a summary of the expenses
+def print_summary(stats):
+    print
+    print "Total = $%4.2f,  " % stats[0],
+    print stats[1], ' transactions,  ',
+    print '$%4.2f average' % stats[2]
+
+# Process all text in a known file
+def create_expense_listing(f):
+    table = read_file(f)
+    table = create_table(table)
+    table = select_transactions(table)
+    stats = calculate_summary(table)
+    print_table(table)
+    print_summary(stats)
+
+
+create_expense_listing(argv[1])

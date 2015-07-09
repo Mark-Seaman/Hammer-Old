@@ -1,0 +1,10 @@
+#!/usr/bin/env python
+# Run all system tests
+
+from sys import argv
+from util.systest import run,clear_cache
+
+if len(argv)<1:
+    print 'usage: trun files'
+clear_cache(argv[1].replace('.tst',''))
+run(argv[1].replace('.tst',''))

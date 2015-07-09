@@ -1,0 +1,8 @@
+#!/bin/bash
+# Find the location of the misspelled words
+
+spell-mispelled "*" | 
+while read w
+do
+    grep -l $w *
+done

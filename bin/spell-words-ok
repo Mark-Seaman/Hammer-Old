@@ -1,0 +1,4 @@
+#!/bin/bash
+# List the approved words during spell check 
+
+cat $b/spelled-ok.txt

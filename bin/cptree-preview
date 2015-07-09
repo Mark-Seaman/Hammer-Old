@@ -1,0 +1,4 @@
+#!/bin/bash
+# Copy a recursive directory
+
+nice rsync -nauv "$1/" "$2" | rsync-filter

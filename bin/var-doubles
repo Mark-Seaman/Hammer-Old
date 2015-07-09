@@ -1,0 +1,4 @@
+#!/bin/bash
+# List the double variables
+
+grep double $c/vars/xmlVars.txt

@@ -1,0 +1,133 @@
+#!/bin/bash
+# Setup a SAMBA share volume
+
+# Install the samba package
+inst samba
+
+# Create a SMB user
+sudo smbpasswd -a seaman
+
+# Create the directory
+mkdir ~/FileShare
+
+# Configure the server
+sudo cp /etc/samba/smb.conf ~
+sudo vi /etc/samba/smb.conf
+
+# Restart the smb daemon
+sudo restart smbd
+
+# Test the server
+sudo testparm
+
+exit
+
+_____________________________________________________________________________
+# Contents of /etc/samba/smb.conf
+
+[test]
+path = /home/seaman/FileShare
+available = yes
+valid users = seaman
+read only = no
+browsable = yes
+public = yes
+writable = yes
+_____________________________________________________________________________
+http://www.jonathanmoeller.com/screed/?p=3967
+Basic Samba Setup And Installation On Ubuntu 12.10 Quantal Quetzal
+Posted on October 19, 2012 by Jonathan Moeller
+
+One of the most common uses of a Ubuntu 12.10 Quantal Quetzal machine – whether a server or a
+desktop – is to share files across the network. If you’re not familiar with the term, “file sharing”
+means to make a folder on your system available to clients on the network. From their own machines,
+users are able to access your shared folder from their computers, and depending upon how you’ve
+configured the security, they can copy the files for themselves, alter the files, add new files, or
+even delete files.
+
+There are a number of different programs that offer file-sharing capabilities. Most Ubuntu 12.10
+Quantal Quetzal systems use the “Samba” software, since it is can easily share files with
+Windows-based computers. It’s common to find organizations that have a number of users with Windows
+systems storing their data on a Linux server running Samba.
+
+In this post we’ll show you how to set up a basic Samba server, and how to access those shares from
+client computers, on a Ubuntu machine.
+
+Samba has a vast array of options and configuration settings, but here we’ll show you how to set up
+and configure a basic Samba server with one user.
+
+First, you’ll need to install Samba. Make your way to a command prompt and type this command:
+
+
+sudo apt-get install samba
+
+Enter your password to authenticate, and apt will download and install Samba and its attendant
+utilities for you.
+
+It’s important to realize about Samba is that it stores its own set of user accounts, separate from
+the main accounts, in the /etc/samba/smbpasswd file. That means you’ll need to create a separate
+Samba password for every user you want to access your file shares. You create this password using
+the smbpasswd command. For example, to create a command for a user named camalas, here’s how the
+command should look:
+
+sudo smbpasswd -a camalas
+
+Be sure to give camalas’s Samba account an appropriately strong password (make sure it includes
+uppercase, lowercase, punctuation, and numbers). Once camalas’s password is created, the next step
+is to create a directory for her to share. Begin by creating a folder named ‘test’ in camalas’s
+folder, which we’ll use for our first shared folder:
+
+mkdir /home/camalas/test
+
+(NOTE: DO NOT use sudo to create the folder, because then the owning user and group will be set as
+‘root’, which means you won’t be able to access the folder using your Samba username and password.)
+
+The next step is to edit the /etc/samba/smb.conf file, the main configuration file for Samba. As
+always, make a safe backup copy of the original smb.conf file to your home folder, in case you make
+an error:
+
+sudo cp /etc/samba/smb.conf ~
+
+Now use vi to edit the /etc/samba/smb.conf file:
+
+sudo vi /etc/samba/smb.conf
+
+The smb.conf file is long and rather complex, but for the purposes of this demonstration, you can
+ignore most of it. Key down to the very end of the file and insert this text:
+
+
+[test]
+path = /home/camalas/test
+available = yes
+valid users = camalas
+read only = no
+browsable = yes
+public = yes
+writable = yes
+
+
+Here’s what some of the more important configuration options mean.
+
+-The “[test]” gives the name of the file share.  The “path” option specifies the location of the
+-folder to be shared.  The “available” option specifies that the file share is available to clients
+-on the network.  The “valid users” option details the users that are allowed to access the file
+-share. In this case, we’ve set it so that only the camalas account can access it. You can add
+-additional accounts here, if you prefer.  The “read only” options specifies whether nor not clients
+-will be allowed to write to the file share.  The “writable” option specifies that data can be
+-written to the file share.
+
+The settings specified above will share the test folder we created earlier, and give your username
+and your username alone permission to read and write to the folder. Once you have input the changes,
+save smb.conf, exit vi, and restart Samba with this command:
+
+sudo restart smbd
+
+(This will force Samba to restart, re-reading its configuration files and activating the share you
+just created.)
+
+Once Samba has restarted, use this command to check your smb.conf for any syntax errors:
+
+sudo testparm
+
+If you pass the testparm command, Samba should be working. Try accessing the share from another
+client on your LAN.

@@ -1,0 +1,11 @@
+#!/bin/bash
+# Send someone a Spiritual Partners article
+
+cat <<EOF >/tmp/SpiritualLog
+
+---
+You are receiving this message as a subscriber of the Spiritual Things mailing list. Your privacy is important.  To learn more or unsubscribe visit our web site at http://Spiritual-Things.org.
+EOF
+
+#blog-send-html "$1" "$2" "$3" "SpiritualLog" 
+blog-send "$1" "$2" "$3" "SpiritualLog" 

@@ -1,0 +1,87 @@
+#!/bin/bash
+# Variable declarations
+
+export a=$HOME/Archive
+
+export b=$HOME/bin
+export book=$HOME/Documents/Dropbox/Leverage/docs
+
+
+export c=$HOME/wme/application-git/source
+export code=$HOME/Documents/Code
+
+export d=$HOME/Desktop
+
+export e='open variable'
+
+export f="~/Documents/Slides/text/web-dev.txt"
+
+export g="mark.seaman@shrinking-world.com"
+export gh=http://github.com/Mark-Seaman
+
+export h=172.16.0.10
+export hammersys=seaman@$h
+export hammer="$HOME/Projects/Hammer"
+
+export i="open variable"
+export inbox=$HOME/wme/support-git/data/inbox
+
+export j=$HOME/Desktop/Junk
+export jack=$HOME/Projects/jack-hammer
+export joy=admin@8.19.35.121
+
+export k="open variable"
+
+export l=$HOME/LiveSync
+export log=/tmp/logs/recent-log
+
+export m="open variable"
+export mb=$HOME/Projects/mybook
+export mbo=mybookonline.org
+export macbook=markseaman@172.16.0.3
+export macmini=seaman@172.16.0.2
+export ms=markseaman.org
+export music=$HOME/Music
+export mybook=$HOME/Documents/MyBook/Public
+
+export n="open variable"
+export nhammer="$HOME/Projects/node-hammer"
+
+export o=Shrinking-world.org
+
+export p="open variable"
+export plan='$HOME/Documents/MyBook/seaman/BizPlan'
+
+export q="open variable"
+
+export r="open variable"
+export rcp=$HOME/Archive/rcp
+export rock=$HOME/FileShare/Music/Rock
+
+export s="~/Documents/Slides"
+export sf=SeamanFamily.org
+export swo=shrinking-world.org
+export sws=ubuntu@54.244.95.205
+
+export t=/media/Big
+export thumb='$HOME/LiveSync/thumb'
+export tips=$HOME/Documents/TechTips
+
+export u=$HOME/Documents
+export ultra=172.16.0.17
+export user=seaman
+
+export v="open variable"
+
+export x="open variable"
+
+export z=seaman@192.168.1.107
+
+#_____________________________________________________________________________
+
+# Set these environmental variables for PostgresDB
+export PGHOST=shrinking-world.cqfqiornb6z5.us-west-2.rds.amazonaws.com
+export PGPORT=5432
+export PGDATABASE=mysite
+export PGUSER=sws
+export PGPASSFILE=$HOME/base-bin/pgpass.conf

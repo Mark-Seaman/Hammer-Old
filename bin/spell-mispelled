@@ -1,0 +1,15 @@
+#!/bin/bash
+# Find all of the misspelled words in the directory
+
+# Find wiki words
+wiki-words $* | sort -u > /tmp/ms1
+
+# Find OK words
+cat /home/seaman/bin/spelled-ok.txt | sort -u > /tmp/ms2
+
+# Find misspellings
+spell $*     | sort -u > /tmp/ms3
+
+comm -23 /tmp/ms3 /tmp/ms1  > /tmp/ms4
+comm -23 /tmp/ms4 /tmp/ms2  
+

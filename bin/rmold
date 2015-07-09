@@ -1,0 +1,12 @@
+#!/bin/bash
+# Remove the old file (more than 30 days from this directory)
+
+if [ ! -d "$1" ]
+then
+    echo "You must choose a directory"
+    exit 1
+fi
+
+find $1 -mtime +10 -type f -exec rm -f {} \;
+find $1 -empty -type d -exec rmdir {} \;
+

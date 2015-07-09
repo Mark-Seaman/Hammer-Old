@@ -1,0 +1,16 @@
+#!/bin/bash
+# Add  hammer test infrastructure
+echo Add  hammer test infrastructure
+
+cp ~/bin/tdiff .
+cp ~/bin/te    .
+cp ~/bin/tfail .
+cp ~/bin/tlike .
+cp ~/bin/tlist .
+cp ~/bin/tnew  .
+cp ~/bin/todo  .
+cp ~/bin/tout  .
+cp ~/bin/tresults .
+cp ~/bin/trun  .
+cp ~/bin/tshow .
+cp ~/bin/tst   .

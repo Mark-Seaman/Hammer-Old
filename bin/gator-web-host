@@ -1,0 +1,5 @@
+#!/bin/bash
+# Login to administer web sites
+
+wf http://shrinking-world.net/cpanel
+

@@ -1,0 +1,9 @@
+#!/bin/bash
+# Save the music on the file server
+
+# Setup the execution context
+. /home/seaman/bin/bash-vars
+
+# Merge contents from the local music folder to the server
+cptree $l/Music $z:$l/Music | mklog music-sync
+#rsync -auv --delete $l/Music/ $z:$l/Music | mklog music-sync

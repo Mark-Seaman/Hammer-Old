@@ -1,0 +1,12 @@
+#!/bin/bash
+# Restart the local server
+
+echo Restarting the local apache server
+
+# Restart
+#sudo /etc/init.d/apache2 stop
+
+rbg  $mb/manage.py runserver localhost:8080
+
+# Show the local page
+w localhost:8080

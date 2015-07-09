@@ -1,0 +1,26 @@
+#!/bin/bash
+# This file contains useful tools that should be set up on each new Linux system
+
+sudo apt-get update
+
+# images
+sudo apt-get install -y  gimp
+#sudo apt-get install -y  drapes
+sudo apt-get install -y  graphviz
+sudo apt-get install -y  imagemagick
+#sudo apt-get install -y  libmagick9-dev
+
+# music
+#sudo apt-get install -y  gtkpod
+#sudo apt-get install -y  lame
+sudo apt-get install -y  sox nodejs-dev
+sudo apt-get install -y  vlc
+sudo apt-get install -y  audacity
+sudo apt-get install -y  sound-juicer
+
+#sudo apt-get install -y  amarok
+#sudo apt-get install -y  gnome-blog
+#sudo apt-get install -y  icecast2
+#sudo apt-get install -y  ices2
+#sudo apt-get install -y  mpg321
+#sudo apt-get install -y  mplayer

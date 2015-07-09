@@ -1,0 +1,5 @@
+#!/bin/bash
+# Open a my book directory
+echo Open a my book directory
+
+e $y/$1

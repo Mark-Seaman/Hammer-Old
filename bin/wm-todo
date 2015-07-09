@@ -1,0 +1,13 @@
+#!/bin/bash
+# Add an idea to the todo list
+echo "Add an idea to the todo list"
+
+todo=$br/WatermillWork
+if [ "$1" != "" ]
+then
+    echo "$*" >> $todo
+else
+    cat $todo
+fi
+
+cat $todo

@@ -1,0 +1,8 @@
+#!/usr/bin/python3
+# Copy files to mini
+
+from sys import argv
+from filecopy import file_copy_to_mini
+
+file_copy_to_mini(argv)
+

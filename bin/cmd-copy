@@ -1,0 +1,9 @@
+#!/bin/bash
+# Copy the core commands to this project
+echo Copy the core commands to this project
+
+cmd-core |
+while read f
+do
+    cp $b/$f .
+done

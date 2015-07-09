@@ -1,0 +1,8 @@
+#!/bin/bash
+# Pretty print JSON file
+echo Pretty print JSON file
+
+cp $1 /tmp/json.txt &&
+cat /tmp/json.txt | tr -d '\n' | python -mjson.tool > $1 && 
+rm  /tmp/json.txt
+

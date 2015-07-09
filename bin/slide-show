@@ -1,0 +1,4 @@
+#!/bin/bash
+# Build and view a slides show
+
+slide-build $1 && slide-view $1

@@ -1,0 +1,5 @@
+#!/bin/bash
+# Go to the exteriorbrain.com web page
+
+w exteriorbrain.com
+

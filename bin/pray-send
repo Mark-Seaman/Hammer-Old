@@ -1,0 +1,5 @@
+#!/bin/bash
+# Send a reminder for prayer
+echo Send a reminder for prayer
+
+pray-prompt | send mark@seamanfamily.org 'Prayer request'

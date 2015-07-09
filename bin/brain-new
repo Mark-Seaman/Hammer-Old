@@ -1,0 +1,13 @@
+#!/bin/bash
+# Create a new brain topic (alias bn)
+echo Create a brain topic for $1
+
+if [ -f "$br/$1" ]
+then
+    echo File already exists
+else
+    sed "s/\* \*/*$1 */" $br/NewTopic   | 
+    sed 's/\([A-Z]\)/ \1/g'             |
+    sed 's/^ See/See/'                  > $br/$1
+fi
+e $br/$1

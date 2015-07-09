@@ -1,0 +1,11 @@
+#!/bin/bash
+# Resize a image file
+
+size=600x600
+
+# Find big files and make thumbnails
+for f in *.jpg
+do
+    echo "resize $f to $size"
+    convert -resize $size $f f-$f
+done

@@ -1,0 +1,6 @@
+#!/bin/bash
+# Add a new lesson
+echo "New lesson: $*"
+
+echo "$*" >> ~/Documents/MyBook/SeamansLog/LifeLessons
+

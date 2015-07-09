@@ -1,0 +1,10 @@
+#!/bin/bash
+# Count the number of commands available
+
+t=/tmp/count_commands
+echo `ls $b|wc -l` "Seaman scripts"                     |tee $t
+echo `ls $sus|wc -l`  "WM Scripts"                      |tee -a $t
+echo `grep alias ~/bin/bash-alias|wc -l`  "Aliases"     |tee -a $t
+echo `env|wc -l` "Variables"                            |tee -a $t
+
+echo `cat $t|awk '{sum+=$1} END {print sum}'` "Total"

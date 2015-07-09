@@ -1,0 +1,20 @@
+#!/bin/bash
+# Return a list of core commands
+
+cat<<EOF
+e
+rbg
+show
+tdiff
+tfail
+tlike
+tlist
+tnew
+tout
+tresults
+trun
+tshow
+tst
+w
+wiki-html-content
+EOF

@@ -1,0 +1,4 @@
+#!/bin/bash
+# Select a random brain topic
+
+ls $br|random

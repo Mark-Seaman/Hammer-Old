@@ -1,0 +1,5 @@
+#!/bin/bash
+# Send an email message using the STMP server at seaman@comsystem.us
+
+ssh $ms '. bin/bash-vars && cat - | wf-send' 
+

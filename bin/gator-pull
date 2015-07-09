@@ -1,0 +1,4 @@
+#!/bin/bash
+# Pull a file from the host gator server
+
+scp -P 2222 seaman@shrinking-world.com:$1 $2

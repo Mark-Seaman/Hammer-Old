@@ -1,0 +1,8 @@
+#!/bin/bash
+#name=$1
+
+find -iname '*.mp2' | while read name
+do
+    newname=${name/\(*\)/}
+    echo mv \""$name"\" \""${newname/.mp2/.mp3}"\"|sh
+done

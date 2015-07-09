@@ -1,0 +1,10 @@
+#!/bin/bash
+# Find the space in the archive space
+
+echo Find all of the Archive space
+
+space=`hostname`-archive-du.txt
+cd $l/Archive
+du > $space
+
+sort -nr $space | head -50

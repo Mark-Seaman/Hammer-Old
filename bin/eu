@@ -1,0 +1,5 @@
+#!/bin/bash
+# Edit the util files
+
+e $pb/util/$1.py
+

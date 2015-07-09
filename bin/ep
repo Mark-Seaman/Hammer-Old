@@ -1,0 +1,5 @@
+#!/bin/bash
+# Echo $p
+
+echo $p
+

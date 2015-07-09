@@ -1,0 +1,6 @@
+#!/bin/bash
+# Grep recursive in the current directory
+
+echo Grep recursive in the current directory
+
+grep -r --exclude-dir=platform-git "$*" . 2>/dev/null | grep -v 'Binary file' 

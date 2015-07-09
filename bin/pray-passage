@@ -1,0 +1,5 @@
+#!/bin/bash
+# Select a prayer passage
+
+echo 'Message from God:'
+paragraphs  $br/LetterFromJesus | random

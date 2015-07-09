@@ -1,0 +1,6 @@
+#!/bin/bash
+# Show web site for Spiritual Log
+echo Show web site for Spiritual Log
+
+# Invoke the web page
+w spiritual-things.org

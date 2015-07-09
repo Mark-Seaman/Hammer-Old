@@ -1,0 +1,64 @@
+#!/bin/bash
+
+echo "Creating the settings.py script for $project"
+
+cat <<EOF > settings.py
+# Django settings for $project project.
+
+DEBUG = True
+TEMPLATE_DEBUG = DEBUG
+
+ADMINS = (
+  #  ('Mark Seaman', 'mark.seaman@shrinking-world.com'),
+)
+
+MANAGERS = ADMINS
+DATABASE_ENGINE = "sqlite3"
+DATABASE_NAME = '$project.db'
+DATABASE_USER = '' 
+DATABASE_PASSWORD = ''
+DATABASE_HOST = ''    
+DATABASE_PORT = ''    
+
+TIME_ZONE = 'America/Denver'
+
+LANGUAGE_CODE = 'en-us'
+
+SITE_ID = 1
+USE_I18N = True
+MEDIA_ROOT = ''
+MEDIA_URL = ''
+ADMIN_MEDIA_PREFIX = '/media/'
+SECRET_KEY = '*fe36zqt3ehkm1$dvhfu*00v$um)rgb*^#ga3zuo=5k4rxev5_'
+
+# List of callables that know how to import templates from various sources.
+TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.load_template_source',
+    'django.template.loaders.app_directories.load_template_source',
+#     'django.template.loaders.eggs.load_template_source',
+)
+
+MIDDLEWARE_CLASSES = (
+    'django.middleware.common.CommonMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+)
+
+ROOT_URLCONF = 'gallery.urls'
+
+TEMPLATE_DIRS = (
+    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
+    # Don't forget to use absolute paths, not relative paths.
+)
+
+INSTALLED_APPS = (
+    'django.contrib.auth',
+    'django.contrib.admin',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.sites',
+    '$project.$appName',
+)
+EOF
+
+e settings.py

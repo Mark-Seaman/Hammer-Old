@@ -1,0 +1,10 @@
+#!/bin/bash
+# Run ipython notebook
+
+. ~/Projects/ipython/bin/project
+
+cd $pd
+rbg ipython notebook --pylab inline --script
+
+
+

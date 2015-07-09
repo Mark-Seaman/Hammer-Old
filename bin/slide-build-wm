@@ -1,0 +1,26 @@
+#!/bin/bash
+# Build the watermill slides
+
+# Go to the directory
+cd $su/slides
+
+# Build each slide deck
+function build
+{
+    echo "Building $su/slides/$1 ..."
+    
+    # Copy the template files
+    rsync -auv template/ $1 &>/dev/null &&
+
+    # Create the presentation
+    cp text/$1.txt $1 &&
+    cat $1/$1.txt | template/bin/sling.py  > $1/$1.html &&
+    mv slide_config.js $1 
+}
+
+# Run the build for each slide show in the directory
+for f in `ls text`
+do
+    build ${f/.txt/}
+done
+

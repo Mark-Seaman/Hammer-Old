@@ -1,0 +1,57 @@
+#!/usr/bin/env python
+# Build new python test script
+
+from os       import system, environ, chmod
+from os.path  import join, isfile, splitext, basename, exists
+from sys      import argv
+
+
+# Code template for a python test
+code = '''#!/usr/bin/env python
+# Build new python test script
+
+from os       import system
+
+# Test %s
+def %s_test():
+    system ('echo %s')
+
+
+if __name__ == "__main__":
+     %s_test()
+
+    '''
+
+
+# Calculate the path for the test file
+def test_path_name(test_name):
+    return join(environ['pt'],test_name+'_test.py')
+
+
+# Create one tst file to execute nose on a py file
+def create_python_test(t):
+    test_name = basename(t)
+    text = code%(test_name,test_name,test_name,test_name)
+    test_file = test_path_name(test_name)
+    if exists(test_file):
+        print 'Test script exists already,',test_file
+    else:
+        f = open(test_file,'w')
+        f.write(text)
+        f.close()
+        chmod (test_file, 0755)
+        #print 'Create %-40s \n   %s'%(test,code)
+
+
+# Create the test file and edit it
+def write_test(testname):
+    print "Build new python test script"
+    create_python_test('test/%s'%testname)
+    system ('e test/%s_test.py'%testname)
+
+
+if __name__ == "__main__":
+    if len(argv)>1:
+        write_test(argv[1])
+    else:
+        print 'usage: %s testname'%argv[0]

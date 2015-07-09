@@ -1,0 +1,13 @@
+#!/usr/bin/env python
+# Get the doc from storage
+
+from sys      import argv
+from util.doc import doc_get
+
+if len(argv)<2:
+    print 'usage: doc-get doc'
+    exit(1)
+ 
+print doc_get (argv[1])
+
+

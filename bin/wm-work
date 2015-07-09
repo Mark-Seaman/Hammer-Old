@@ -1,0 +1,5 @@
+#!/bin/bash
+# Go to the watermill work context
+echo Go to the watermill work context
+
+brain-edit WatermillWork

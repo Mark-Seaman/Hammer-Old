@@ -1,0 +1,12 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+[remote "origin"]
+	fetch = +refs/heads/*:refs/remotes/origin/*
+	url = git@github.com:Mark-Seaman/Documents-2014.git
+#   url = markseaman.org:Git/2014-Documents.git
+[branch "master"]
+	remote = origin
+	merge = refs/heads/master

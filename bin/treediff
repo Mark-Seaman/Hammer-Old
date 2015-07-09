@@ -1,0 +1,8 @@
+#!/bin/bash
+# Show differences in two directories
+
+t=/tmp/diff; 
+tree -dL 3 $1 > $t\1; 
+tree -dL 3 $2 > $t\2; 
+diff $t\1 $t\2; 
+

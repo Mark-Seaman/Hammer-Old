@@ -1,0 +1,15 @@
+#!/bin/bash
+# Count the archive files
+echo Count the archive files
+
+# Set the environment
+. /home/seaman/bin/bash-vars
+
+cd /home/seaman/Git
+
+# List the different archives
+for f in *
+do
+    # Weigh each archive
+    find-weigh $f|tail -1
+done

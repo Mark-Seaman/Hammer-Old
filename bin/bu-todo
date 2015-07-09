@@ -1,0 +1,6 @@
+#!/bin/bash
+# Add an action to the doc todo list
+echo Add an action to the doc todo list
+
+echo "$*" >> $br/DocAction
+e  $br/DocAction

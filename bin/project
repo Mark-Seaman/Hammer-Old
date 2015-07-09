@@ -1,0 +1,59 @@
+#!/bin/bash
+# Default project for Documents
+
+# Execute all scripts
+[ -f /etc/bash_completion ] &&  . /etc/bash_completion
+[ -f ~/bin/bash-prompt    ] &&  . ~/bin/bash-prompt
+[ -f ~/bin/bash-alias     ] &&  . ~/bin/bash-alias
+[ -f ~/bin/bash-vars      ] &&  . ~/bin/bash-vars
+[ -f ~/bin/rc             ] &&  bin/rc
+
+
+echo 'Vars'
+export p=$HOME/Documents
+export gh=Mark-Seaman/Documents-2014
+export ph=markseaman.org
+export pa=$p
+export pb=$p/bin
+export pd=$p/Brain
+export pt=$p/test
+
+echo 'Alias'
+alias proot="cd $p"
+alias papp="cd $pa"
+alias pbin="cd $pb"
+alias pdoc="cd $pd"
+alias ptest="cd $pt"
+
+# Banner
+figlet `hostname` Documents
+
+# Regular Path
+export PATH=\
+$pb:\
+$pt:\
+/usr/bin:\
+/usr/local/bin:\
+/sbin:\
+/bin:\
+~/bin:\
+/usr/local/texlive/2014basic/bin/universal-darwin/:\
+.
+export _OLD_VIRTUAL_PATH=$PATH
+echo "python = `which python`"
+echo
+path
+echo
+
+# Show the banner
+reset
+cd $p
+pwd
+ls
+echo
+[ -x ~/bin/life-lesson    ] &&  life-lesson
+
+# Use nvm
+#[ -s "/home/seaman/.nvm/nvm.sh" ] && . "/home/seaman/.nvm/nvm.sh"
+#[ -s "$HOME/.nvm/nvm.sh" ] && . "$HOME/.nvm/nvm.sh"
+#[ -s "$HOME/.nvm/nvm.sh" ] && . "$HOME/.nvm/nvm.sh"

@@ -1,0 +1,24 @@
+#!/bin/bash
+# Play music
+echo Play music $1
+
+# Play new songs
+[[ "$1" == '-n' ]] &&
+rbg vlc "$HOME/Music/New" &&
+exit 0
+
+# Play local songs
+[[ "$1" == '-l' ]] &&
+rbg vlc "$HOME/Music" &&
+exit 0
+
+# Play a collection
+[[ -d "$1" ]] &&
+echo "Found your music $1" &&
+rbg vlc "$1" &&
+exit 0
+
+# Play entire collection
+echo "Playing default music"
+rbg vlc $HOME/FileShare/Music/Rock
+

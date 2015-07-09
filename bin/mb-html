@@ -1,0 +1,13 @@
+#!/bin/bash
+# List the entire book in HTML format
+
+cd $mb
+if [ "" == "$2" ]
+then
+    echo "Example usage:  mb-html SuperPower Home"
+    exit 1
+fi    
+
+cat $y/$1/HtmlHead
+./manage.py html $y/$1/$2
+cat $y/$1/HtmlFoot

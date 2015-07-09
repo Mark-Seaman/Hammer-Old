@@ -1,0 +1,3 @@
+#!/bin/bash
+# Tell me something short
+echo "Message from Mark" | send "mark.b.seaman@gmail.com" "$*"

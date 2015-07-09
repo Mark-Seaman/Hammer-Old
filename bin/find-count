@@ -1,0 +1,4 @@
+#!/bin/bash
+# Count the files in a directory tree
+echo Count files in directory tree $1
+find $1 -type f | wc -l

@@ -1,0 +1,12 @@
+#!/bin/bash
+# Find all changes
+  
+# Go to top of screen
+reset
+
+# Report the version status of all files
+gstatus ~/Documents
+gstatus ~/Books
+gstatus ~/Projects/thumper
+
+

@@ -1,0 +1,18 @@
+#!/bin/bash
+# Copy the repositories to another computer
+
+ip=$1
+echo "Copy the repositories to $ip computer"
+
+cd /home/seaman
+
+cmd='mkdir -p wme wme/platform-git  wme/application-git wme/server-git wme/support-git'
+echo "$cmd"
+echo "$cmd" | ssh $1 > /dev/null
+
+rsync -auv --delete wme/application-git/.git    $ip:wme/application-git &&
+rsync -auv --delete wme/server-git/.git         $ip:~/wme/server-git    &&
+rsync -auv --delete wme/support-git/.git        $ip:~/wme/support-git   &&
+rsync -auv --delete wme/platform-git/.git       $ip:~/wme/platform-git  &&
+
+echo "wm-copy-repos Successful"

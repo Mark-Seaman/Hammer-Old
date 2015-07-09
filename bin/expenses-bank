@@ -1,0 +1,20 @@
+#!/usr/bin/python
+# Process the expenses for this year from the downloaded info from Well Fargo Checking
+
+from sys import argv
+
+from util.list     import text_to_table, table_to_text
+from util.expenses import substitute, read_semicolon_file
+from util.expenses import save_report, print_report
+
+
+# Must have one argument
+if len(argv)<2:
+    print 'usage: '+argv[0]+' SWS-Checking'
+
+# Create a report for semi sep values
+table = read_semicolon_file(argv[1]+'.bank')
+text  = print_report(table)
+#print text
+save_report(argv[1]+'.csv', text)
+

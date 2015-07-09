@@ -1,0 +1,3 @@
+#!/bin/bash
+# Create a schedule for sending Spiritual email
+blog-schedule "$1" "$2" SpiritualLog

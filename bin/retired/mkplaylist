@@ -1,0 +1,17 @@
+function list_songs () { \
+   songdir=/media/SignatureMini/Music; \
+   playlist=$songdir/$listname.m3u; \
+   cd $songdir; \
+   find $dir -name *.mp3 > $playlist; \
+   num=`wc -l $playlist`; \
+   echo "$num songs found"; \
+ } 
+
+dir="Christian/Christian-Oldies"; listname="Christian-Oldies";    list_songs
+dir="Christian/Christian-Rock";   listname="Christian-Rock";      list_songs
+dir="Christian/Worship";         listname="Worship";             list_songs
+dir="Rock";                      listname="Rock";                list_songs
+dir="Foreign/Greek";             listname="Greek";               list_songs
+dir="Foreign/Japan";             listname="Japan";               list_songs
+
+

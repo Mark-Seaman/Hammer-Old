@@ -1,0 +1,21 @@
+#!/bin/bash
+# Setup the account structure on a new computer
+
+# Setup the key directories
+mkdir -p ~/Archive
+mkdir -p ~/Desktop/Junk
+mkdir -p ~/Projects
+mkdir -p ~/Tools
+
+# Move unneeded files to Junk
+mv Downloads examples* Videos Pictures Public Templates Desktop/Junk
+
+# Setup bin directory
+[[ ! -f ~/Documents/bin ]] && ln -s ~/Documents/bin ~/bin
+
+# Create the default profile
+cp ~/.bashrc ~/.bashrc.old
+
+# Initialize the environment
+~/Documents/bin/rc
+

@@ -1,0 +1,18 @@
+#!/usr/bin/env python
+
+# Format a page title
+from sys import argv
+from os.path import basename
+
+str = basename(argv[1])
+word = ''
+result = []
+for i,c in enumerate(str):
+    word += c
+    if i+1>=len(str) or str[i+1].isupper():
+        result.append(word)
+        word = ''
+
+print ' '.join(result)
+
+

@@ -1,0 +1,87 @@
+#!/usr/bin/env python
+# List a directory as JSON data for the page
+
+from os.path import join,exists,isdir,isfile
+from os import listdir, environ
+from sys import argv
+
+
+def dirlist(dir):
+    '''
+    Create a list of directories for this directory
+    '''
+    #print 'dir:',dir
+    if exists(dir):
+        return [ join(dir,f) for f in sorted(listdir(dir)) if isdir(join(dir,f)) ]
+    return []
+
+
+def filelist(dir):
+    '''
+    Create a list of files for this directory
+    '''
+    #print sorted(listdir(dir))
+    return [  join(dir,f) for f in sorted(listdir(dir)) if isfile( join(dir,f))]
+
+
+def content(file):
+    '''
+    Read the file content; return file name and content as a list
+    '''
+    return  [ file, open(file).read() ]
+
+
+def read_dir(dir):
+    '''
+    Return a list of file contents for the directory
+    '''
+    return [ content(f) for f in filelist(dir) ] 
+       
+
+def dir_content(dir):
+    '''
+    Read the directory content; return file name and content as a list
+    '''
+    return  [ dir, read_dir(dir) ]
+
+
+def read_all_dirs(dir):
+    '''
+    Print the directory content for two levels of files
+    '''
+    return [ dir_content(d) for d in dirlist(dir) ]
+
+
+def print_contents(contents):
+    '''
+    Print the directory content for files in a directory
+    '''
+    for c in contents:
+        print '   '+c[0],  len(c[1]), 'chars'
+        #print '\n\n   BODY:\n',c[1]
+
+
+def print_all_dirs(contents):
+    '''
+    Print the directory content for two levels of files
+    '''
+    for d in contents:
+        print '\n'+d[0]
+        print_contents(d[1])
+
+
+def build_json(contents):
+    years = [ str(1959+year) for year in range(54) ]
+
+d = ''
+if len(argv)>1: d = argv[1]
+
+files = []
+dir   = join(environ['pt'],d)
+files = filelist(dir)
+
+contents = read_dir(dir)
+print_contents(contents)
+
+#contents = read_all_dirs(dir)
+#print_all_dirs(contents)

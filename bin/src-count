@@ -1,0 +1,5 @@
+#!/bin/bash
+# Count the source code
+
+src|xargs lc|sort -nr|head -30
+

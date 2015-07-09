@@ -1,0 +1,39 @@
+#!/usr/bin/env python
+# Create code for a new live JS variable
+
+from sys import argv
+
+source = '''
+    //----------------
+    // varname control
+
+    $scope.varname = 'No value'
+
+    $scope.get_varname = function () {
+        get_variable ($http, 'varname', function(data){ 
+           $scope.varname = data
+        })
+    }
+
+    $scope.set_varname = function () {
+        set_variable ($http, 'varname', $scope.varname, function(data){} )
+    }
+
+    $scope.get_varname()
+'''
+
+jade = '''
+input(type='text',style="width:50px",ng-model='varname',ng-change='set_varname()')
+'''
+
+# Create a code snippet
+def create_var_code(varname):
+    print "JS: ",source.replace('varname',varname)
+    print "JADE: ",jade.replace('varname',varname)
+
+if len(argv)>1:
+    varname = argv[1]
+    create_var_code(varname)
+else:
+    print 'example usage:',argv[0],'varname'
+

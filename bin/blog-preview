@@ -1,0 +1,21 @@
+#!/usr/bin/python
+# Send me a preview article
+
+# Create a schedule for sending a Dr Prof Tips article
+print '# Create a schedule for sending a Dr Prof Tips article'
+
+from files import read_file
+from sys import argv
+from os import system
+
+if (len(argv)<3):
+    print "usage: blog-schedule article title"
+    exit (1)
+
+output=open('/home/seaman/Documents/Brain/SeamansLogQueue', 'w')
+
+subscriber = "mark.b.seaman@gmail.com"
+output.write('blog-send ' + subscriber + ' ' + argv[1] + ' "'+argv[2]+'"\n')
+output.close()
+
+system ('sh /home/seaman/Documents/Brain/SeamansLogQueue')

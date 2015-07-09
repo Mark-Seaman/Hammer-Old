@@ -1,0 +1,5 @@
+#!/bin/bash
+# Show the Tricks web site
+
+e $mybook/50-Tricks
+

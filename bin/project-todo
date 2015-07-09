@@ -1,0 +1,10 @@
+#!/bin/bash
+# Show all of the todo lists
+echo Show all of the todo lists
+
+project-list |
+while read p 
+do
+    echo "$p"
+    cd $p && cat doc/ToDo
+done

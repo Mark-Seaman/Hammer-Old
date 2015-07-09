@@ -1,0 +1,5 @@
+#!/bin/bash
+# Spiritual Growth App
+
+. ~/Projects/mybook/bin/project && run localhost/seaman/SpiritualGrowth/Index
+

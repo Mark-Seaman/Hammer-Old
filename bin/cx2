@@ -1,0 +1,5 @@
+#!/bin/bash
+# Copy this command to ~/bin
+echo Copy this command to ~/bin
+
+cp ~/bin/$1 .

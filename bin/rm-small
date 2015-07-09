@@ -1,0 +1,4 @@
+#!/bin/bash
+# Remove small files
+
+find $1 -size -25k -type f| while read f; do echo rm $f; done

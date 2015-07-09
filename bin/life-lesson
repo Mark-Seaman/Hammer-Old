@@ -1,0 +1,5 @@
+#!/bin/bash
+# Pick a life lesson
+
+cat ~/Documents/MyBook/Public/SeamansLog/LifeLessons | random
+

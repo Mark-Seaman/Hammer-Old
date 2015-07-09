@@ -1,0 +1,5 @@
+#!/bin/bash
+# Find the files in the brain
+
+ls $br
+

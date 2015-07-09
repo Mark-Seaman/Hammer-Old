@@ -1,0 +1,4 @@
+#!/bin/bash
+# Run gmail in a browser
+echo Run gmail in a browser
+w http://mail.google.com/mail/?shva=1#inbox

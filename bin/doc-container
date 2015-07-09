@@ -1,0 +1,16 @@
+#!/bin/bash
+# Create a new document container template
+
+# Create the directory
+mkdir $pd/template/$1
+
+# Create the template
+echo $2 > $pd/template/$1/.template
+
+# Create the index
+echo '* %s *'     > $pd/template/$1/.index
+echo 'doc-index $0' > $pd/template/$1/Index
+chmod +x  $pd/template/$1/Index
+
+# Show the results
+tree -a $pd/template/$1

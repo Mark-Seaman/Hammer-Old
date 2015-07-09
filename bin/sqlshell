@@ -1,0 +1,5 @@
+#!/bin/bash
+# Work on the SQL database for a given project
+project=$1
+mysql seaman_$project -useaman_$project -p`cat $b/sqluser`
+

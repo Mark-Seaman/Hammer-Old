@@ -1,0 +1,13 @@
+#!/bin/bash
+# Create a new python command
+
+cat <<EOF > $1
+#!/usr/bin/python
+# $2
+
+print "$1"
+EOF
+
+exe $1
+$1
+e $1

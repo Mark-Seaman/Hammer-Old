@@ -1,0 +1,5 @@
+#!/bin/bash
+# Track the time spent for this week
+
+cd ~/Documents/Brains
+doc-template    `date  +%Y-%m` Month

@@ -1,0 +1,44 @@
+#!/bin/bash
+# Prepare a new invoice
+
+t=$1
+
+cat <<EOF 
+Prepare a new invoice
+---------------------
+
+secure-unpack
+
+prepare data
+
+    cd ~/Projects/Secure/2014/Invoice/Q2
+    ew invoice-prep
+
+    e *Billing
+
+    # Invoice for CNE
+    e time-cne-$t
+    invoice-cne $t 90
+
+
+send invoice & checks
+
+    cp Watermill.odt Watermill-$t.odt
+    o Watermill-$t.odt
+
+    cp CNE.odt CNE-$t.odt
+    o CNE-$t.odt
+
+    cut and paste data into invoice
+    review invoice
+    export PDF
+
+    attach to email
+    transfer $ to family
+    write bill pay check
+    send info to Eric
+    record billing info
+
+secure-pack
+
+EOF

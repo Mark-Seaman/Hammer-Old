@@ -1,0 +1,22 @@
+#!/bin/bash
+# Configure this emacs installation
+cat <<EOF >/tmp/setup-emacs
+
+echo Configure this emacs installation
+
+cd /usr/share/emacs/site-lisp/muse-el
+#mv muse-mode.el  muse-mode.el.orig
+#mv muse-colors.el muse-colors.el.orig
+#cp /home/seaman/bin/config/muse-mode.el  .
+#cp /home/seaman/bin/config/muse-colors.el .
+
+cd /usr/share/emacs24/site-lisp/muse-el
+mv muse-mode.elc muse-mode.elc.orig
+mv muse-mode.el  muse-mode.el.orig
+mv muse-colors.el muse-colors.el.orig
+cp /home/seaman/bin/config/muse-mode.el  .
+cp /home/seaman/bin/config/muse-colors.el .
+
+EOF
+
+sudo bash /tmp/setup-emacs

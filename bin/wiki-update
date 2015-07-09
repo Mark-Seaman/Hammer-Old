@@ -1,0 +1,9 @@
+#!/bin/bash
+# Push all the changes from this directory
+
+cd $p/wiki/markdown
+git add -A .         
+git commit -m"Dev machine update of files `hostname`"   
+
+git pull            &&
+git push

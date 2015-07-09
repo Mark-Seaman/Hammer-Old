@@ -1,0 +1,33 @@
+#!/usr/bin/env python
+# Display the current settings
+
+from sys  import stdin
+from util.vars import process_vars
+from util.files import read_input,do_command
+
+
+# Process a single variable
+def process_var(line):
+    parts = line.split('=')
+    name = parts[0].strip()
+    print '  <tr>'
+    if len(parts)>1:
+        value = parts[1].strip()
+        print '    <td>',
+        print "<b>%s</b>" % name,
+        print '</td>'
+        print '    <td>',
+        print "%s" % value,
+        print '</td>'
+    print '  </tr>'
+        
+
+vars = do_command('var-list').split('\n')
+
+print '<h1>Settings for Pipe Scan</h1>'
+print '<a href="/profile/edit">Edit Settings</a>'
+print '<br>'
+print '<table>'
+for v in vars:
+      process_var (v)
+print '</table>'

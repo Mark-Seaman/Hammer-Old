@@ -1,0 +1,133 @@
+#!/bin/bash
+# Prune off extra unneeded files that are recreated each time synchronization is done
+
+dir=/home/seaman/Documents/Code
+if [ "$1" != "" ]
+then
+    dir=$1
+fi
+
+if [ ! -d $dir ] 
+then
+    echo "Directory not found, $dir"
+    exit 1
+fi
+
+(
+
+# Code
+cd $dir
+echo "Pruning $dir/Code"
+xargs rm -rf << EOL
+    html/.git
+    qt
+    rails
+    sites
+    txtracing
+    net/Microtronics
+	c++/boost_1_37_0.tar.bz2
+	c++/charMatch.zip
+	c++/dirs.zip
+	c++/experiments/
+    database/
+    django-wiki/
+    dnaskittle/
+    Login/
+    net/
+    perl/
+	rcp/pict
+	rcp/picture/Picture.kdevelop.pcs
+	rcp/picture/bin/
+	rcp/picture/picture.kdevelop
+	rcp/picture/picture.kdevses
+	rcp/picture/picture.txt
+	rcp/picture/src/src.kdev4
+	rcp/rcp
+	rcp/ruby/
+    ruby/
+    smarty/
+    sws/
+    VSMacros80/
+    webapps/
+    webfaction/
+    uml/
+    xml/
+EOL
+
+# mybook
+cd $dir/mybook
+xargs rm -rf << EOL
+	bin/__init__.py
+	effectiveness.txt
+    book/httputil.py
+	book/format.py
+	book/topic_tree.py
+	data/all.json
+    data/seaman_.sql
+	etc-apache2-httpd.conf
+    .git
+	media/admin/img/mybook-logo.png
+	media/media
+	media/mybook/mybook.css
+ 	media/Mark.Seaman.200.jpg
+ 	media/Mark.Seaman.400.jpg
+ 	media/sws_logo_150.png
+ 	media/sws_logo_300.png
+ 	media/sws_logo_556.png
+ 	media/sws_logo_65.png
+ 	media/sws_logo_75.png
+    mybook.txt
+    seaman_mybook.sql
+    seaman_seaman.sql
+    seaman_shrinking.sql
+ 	settings-leadership.py
+ 	settings-mybook.py
+ 	settings-seaman.py
+ 	settings-shrinkingworld.py
+ 	settings-technology.py
+ 	start_application
+ 	templates/author.html
+    templates/base_site.html
+    test.it
+	test.html
+EOL
+
+if [ -d go ] ; then merge go ../Tools/go; fi
+
+# mybook
+cd $dir/webfaction/mybook
+xargs rm -rf << EOL
+    admin-media/img/mybook-logo-100.png
+    mybook/data/topic.json
+    mybook/manage.py-localhost
+    mybook/mb.py
+    mybook/nohup.out
+    mybook/settings.py-localhost
+    mybook/templates/list.html
+    mybook/old
+    x2
+    webfaction
+EOL
+
+# shrinkingworld
+cd $dir/webfaction/shrinkingworld
+xargs rm -rf << EOL
+    admin-media/.git
+ 	customize
+	mybook/manage_hummer.py
+	mybook/settings_hummer.py
+EOL
+
+# webfaction
+cd $dir/webfaction
+xargs rm -rf << EOL
+    old
+    old-seaman
+    xxx
+	seaman/mybook/manage_hummer.py
+	seaman/mybook/settings_hummer.py
+EOL
+
+# Supress the errors
+) 2> /dev/null
+

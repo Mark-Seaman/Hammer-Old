@@ -1,0 +1,5 @@
+#!/bin/bash
+# Send me a life lesson
+echo Send me a life lesson
+
+life-lesson | send 'mark.b.seaman@gmail.com,stacie@seamanfamily.org' 'Life lesson'

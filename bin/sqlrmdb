@@ -1,0 +1,11 @@
+#!/bin/bash
+# Removed a database from the command line
+
+# Usage:
+#   sqlrmdb seaman
+#   sqlrmdb shrinking
+#   sqlrmdb mybook
+
+database=$1
+echo "Removing Database: $database"
+echo "DROP DATABASE IF EXISTS \`$database\` ;" | mysql -uroot -p`cat $b/sqlroot`

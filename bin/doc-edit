@@ -1,0 +1,5 @@
+#!/bin/bash
+# Edit the proper document file
+
+e $pd/$1
+

@@ -1,0 +1,50 @@
+#!/usr/bin/env python
+# Enumerate a specific number of days
+
+from datetime       import datetime, date, timedelta 
+
+# Convert from string to seconds after 1970
+def to_date(s):
+     return datetime.strptime(s, "%Y-%m-%d") #"%Y-%m-%d"
+
+# Format like   Tue, 03-11
+def to_day(s):
+    return datetime.strptime(s, "%a, %m-%d")
+
+#------------
+
+# Convert from a time record to string
+def date_str(t):
+    return t.strftime("%Y-%m-%d")  #  "%Y-%m-%d"
+
+# Format like   Tue, 03-11
+def day_str(t):
+    return t.strftime("%a, %m-%d")
+
+#------------
+
+# Return a date from 48 hours ago
+def days_ago(date,days):
+    return  date_str(date-timedelta(days=days))
+
+# List all of the days
+def enumerate_days(today, days):
+    return [ days_ago(today, days-d-1) for d in range(days) ]
+
+#------------
+
+today = datetime.today()
+
+from sys import argv
+if len(argv)<2:
+    print('today')
+else:
+    days = int(argv[1])
+    if len(argv)>2:
+        today = to_date(argv[2])
+
+    print('Days: %d, To: %s'%(days,day_str(today)))
+
+    for d in enumerate_days(today, days):
+        print(day_str(to_date(d)))
+

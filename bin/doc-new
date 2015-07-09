@@ -1,0 +1,13 @@
+#!/bin/bash
+# Create a new document in the current directory
+echo Create a new document in the current directory
+
+if [ -f "$1" ]
+then
+    echo File already exists
+else
+    sed "s/\* \*/*$1 */" $br/NewTopic   | 
+    sed 's/\([A-Z]\)/ \1/g'             |
+    sed 's/^ See/See/'                  > $1
+fi
+e $1

@@ -1,0 +1,38 @@
+#!/bin/bash
+# This file contains useful tools that should be set up on each new Linux system
+
+sudo apt-get update
+
+# Qt
+wget http://download.qt-project.org/official_releases/qt/5.3/5.3.0/qt-opensource-linux-x64-5.3.0.run
+chmod +x qt-opensource-linux-x64-5.3.0.run
+./qt-opensource-linux-x64-5.3.0.run
+sudo apt-get install -y  qt4-designer
+sudo apt-get install -y  qt4-dev-tools
+sudo apt-get install -y  qt4-doc
+sudo apt-get install -y  qt4-qtconfig
+
+
+# Virutal Box
+sudo apt-get install -y  virtualbox-qt
+
+
+# C++
+sudo apt-get install -y  scons
+
+
+# Python
+sudo apt-get install -y  python-mysqldb
+sudo apt-get install -y  fabric
+sudo apt-get install -y  libapache2-mod-wsgi
+
+
+# Linux files
+sudo apt-get install -y  inotify-tools
+sudo apt-get install -y  pgpgpg
+sudo apt-get install -y  gpa
+sudo apt-get install -y  sshfs
+
+
+# Database
+sudo apt-get install -y  sqlite3

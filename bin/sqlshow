@@ -1,0 +1,4 @@
+#!/bin/bash
+# Show the SQL databases
+echo 'show databases;'| mysql -uroot -p`cat $b/sqlroot`
+

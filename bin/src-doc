@@ -1,0 +1,5 @@
+#!/bin/bash
+# Find all of the topics in MyBook
+
+cd ~/Documents/MyBook
+doc-files 

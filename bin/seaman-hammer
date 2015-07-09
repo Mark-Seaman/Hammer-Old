@@ -1,0 +1,5 @@
+#!/bin/bash
+# Create a console window and login to seaman-hammer
+
+ssh seaman@$h
+

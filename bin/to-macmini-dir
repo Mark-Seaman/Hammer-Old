@@ -1,0 +1,5 @@
+#!/bin/bash
+# Copy a directory tree of files
+
+cptree $1 $macmini:$1
+

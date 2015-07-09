@@ -1,0 +1,13 @@
+#!/usr/bin/env python
+# Load the correct answers from the git repo
+
+from sys import argv
+from util.systest import load_correct_files
+
+
+print "Load the correct answers from the git repo"
+if len(argv)>1:
+    load_correct_files(argv[1])
+else:
+    print 'usage: ',argv[0], 'hostname'
+

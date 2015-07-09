@@ -1,0 +1,5 @@
+#!/bin/bash
+# Run libre-office
+
+rbg /Applications/LibreOffice.app/Contents/MacOS/soffice $*
+

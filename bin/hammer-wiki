@@ -1,0 +1,5 @@
+#!/usr/bin/env python
+# Wiki text formatter
+
+from util.doc import  print_page_html
+print_page_html()

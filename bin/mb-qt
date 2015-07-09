@@ -1,0 +1,4 @@
+#!/bin/bash
+# Quick test
+cd $mb
+manage.py qt

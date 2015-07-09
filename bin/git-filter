@@ -1,0 +1,12 @@
+#!/bin/bash
+# Git status and filter the output
+
+sed '/git add/d'            | 
+sed '/Changed/d'            | 
+sed '/\#$/d'                | 
+sed '/On branch master/d'   | 
+sed '/nothing to commit/d'  |
+sed '/discard changes/d'    |
+sed '/Already up-to-date./d'|
+sed '/Everything up-to-date/d'|
+sed '/Commit all changes to Documents/d'

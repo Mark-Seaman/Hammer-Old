@@ -1,0 +1,7 @@
+#!/bin/bash
+# Present some slides
+echo Present some slides
+
+slides=Meeting-2014-04-30
+slide-build $slides
+slide-view $slides

@@ -1,0 +1,10 @@
+#!/usr/bin/env python
+# Read the JSON for all vars
+
+from sys       import argv
+from util.vars import print_json
+
+if len(argv)<2:
+    print_json()
+else:
+    print_json(argv[1])

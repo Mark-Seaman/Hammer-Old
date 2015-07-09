@@ -1,0 +1,5 @@
+#!/bin/bash
+# Show the configured hosts on this computer
+
+cat /etc/hosts
+

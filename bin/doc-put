@@ -1,0 +1,11 @@
+#!/usr/bin/env python
+# Put the doc in storage
+
+from sys      import argv
+from util.doc import doc_put
+
+if len(argv)<2:
+    print 'usage: doc-put doc < text'
+    exit(1)
+
+doc_put(argv[1])

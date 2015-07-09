@@ -1,0 +1,5 @@
+#!/bin/bash
+# Launch the Wing IDE for Python
+
+wing5.0 $*
+

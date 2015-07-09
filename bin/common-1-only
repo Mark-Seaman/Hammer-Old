@@ -1,0 +1,8 @@
+#!/bin/bash
+# Create a list of common files
+
+ls $1 > /tmp/common-files-1
+ls $2 > /tmp/common-files-2
+
+comm -23 /tmp/common-files-1 /tmp/common-files-2
+

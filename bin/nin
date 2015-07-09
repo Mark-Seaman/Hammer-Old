@@ -1,0 +1,5 @@
+#!/bin/bash
+# Node package manager (NPM) install
+echo 'Node package manager (NPM) install'
+
+npm install $1

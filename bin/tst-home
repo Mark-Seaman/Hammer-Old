@@ -1,0 +1,12 @@
+#!/bin/bash
+# Test the Jack Hammer code
+
+. ~/bin/project > /dev/null
+
+git pull &&
+tresults | mklog tst-home
+
+
+log=$HOME/Documents/logs/`hostname`/tst-home.log
+cat $log |range 0 0
+echo $log

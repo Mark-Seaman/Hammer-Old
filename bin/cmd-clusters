@@ -1,0 +1,28 @@
+#!/bin/bash
+# List command clusters
+cat <<EOF 
+
+ Command clusters
+------------------
+    ch          # Command automation
+    bh          # Brain help
+    pray-help   # Pray tools
+
+    blog-help   # Blog tools
+    blog-help     # Seamans log
+    sp-help     # Spiritual blog
+
+    mb-help     # My book application
+    dj-help     # Django applications
+    sql-help    # SQL scripts
+
+    archive-help# Archive managment
+    music-help  # Music organization
+
+    wc-help     # Watermill code
+    wm-help     # Watermill diagnostics
+    ws-help     # Watermill server
+
+    prune-help  # Prune unneeded files
+    setup-help  # Setup scripts
+EOF

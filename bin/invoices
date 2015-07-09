@@ -1,0 +1,5 @@
+#!/bin/bash
+# Open the invoices spreadsheet
+
+rbg soffice ~/Dropbox/Shrinking_World_Finance/Invoices.xlsx
+

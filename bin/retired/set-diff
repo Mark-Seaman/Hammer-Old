@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Find the difference between two sets of lines.
+
+sort $1 -o /tmp/set1
+sort $2 -o /tmp/set2
+
+# Subtract the second set from the first
+comm -23 /tmp/set1 /tmp/set2

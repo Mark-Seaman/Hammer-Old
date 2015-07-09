@@ -1,0 +1,10 @@
+
+#!/bin/bash
+# Edit my notes
+
+# Edit notes on App Thumper
+echo View notes on App Thumper
+
+e ~/Projects/thumper/doc/seaman/notes
+e ~/Projects/thumper/doc/seaman/planner
+

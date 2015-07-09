@@ -1,0 +1,6 @@
+#!/bin/bash
+# Run a command that takes a long time to complete.
+# Run it as a background task and send the output to a temp file.
+
+nohup time $* &> /tmp/longrun &
+

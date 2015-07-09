@@ -1,0 +1,96 @@
+#!/usr/bin/env python
+# Track the state of documents
+
+from sys import argv
+from datetime import datetime
+
+doc_file = '/home/seaman/Documents/doc-work-flow'
+
+help_string =  '''usage:
+    work-flow [-v] [doc] [state]
+
+    doc     - select the named document for the operation
+    state   - new state to set on the doc
+    -?      - show the command usage
+    -v      - show all of the entries that match (default is to show one)
+    '''
+
+# Convert a date from date object to string 
+def date_str(date):
+    return date.strftime("%Y-%m-%d")
+
+# True is known state
+def is_state(state):
+    return state in [ 'create','outline','draft','edit','publish','share','delete' ]
+
+# Remember a doc state
+def set_doc(doc,state):
+    #print 'set-doc    %s %s'%(doc,state)
+    f = open(doc_file,'a')
+    f.write('%s,%s,%s\n'%(doc,state,date_str(datetime.now())))
+
+# Read doc history
+def read_file():
+    l = open(doc_file).read().split('\n')
+    l = map(lambda x:x.split(','), l)
+    return filter (lambda x:len(x)==3, l)
+
+# Print the entries that matched
+def print_match(l):
+    for i in l:  print ','.join(i)
+
+# Filter the matches
+def match_verbose(l, verbose):
+    return l if verbose else l[:1]
+def match_state(l, state):
+    return filter(lambda x:x[1]==state, l) if state else l
+def match_doc(l, doc):
+    return filter(lambda x:x[0]==doc, l) if doc else l
+
+# Find doc history
+def find_docs (doc=None, state=None, verbose=False):
+    #print '\nfind-docs   doc:%s state:%s verbose:%s'%(doc,state,verbose)
+    l = read_file()
+    l = match_state  (l, state)
+    l = match_doc    (l, doc)
+    l = match_verbose(l, verbose)
+    print_match(l)
+
+# Lookup or set the doc states
+def work_flow(doc,state,verbose):
+    #print 'work flow:', doc, state, verbose
+    if doc and state:
+        set_doc(doc,state)
+        return
+    if state:
+        find_docs (doc, state, verbose)
+        return
+    if doc:
+        find_docs (doc,state,verbose)
+        return
+    find_docs (doc,state,verbose)
+
+# Gather arguments
+def get_args(argv):
+    help,verbose,doc,state  = (False,False,None,None)
+    if len(argv)>1 and argv[1]=='-?':
+        help = True
+    if len(argv)>1 and argv[1]=='-v':
+        verbose = True
+        argv = argv[1:]
+    if len(argv)>1 and is_state(argv[-1]):
+        state = argv[-1]
+        argv = argv[:-1]
+    if len(argv)>1:
+        doc = argv[1]
+    return doc,state,verbose,help
+
+# Print help or work flow info
+def run_command(argv):
+    doc,state,verbose,help = get_args(argv)
+    if help:
+        print help_string
+    else:
+        work_flow(doc,state,verbose)
+
+run_command(argv)

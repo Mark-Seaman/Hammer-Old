@@ -1,0 +1,32 @@
+#!/bin/bash
+# Do a quick test for a development loop
+
+scc alert-convert
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# year=2010
+# month=05
+
+# d=$sud/archive/$year-$month
+# mkdir -p $d
+# $suc/manage.py alert-archive $year $month
+# wc -l $d/*-alerts

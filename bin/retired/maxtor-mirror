@@ -1,0 +1,33 @@
+#!/bin/bash
+# Mirror the contents of the Maxtor drive to the local file system.
+# This file must be run as root.
+
+# Source the proper context
+. /home/seaman/bin/bash-vars
+
+{
+    date
+    id
+
+    # Mount the drive
+    maxtor
+
+    # Check if ready
+    if [ -f "$m/backup/ready.txt" ]
+    then
+        echo "Found Maxtor drive"
+
+        # Create the directory
+        mkdir -p /maxtor
+
+        echo 'rsync -au --delete /media/maxtor/ /maxtor'
+        
+        # Copy the files
+        rsync -au --delete /media/maxtor/ /maxtor
+    else
+        echo "Server is NOT available for backup"
+        return 1
+    fi
+
+    date
+} &> $a/logs/maxtor-mirror.log

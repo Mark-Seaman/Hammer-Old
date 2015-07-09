@@ -1,0 +1,13 @@
+#!/bin/bash
+# List the bin files
+
+[ -d "$jack" ] &&
+{
+    cd $jack
+    find bin | grep -v '.pyc\|^bin$\|^bin/util$'
+    find test -name '*.tst' 
+} | sort
+
+[ ! -d "$jack" ] &&
+echo 'No Jack Hammer project found' &&
+exit 1

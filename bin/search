@@ -1,0 +1,7 @@
+#!/bin/bash
+# Search for strings in source code
+
+cd $p
+grep -s $* `src`
+
+

@@ -1,0 +1,34 @@
+#!/bin/bash
+# Prune off extra unneeded files that are recreated each time synchronization is done
+
+dir=/home/seaman/Documents/Code
+if [ "$1" != "" ]
+then
+    dir=$1
+fi
+
+if [ ! -d $dir ] 
+then
+    echo "Directory not found, $dir"
+    exit 1
+fi
+
+(
+cd $dir
+
+xargs rm -rf << EOL
+
+com-system/djdo
+mybook/bin/__init__.py
+mybook/book/format.py
+mybook/book/topic_tree.py
+mybook/effectiveness.txt
+mybook/xxx
+mybook/xxx.txt
+mybook/yyy
+
+EOL
+
+# Supress the errors
+) 2> /dev/null
+

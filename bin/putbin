@@ -1,0 +1,10 @@
+#!/bin/bash
+# Put the commands on the file server
+
+echo "Put bin"
+prune-bin
+echo 'prune-bin' | ssh $z 2>&1 |grep -v 'Pseudo'
+
+rsync -au --exclude .git /home/seaman/bin/ $z:/home/seaman/bin
+
+

@@ -1,0 +1,14 @@
+#!/bin/bash
+# Set a burst timer series
+echo 'Set a timer series for 4 burst cycles (over 2 hours)'
+
+play ~/bin/DING1.WAV ~/bin/DING.WAV
+
+echo play ~/bin/DING.WAV  | at -v "NOW + 30 MINUTE" &> /dev/null
+
+echo play ~/bin/DING.WAV  | at -v "NOW + 60 MINUTE" &> /dev/null
+
+echo play ~/bin/DING.WAV  | at -v "NOW + 90 MINUTE" &> /dev/null
+
+echo play ~/bin/DING1.WAV ~/bin/DING.WAV | at -v "NOW + 120 MINUTE" &> /dev/null
+

@@ -1,0 +1,5 @@
+#!/bin/bash
+# Show the content for this blog
+echo Show the content for this blog
+
+brain-edit SpiritualLogContent

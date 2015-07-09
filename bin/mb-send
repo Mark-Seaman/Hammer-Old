@@ -1,0 +1,9 @@
+#!/bin/bash
+# Send a topic as an email from mybook
+
+to=$1
+book=$2
+page=$3
+
+mb-html $book $page | send-html $to "Message from Mark Seaman"
+

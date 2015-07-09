@@ -1,0 +1,5 @@
+#!/bin/bash
+# Go to linked in
+echo Go to Linked In
+
+w http://linkedin.com

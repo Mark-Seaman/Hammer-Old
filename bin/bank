@@ -1,0 +1,5 @@
+#!/bin/bash
+# Go to my bank account
+
+web https://www.wellsfargo.com/
+

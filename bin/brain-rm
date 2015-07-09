@@ -1,0 +1,7 @@
+#!/bin/bash
+# Remove a topic from the brain
+echo Remove $1 topic from the brain
+cd $br
+git rm $1
+
+

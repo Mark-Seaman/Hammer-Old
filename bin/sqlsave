@@ -1,0 +1,13 @@
+#!/bin/bash
+
+database=seaman_$1
+user=seaman_$1
+password=$2
+
+echo "Database: $database"
+echo "User:     $user"
+echo "Password: $password"
+
+echo mysqldump -u$user -p$password $database '>' $database.sql
+mysqldump -u$user -p$password $database > $database.sql
+

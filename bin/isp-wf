@@ -1,0 +1,4 @@
+#!/bin/bash
+# Go to the Web Faction Setup view
+echo  Go to the Web Faction Setup view
+w https://my.webfaction.com/

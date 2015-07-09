@@ -1,0 +1,38 @@
+#!/bin/bash
+# Setup the bash environment for new shell
+
+# If not running interactively, don't do anything
+[ -z "$PS1" ] && return
+
+# Enable the bash prompt 
+if [ -f ~/bin/bash-prompt ]; then
+    . ~/bin/bash-prompt
+fi
+
+# Enable the bash shell completion
+if [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+fi
+
+# Welcome message
+if [ -x bin/welcome ]
+then
+    bin/welcome
+fi
+
+# Variables
+if [ -f ~/bin/bash-vars ]; then
+    . ~/bin/bash-vars
+fi
+
+# Alias definitions.
+if [ -f ~/bin/bash-alias ]; then
+    . ~/bin/bash-alias
+fi
+
+# Home setup
+if [ -f ~/bin/project-home-env ]; then
+    . ~/bin/project-home-env 
+fi
+
+

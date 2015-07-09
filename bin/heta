@@ -1,0 +1,9 @@
+#!/bin/bash
+# Show head and tail of a file
+
+echo "Head and tail of $1"
+echo '-------------'
+head -20 $1
+echo '-------------'
+tail -20 $1
+echo '-------------'

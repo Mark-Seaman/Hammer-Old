@@ -1,0 +1,5 @@
+#!/bin/bash
+# Run Quickbooks
+
+w quickbooks.com
+

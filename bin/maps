@@ -1,0 +1,5 @@
+#!/bin/bash
+# Go to google maps
+
+w maps.google.com
+

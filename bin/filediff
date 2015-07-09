@@ -1,0 +1,8 @@
+#!/bin/bash
+# Calculate the difference between two lists of files
+
+ls -l $1 > /tmp/diff1
+ls -l $2 > /tmp/diff2
+
+
+diff /tmp/diff1 /tmp/diff2

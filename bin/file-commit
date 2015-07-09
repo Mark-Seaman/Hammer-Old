@@ -1,0 +1,9 @@
+#!/usr/bin/python3
+# Commit all changes in Documents
+
+from os import system
+
+print("Commit all changes in Documents")
+
+system('commit "Automatic Commit of Documents"')
+

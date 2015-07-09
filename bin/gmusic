@@ -1,0 +1,5 @@
+#!/bin/bash
+# Listen to Google Music
+
+w https://play.google.com/music/listen
+

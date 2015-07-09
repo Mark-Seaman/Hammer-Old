@@ -1,0 +1,6 @@
+#!/bin/bash
+# Find differences with the Jack Hammer file
+echo Find differences with the Jack Hammer file
+
+cd $p
+diff  $1 ~/Projects/jack-hammer/$1

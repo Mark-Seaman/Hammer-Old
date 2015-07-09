@@ -1,0 +1,8 @@
+#!/bin/bash
+# Refresh the managed directory by copying music from Seaman Server
+
+. /home/seaman/bin/bash-vars
+rsync -auv --delete $z:Music/managed/ ~/Music/managed 2>&1 | 
+mklog music-copy
+
+

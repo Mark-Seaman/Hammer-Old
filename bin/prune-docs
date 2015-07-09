@@ -1,0 +1,38 @@
+#!/bin/bash
+# Prune the following list of files so that they are not 
+# propogated while doing synchronization.
+
+dir=/home/seaman/Documents
+if [ "$1" != "" ]
+then
+    dir=$1
+fi
+
+if [ ! -d $dir ] 
+then
+    echo "Directory not found, $dir"
+    exit 1
+fi
+
+cd $dir
+(
+
+# Remove files left by emacs
+find -name '*#*'|xargs rm
+find -name '*~' |xargs rm
+
+
+# Remove this list of files
+xargs rm -rf << EOL
+
+KeePass/Database.kdb.lock
+
+EOL
+
+# Specialized prune scripts
+prune-mybook MyBook
+prune-brain  Brain
+prune-code   Code
+
+) &> /dev/null
+

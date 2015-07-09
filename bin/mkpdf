@@ -1,0 +1,6 @@
+#!/bin/bash
+# Create a PDF file from markdown
+
+pandoc $1.md -o $1.pdf &&
+rbg evince "$1.pdf"
+

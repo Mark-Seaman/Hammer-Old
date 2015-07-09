@@ -1,0 +1,10 @@
+#!/bin/bash
+# Create and edit a wiki page for this project
+
+echo Project: $1
+[ -f "$plan/$1" ] && echo 'Exists already' 
+
+[ ! -f "$plan/$1" ] && cp $br/TemplateProject $plan/$1
+
+e $plan/$1
+

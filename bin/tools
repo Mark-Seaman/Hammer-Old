@@ -1,0 +1,5 @@
+#!/bin/bash
+# Show the tools info
+
+e $plan/SWS/Tools
+

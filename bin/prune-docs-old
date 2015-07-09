@@ -1,0 +1,169 @@
+#!/bin/bash
+# Prune the following list of files so that they are not 
+# propogated while doing synchronization.
+
+dir=/home/seaman/Documents
+if [ "$1" != "" ]
+then
+    dir=$1
+fi
+
+if [ ! -d $dir ] 
+then
+    echo "Directory not found, $dir"
+    exit 1
+fi
+
+cd $dir
+(
+rm *~ */*~
+rm */.#*
+
+xargs rm -rf << EOL
+Brain/Emacs.muse
+Brain/FrederickSvr
+Brain/WatermillCheckup
+Brain/MicroBooks
+Brain/Motivation.muse
+Brain/MillServer
+Brain/Motivation.muse
+Brain/Publishing
+Brain/SupportCenterUsers
+Brain/WatermillCollections
+Brain/WatermillDefects
+Brain/WatermillDiagnostics
+Brain/WatermillFieldDeploy
+Brain/WatermillNewIO
+Brain/WatermillNotifications
+Brain/WatermillScriptor
+Brain/WatermillSupportIssues
+Brain/WatermillSupportProcess
+Brain/WatermillVariables
+
+../LiveSync/Secure/Invoice-01-01.pdf
+2010-07-25_CapOne.pdf
+bin
+accounting.txt
+Action/done-1.txt
+Action/calendar.txt~
+Action/ice-delivery.txt
+Action/nohup.out
+Action/watermill-priorities.txt
+Action/watermill.txt
+Blog/
+'Blog -5-11.odt'
+Books/Bible-raw
+Books/Programming/django-screencast.mov
+Business/accounting.txt
+Business/2009\ Budget.ods.pgp
+Business/Christine-account.ods
+Business/ClientAccounts.txt
+Business/IRS_Forms.zip
+'Business/Internet Services.ods'
+Business/Miles-2009.ods
+Business/Miles-2010.ods
+Business/SWS-Transactions.ods
+Business/SWS_Expenses_2008.html
+Business/SWS_Finance.ods
+'Business/Stock Options.xls'
+'Business/Tax 2010-06.jpg'
+'Business/Time Log.ods'
+Business/UserID.ods
+Business/Workmans-Comp.jpeg
+'Business/opt-out lists.jpg'
+Business/track-receipts.txt
+cdiff.txt
+Clients
+community.html
+Computer.html
+ComputerCookbook.odt
+Computer_Cookbook.odt
+EstateManager.html
+EstateManager.zip
+Finance.zip.gpg
+Finance.zip.pgp
+KeePass/Database.kdb.lock
+Life/life-goals.txt
+Life/Life_With_Impact.doc
+Life/SpiritualLife.20100328.1631230927.html
+mybook.txt
+Software/ComputerCookbook.odt
+Software/Computer_Cookbook.odt
+Watermill/Invoice-01-01.pdf
+Watermill/Miles-2011.ods
+wave.html
+Web
+VineyardMen.xls
+Vital-signs.txt
+EOL
+
+
+cd $dir/Action
+rm \#*
+
+xargs rm -rf << EOL
+	WebFaction.txt
+	accounting.txt
+	alerts.txt
+	goals.txt
+	habits.txt
+	ip.txt
+	movies.txt
+	music.txt
+	photos.txt
+	support.txt
+	textracing.txt
+	tools.txt
+	upgrade.txt
+	weekly-finances.txt
+EOL
+
+cd $dir/Notes
+xargs rm -rf << EOL
+    anacron.txt
+    Blog-5-11.odt
+    book.txt
+    build-support-tools.txt
+    calibre.txt
+    comm-system.txt
+    comm-system.org
+    essential-tasks.txt
+    git-email.txt
+    idea-forum.txt
+    languages.txt
+    reboot-on-reload.txt
+    ro-pressure.txt
+    setup-11-02.txt
+    simple-lifestyle.txt
+    SWG.txt
+    SWG-book.txt
+    tasks-goals.txt
+EOL
+
+cd $dir/Watermill
+rm *.txt
+rm Invoice-*.odt
+xargs rm -rf << EOL
+    Diagnostic_Utility.odt
+    Pricing
+    Support\ Engineer.odt
+    SupportCenter.odp
+    TankLevel.odp
+    Troubleshooting.odt
+    WatermillSoftware.odt
+    millview.doc
+    notes/test.txt
+    views/
+    wets\ errors.doc
+    ice-weights.ods
+    IceLogs.ods
+    invoice.py
+    Bag_Inflater.ods
+    Miles-2010.ods
+    nohup.out
+    WatermillSoftware.20100809.1955230413.html
+    WatermillSoftware.20100824.1544440068.html
+EOL
+
+) &> /dev/null
+

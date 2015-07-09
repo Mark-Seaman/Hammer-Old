@@ -1,0 +1,4 @@
+#!/bin/bash
+# Print the number of words in a MyBook
+
+wc -w ~/Documents/Brain/*|sort -nr|head -50

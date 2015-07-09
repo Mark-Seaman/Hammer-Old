@@ -1,0 +1,5 @@
+#!/bin/bash
+# List the stories from Jordan
+echo List the stories from Jordan
+
+paragraphs $br/JordanStories

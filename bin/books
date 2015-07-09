@@ -1,0 +1,3 @@
+#!/bin/bash
+# Go to Safari Books Online
+w http://my.safaribooksonline.com/book/-/9781449337735/building-node-applications-with-mongodb-and-backbone/index_html

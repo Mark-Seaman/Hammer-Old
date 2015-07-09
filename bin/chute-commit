@@ -1,0 +1,7 @@
+#!/bin/bash
+# Commit all changes on chute
+echo Commit all changes on chute
+
+commit-changes
+chute-cmd commit-changes
+commit-changes

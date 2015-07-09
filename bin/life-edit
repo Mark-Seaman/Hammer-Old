@@ -1,0 +1,6 @@
+#!/bin/bash
+# Edit lesson for living
+echo Edit lesson for living
+
+e ~/Documents/MyBook/SeamansLog/LifeLessons
+

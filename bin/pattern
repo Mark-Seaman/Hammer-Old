@@ -1,0 +1,5 @@
+#!/bin/bash
+# Edit the topic of patterns
+echo Edit the topic of patterns
+
+brain-edit TaskPatternCatalog

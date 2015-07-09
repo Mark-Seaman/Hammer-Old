@@ -1,0 +1,4 @@
+#!/bin/bash
+# Evernote
+echo Evernote
+w http://evernote.com

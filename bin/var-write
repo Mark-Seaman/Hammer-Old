@@ -1,0 +1,11 @@
+#!/usr/bin/env python
+# Write this JSON data into the current state
+
+from sys       import argv, stdin
+from util.vars import save_json
+
+json = stdin.read()
+if len(argv)<2:
+    save_json(json)
+else:
+    save_json(json,argv[1])

@@ -1,0 +1,5 @@
+#!/bin/bash
+# Edit the promptings file
+echo Edit the promptings file
+
+brain-edit PrayerPrompting

@@ -1,0 +1,6 @@
+#!/bin/bash
+# Show the brain in a web browser
+echo Show the brain in a web browser
+
+. ~/Projects/thumper/bin/project
+run notes

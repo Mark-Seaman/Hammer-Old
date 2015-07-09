@@ -1,0 +1,9 @@
+#!/bin/bash
+# Select a random wallpaper to display
+
+if [ -r /home/seaman/Archive/wallpaper ]
+then
+    pict=`find /home/seaman/Archive/wallpaper -iname '*.JPG' | shuf -n 1`
+    #/bin/echo "Wallpaper = $pict"
+    /usr/bin/gconftool -t str -s /desktop/gnome/background/picture_filename "$pict"
+fi

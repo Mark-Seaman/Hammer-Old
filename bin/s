@@ -1,0 +1,5 @@
+#!/bin/bash
+# Search for document content
+
+search $*
+

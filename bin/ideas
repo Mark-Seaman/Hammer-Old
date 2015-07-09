@@ -1,0 +1,3 @@
+#!/bin/bash
+# List new ideas
+cat $br/Ideas

@@ -1,0 +1,7 @@
+#!/bin/bash
+# Remove the files given on the input even though they have # on each line
+
+git status | sed 's/\#\t/rm -rf /' |sed '$d'|sh
+git status | sed 's/\#\tdeleted:/git rm/' |sed '$d' |sh
+git checkout -f 
+git status

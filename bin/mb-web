@@ -1,0 +1,5 @@
+#!/bin/bash
+# Show the remote version of the mybook web site ()
+
+echo Show shrinking-world.org website
+rbg firefox http://shrinking-world.org/$1

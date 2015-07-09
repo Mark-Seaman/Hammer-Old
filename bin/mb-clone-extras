@@ -1,0 +1,40 @@
+#!/bin/bash
+# Copy the support files into each directory
+echo Copy the support files into each directory
+
+cat <<EOF > books
+SuperPower
+Patterns
+Brain
+Guides
+Technology
+SpiritualLog
+Ideas
+MyBookOnline
+Gallery
+Automate
+Leadership
+Software
+MarkSeaman
+SeamansLog
+EOF
+
+cat <<EOF > files
+HtmlFoot
+HtmlHead
+Sent
+Subscribe
+Subscribed
+Unsubscribe
+Unsubscribed
+EOF
+
+
+cat books | while read x
+do   
+    echo cp `cat files` $x
+done
+
+rm books
+rm files
+

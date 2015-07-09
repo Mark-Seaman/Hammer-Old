@@ -1,0 +1,16 @@
+#!/bin/bash
+# Clean up all the old, dead files
+
+mkdir -p /home/seaman/Documents/logs
+
+{
+    . /home/seaman/bin/bash-vars
+
+    echo "Remove old temp files"
+    find /tmp -mtime +3 -type f -exec rm -f {} \;
+
+    echo "Prune the files older than 10 days"
+    rmold /home/seaman/Desktop/Junk
+
+} 2>&1 | mklog clean
+

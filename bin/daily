@@ -1,0 +1,30 @@
+#!/bin/bash
+# Run the daily task as seaman
+
+# To run this command manually as root use:
+#   nohup /home/seaman/bin/daily &> /dev/null&
+
+bin=/home/seaman/bin
+. $bin/bash-vars
+
+{
+    echo `date` `id` " - $0 Started"
+
+    # Executed as user 'seaman'
+    function execute {
+        echo '---------------------------------------'
+        echo $1 $2; 
+        date; 
+        $bin/$1 $2        
+    }
+
+    execute tst-home
+    execute tst-jack
+    execute tst-seamantech
+    execute doc-sync
+    execute clean
+
+    echo `date` " - $0 Done "
+
+} 2>&1 | mklog daily
+

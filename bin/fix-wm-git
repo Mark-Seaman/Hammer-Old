@@ -1,0 +1,105 @@
+#!/bin/bash
+
+cd /home/seaman/wme/server-git
+xargs rm -rf << LIST
+branches
+COMMIT_EDITMSG
+config
+description
+FETCH_HEAD
+gitk.cache
+HEAD
+hooks
+index
+info
+objects
+ORIG_HEAD
+packed-refs
+rebase-apply
+refs
+LIST
+
+cd /home/seaman/wme/server-git/.git
+xargs rm -rf << LIST
+accounting
+alerts
+commander
+data
+diagnostics
+health
+logs
+notes
+other
+pricing
+scripts
+support
+tools
+vends
+versions
+xml
+LIST
+
+
+cd /home/seaman/wme/application-git
+xargs rm -rf << LIST
+branches
+COMMIT_EDITMSG
+config
+description
+FETCH_HEAD
+gitk.cache
+HEAD
+hooks
+index
+info
+logs
+objects
+ORIG_HEAD
+packed-refs
+rebase-apply
+refs
+LIST
+
+
+cd /home/seaman/wme/application-git/.git
+xargs rm -rf << LIST
+3rdParty
+data
+documentation
+mill-firewall
+mill-id-board
+millMaster
+millview
+scripts
+source
+systemCharacterizationTests
+LIST
+
+cd /home/seaman/wme/release-git
+xargs rm -rf << LIST
+branches
+COMMIT_EDITMSG
+config
+description
+FETCH_HEAD
+gitk.cache
+HEAD
+hooks
+index
+info
+logs
+objects
+ORIG_HEAD
+packed-refs
+rebase-apply
+refs
+LIST
+
+cd /home/seaman/wme/release-git/.git
+xargs rm -rf << LIST
+bin
+code
+flash
+Notes_For_Mill_Factory.txt
+LIST
+

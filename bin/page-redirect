@@ -1,0 +1,13 @@
+#!/usr/bin/env python
+# Format the requested document
+
+from sys import argv
+from util.page   import page_redirect
+
+
+if len(argv)>3: 
+    d = page_redirect(argv[1],argv[2],argv[3])
+    if d:
+        print d
+else:
+    print 'usage: ', argv[0], 'Book/Index seaman localhost:8080'

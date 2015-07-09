@@ -1,0 +1,9 @@
+#!/bin/bash
+# If this directory exists then prune it
+dir=$1
+prune=$2
+if [ -d "$dir" ] 
+then 
+    cd "$dir"
+    $b/$prune
+fi

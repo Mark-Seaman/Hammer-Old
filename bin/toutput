@@ -1,0 +1,8 @@
+#!/usr/bin/env python
+# Accept the currect results as the correct answer
+
+from sys import argv
+from util.systest import output
+
+print 'Test Output:', argv[1]
+print output (argv[1])

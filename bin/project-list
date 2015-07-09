@@ -1,0 +1,12 @@
+#!/bin/bash
+# Create a list of managed projects
+
+cat <<EOF
+/home/seaman/wme/support-git
+//home/seaman/Projects/pipescan
+/home/seaman/Projects/thumper
+/home/seaman/Projects/django-hammer
+/home/seaman/Projects/node-hammer
+/home/seaman/Projects/jack-hammer
+EOF
+   

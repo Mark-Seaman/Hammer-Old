@@ -1,0 +1,5 @@
+#!/bin/bash
+# Browse Shrinking-World.org
+
+wf Shrinking-World.org
+

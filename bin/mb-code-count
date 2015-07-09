@@ -1,0 +1,15 @@
+#!/bin/bash
+# Count the total amount of code
+echo Count the total amount of code
+
+t=/tmp/`basename $0`
+
+{
+ls $b/mb-*
+ls $b/blog-*
+ls $b/test-*
+ls $b/sp-*
+find $mb -name '*.py'
+} > $t
+
+wc -l  `cat $t`

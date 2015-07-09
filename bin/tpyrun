@@ -1,0 +1,17 @@
+#!/bin/bash
+# Execute a single nose test
+
+t=$1
+cd `dirname $t`
+t=`basename $t`
+#pwd
+
+{
+echo "nosetests -v $t.py"
+nosetests -v $t.py
+} 2>$1.err >  $t.nose
+
+#echo ${1/.py/}.nose
+cat  $t.nose 
+cat  $t.err | grep -v 'Ran '
+rm -rf $1.nose $1.err

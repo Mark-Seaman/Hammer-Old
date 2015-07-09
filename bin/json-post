@@ -1,0 +1,11 @@
+#!/bin/bash
+# Use curl to post a json doc
+
+d=$1
+[ -z "$d" ] && d='{"name":"Me Here", "email":"me@here.com"}'
+m="-X POST -H 'Content-Type: application/json'"
+
+h=$2    # eg.  http://localhost:8000/contact
+
+echo curl -d \'$d\' "$m" $h | sh
+

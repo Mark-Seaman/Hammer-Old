@@ -1,0 +1,3 @@
+#!/bin/bash
+# Filter the output of rsync
+egrep -v '(^sending )|(^$)|(^sent )|(^total)|(\/$)'

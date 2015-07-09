@@ -1,0 +1,14 @@
+#!/usr/bin/python
+# Extract a single column
+# Usage:    cat data | column 2
+
+from sys import stdin,argv
+
+def split_columns(t):
+    return t.split(',')
+
+lines = map(split_columns, stdin.readlines())
+col = int(argv[1])
+for l in lines: 
+    if len(l)>col: 
+        print l[col]

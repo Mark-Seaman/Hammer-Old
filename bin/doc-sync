@@ -1,0 +1,9 @@
+#!/bin/bash
+# Pull and then push all of the git archives.
+
+. /home/seaman/bin/bash-vars
+
+cd $u; echo sync $u; git pull -q; git push -q
+
+
+

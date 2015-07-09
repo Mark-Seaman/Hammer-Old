@@ -1,0 +1,5 @@
+#!/bin/bash
+# Count the files and words
+echo Count the files and words
+
+wc -wl $br/*

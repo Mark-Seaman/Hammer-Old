@@ -1,0 +1,5 @@
+#!/bin/bash
+# Pull code from the Django hammer project
+
+cp  ~/Projects/django-hammer/$1 $p/$1
+

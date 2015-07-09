@@ -1,0 +1,11 @@
+#!/usr/bin/env python
+# Put the doc in storage
+
+from sys         import argv
+from util.domain import put_domain_doc
+
+if len(argv)<2:
+    print 'usage: '+argv[0]+' doc < text'
+    exit(1)
+
+put_domain_doc(argv[1])

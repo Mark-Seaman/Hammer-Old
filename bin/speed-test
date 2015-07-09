@@ -1,0 +1,4 @@
+#!/bin/bash
+# Test the network
+
+w http://www.speakeasy.net/speedtest/

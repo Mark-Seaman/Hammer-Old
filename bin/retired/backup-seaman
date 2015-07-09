@@ -1,0 +1,53 @@
+#!/bin/bash
+
+# Print the date and user
+date
+echo "Running backup as `id -un`"                     
+
+# Load the variables from bashrc
+. /home/seaman/bin/bash-vars
+
+# Backup location
+backup="$m/Archive/2010"
+echo "Backup location = $backup"
+
+# mount the Maxtor drive
+if [ ! -d "$backup" ]
+then
+    echo "Mount the Maxtor drive"
+    mount /dev/sdb1 /media/maxtor -t ext3 -o rw,nosuid,nodev
+fi
+
+# list the contents of the mounted drive
+ls -l /media/maxtor
+
+# Test to see that the backup location is available
+if [ -f "$m/backup/ready.txt" ]
+then
+    mkdir -p /home/seaman/Archive/
+    mkdir -p /home/seaman/Archive/logs/
+
+    # Perform the backup
+    echo "Found server, starting backup"
+    time nice rsync -auv \
+        --exclude Music \
+        --exclude .thumbnails \
+        --exclude .gvfs \
+        --exclude rsnapshot \
+        --exclude Desktop/Junk \
+        --exclude rcp \
+        --exclude wme/logs \
+        --exclude platform-git \
+         /home/seaman/ $backup |
+    grep -v '\/$' > /home/seaman/Archive/logs/backup-seaman.log
+    
+    # Get a listing of the disk space  
+    cd $backup
+    nice du --max-depth=6 | sort -nr |head -200 > disk-space.txt
+
+    echo "All done" 
+else
+    echo "Server is NOT available for backup"
+    exit 1
+fi
+

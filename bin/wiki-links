@@ -1,0 +1,54 @@
+#!/usr/bin/python
+# Wiki page links
+
+from files      import *
+from os.path    import exists, dirname, basename, join
+from re         import sub, match
+from sys        import argv
+from os         import environ
+
+
+# Convert the Wiki Words to hyperlinks
+def wiki_word_link(text):
+    s = r"[^A-Za-z\"\']*([A-Z][a-z]+[A-Z][a-z]+([A-Z][a-z]+)*)[^A-Za-z\'\"]*"
+    m = match(s, text)
+    if m: return m.group(1) 
+
+# Extract all of the links from one line of text
+def get_link(line):
+    link = wiki_word_link(line)
+    if link: return link 
+    x=line.find('[[') 
+    y=line.find(']]')
+    if not x>=y:
+        str = line[x+2:y]
+        link = sub ( r'\]\[.*', '', str)
+        if link.find('/')==-1: return link
+
+# Extract links from an array of text
+def get_all_links(text):
+    return filter (lambda x:x, map (get_link, text))
+
+# Eliminate the duplication from a list
+def unique(with_dups):
+    result = []
+    s = set()
+    for i in with_dups:
+        if not i in s:
+            s.add(i)
+            result.append(i)
+    return result
+
+# Sort a list of links
+def sorted_links(links):     
+    sorted(unique(links))
+   
+# Check to see if there is a brain file
+def is_brain_topic(topic):
+    return exists(join(environ['br'],topic))
+
+# Get the links contained in this MyBook file
+links = get_all_links(read_file(argv[1]))
+#links = filter (is_brain_topic, links)
+for t in  links: print t
+

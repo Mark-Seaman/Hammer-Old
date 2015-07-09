@@ -1,0 +1,5 @@
+#!/bin/bash
+# Go to the Godaddy web site
+
+w godaddy.com
+

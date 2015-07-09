@@ -1,0 +1,6 @@
+#!/bin/bash
+# Zip a directory into a file
+
+echo  Zip $1 directory into "$1".zip
+
+zip -r "$1" "$1"

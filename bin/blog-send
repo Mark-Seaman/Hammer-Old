@@ -1,0 +1,25 @@
+#!/bin/bash
+# Send someone a blog article
+
+to="$1"      && [[ "$1" == "" ]] && { echo 'No recipient';  exit; }  # Select the recipient
+article="$2" && [[ "$2" == "" ]] && { echo 'No article';    exit; }  # Select the article
+title="$3"   && [[ "$3" == "" ]] && { echo 'No title';      exit; }  # Select the title
+blog='SeamansLog' && [[ "$4" != "" ]] &&  blog=$4                    # Select the blog
+
+echo Sending to:$to article:$article, subject:$title, blog:$blog
+
+[[ ! -f "$y/$blog/$article" ]] && { echo 'Article not found' "$y/$blog/$article"; exit; }
+
+# Create the footer text
+cat <<EOF >/tmp/SeamansLog
+
+---
+You are receiving this message as a subscriber of the Seaman's Log list. Your privacy is important.  To learn more or unsubscribe visit our web site at http://SeamansLog.com.
+EOF
+
+# Send the formatted text to one recipient
+paragraphs -v $y/$blog/$article > /tmp/blog-send
+cat /tmp/blog-send /tmp/$blog | send "$to" "$title"
+
+# Record in a history log file
+echo "`date` blog-send $to $article \'$title\' $blog" >> $cs/$blog\History

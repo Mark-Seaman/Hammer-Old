@@ -1,0 +1,5 @@
+#!/bin/bash
+# Send Josiah a file
+echo Send Josiah a file
+
+cat $1 | send josiah.seaman@gmail.com,mark.seaman@shrinking-world.com  "$2"

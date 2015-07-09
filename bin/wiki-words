@@ -1,0 +1,19 @@
+#!/usr/bin/python
+# Find all of the wiki words in documents
+
+from files import read_file
+from sys   import argv
+from re    import findall
+
+# Find Wiki Words in an array of strings
+def wiki_words(text):
+    return  map(lambda x: x[0], findall('([A-Z]+[a-z]+([A-Z]+[a-z]+)+)+', text))
+
+# Read the text from all files
+text = ''
+for f in argv:
+    text += ' '.join(read_file(f))
+
+# Print the wiki words in the text
+print '\n'.join(wiki_words (text))
+

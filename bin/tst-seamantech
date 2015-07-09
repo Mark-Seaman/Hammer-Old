@@ -1,0 +1,11 @@
+#!/bin/bash
+# Test the Impage SRS code
+
+. ~/Projects/seamantech/bin/project > /dev/null
+
+git pull &&
+tresults | mklog tst-seamantech
+
+log=$HOME/Documents/logs/`hostname`/tst-seamantech.log
+cat $log | range 40 50
+echo $log

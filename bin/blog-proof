@@ -1,0 +1,18 @@
+#!/bin/bash
+# Proof-read request
+
+# Select the blog
+blog=SeamansLog
+[[ "$3" != "" ]] && [[ -d "$y/$3/" ]] && blog=$3
+
+echo Proof-read request for $blog
+echo To:        mark@seamanfamily.org
+echo Article:    $y/$blog/$1
+echo Title:     $2
+
+if [ -f "$y/$blog/$1" ]
+then
+    blog-send  "mark@seamanfamily.org" $1 \'"Proof-read: $2"\' $blog
+else
+    echo "Could not find, $y/$blog/$1"
+fi

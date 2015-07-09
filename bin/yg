@@ -1,0 +1,8 @@
+#!/bin/bash
+# Run the Yuugu screen sharing app
+echo Run the Yuugu screen sharing app
+
+yuuguu
+
+echo http://yuuguu.com/share
+echo PIN: 792784

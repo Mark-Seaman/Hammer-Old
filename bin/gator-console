@@ -1,0 +1,4 @@
+#!/bin/bash
+# Console window for host gator server
+   
+ssh seaman@shrinking-world.com  -p 2222;

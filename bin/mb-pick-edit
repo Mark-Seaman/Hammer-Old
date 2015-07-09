@@ -1,0 +1,5 @@
+#!/bin/bash
+# Select a random topic to edit
+echo Select a random topic to edit
+
+mb-edit `mb-pick-topic`

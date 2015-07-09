@@ -1,0 +1,89 @@
+#!/bin/bash
+
+# This script must be run as root to do a system snapshot onto maxtor drive
+
+# Set the environment
+. /home/seaman/bin/bash-vars
+
+echo "Host name = `hostname`"
+
+function maxtor_snapshot {
+    # mount the Maxtor drive if needed
+    if [ ! -d "/media/maxtor/rsnapshot" ]
+    then
+        echo "Mount the Maxtor drive"
+        mount /dev/sdb1 /media/maxtor -t ext3 -o rw,nosuid,nodev
+    fi
+
+    # checking for the Maxtor to be mounted
+    if [ ! -f "/media/maxtor/backup/ready.txt" ]
+    then
+        echo "Could not see the Maxtor drive"
+        exit 1
+    fi
+
+    # backup the files to the drive using rsnapshot
+    echo "Running rsnapshot"
+    time rsnapshot -c /home/seaman/bin/maxtor-snapshot.cfg daily
+    echo "Finished rsnapshot"
+
+    # find where all of the disk space went
+    cd /media/maxtor/rsnapshot/daily.0/
+    du --max-depth=7 | /usr/bin/sort -nr |head -200 > disk-space.txt
+}
+
+function server_snapshot {
+    echo "Expecting Terra at $t"
+
+    # checking for the Terra drive to be connected
+    if [ ! -f "$t/rsnapshot/ready.txt" ]
+    then
+        echo "Could not see the Terra drive ($t)"
+        exit 1
+    fi
+
+    echo "Running rsnapshot"
+    /usr/bin/rsnapshot -c /home/seaman/bin/server-snapshot.cfg daily
+    echo "Finished rsnapshot"
+
+    cd $t/rsnapshot/daily.0/
+    /usr/bin/du --max-depth=6 | /usr/bin/sort -nr |head -200 > disk-space.txt
+}
+
+
+#--------------------------------------------------------
+# Hummer
+
+if [ "seaman-hummer" == `hostname` ]
+then
+    echo "There is no snapshot defined for Hummer"
+fi
+
+
+#--------------------------------------------------------
+# Chute
+
+if [ "seaman-chute" == `hostname` ]
+then
+    maxtor_snapshot
+fi
+
+
+#--------------------------------------------------------
+# Server
+
+if [ "seaman-server" == `hostname` ]
+then
+    server_snapshot
+fi
+
+
+#--------------------------------------------------------
+# Mini
+
+if [ "seaman-mini" == `hostname` ]
+then
+    echo "There is no snapshot defined for mini"
+fi
+
+    

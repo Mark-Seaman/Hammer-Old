@@ -1,0 +1,44 @@
+# synchronize the files shared with the mini using a file server and a single file
+
+                                 # create temp directory
+tar=sync-mini.tar.gz
+tmp=/tmp/sync-mini
+archive=~/Flashy/$tar
+
+if [ ! -d $tmp ]
+then 
+    mkdir $tmp 
+fi
+                                 # get archive file from server
+cd $tmp
+if [ -w $archive ]
+then 
+     cp $archive $tar
+                                # unpack
+    tar -xzf $tar
+    rm $tar
+                                # merge in remote changes
+    c bin ~/bin
+    c Documents   ~/Documents
+else
+    echo "Could not write archive file, $archive"
+    exit 1
+fi
+                                # Recreate temp dirs
+rm -rf $tmp
+mkdir $tmp 
+mkdir $tmp/Documents
+mkdir $tmp/bin
+                                 # remove unwanted file
+prune-sync-files                 
+                                 # merge local changes
+cd ~/Documents
+rsync -au --exclude .git ./     $tmp/Documents
+rsync -au --exclude .git ~/bin/ $tmp/bin
+
+                                 # create new archive file
+cd $tmp
+rm $archive
+tar -czf $archive .
+
+

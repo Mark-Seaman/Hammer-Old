@@ -1,0 +1,5 @@
+#!/bin/bash
+# Show an image file
+
+rbg eog "$*"
+

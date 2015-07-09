@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Set the environment
+. /home/seaman/bin/bash-vars
+
+t=/home/seaman/Archive/logs/backup-rcp.log
+{
+    # Clone the directory
+    mirror $rcp $m/backup/Rcp 
+
+    # Show numbers of files
+    echo `find $rcp|wc -l` "locally"           
+    echo `find $m/backup/Rcp|wc -l` "in backup"  
+
+    /home/seaman/Code/rcp/bin/countdirs 
+} &> $t
+chown seaman $t

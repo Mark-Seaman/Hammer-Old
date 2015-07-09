@@ -1,0 +1,4 @@
+#!/bin/bash
+# Show the local version of the mybook web site
+
+rbg firefox http://localhost/$1

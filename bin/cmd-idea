@@ -1,0 +1,6 @@
+#!/bin/bash
+# Build a list of ideas for improving automation (idea)
+echo Added idea to "$br/CommandClusterIdeas"
+
+echo "$*" >> $br/Ideas
+brain-edit Ideas

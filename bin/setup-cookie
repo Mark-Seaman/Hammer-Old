@@ -1,0 +1,5 @@
+#!/bin/bash
+# Setup a project package using cookie cutter
+
+cookiecutter git@github.com:sloria/cookiecutter-docopt.git
+

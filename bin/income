@@ -1,0 +1,17 @@
+#!/usr/bin/env python
+# Format an income statement
+from sys import stdin
+
+total = 0
+x = stdin.read().split("\n")
+for i in x:
+    i = i.split(',')
+    if len(i)>3:
+        amt = int(float(i[3].strip()))
+        total += amt
+        print "%-6s %5s, %10s, %8d, %8d" % \
+            (i[0]+',', i[1].strip(), i[2].strip(), amt, total)
+    else:
+        print '**',i,'**'
+
+        

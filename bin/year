@@ -1,0 +1,32 @@
+#!/usr/bin/python
+# Capture a year of my life
+
+from sys import argv
+
+text = '''* %d, Age %d *                 -*-muse-*-
+
+**Defining lesson**
+
+**Key experiences**
+
+**Family**
+Parents: Dave %d, Mary %d
+Stacie %d
+Christine %d
+Josiah %d
+Rachel %d
+Relatives
+
+**Church**
+
+**Career**
+
+**Interests**
+
+**Growth**
+'''
+
+for year in range(54):
+    year += 1959
+    ages = ( year, year-1959, year-1932, year-1927, year-1959, year-1982, year-1984, year-1988 )
+    open(str(year), 'at').write(text%ages)

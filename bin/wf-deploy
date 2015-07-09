@@ -1,0 +1,18 @@
+#!/bin/bash
+# Publish the content for the mybook library onto the server
+
+# Pull the latest files
+cd ~/Documents
+git pull
+
+# Remove compiled files
+find ~/webapps/mybook -name "*~ *.pyc" | xargs rm &> /dev/null
+
+# Sync the pages
+cptree ~/Documents/Code/mybook ~/webapps/mybook
+
+# Restart apache at web faction
+~/webapps/mybook/apache2/bin/restart
+
+
+ 

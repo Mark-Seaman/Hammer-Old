@@ -1,0 +1,51 @@
+#!/usr/bin/python
+
+from files import list_files, write_file, print_list
+from sys   import argv
+
+# Create a list of thumbnail anchors as an array
+def image_list(dir):
+    files = [f.replace('t-','')  for f in list_files (dir) if f.find('t-')==0 ]
+    files.sort()
+    return files
+
+# Create one thumbnail anchor
+def tfile_name(dir,f):
+    image ='[['+dir+'/t-'+f+']]'
+    page = f.replace('.jpg','')
+    page_link = '\n<br>[['+page+']]'
+    anchor = '\n<a href="'+page+'">'+image+page_link+'\n</a>'
+    style = 'float:left;width:200px;height:200px;vertical-align:middle;horizontal-align:middle'
+    div = '\n<div style="'+style+'">'+anchor+'</div>'
+    return div
+
+# Create a list of thumbnail anchors as an array
+def thumbnail_files(dir):
+    files = [tfile_name(dir,f)  for f in image_list(dir) ]
+    files.sort()
+    return files
+
+def header(title):
+    return  ['* '+title+' *       -*-muse-*-\n\n']
+
+# Create page content as a text array
+def page_content(dir,filename):
+    return  ['', '[['+dir+'/f-'+filename+']]', '' ]
+
+# Create a page for a single photo
+def write_photo_page(dir,filename):
+    title  = filename.replace('.jpg','')
+    write_file(title, header( "Picture "+title)+page_content (dir,filename))
+
+# Create the index file for the album
+def create_index(dir, title):
+    files = header(title) + thumbnail_files(dir)
+    #print_list(files)
+    write_file("Index", files)
+    count = 0
+    for f in  image_list(dir):
+        write_photo_page(dir,f)
+
+album = argv[1]
+title = argv[2]
+create_index('images/Gallery/'+album, title)

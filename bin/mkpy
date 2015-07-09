@@ -1,0 +1,23 @@
+#!/bin/bash
+# Make a python script
+echo "Make a python script"
+
+cd $pb
+
+if [ -s "$1" ]
+then
+    echo "File already exists, $pd/$1"
+    return 1
+fi
+
+cat <<EOF >$1
+#!/usr/bin/env python
+# $2
+print "$2"
+
+$3
+EOF
+
+chmod 755 $1
+e $1
+

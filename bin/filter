@@ -1,0 +1,6 @@
+#!/bin/bash
+# Filter (exclude) lines of text from a file
+
+mv "$2" /tmp/filter
+grep -v "$1" /tmp/filter >"$2"
+

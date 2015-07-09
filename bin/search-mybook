@@ -1,0 +1,7 @@
+#!/bin/bash
+# Search for strings in source code
+
+cd ~/Documents/MyBook
+grep -i $* `src-mybook`
+
+

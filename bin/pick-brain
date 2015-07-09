@@ -1,0 +1,5 @@
+#!/bin/bash
+# Select a random file out of a category
+
+e "$br/`src-brain | random`"
+

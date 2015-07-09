@@ -1,0 +1,6 @@
+#!/bin/bash
+# Set a timer for 10 mintues
+echo Set a timer for 25 mintues
+
+echo play ~/bin/DING1.WAV | at -v "NOW + 25 MINUTE" &> /dev/null
+echo play ~/bin/DING.WAV | at -v "NOW + 30 MINUTE" &> /dev/null

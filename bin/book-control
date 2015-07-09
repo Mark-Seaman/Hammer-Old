@@ -1,0 +1,5 @@
+#!/bin/bash
+# Show the Turn Key control panel 
+echo Show the Turn Key control panel 
+
+w https://hub.turnkeylinux.org/servers/

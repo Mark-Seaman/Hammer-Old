@@ -1,0 +1,8 @@
+#!/bin/bash
+# List all the source code
+
+{
+cd $p
+find test -type f -name '*.tst' 
+} | sort
+

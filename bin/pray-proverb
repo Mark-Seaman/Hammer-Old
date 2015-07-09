@@ -1,0 +1,5 @@
+#!/bin/bash
+# Select a proverb to ponder
+echo Select a proverb to ponder
+grep .................................. $br/Proverbs|random
+

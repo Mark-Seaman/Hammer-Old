@@ -1,0 +1,4 @@
+# Search and destroy the requested dirs in the current dir tree
+
+find . -type d -name $1 -exec rm -rf '{}' \;
+

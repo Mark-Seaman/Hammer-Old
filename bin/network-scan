@@ -1,0 +1,6 @@
+#!/bin/bash
+# Scan the local network for computers
+echo Scan the local network for computers
+   
+nmap -sP 192.168.1.0/24
+nmap -sP 10.0.0.0/24

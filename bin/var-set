@@ -1,0 +1,16 @@
+#!/usr/bin/env python
+# Set a variable
+
+from sys  import argv
+from util.vars import read_all_vars,save_all_vars,set_var
+
+
+# Read the vars
+read_all_vars()
+
+# Set this var
+set_var(argv[1],argv[2])
+
+# Update the vars file
+save_all_vars()
+

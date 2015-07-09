@@ -1,0 +1,5 @@
+#!/bin/bash
+# Run a terminal window
+
+#ssh $sa
+t $ph

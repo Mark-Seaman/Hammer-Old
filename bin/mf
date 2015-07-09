@@ -1,0 +1,5 @@
+#!/bin/bash
+# Move file
+
+mv $1.md $1.outline
+ls *.md

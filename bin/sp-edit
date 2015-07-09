@@ -1,0 +1,4 @@
+#!/bin/bash
+# Edit a topic from the brain
+
+e $mybook/SpiritualGrowth/$1

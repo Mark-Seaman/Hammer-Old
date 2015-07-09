@@ -1,0 +1,4 @@
+#!/bin/bash
+# Count the files in a directory tree
+echo Weigh files in directory tree $1
+echo `find $1 -type f | wc -l` 'files,    ' `du -sh $1`

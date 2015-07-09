@@ -1,0 +1,6 @@
+#!/bin/bash
+# Select a daily passage
+echo Select a daily passage
+
+mb-passage SuperPower | send mark@seamanfamily.org 'Facebook post'
+

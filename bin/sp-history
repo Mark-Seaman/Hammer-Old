@@ -1,0 +1,5 @@
+#!/bin/bash
+# Show the Spiritual history
+echo Show the Spiritual Log email history
+
+e $cs/SpiritualLogHistory

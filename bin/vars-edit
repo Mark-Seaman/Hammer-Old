@@ -1,0 +1,39 @@
+#!/usr/bin/env python
+# Generate a form the edit the current settings
+
+from sys  import stdin
+from util.vars import process_vars
+from util.files import read_input,do_command
+
+
+# Process a single variable
+def process_var(line):
+    parts = line.split('=')
+    name = parts[0].strip()
+    print '  <tr>'
+    if len(parts)>1:
+        value = parts[1].strip()
+        print '    <td>',
+        print "<b>%s</b>" % name,
+        print '</td>'
+        print '    <td>',
+        print '<input name="%s" type="text" value="%s" width="400px">' % (name,value),
+        print '</td>'
+    print '  </tr>'
+
+
+# Print out an edit form for the current settings        
+def print_settings_form(vars):
+    print '<h1>Edit Settings for Pipe Scan</h1>'
+    print '<form method="post" action="/profile/save" >'
+    print '<table>'
+    for v in vars:
+        process_var (v)
+    print '</table>'
+    print '<button type="submit", value="Save">Save</button>' 
+    print '</form>'
+
+
+# Print out the entire form
+vars = do_command('var-list').split('\n')
+print_settings_form(vars)

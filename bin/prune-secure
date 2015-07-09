@@ -1,0 +1,29 @@
+#!/bin/bash
+# Prune files so that they are not propogated while doing synchronization.
+
+dir=$l/Secure
+if [ "$1" != "" ]
+then
+    dir=$1
+fi
+
+if [ ! -d $dir ] 
+then
+    echo "Directory not found, $dir"
+    exit 1
+fi
+
+cd $dir
+(
+xargs rm -rf <<EOF
+2009
+2010
+2011
+2009-Secure.zip.gpg
+2010-Secure.zip.gpg
+2011-Secure.zip.gpg
+EOF
+
+) &> /dev/null
+
+

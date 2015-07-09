@@ -1,0 +1,6 @@
+#!/bin/bash
+# Select a random passage from my books
+
+topic=`mb-pick-topic $1`
+paragraphs -l $y/$topic |random | tee /tmp/mb-passage
+echo "Read more at http://shrinking-world.org/$topic" >> /tmp/mb-passage

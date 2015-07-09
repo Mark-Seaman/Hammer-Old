@@ -1,0 +1,15 @@
+#!/bin/bash
+# Bootstrap a new clone
+echo Bootstrap a new clone
+
+setup-core      # This file contains useful tools that should be set up on each new Linux system
+setup-developer # This file contains useful tools that should be set up on each new Linux system
+setup-django    # Setup the Django web application framework
+setup-emacs     # Configure this emacs installation
+setup-java      # Install JRE
+setup-lamp      # Run as root.  Install Django on a machine from scratch
+setup-media     # This file contains useful tools that should be set up on each new Linux system
+setup-mongo     # Install the MongoDB
+setup-nodejs    # Install Node.JS
+
+figlet `hostname` > .welcome

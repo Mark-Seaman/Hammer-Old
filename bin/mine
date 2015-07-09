@@ -1,0 +1,5 @@
+#!/bin/bash
+# Start a minecraft session
+echo Start a minecraft session
+
+java -Xmx1024M -Xms512M -cp ~/minecraft.jar net.minecraft.LauncherFrame &> /dev/null &

@@ -1,0 +1,6 @@
+#!/bin/bash
+# See the task time remaining
+echo See the task time remaining
+
+date
+at -l

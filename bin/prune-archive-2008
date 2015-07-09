@@ -1,0 +1,48 @@
+#!/bin/bash
+# Remove old files from the archive and merge directories together
+
+. /home/seaman/bin/bash-vars
+
+# Make sure you are running from Archive
+d=~/LiveSync/Archive
+
+if [ ! -d "$d" ] 
+then
+    echo "Directory does not exist, $d"
+    exit 1
+fi
+
+
+# If this directory exists then prune it
+function merge_dir {
+    if [ ! -d "$1" ] ; then return; fi
+    if [ ! -d "$2" ] ; then mkdir -p "$2"; fi
+    rsync -auv "$1/" "$2" && rm -rf "$1"
+}
+
+
+echo "Prune $d"
+cd $d/2008
+
+merge_dir Money/Mark .
+#merge_dir Mail .
+merge_dir Personal .
+merge_dir Work .
+merge_dir Business .
+merge_dir Download .
+merge_dir Documents .
+merge_dir Learning .
+merge_dir Clients .
+
+merge_dir Documents/Personal Personal
+merge_dir Fun/Artwork ../Pictures/Artwork
+merge_dir Business/Email Mail/business-email
+merge_dir Stacie/Thunderbird Stacie/Mail/Thunderbird
+merge_dir Stacie/Photos ../Pictures/Stacie
+
+merge_dir Maximum\ Impact/ ../Music/JohnMaxwell/
+
+rm -rf 'Local Folders 2'
+rm -rf Old
+
+showhogs .

@@ -1,0 +1,58 @@
+#!/usr/bin/python
+# Break text into paragraphs
+
+from files import read_file
+from sys import argv
+
+# Remove the muse tag from the first line
+def remove_muse(line):
+    line = line.replace ('-*-muse-*-', '')
+    line = line.replace ('-*- muse -*-', '') 
+    line = line.replace ('*', '')
+    line = line.rstrip()
+    return line
+   
+# Print a text file
+def read_paragraphs(filename):
+    nl='**new-line**'
+    text = open(filename).read()
+    text = text.replace('\n\n', nl)
+    text = text.replace('\n', ' ')
+    text = text.replace(nl, '\n')
+    return text
+
+# Each line must have a minimum number of characters
+def remove_short_lines(text):
+    text = text.split('\n')
+    text = filter (lambda l: len(l)>40, text)
+    return '\n'.join (text)
+
+# Pick off all args and set program options
+def arguments(argv):
+    if (len(argv)<=1):      # Must have one arg
+        print 'Usage: paragraphs [-l|-v] file'
+        exit(1);
+    filename=argv[1]        # Filename
+    long_lines = False
+    verbose = False
+    if argv[1]=='-l':       # Long lines
+        filename=argv[2]
+        long_lines=True
+    if argv[1]=='-v':       # Verbose
+        filename=argv[2]
+        verbose = True
+    return filename, long_lines, verbose     # Return all three parameters
+
+# Format the output
+def format_output(filename, long_lines, verbose):
+    text = read_paragraphs(filename)
+    text = remove_muse (text)
+    if long_lines: 
+        text = remove_short_lines(text)
+    if verbose:
+        text = text.replace('\n', '\n\n')
+    return text
+
+
+filename, long_lines, verbose = arguments(argv)
+print format_output(filename, long_lines, verbose)

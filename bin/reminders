@@ -1,0 +1,12 @@
+#!/bin/bash
+# Send all reminders
+
+r=/home/seaman/Documents/Brain/Reminders
+if [ -f $r ]
+then
+    echo Found reminders
+    cat $r
+    sh $r
+
+    rm $r
+fi

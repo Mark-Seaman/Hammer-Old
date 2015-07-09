@@ -1,0 +1,62 @@
+#!/bin/bash
+# Prune the following list of files so that they are not 
+# propogated while doing synchronization.
+
+dir=/home/seaman/Documents/MyBook
+if [ "$1" != "" ]
+then
+    dir=$1
+fi
+
+if [ ! -d $dir ] 
+then
+    echo "Directory not found, $dir"
+    exit 1
+fi
+
+cd $dir
+(
+
+rm *~ */*~
+rm */*#* */.#*
+
+rm Gallery/*/*.jpg
+
+xargs rm -rf << EOL
+Guides-auto
+Prioritize
+SuperPower/UpgradeYourLife
+SuperPower/hourWorkWeek
+SuperPower/NowDiscoverYourStrengths
+SuperPower/HalfTime
+SuperPower/GettingThingsDone
+SuperPower/HabitsOfHighlyEffectivePeople
+SuperPower/Switch
+Leadership/PreferredCommunicationChannels
+Leadership/ProjectCompletion
+Leadership/ProjectExecution
+Leadership/ProjectPlanning
+Leadership/Audience
+Leadership/Message
+Leadership/ProcessOfCommunication
+Leadership/ToolsForCommunication
+Leadership/HowEffectiveIsYourCommunication
+MarkSeaman/Index
+MarkSeaman/markseaman.html
+MarkSeaman/MarkSeaman
+Technology/ApplicationManagement
+Technology/EvolutionaryDesign
+Technology/IncrementalDefinition
+Technology/IncrementalDeployment
+Technology/LearningResources
+Technology/LinuxTips
+Technology/SoftwareEngineering
+Technology/SoftwareTrends
+Technology/TestdrivenDevelopment
+Technology/WebBrowsersAsPlatform
+Technology/WebHostingPlatforms
+Writing
+EOL
+
+) &> /dev/null
+

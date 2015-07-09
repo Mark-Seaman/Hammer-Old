@@ -1,0 +1,8 @@
+#!/bin/bash
+
+local=/home/seaman/Documents/Code/don-seaman
+ip=68.2.142.193
+rsync -auv --delete $local/bin/   $ip:bin
+rsync -auv --delete $local/notes/ $ip:notes
+rsync -auv --delete $local/code/  $ip:code
+

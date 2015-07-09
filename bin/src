@@ -1,0 +1,6 @@
+#!/bin/bash
+# List all the source code
+
+src-bin | grep -v '\.el$'
+src-test
+

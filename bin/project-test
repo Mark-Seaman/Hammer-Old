@@ -1,0 +1,20 @@
+#!/bin/bash
+# List all changes
+echo List all changes
+
+project-list |
+while read p 
+do
+    echo "$p"
+    echo '----------------------------------------------'
+    . $p/bin/project &&  tst
+done
+
+reset
+project-list |
+while read p 
+do
+    echo "$p"
+    echo '----------------------------------------------'
+    . $p/bin/project && tfail
+done

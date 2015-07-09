@@ -1,0 +1,13 @@
+#!/usr/bin/env python
+# Get the doc from storage
+
+from sys         import argv
+from util.domain import get_domain_doc
+
+if len(argv)<2:
+    print 'usage: doc-page-get doc'
+    exit(1)
+ 
+get_domain_doc(argv[1])
+
+

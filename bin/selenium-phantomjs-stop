@@ -1,0 +1,7 @@
+#!/bin/bash
+# Stop the display server to run browswer headless
+
+killall Xvfb
+export DISPLAY=:0
+
+echo "usage: . $0"

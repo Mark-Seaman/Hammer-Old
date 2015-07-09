@@ -1,0 +1,4 @@
+#!/bin/bash
+# Create a shell on the test machine in Frederick
+
+ssh -t 204.133.31.34 ssh 10.97.24.42

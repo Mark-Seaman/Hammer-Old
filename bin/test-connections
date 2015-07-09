@@ -1,0 +1,10 @@
+#!/bin/bash
+# Test all of the connections from this computer
+echo Test all of the connections from this computer
+
+# List the hostname to several systems
+ssh $z hostname
+ssh $ms hostname
+ssh $wm hostname
+ssh $wm2 hostname
+ssh $wms hostname

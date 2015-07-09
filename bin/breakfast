@@ -1,0 +1,16 @@
+#!/bin/bash
+# Invite guys to breakfast
+echo Invite guys to breakfast
+
+guys='eric@cnecreative.com,mark.seaman@shrinking-world.com,intelengineer@gmail.com,bretthart2@hotmail.com,wayne-ball@msn.com,warrenpc@outlook.com,mrmark@comcast.net,jjnlemora@juno.com,josiah.seaman@gmail.com'
+
+send $guys 'Breakfast on Saturday'  <<EOF
+
+We will be meeting for breakfast at Egg & I in Windsor on Saturday at 9:00 AM.
+
+Invite a friend to come with you.
+
+-- 
+Mark Seaman  * http://MarkSeaman.Org *  970-481-6240 
+EOF
+

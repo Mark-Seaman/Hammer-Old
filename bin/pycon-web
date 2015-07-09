@@ -1,0 +1,8 @@
+#!/usr/bin/python3
+# Browse the PyCon website
+
+from os import system
+
+print("Browse the PyCon website")
+system('w https://us.pycon.org/2015/schedule')
+

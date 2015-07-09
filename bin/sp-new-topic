@@ -1,0 +1,11 @@
+#!/bin/bash
+# Create a new topic for SpiritualLog
+echo Create a new log topic for $1
+
+if [ -f "$y/SpiritualLog/$1" ]
+then
+    echo File already exists
+else
+    sed "s/\* \*/*$1 */" $y/NewTopic | sed 's/\([A-Z]\)/ \1/g' > $y/SpiritualLog/$1
+fi
+e $y/SpiritualLog/$1

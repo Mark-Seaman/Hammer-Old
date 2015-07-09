@@ -1,0 +1,10 @@
+#!/bin/bash
+# List the source code for mybook
+
+cd $mb
+echo Python source code for mybook
+find -name '*.py' | xargs 'wc'
+
+echo
+echo HTML source code for mybook
+find -name '*.html' | xargs 'wc'

@@ -1,0 +1,8 @@
+#!/bin/bash
+# Send a directory of Evernotes
+
+for f in `ls $1`
+do
+    echo evernote $f
+done
+

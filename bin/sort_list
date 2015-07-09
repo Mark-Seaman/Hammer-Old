@@ -1,0 +1,14 @@
+#!/usr/bin/python
+# Print a sorted list of text read from input stream
+
+from files import read_input
+
+# Eliminate the duplication from a list
+def unique(items):
+    s = set()
+    for i in items: s.add(i)
+    return sorted(s)
+
+# Sort a list of items
+for t in  unique(read_input()): print t
+

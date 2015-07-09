@@ -1,0 +1,3 @@
+#!/bin/bash
+# Connect to the gateway in Frederick
+ssh 204.133.31.34

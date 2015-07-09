@@ -1,0 +1,14 @@
+#!/bin/bash
+# Unpack the Git archive contents
+
+# example usage: archive-unpack 2008
+
+[[ ! -d "$HOME/LiveSync/Git/$1.git/" ]] && 
+echo "No directory found,  $HOME/LiveSync/Git/$1.git" && 
+exit 1
+
+mkdir -p ~/Archive              &&
+cd ~/Archive                    &&
+git clone ~/LiveSync/Git/$1.git &&
+echo "Unpack sucessful ~/Archive/$1"
+

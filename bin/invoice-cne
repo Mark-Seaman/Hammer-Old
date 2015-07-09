@@ -1,0 +1,12 @@
+#!/bin/bash
+# Create an invoice for CNE
+
+cd ~/Archive/Secure/2014/Invoice/Q1
+
+cp CNE.odt CNE-$1.odt
+rbg soffice CNE-$1.odt
+
+echo 
+echo "Invoice for CNE"
+invoice time-cne-$1  90
+

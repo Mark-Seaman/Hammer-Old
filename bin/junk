@@ -1,0 +1,22 @@
+#!/bin/bash
+# Move files to Junk directory
+
+# Make directory if needed
+mkdir -p ~/Desktop  ~/Desktop/Junk
+
+# Move junk files to a directory
+for f in $* 
+do
+    source="$f"
+    dest="~/Desktop/Junk/`basename $f`"
+    echo Move $source to $dest
+    ls -l $source $dest
+
+    # Handle directories
+    [ -d "$dest" ] && echo "rm -rf $dest"
+ 
+    # Handle files
+    mv $source $dest
+    
+done
+

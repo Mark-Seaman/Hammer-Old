@@ -1,0 +1,12 @@
+#!/bin/bash
+# Make a log to record information
+
+# Create a directory if needed
+logs=$HOME/Documents/logs/`hostname`
+mkdir -p `dirname $logs` $logs
+
+echo "Log: $1.log"
+
+# Record the info
+cat - > $logs/$1.log
+

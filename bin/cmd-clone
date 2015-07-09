@@ -1,0 +1,6 @@
+#!/bin/bash
+# Clone a command
+echo Clone command "$1" to "$2"
+
+cp $b/$1 $b/$2
+cmd-edit $2

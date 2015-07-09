@@ -1,0 +1,5 @@
+#!/bin/bash
+# Terminal on sarge
+
+echo SSH to Sarge
+ssh seaman@sarge.coresoftwaregroup.com

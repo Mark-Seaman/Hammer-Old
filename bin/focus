@@ -1,0 +1,43 @@
+#!/usr/bin/env python
+# Select a work task
+
+from os.path import join
+from os import environ,system
+from random import choice
+from sys import argv
+
+# Decode the choice for focus
+def print_choice(selection):
+    d1 = { 'w':'watermill ', 'p':'pipescan  ', 'a':'appthumper', 's':'sws       ' }
+    d2 = { 'l':'learn', 'p':'plan', 'b':'build', 't':'teach' }
+    if d1.has_key(selection[0]):
+        print "%-10s"%d1[selection[0]],
+    if d2.has_key(selection[1]):
+        print "%-10s"%d2[selection[1]],
+    print selection[2:]
+
+ 
+# Select today's focus
+def select_focus(path,argv):
+    lines = open( path ).read().splitlines()[2:]
+    cmd = ' '.join(argv[1:])
+
+    if len(cmd)>4:
+        open(path,'a').write(cmd+'\n')
+    else:
+        if len(cmd)>0:
+            for c in lines:
+                if c.startswith(cmd):
+                    print_choice(c)
+        else:
+            for c in lines:
+                print_choice(c)
+
+
+path = join(environ['plan'],'Focus')
+if len(argv)>1 and argv[1]=='-edit':
+    system('e '+path)
+    exit(0)
+
+
+select_focus(path,argv)

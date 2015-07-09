@@ -1,0 +1,5 @@
+#!/bin/bash
+# Go to the wiki github page
+
+chrome http://github.com/$gh/wiki
+

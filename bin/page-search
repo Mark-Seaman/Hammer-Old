@@ -1,0 +1,10 @@
+#!/bin/bash
+# Build a page of search results
+
+{
+    search-brain  $1 | page-results $br 
+    search-cmd    $1 | page-results $b
+    search-mybook $1 | page-results /home/seaman/Documents/MyBook
+} >  /tmp/search && 
+
+e /tmp/search

@@ -1,0 +1,29 @@
+#!/bin/sh
+# Produce a sorted list of space hogs
+
+# Go to the directory given as an argument
+if [ -d "$1" ]
+then
+    cd $1
+fi
+
+# Create a log of the hogs
+d=`pwd`
+f=`basename $d`
+echo $f
+#exit
+
+{
+
+
+    # Find the disk usage and sort by biggest
+    du --max-depth=5 | 
+    sort -nr |
+    awk '{ if ($1>10240) printf "%d MB\t%s\n", $1/1024, $2, $3, $4, $5 }' |
+    expand -10 
+
+} 2>&1 | mklog show-hogs-$f
+
+
+# Show me the log file
+echo $HOME/Documents/logs/`hostname`/show-hogs-$f.log

@@ -1,0 +1,11 @@
+#!/usr/bin/python3
+# Show the log for the last test run
+
+from socket import gethostname
+from os.path import join
+from os import environ
+
+print("Log of Test Results")
+path = join(environ['HOME'],'Documents','logs',gethostname(),'tst-home.log')
+print (open(path).read())
+

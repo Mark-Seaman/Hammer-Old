@@ -1,0 +1,27 @@
+#!/bin/bash
+# Create a new database from the command line
+
+database=$1
+user=$2
+password=$3
+rootpasswd=$4
+
+echo "Database $database"
+echo "User $user"
+echo "Password $password"
+
+# Create a file containing the SQL statements
+cat <<EOF >/tmp/sql$$
+    
+    CREATE DATABASE \`$database\`;
+
+    CREATE USER '$user'@'localhost' IDENTIFIED BY '$password';
+
+    GRANT USAGE ON * . * TO '$user'@'localhost' IDENTIFIED BY '$password' 
+        WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0 ;
+
+    GRANT ALL PRIVILEGES ON * . * TO '$user'@'localhost';
+EOF
+
+# Execute the SQL
+cat /tmp/sql$$ | tee | mysql -uroot -p$rootpasswd

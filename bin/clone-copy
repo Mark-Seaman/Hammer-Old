@@ -1,0 +1,5 @@
+#!/bin/bash
+# Copy a file tree to the new computer
+echo Copy a file tree to the new computer
+
+cptree $1 $sub:$1

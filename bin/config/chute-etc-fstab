@@ -1,0 +1,11 @@
+# /etc/fstab: static file system information.
+#
+# <file system> <mount point>   <type>  <options>       <dump>  <pass>
+proc            /proc           proc    defaults        0       0
+# /dev/sda6
+UUID=9325df9a-3ea6-4a16-9fb5-7b985ad8b7aa /               ext3    relatime,errors=remount-ro 0       1
+# /dev/sda5
+UUID=7e5d11a0-d4e5-41f1-a56f-a5c1f3d2f493 none            swap    sw              0       0
+# /dev/sdb5
+UUID=755a0a55-9b91-49fe-93af-6fc1fd45c929 none            swap    sw              0       0
+/dev/scd0       /media/cdrom0   udf,iso9660 user,noauto,exec,utf8 0       0

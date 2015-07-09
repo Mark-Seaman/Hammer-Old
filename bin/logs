@@ -1,0 +1,9 @@
+#!/bin/bash
+# Show all the key system logs in the editor
+
+logs=$HOME/Documents/logs/`hostname`
+
+cd $logs
+ls -l
+
+echo "cd $logs; ls -l"

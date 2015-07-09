@@ -1,0 +1,15 @@
+#!/bin/bash
+# Git status and filter the output
+
+[[ ! -d "$1" ]] && echo "No directory $1" && exit 1
+
+cd $1                       &&
+echo                        &&
+pwd                         &&
+git status                  | 
+sed '/git add/d'            | 
+sed '/Changed/d'            | 
+sed '/\#$/d'                | 
+sed '/On branch master/d'   | 
+sed '/nothing to commit/d'  |
+sed '/discard changes/d'

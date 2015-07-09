@@ -1,0 +1,6 @@
+#!/bin/bash
+# Go to the pipescan github page
+
+chrome http://github.com/$gh
+wiki
+issues

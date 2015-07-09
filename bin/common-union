@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Find the union of two sets of lines.
+{
+    ls $1
+    ls $2
+} | sort -u
+

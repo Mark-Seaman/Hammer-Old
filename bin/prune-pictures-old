@@ -1,0 +1,28 @@
+#!/bin/bash
+# Remove old files from the archive and merge directories together
+
+# Make sure you are running from Archive
+d=`pwd`
+if [ `basename $d` != "Pictures" ] ; then
+    echo "You must be in Pictures to run this command"
+    exit 1
+fi
+
+if [ ! -d "$d" ] 
+then
+    echo "Directory does not exist, $d"
+    exit 1
+fi
+
+(
+date
+
+# 2009
+rm -rf 2009/Original-Mediterranean
+rm -rf 2009/More
+rm -rf 2009/Mediterranean/Music
+
+tree -L 4
+
+date
+) &> /home/seaman/Documents/logs/prune-pictures

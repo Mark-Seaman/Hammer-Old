@@ -1,0 +1,4 @@
+#!/bin/bash
+# Amazon video service
+
+w http://www.amazon.com/Prime-Instant-Video/b/ref=gno_yam_piv?ie=UTF8&node=2676882011

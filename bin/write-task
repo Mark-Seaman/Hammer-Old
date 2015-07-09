@@ -1,0 +1,4 @@
+#!/bin/bash
+# Select a writing task
+
+shuf -n 1 < $br/WritingTasks

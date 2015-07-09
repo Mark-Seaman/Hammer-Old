@@ -1,0 +1,33 @@
+#!/bin/bash
+# Synchronize two directories and prune
+
+# There must be two arguments
+if [ $# -lt 2 ]
+then 
+    echo "usage: merge from-dir to-dir"
+    exit 1
+fi
+
+# Save current directory
+d=`pwd`
+
+# Prune before sync
+if [ -x $b/$3 ]
+then
+    cd $1
+    $3 2> /dev/null
+fi
+
+# Return to starting directory
+cd $d
+
+# Sync both directions
+cptree "$1" "$2" && cptree "$2" "$1"
+
+# Prune after sync
+if [ -x $b/$3 ]
+then
+    cd $1
+    $3
+fi
+

@@ -1,0 +1,16 @@
+#!/bin/bash
+# Pack the Git archive contents
+
+# example usage: archive-pack 2008
+
+[[ ! -d "$HOME/Archive/$1" ]] && 
+echo 'No directory found, ' ~/Archive/$1 && 
+exit 1
+
+cd ~/Archive/$1
+git add .
+git commit -m "Automatic update"
+git pull                        && 
+git push                        &&
+rm -rf ~/Archive/$1
+

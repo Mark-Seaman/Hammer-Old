@@ -1,0 +1,41 @@
+#!/bin/bash
+# Remove old files from the archive and merge directories together
+
+# Setup the execution context
+. /home/seaman/bin/bash-vars
+
+cd  /home/seaman/LiveSync/Pictures
+
+# Make sure you are running from Archive
+d=`pwd`
+if [ `basename $d` != "Pictures" ] ; then
+    echo "You must be in Pictures to run this command"
+    exit 1
+fi
+
+if [ ! -d "$d" ] 
+then
+    echo "Directory does not exist, $d"
+    exit 1
+fi
+
+{
+date
+
+# 2009
+rm -rf 2009/Original-Mediterranean
+rm -rf 2009/More
+rm -rf 2009/Mediterranean/Music
+
+rm -rf xtra
+rm -rf Samples
+rm -rf 'Sample Pictures'
+rm -rf 'New photos'
+rm -rf Desktop
+rm *.jpg *.avi
+1978-2002/1999/Prom 1999/Prom#3.jpg
+
+tree -L 4
+
+date
+} | mkdir prune-pictures

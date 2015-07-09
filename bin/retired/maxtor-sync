@@ -1,0 +1,42 @@
+#!/bin/bash
+# synchronize the inbox files on the maxtor drive
+
+maxtor
+
+if [ -f "$m/backup/ready.txt" ]
+then
+
+    function mirror_out()
+    {
+        mkdir -p /media/maxtor/inbox/$1
+        rsync -auv --delete /home/seaman/$1/ /media/maxtor/inbox/$1
+    }
+
+    function merge_in()
+    {
+        rsync -auv /media/maxtor/inbox/$1/ /home/seaman/$1
+    }
+
+    function synchronize()
+    {
+        merge_in    $1   
+        $2 
+        mirror_out  $1            
+    }
+
+    echo "Doing synchronization..."
+    {
+        synchronize    bin                  prune-bin
+        synchronize    Documents            prune-docs
+
+    } | 
+    sed '/\/$/d'|
+    sed '/bytes\/sec/d'|
+    sed '/total size/d'|
+    sed '/sending incremental/d'
+else
+    echo "Server is NOT available for backup"
+    return 1
+fi
+
+

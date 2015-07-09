@@ -1,0 +1,5 @@
+#!/bin/bash
+# Python Install Package
+
+pip install $* &&
+echo "pip install $*" | tee -a $pb/install.pip

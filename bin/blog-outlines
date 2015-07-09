@@ -1,0 +1,8 @@
+#!/bin/bash
+# Show the articles for Seamans Log
+echo  Show the articles for Seamans Log
+
+# Select the blog
+blog=SeamansLog
+[[ "$1" != "" ]] && [[ -d "$1" ]] && blog=$1
+e $y/$blog/Outlines

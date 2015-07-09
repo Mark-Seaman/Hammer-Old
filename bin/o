@@ -1,0 +1,8 @@
+#!/bin/bash
+# Open Libre Office for Mac or Linux
+
+
+[ "`which soffice`" != "" ] && rbg soffice "$1" && exit
+
+open "$1"
+

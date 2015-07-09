@@ -1,0 +1,38 @@
+#!/bin/bash
+# Install Node.JS
+
+# Node JS and npm
+sudo apt-get install -y nodejs nodejs-legacy npm
+
+
+# Install global node packages
+sudo npm install -g express body-parser jade redis forever
+
+
+# Install local node packages
+# cd $pa
+# npm install express body-parser jade redis forever
+
+
+#-----------------------------------------------------------------------------
+
+# Attempts at installing version manager
+#sudo npm install -g nvm
+
+# sudo apt-get update
+# sudo apt-get install build-essential libssl-dev
+# curl https://raw.githubusercontent.com/creationix/nvm/v0.7.0/install.sh | sh
+
+# echo '[ -s "/home/seaman/.nvm/nvm.sh" ] && . "/home/seaman/.nvm/nvm.sh"' >> ~/bin/project
+
+# nvm ls-remote
+
+# nvm install 0.8.26
+# nvm install 0.10.25
+
+# node -v
+
+# nvm use 0.8.26
+# nvm use 0.10.25
+
+

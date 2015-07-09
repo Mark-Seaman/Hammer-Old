@@ -12,7 +12,7 @@ from tst import run_diff_checks, shell, lines, limit_lines
 
 def lines_test():
     '''   Count the lines of source code in the tst.py file   '''
-    return limit_lines ('cat bin/tst.py',200,300)
+    return limit_lines ('cat bin/tst.py',300,320)
 
 
 def like_test():

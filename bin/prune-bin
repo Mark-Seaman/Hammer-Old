@@ -1,0 +1,30 @@
+#!/bin/bash
+# Prune files so that they are not propogated while doing synchronization.
+
+dir=/home/seaman/bin
+if [ "$1" != "" ]
+then
+    dir=$1
+fi
+
+if [ ! -d $dir ] 
+then
+    echo "Directory not found, $dir"
+    exit 1
+fi
+
+cd $dir
+(
+find -name "*~" |xargs rm
+find -name "#*#"|xargs rm
+
+xargs rm <<EOF
+dropbox.py
+.#mirror
+sync-wm
+sync-flashy
+EOF
+
+) &> /dev/null
+
+

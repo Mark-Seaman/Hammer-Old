@@ -1,0 +1,5 @@
+#!/bin/bash
+# Grep the list of install packages
+
+dpkg --get-selections | grep $1 | grep -v deinstall
+

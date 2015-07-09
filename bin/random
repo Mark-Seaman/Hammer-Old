@@ -1,0 +1,7 @@
+#!/usr/bin/env python
+# Select one random line from the input
+
+from random import choice
+from sys import stdin
+
+print (choice(stdin.read().split('\n')))

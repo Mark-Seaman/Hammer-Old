@@ -1,0 +1,12 @@
+#!/usr/bin/env python
+# Track the task hours for the work week
+
+from util.date import date_str,today_str,someday_str
+
+print '''
+**Week of %s**
+
+            w   p   a   s   i'''%today_str()
+
+for i in range(7):
+    print someday_str(i)

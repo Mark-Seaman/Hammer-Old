@@ -1,0 +1,82 @@
+#!/usr/bin/python
+# Time spent on activities
+
+from sys import stdin,argv
+from os import  environ
+
+print 'Time spent on activities'
+
+# Read the data file
+def read_time(filename):
+    weeks = 26
+    return open(environ['br']+'/'+filename).read().split('\n')[-weeks*9:]
+
+# Use a dictionary of values
+def increment(d, i):
+    if i != '\n':
+        if d.has_key(i):
+            d[i] = d[i]+1
+        else:
+            d[i] = 1
+
+# Show the counter summary
+def show(label, amounts, weeks=1):    
+    print '%-18s'%label,
+    total = 0
+    for i in ['w','p','g','f','c']:
+        if amounts.has_key(i): 
+            print "%5d"%(amounts[i]/weeks),
+            total += amounts[i]
+        else:
+            print "%5d"%0,
+    print '       ', total/weeks
+
+# Gather and display results
+def print_summary(label, s):
+    d = {}
+    for i in s:
+        if i != '\n':
+            increment(d,i)
+            increment(totals,i)
+    show(label,d)
+    global weeks 
+    weeks += 1
+
+# Print headings for time table
+def headings():
+    print '%18s'%'',
+    for i in ['w','p','g','f','c']:
+        print '%5s'%i,
+    print
+
+# Run a summary of each week
+def weekly_summary(time):
+    print len(time)/9, 'weeks'
+    headings()
+    for week in range(len(time)/9):
+        offset = week*9
+        print_summary(time[offset], ''.join(time[offset+1:offset+8]))
+    print 
+
+# Compare to the ideal and advise
+def need_more(totals,weeks,ideal):
+    print
+    for i in  ['w','p','g','f','c']:
+        if totals[i]/weeks > ideal[i] + 3:
+            print 'Need less', i
+        if totals[i]/weeks < ideal[i] - 3:
+            print 'Need more',i
+
+# Summarize all of the time
+def print_total_summary(totals,weeks):
+    headings()
+    show("totals:", totals, weeks)
+    ideal = {'w':48,'p':10,'g':10,'f':20, 'c':10}
+    show("ideal:", ideal)
+    need_more(totals,weeks,ideal)
+
+# Gather data and summarize the time
+totals = {}
+weeks = 0
+weekly_summary(read_time(argv[1]))
+print_total_summary(totals,weeks)

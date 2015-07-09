@@ -1,0 +1,3 @@
+#!/bin/bash
+# Edit a topic from the brain
+e $mybook/Leverage

@@ -1,0 +1,21 @@
+#!/usr/bin/env python
+# Create a new python test script
+
+from sys import argv
+
+script  = argv[1]
+comment = argv[2]
+
+code = '''# test/%s_test.py
+# %s
+
+from os import system
+
+def %s_test():
+    system ('%s')
+
+
+
+''' % (script,comment,script,script)
+
+open('test/%s_test.py'%script, 'wt').write(code)

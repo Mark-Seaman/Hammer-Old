@@ -1,0 +1,12 @@
+#!/bin/bash
+# List the reading order of topics in this book
+
+cd $mb
+if [ "" == "$1" ]
+then
+    echo "Example usage:  mb-order SuperPower/Home"
+    exit 1
+fi    
+
+cd $mb
+manage.py order $y/$1

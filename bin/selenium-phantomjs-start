@@ -1,0 +1,7 @@
+#!/bin/bash
+# Start the display server to run browswer headless
+
+rbg Xvfb :99 -ac
+export DISPLAY=:99
+
+echo "usage: . $0"
