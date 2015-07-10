@@ -47,20 +47,30 @@ def complexity(lines):
 	return (num_lines, total_cost, summary)
 
 
-def function_sizes(show_functions = False):
-	'''Measure the complexity based on the function sizes within the module'''
-	print('File                              Lines  Complexity')
+def calculate_complexity(filename, lines, show_functions):
+	num_lines, cost, summary = complexity(lines)		
+	if show_functions:	
+		print('%-30s %8d %8d %s' % (filename, num_lines, cost, summary))
+	else:
+		print('%-30s %8d %8d' % (filename, num_lines, cost))
+	return (num_lines, cost, summary)
+
+
+def system_complexity(source, show_functions):
 	total_cost = 0
 	total_lines = 0
 	for filename in python_source():
 		lines = read_source(filename)
-		num_lines, cost, summary = complexity(lines)		
-		if show_functions:	
-			print('%-30s %8d %8d %s' % (filename, num_lines, cost, summary))
-		else:
-			print('%-30s %8d %8d' % (filename, num_lines, cost))
+		num_lines, cost, summary = calculate_complexity(filename, lines, show_functions)
 		total_lines += num_lines
 		total_cost += cost
+	return (total_lines, total_cost)	
+
+
+def function_sizes(show_functions = False):
+	'''Measure the complexity based on the function sizes within the module'''
+	print('File                              Lines  Complexity')
+	total_cost, total_lines = system_complexity(python_source())
 	print('%-30s %8d %8d' % ('    total', total_lines, total_cost))
 
 
