@@ -25,25 +25,59 @@ def extract_functions(lines):
 	yield((i,''))
 
 
+def function_cost(num_lines):
+	return num_lines ** 1.2  # Exponential penalty of size
+
+
+def module_cost(functions):
+
+	total_cost = 0
+	summary = '\n'
+	name = 'module'
+	line = 0
+
+	for x in functions:		
+		if name:
+			print('MODULE COST: '+ str(x))
+			num_lines = x[0]-line
+			cost = function_cost(x[0]-line)
+			total_cost += cost
+			summary += '    %-26s %8d %8d\n' % (name, num_lines, cost)
+			line = x[1]
+
+		name = x[1]
+		line = x[0]
+
+	cost = num_lines ** 1.2 # Exponential penalty of size
+	total_cost += cost
+	return total_cost
+	
+
 def complexity(lines):
 	'''Measure the complexity of a single file'''
 	total_cost = 0
 	summary = '\n'
-	name = None
-	for x in extract_functions(lines):
+	name = 'module'
+	line = 0
+	for x in extract_functions(lines):		
 		if name:
-			num_lines = x[0]-start
-			cost = num_lines ** 1.2 # Exponential penalty of size
+			num_lines = x[0]-line
+			cost = function_cost(x[0]-line)
 			total_cost += cost
 			summary += '    %-26s %8d %8d\n' % (name, num_lines, cost)
-			start = x[1]
+			line = x[1]
+
 		name = x[1]
-		start = x[0]
+		line = x[0]
+
 	num_lines = len(lines)
 	cost = num_lines ** 1.2 # Exponential penalty of size
 	num_imports = len([i for i in lines if 'import' in i])
 	import_cost = num_imports * 10  # Equal to 10 lines of code
 	total_cost += cost + import_cost
+	
+	module_cost(extract_functions(lines))
+
 	return (num_lines, total_cost, summary)
 
 
@@ -70,7 +104,7 @@ def system_complexity(source, show_functions):
 def function_sizes(show_functions = False):
 	'''Measure the complexity based on the function sizes within the module'''
 	print('File                              Lines  Complexity')
-	total_cost, total_lines = system_complexity(python_source())
+	total_lines, total_cost = system_complexity(python_source(), show_functions)
 	print('%-30s %8d %8d' % ('    total', total_lines, total_cost))
 
 
