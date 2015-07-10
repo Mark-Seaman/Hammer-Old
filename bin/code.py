@@ -28,31 +28,36 @@ def extract_functions(lines):
 
 
 def function_cost(name,size):
-	cost = size ** 1.3  # Exponential penalty of size
+	'''Exponential penalty of function size'''
+	cost = size ** 1.3
 	details = '    %-26s %8d %8d\n' % (name, size, cost)
 	return cost,details
 
 
 def module_cost(lines):
+	'''Cost of maintaining this module'''
 	module_cost = 0
 	summary = '\n'
-	name = 'module'
-	
+	name = 'module'	
 	for x in extract_functions(lines):		
 		cost,details = function_cost(name, x[0])
 		summary += details
 		module_cost += cost
 		name = x[1]
-
-	size = len(lines)
-	cost = (size/2) ** 1.1 # Exponential penalty of size
-	module_cost += cost
 	return module_cost,summary
 	
 
+def cost_of_modularity(lines):
+	'''Exponential penalty of module size'''
+	size = len(lines)
+	return (size/2) ** 1.1
+
+
 def complexity(filename, lines, show_functions):
+	'''Compute the complexity of a single module'''
 	num_lines = len(lines)
 	cost, summary = module_cost(lines)
+	cost += cost_of_modularity(lines)
 	if show_functions:	
 		print('%-30s %8d %8d %s' % (filename, num_lines, cost, summary))
 	else:
@@ -60,7 +65,9 @@ def complexity(filename, lines, show_functions):
 	return (num_lines, cost, summary)
 
 
-def system_complexity(source, show_functions):
+def show_complexity(show_functions = False):
+	'''Measure the complexity of all modules'''
+	print('File                              Lines  Complexity\n')
 	total_cost = 0
 	total_lines = 0
 	for filename in python_source():
@@ -68,13 +75,6 @@ def system_complexity(source, show_functions):
 		num_lines, cost, summary = complexity(filename, lines, show_functions)
 		total_lines += num_lines
 		total_cost += cost
-	return (total_lines, total_cost)	
-
-
-def function_sizes(show_functions = False):
-	'''Measure the complexity based on the function sizes within the module'''
-	print('File                              Lines  Complexity\n')
-	total_lines, total_cost = system_complexity(python_source(), show_functions)
 	print('\n%-30s %8d %8d' % ('    total', total_lines, total_cost))
 
 
@@ -138,10 +138,10 @@ def code_command(argv):
 	if len(argv)>1:
 
 		if argv[1]=='complexity':
-			function_sizes()
+			show_complexity()
 
 		elif argv[1]=='functions':
-			function_sizes(True)
+			show_complexity(True)
 
 		elif argv[1]=='list':
 			print(code_list())
