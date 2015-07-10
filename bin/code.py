@@ -34,24 +34,23 @@ def function_cost(name,size):
 
 
 def module_cost(lines):
-	total_cost = 0
+	module_cost = 0
 	summary = '\n'
 	name = 'module'
 	
 	for x in extract_functions(lines):		
 		cost,details = function_cost(name, x[0])
 		summary += details
-		total_cost += cost
+		module_cost += cost
 		name = x[1]
 
 	size = len(lines)
-	cost = 0 # + (size/10) ** 1.1 # Exponential penalty of size
-	module = '\n    %-26s %8d %8d\n' % ('MODULARITY', size, cost)
-	#total_cost += cost
-	return total_cost,module+summary
+	cost = (size/2) ** 1.1 # Exponential penalty of size
+	module_cost += cost
+	return module_cost,summary
 	
 
-def calculate_complexity(filename, lines, show_functions):
+def complexity(filename, lines, show_functions):
 	num_lines = len(lines)
 	cost, summary = module_cost(lines)
 	if show_functions:	
@@ -66,7 +65,7 @@ def system_complexity(source, show_functions):
 	total_lines = 0
 	for filename in python_source():
 		lines = read_source(filename)
-		num_lines, cost, summary = calculate_complexity(filename, lines, show_functions)
+		num_lines, cost, summary = complexity(filename, lines, show_functions)
 		total_lines += num_lines
 		total_cost += cost
 	return (total_lines, total_cost)	
