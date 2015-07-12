@@ -8,6 +8,8 @@ from sys import argv
 
 from store import save, recall, expire, expiration
 
+#------------------------------------------------------
+# Shell command execution
 
 def limit_lines(shell_command, min=None, max=None):
     '''Limit the lines to a certain number or echo all the output'''
@@ -49,6 +51,23 @@ def differences(answer,correct):
             print('Differences detected:     < actual     > expected')
             print (diffs)
             return diffs
+
+
+#------------------------------------------------------
+
+def approve_all_answers():
+    for name in test_list():
+        approve_results(name)
+
+
+def approve_results(name):
+    '''   Approve the test results   '''
+    answer = recall_key(name+'.out')
+    if answer:
+        save_key('%s.correct' % name, answer)
+    else:
+        print('No output from test: '+name)
+        save_key('%s.correct' % name, '')
 
 
 def is_cached(testname):
@@ -96,9 +115,8 @@ def show_expected(name):
     print('Expected correct output from %s\n-----------------' % name)
     print(recall_key(name+'.correct'))
 
-
 def show_status():
-    '''  Display the tests that failed  '''
+    '''Display the tests that failed'''
     failures = []
     for name in test_list():
         answer = recall_key ('%s.out' % name)
@@ -110,7 +128,7 @@ def show_status():
       
 
 def show_diff(name):
-    '''   Show the results for one test   '''
+    '''Show the results for one test'''
     answer = recall_key ('%s.out' % name)
     correct = recall_key('%s.correct' % name)
     if answer!=correct:
@@ -135,16 +153,6 @@ def recall_key(key):
     '''recall_key the value with a key prefixed to the current directory'''
     #print ('RECALL: '+ join(getcwd(), key))
     return recall(join(getcwd(), key))
-
-
-def approve_results(name):
-    '''   Approve the test results   '''
-    answer = recall_key(name+'.out')
-    if answer:
-        save_key('%s.correct' % name, answer)
-    else:
-        print('No output from test: '+name)
-        save_key('%s.correct' % name, '')
 
 
 def run_check(name, function):
@@ -182,6 +190,7 @@ def tst_help():
     subcommands of tst:
 
     No args
+        accept     # Accept every answer
         list       # List the tests to run
         status     # Show the failing tests
         results    # Show the unexpected results
@@ -239,7 +248,10 @@ def execute_tst_command(argv):
     if len(argv)==2:
         t = argv[1]
 
-        if 'status'==t:
+        if 'accept'==t:
+            approve_all_answers()
+
+        elif 'status'==t:
             show_status()
         
         elif 'results'==t:

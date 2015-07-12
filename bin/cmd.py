@@ -68,6 +68,7 @@ def command_help():
         delete  [file] -- Delete a command
         edit    [file] -- Edit the command
         list    [file] -- List all commands
+        search  [pattern] -- Find the pattern in commands
         show    [file] -- Show a command
         test           -- Run the self-test
       

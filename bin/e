@@ -13,7 +13,7 @@ if exists(exe_path):
     print("Invoke the Sublime Text editor on "+args)
     system(exe_path+' '+args)
 else:
-    exe_path = join(environ['HOME'],'Projects/Hammer/bin','subl')
+    exe_path = join(environ['HOME'],'bin','subl')
     if exists(exe_path):
         print("Invoke the Sublime Text editor on "+args)
         system(exe_path+' '+args)
