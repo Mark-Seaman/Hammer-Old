@@ -1,0 +1,6 @@
+#!/bin/sh
+
+cd ~/bin
+#java -jar violet-0.16a.jar &
+java -jar /usr/local/bin/com.horstmann.violet-0.21.1.jar &
+

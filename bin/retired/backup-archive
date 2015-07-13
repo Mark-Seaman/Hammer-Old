@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# Print the date and user
+date
+echo "Running backup as `id -un`"                     
+
+# Load the variables from bashrc
+. /home/seaman/bin/bash-vars
+
+# Backup location
+archive="$m/Archive/2010/Mark"
+echo "Archive location = $archive"
+
+# Test to see that the backup location is available
+scp $m/backup/ready.txt /tmp/ready.txt
+if [ ! -f "/tmp/ready.txt" ]
+then
+    echo "Server is NOT available for backup"
+    return 1
+fi
+rm /tmp/ready.txt
+
+# Perform the backup
+date
+echo "Found server, starting backup"
+nice rsync -auv /home/seaman/ $archive
+
+# Get a listing of the disk space  
+cd $archive
+date
+echo "Listing disk space"
+du --max-depth=6 | sort -nr |head -200 > disk-space.txt
+
+# Remove unwanted extra files
+cd $m/Archive
+date
+echo "Pruning archive"
+prune-archive
+
+date
+echo "All done" 
+

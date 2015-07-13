@@ -1,0 +1,4 @@
+sshfs $z:/mnt/terra $t
+
+#sudo mount /dev/sdb1 /media/terra -t ntfs-3g -o nls=utf8,umask=077,uid=1000,gid=1000
+ls -l /media/terra

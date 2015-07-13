@@ -1,0 +1,33 @@
+#!/bin/bash
+# Print the date and user
+
+echo "`date` Started backup as `id -un`"                     
+
+# Load the variables from bashrc
+. /home/seaman/bin/bash-vars
+
+# Backup location is seaman-server
+backup="$z:Backup"
+echo "Backup location = $backup"
+
+# Test to see that the backup location is available
+scp $backup/ready.txt /tmp/ready.txt
+if [ -f "/tmp/ready.txt" ]
+then
+    rm /tmp/ready.txt
+
+        # Perform the backup
+        echo "Found server, starting backup"
+        nice time rsync -auv --delete \
+            --exclude Music \
+            --exclude .thumbnails \
+            --exclude .gvfs \
+            --exclude rsnapshot \
+            --exclude platform-git \
+             /home/seaman/ $backup/`hostname` |
+        grep -v '\/$' &> /home/seaman/Archive/logs/backup-svr.log
+    echo "`date` All done" 
+else
+    echo "Server is NOT available for backup"
+fi
+

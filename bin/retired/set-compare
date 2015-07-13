@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Compare to sets of lines
+
+echo "Union:        `set-union $1 $2         | wc -l`"
+echo "Intersection: `set-intersection  $1 $2 | wc -l`"
+echo "Difference:   `set-diff  $1 $2         | wc -l`"
+

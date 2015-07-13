@@ -1,0 +1,13 @@
+#!/bin/bash
+# Forward any file that is moved into a directory to another directory.
+
+fromDir=$1
+toDir=$2
+echo "Moving all files from $fromDir to $toDir"
+inotifywait -mrq --format '%f' -e close_write $fromDir | \
+    while read file; do  
+        ls -l $fromDir/$file
+        mv $fromDir/$file $toDir
+    done
+   
+

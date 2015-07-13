@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Don't do anything if already connected
+if [ ! -f "$m/backup/ready.txt" ]
+then
+    # Execute the following commands as root
+    sudo -i <<EOF
+        # mount the Maxtor drive
+        if [ ! -d "/media/maxtor/rsnapshot" ]
+        then
+            echo "Mount the Maxtor drive"
+            mount /dev/sdb1 /media/maxtor -t ext3 -o rw,nosuid,nodev
+        fi
+
+        # list the contents of the mounted drive
+        ls -l /media/maxtor
+EOF
+fi
+
+# restore the backup files from the drive
+if [ "$1" == "-restore" ]
+then
+    echo "Doing restore..."
+    rsync -auv /media/maxtor/rsnapshot/daily.0/localhost/home/seaman/ /home/seaman
+fi
+
+

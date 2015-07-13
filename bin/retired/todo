@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# give advice
+cat ~/Documents/Life/life-lessons.txt |shuf -n 1
+
+# show free space
+df -h /
+
+# Bring up the todo lists
+cd ~/Documents/Brain 
+e Brain

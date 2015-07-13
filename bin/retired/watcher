@@ -1,0 +1,10 @@
+#!/bin/bash
+# Wait for files to change in a directory and list them
+
+dir=/tmp/logs
+inotifywait -mrq --format '%f' -e close_write ${dir} | \
+    while read file; do  
+        ls -l ${dir}/${file}
+    done
+   
+

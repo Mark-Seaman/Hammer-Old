@@ -1,0 +1,91 @@
+#!/bin/bash
+# Prune files so that they are not propogated while doing synchronization.
+
+dir=/home/seaman/bin
+if [ "$1" != "" ]
+then
+    dir=$1
+fi
+
+if [ ! -d $dir ] 
+then
+    echo "Directory not found, $dir"
+    exit 1
+fi
+
+cd $dir
+(
+xargs rm <<EOF
+    bashrc-host
+    boot-hummer.lst
+    config/fstab-hummer
+    config/fstab-chute
+    config/fstab-server
+    config/mill@10.97.1.134
+    count
+    countdirs
+    cpbin
+    cpmusic
+    cron-setup
+    dj
+    djangoapp
+    d
+    dropbox.py
+    .emacs
+    ew
+    ftp-work-around
+    fstab-hummer
+    fstab-server
+    gr
+    kd
+    lines
+    lsmusic
+    maxtor-snapshot
+    mybook-apache
+    mybook-create
+    mybook-load
+    mybook-newdb
+    mybook-restart
+    mybook-update
+    packages.mini
+    pid
+    pgp-lock
+    prune-flashy
+    prune-wm
+    server-setup-cron
+    server-snapshot
+    server.snapshot.cfg
+    snapshot-m.config
+    sqldump
+    sync-maxtor  
+    swcf
+    swct
+    swsh
+    treediff
+    web
+    welcome.MarkSeaman.org
+    welcome.hummer
+    welcome.server
+    wme
+    vstatus
+    xsl
+    xxx
+    cgo      
+    godefs   
+    godoc    
+    gofmt    
+    goinstall 
+    gomake   
+    gopack   
+    gopprof  
+    gotest   
+    goyacc   
+    hgpatch  
+    quietgcc 
+    ebnflint   
+    windows
+EOF
+
+) &> /dev/null
+
+

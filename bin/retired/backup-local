@@ -1,0 +1,40 @@
+#!/bin/bash
+# Saves all of files from the maxtor drive to a local drive
+
+# Print the date and user
+date
+echo "Running backup as `id -un`"                     
+
+# Load the variables from bashrc
+. /home/seaman/bin/bash-vars
+
+# Mount the drive
+maxtor
+
+function copy {
+    mkdir -p /maxtor/$1
+    nice rsync -auv $m/$1/ /maxtor/$1
+}
+
+
+# Check for the drive
+if [ -f "$m/backup/ready.txt" ]
+then
+    # Copy the files
+    echo "Backup files $m  -->  /maxtor"
+    echo "Logging in /home/seaman/Archive/logs/backup-seaman"
+
+    mkdir -p /home/seaman/Archive/
+    mkdir -p /home/seaman/Archive/logs/
+    (
+        copy Archive
+        copy Installers
+        copy inbox
+    )  &> /home/seaman/Archive/logs/backup-seaman
+
+else
+    echo "Maxtor disk is NOT available for backup"
+    return 1
+fi
+
+

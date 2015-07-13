@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Find the union of two sets of lines.
+
+cat $1 $2 | sort -u
+

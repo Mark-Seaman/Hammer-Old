@@ -1,0 +1,21 @@
+# /etc/fstab: static file system information.
+#
+# Use 'blkid -o value -s UUID' to print the universally unique identifier
+# for a device; this may be used with UUID= as a more robust way to name
+# devices that works even if disks are added and removed. See fstab(5).
+#
+# <file system> <mount point>   <type>  <options>       <dump>  <pass>
+proc            /proc           proc    nodev,noexec,nosuid 0       0
+# / was on /dev/sda4 during installation
+UUID=67a01e0b-e24c-44c4-98d4-3a1c57623be3 /               ext3    errors=remount-ro 0       1
+# swap was on /dev/sda5 during installation
+UUID=e3379577-5d40-477c-b441-5cb9f335260e none            swap    sw              0       0
+# Terra is HTFS
+#/dev/sdc1 /mnt/terra ntfs-3g nls=utf8,umask=077,uid=1000,gid=1000 0 0
+# Windows volume
+/dev/sda1 	/media/windows	ntfs-3g  nls=utf8,umask=077,uid=1000,gid=1000 0	1
+# CD Rom
+/dev/scd0       /media/cdrom0   udf,iso9660 user,noauto,exec,utf8 0       0
+# Maxtor drive
+/dev/sdb1	/media/maxtor	ext3	rw,nosuid,nodev	0	1
+

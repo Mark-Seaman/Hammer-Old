@@ -1,0 +1,37 @@
+# synchronize the mobile data files using a server
+
+m=/tmp/Mobile
+tar=Mobile.tar.gz
+if [ ! -d $m ]
+then 
+    mkdir $m 
+fi
+cd $m
+
+                                 # get tar from server
+swcpf $tar 
+
+                                 # unpack
+tar -xzf $tar
+rm $m/$tar
+
+                                 # synchronize
+c $m/bin       ~/bin
+c $m/Documents ~/Documents
+
+prune-sync-files                 # remove unwanted file
+
+c ~/bin       $m/bin
+cd ~/Documents
+c . $m/Documents
+
+                                 # pack from home
+cd
+tar -czf $tar bin Documents
+
+                                 # send to server
+
+swcpt $tar
+rm $tar
+
+
