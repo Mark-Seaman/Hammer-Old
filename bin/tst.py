@@ -6,7 +6,9 @@ from os.path import join, exists
 from subprocess import Popen,PIPE
 from sys import argv
 
-from store import save, recall, expire, expiration
+from store import save, recall, expire, expiration, save_key, recall_key
+from store import is_cached, clear_cache
+
 
 #------------------------------------------------------
 # Shell command execution
@@ -56,6 +58,7 @@ def differences(answer,correct):
 #------------------------------------------------------
 
 def approve_all_answers():
+    '''Automatically accept any answer'''
     for name in test_list():
         approve_results(name)
 
@@ -68,21 +71,6 @@ def approve_results(name):
     else:
         print('No output from test: '+name)
         save_key('%s.correct' % name, '')
-
-
-def is_cached(testname):
-    '''Check the cache to see if result is available'''
-    cache = join(getcwd(), testname+'.cache')
-    if expiration(cache):
-        print("Used Cached results for %s seconds"%(expiration(cache)))
-        return True
-    else:
-        return False
-
-def clear_cache(testname):
-    '''Clear the cache for all tests'''
-    cache = join(getcwd(), testname+'.cache')
-    expire(cache,1)
 
 
 def reset_test_names():
@@ -98,9 +86,6 @@ def record_test_names(tests):
 
 def test_list():
     '''Generate a list of test names'''
-    #if not exists('test'):
-    #    mkdir('test')
-    #return [f.replace('.out','').replace('test/','') for f in glob('test/*.out')]
     return open('.test').read().split('\n')
 
 
@@ -144,22 +129,14 @@ def show_differences(my_tests):
         show_diff(name)
 
 
-def save_key(key,value):
-    '''Save the value with a key prefixed to the current directory'''
-    save(join(getcwd(), key), value)
-
-
-def recall_key(key):
-    '''recall_key the value with a key prefixed to the current directory'''
-    #print ('RECALL: '+ join(getcwd(), key))
-    return recall(join(getcwd(), key))
-
-
 def run_check(name, function):
     '''   Run the test and check the results   '''
-    print('    running '+name+'...')
-    answer = function()
-    save_key('%s.out' % name, answer)
+    if is_cached('%s.out' % name):
+        print("Cached results for name")
+    else:
+        print('    running '+name+'...')
+        answer = function()
+        save_key('%s.out' % name, answer)
     correct = recall_key(name+'.correct')
     if not correct:
         save_key('%s.correct' % name, answer)
@@ -229,13 +206,11 @@ def tst_add(command):
     script_path = join(environ['pb'],'%s_test.py' % command)
     template_path = join(environ['pb'],'prototypetest.py')
     command_content = open(template_path).read().replace('prototype',command)
-    #print('Content: %s.py \n %s' % (command,command_content))
     if exists(script_path):
         print('File already exists: '+script_path)
     else:
         with open(script_path,'w') as f:
             f.write(command_content)
-    #command_edit(argv)
 
 
 def tst_edit(command):
@@ -257,6 +232,9 @@ def execute_tst_command(argv):
         elif 'results'==t:
             print('Test differences: all tests')
             show_differences(test_list())
+
+        elif 'names'==t:
+            print('\n'.join(command_names()))
 
         elif 'list'==t:
             for t in sorted(test_list()):
