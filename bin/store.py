@@ -31,20 +31,26 @@ def expiration(key):
     return store.ttl(key)
 
 
+def set_cache(key, value, duration):
+    cache = cache_key(key)
+    save(cache,value)
+    if duration:
+        expire(cache, duration)
+        #print ("Key: %s, Duration: %s" % (cache,expiration(cache)))
+
+
 def save_key(key,value,duration=None):
     '''Save the value with a key prefixed to the current directory'''
     key = join(getcwd(), key)
     #print('save_key: %s, %s, %s, %s' % (key,cache_key(key),str(value),str(duration)))
+    if not value:
+        value='No test script output'
     save(key, value)
-    save(cache_key(key),value)
-    if duration:
-        expire(cache_key(key), duration)
-        print ("Key: %s, Duration: %s" % (key,expiration(key)))
+    set_cache(key, value, duration)
 
 
 def recall_key(key):
     '''recall_key the value with a key prefixed to the current directory'''
-    #print ('RECALL: '+ join(getcwd(), key))
     return recall(join(getcwd(), key))
 
 
@@ -57,10 +63,9 @@ def is_cached(key):
     '''Check the cache to see if result is available'''
     cache = cache_key(key)
     if expiration(cache):
-        print("Used Cached results for %s seconds"%(expiration(cache)))
-        return True
-    else:
-        return False
+        #print("Used Cached results for %s seconds"%(expiration(cache)))
+        return expiration(cache)
+    
 
 def clear_cache(key):
     '''Clear the cache for all tests'''

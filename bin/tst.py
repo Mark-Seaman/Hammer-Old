@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+from datetime import datetime
 from glob import glob
 from os import system, listdir, environ, mkdir, getcwd
 from os.path import join, exists
@@ -69,8 +70,8 @@ def approve_results(name):
     if answer:
         save_key('%s.correct' % name, answer)
     else:
-        print('No output from test: '+name)
-        save_key('%s.correct' % name, '')
+        print('No test script output: '+name)
+        save_key('%s.correct' % name, 'No test script output')
 
 
 def reset_test_names():
@@ -129,14 +130,29 @@ def show_differences(my_tests):
         show_diff(name)
 
 
+def execute_test(name, function):
+
+    start = datetime.now()
+    answer = function()
+    end   = datetime.now()
+
+    t     = end-start
+    seconds = "%d.%1d seconds"%(t.seconds, t.microseconds/100000)
+    duration = 10+t.seconds*100
+    print('    running %-20s  ... %s '%(name,seconds))
+    
+    save_key('%s.out' % name, answer, duration)
+    return answer
+
+
 def run_check(name, function):
     '''   Run the test and check the results   '''
-    if is_cached('%s.out' % name):
-        print("Cached results for name")
+    cache = is_cached('%s.out' % name )
+    if cache:
+        print("    cached results %-30s  ... %d seconds" % (name,cache))
+        answer = recall_key(name+'.out')
     else:
-        print('    running '+name+'...')
-        answer = function()
-        save_key('%s.out' % name, answer)
+        answer = execute_test(name, function)
     correct = recall_key(name+'.correct')
     if not correct:
         save_key('%s.correct' % name, answer)
