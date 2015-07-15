@@ -87,7 +87,7 @@ def record_test_names(tests):
 
 def test_list():
     '''Generate a list of test names'''
-    return open('.test').read().split('\n')
+    return [t for t in open('.test').read().split('\n') if t]
 
 
 def show_output(name):
@@ -113,15 +113,24 @@ def show_status():
     print('  '+'\n  '.join(failures))
       
 
+def diff(name):
+    '''Find the differences'''
+    answer = recall_key ('%s.out' % name)
+    correct = recall_key('%s.correct' % name)
+    if answer!=correct:
+        return differences(answer,correct)
+
+
 def show_diff(name):
     '''Show the results for one test'''
     answer = recall_key ('%s.out' % name)
     correct = recall_key('%s.correct' % name)
-    if answer!=correct:
+    d = diff(name)
+    if d:
         print('---------------------------------------------------------')
         print('                      '+name)
         print('---------------------------------------------------------')
-        print(differences(answer,correct))
+        print(d)
 
 
 def show_differences(my_tests):
@@ -148,7 +157,7 @@ def execute_test(name, function):
 def run_check(name, function):
     '''   Run the test and check the results   '''
     cache = is_cached('%s.out' % name )
-    if cache:
+    if cache and not diff(name):
         print("    cached results %-30s  ... %d seconds" % (name,cache))
         answer = recall_key(name+'.out')
     else:
@@ -163,7 +172,7 @@ def run_all_checks(label, my_tests):
     '''   Execute all of the tests defined in the dictionary.   '''
     print('Testing %s:' % label)
     for t in my_tests:
-        run_check(t, my_tests[t])
+       run_check(t, my_tests[t])
     record_test_names(my_tests.keys())
 
 
