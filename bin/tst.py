@@ -148,7 +148,7 @@ def execute_test(name, function):
     t     = end-start
     seconds = "%d.%1d seconds"%(t.seconds, t.microseconds/100000)
     duration = 10+t.seconds*100
-    print('    running %-20s  ... %s '%(name,seconds))
+    print('    %-20s  ... %s '%(name,seconds))
     
     save_key('%s.out' % name, answer, duration)
     return answer
@@ -158,7 +158,7 @@ def run_check(name, function):
     '''   Run the test and check the results   '''
     cache = is_cached('%s.out' % name )
     if cache and not diff(name):
-        print("    cached results %-30s  ... %d seconds" % (name,cache))
+        print("    cached results %-20s  ... %d seconds" % (name,cache))
         answer = recall_key(name+'.out')
     else:
         answer = execute_test(name, function)
