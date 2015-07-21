@@ -139,30 +139,17 @@ def book_read():
     system('pdf $book/../Book.pdf')
 
 
-def book_read_index(name):
+def book_read_index(part=None):
     '''Read an index from the book directory'''
-    topics = '''Cover
-Abstract
-Contents
-Overview
-Summary
-Intro
-Leverage
-Debt
-Practices
-Technology
-Design
-Code
-Test
-Services
-Release
-Scaling
-Monitoring
-Knowledge
-Teamwork
-Learning
-Planning'''
-    topics = [t for t in topics.split('\n') if t]
+    topics = [
+        'Cover;Abstract;Contents;Overview;Summary',
+        'Intro;Leverage;Debt;Practices',
+        'Technology;Design;Code;Test',
+        'Services;Release;Scaling;Monitoring',
+        'Knowledge;Teamwork;Learning;Planning'
+    ]
+    topics = ';'.join(topics)
+    topics = [t for t in topics.split(';') if t]
     return topics
 
 
