@@ -1,5 +1,5 @@
 from os import system, listdir, environ, chdir
-from os.path import join, isfile
+from os.path import join, isfile, exists
 from sys import argv
 
 from tst import shell
@@ -9,10 +9,9 @@ from book_test import book_checker
 def book_build():
     '''Put together a markdown file from the individual parts '''
     results = 'Build: Book.md\n'
-    book = ['book/'+i for i in book_read_index('Book')] 
-    chapters = ['chapters/'+i for i in book_read_index('Chapters')]
+    chapters = ['chapters/'+i for i in book_read_index()]
     with open('Book.md','w') as output_file:
-        for p in book+chapters:
+        for p in chapters:
             path = p+'.md'
             results += 'Build '+path+'  ...\n'
             text = open(path).read()    
@@ -63,7 +62,7 @@ def book_edit(argv):
 
 
 def book_headlines():
-    for i in book_read_index('Chapters'):
+    for i in book_read_index():
         path = join(environ['book'],'chapters',i+'.md')
         headline = open(path).read().split('\n')[0]
         print('%-15s ' % i + headline)
@@ -74,11 +73,7 @@ def book_index():
         print('- [%s.md, "%s", "%s"]' % (category+'/'+path, category, title))
 
     print('site_name: Software Leverage\n\npages:\n')
-    for i in book_read_index('Book'):
-        print_index_entry('book', i, 'Part '+i)
-    for i in book_read_index('Chapters'):
-        print_index_entry('outline', i, 'Outline '+i)   
-    for i in book_read_index('Chapters'):
+    for i in book_read_index():
         print_index_entry('chapters', i, i) 
 
 
@@ -112,7 +107,7 @@ def nested_list(name, children):
 def book_list():
     '''List the parts of the book source code. '''
     results = "List the contents of this book\n"
-    for d in ['.', 'book', 'outline', 'chapters']:
+    for d in ['.', 'chapters']:
         book_dir = join(environ['book'],d)
         files = [f for f in listdir(book_dir) if isfile(join(book_dir,f))]
         results += '\n\n'+d+':    \n    '+'\n    '.join(sorted(files))
@@ -137,18 +132,6 @@ def book_pdf():
         echo '     pdf $book/../Book.pdf'
          ''')
 
-def book_project():
-    '''Create the chapter content markdown'''
-    results = 'Build: Project.md\n'
-    project = [i for i in book_read_index('Project')] 
-    with open('Project.md','w') as output_file:
-        for p in project:
-            path = p+'.md'
-            results += 'Build '+path+'  ...\n'
-            text = open(path).read()    
-            output_file.write(text+'\n\n---\n\n\\newpage\n\n')
-    print(results)
-
 
 def book_read():
     '''Read the PDF for the book'''
@@ -156,10 +139,21 @@ def book_read():
     system('pdf $book/../Book.pdf')
 
 
-def book_read_index(name):
+def book_read_index(part=None):
     '''Read an index from the book directory'''
-    topics = open(join(environ['book'], name+'.index')).read()
-    topics = [t for t in topics.split('\n') if t]
+    topics = [
+        'Cover;Abstract;Contents;Overview;Summary',
+        'Intro;Leverage;Debt;Practices',
+        'Technology;Design;Code;Test',
+        'Services;Release;Scaling;Monitoring',
+        'Knowledge;Teamwork;Learning;Planning'
+    ]
+    if part:
+        topics = topics[part]
+    else:
+        topics = ';'.join(topics)
+
+    topics = [t for t in topics.split(';') if t]
     return topics
 
 
@@ -182,30 +176,45 @@ def book_text(chapter=1):
     print(open(f).read())
 
 
+def chapter_words(chapter):
+    if exists(chapter):
+        text = shell('wc -w '+chapter) 
+        count = [t for t in text.split(' ') if t ]
+        return int(count[0])
+
+
 def book_calculate_words(label,files):
     '''Measure the words for a file set'''
     print(label)
-    text = [shell('wc -w '+topic) for topic in files]
-    print(''.join(text))
+    total = 0
+    for topic in files:
+        if exists(topic):
+            count = chapter_words(topic)
+            total  += count
+            topic = topic.replace('chapters/','').replace('.md','')
+            print('    %4d words  %-30s' % (count,topic))
+    if topic != 'Book':
+        print('    %4d\n' % total)
+
+
+def book_word_count(part):
+    chapters = ['chapters/'+i+'.md' for i in book_read_index(part)]
+    book_calculate_words('Part %d' % part, chapters)
 
 
 def book_words():
     '''Count all of the words in the book '''
-    book = ['book/'+i+'.md' for i in book_read_index('Book')] 
-    chapters = ['chapters/'+i+'.md' for i in book_read_index('Chapters')]
-    content  = ['content/'+i+'.outline'  for i in book_read_index('Chapters')]
     chdir(environ['book'])
     book_calculate_words('manuscript',['Book.md'] )
-    book_calculate_words('chapters',chapters)
-    book_calculate_words('content',content)
     print('\n')
+    for part in range(4):
+        book_word_count(part+1)
 
 
 def book_command(argv):
     '''Execute all of the book specific commands '''
     if len(argv)>1:
         chdir(environ['book'])
-        #print(shell('ls -l'))
 
         if argv[1]=='build':
             print(book_build())
