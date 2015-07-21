@@ -1,5 +1,5 @@
 from os import system, listdir, environ, chdir
-from os.path import join, isfile
+from os.path import join, isfile, exists
 from sys import argv
 
 from tst import shell
@@ -107,7 +107,7 @@ def nested_list(name, children):
 def book_list():
     '''List the parts of the book source code. '''
     results = "List the contents of this book\n"
-    for d in ['.', 'book', 'outline', 'chapters']:
+    for d in ['.', 'chapters']:
         book_dir = join(environ['book'],d)
         files = [f for f in listdir(book_dir) if isfile(join(book_dir,f))]
         results += '\n\n'+d+':    \n    '+'\n    '.join(sorted(files))
@@ -188,7 +188,7 @@ def book_text(chapter=1):
 def book_calculate_words(label,files):
     '''Measure the words for a file set'''
     print(label)
-    text = [shell('wc -w '+topic) for topic in files]
+    text = [shell('wc -w '+topic) for topic in files if exists(topic)]
     print(''.join(text))
 
 
