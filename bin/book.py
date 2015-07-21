@@ -9,10 +9,9 @@ from book_test import book_checker
 def book_build():
     '''Put together a markdown file from the individual parts '''
     results = 'Build: Book.md\n'
-    book = ['book/'+i for i in book_read_index('Book')] 
     chapters = ['chapters/'+i for i in book_read_index('Chapters')]
     with open('Book.md','w') as output_file:
-        for p in book+chapters:
+        for p in chapters:
             path = p+'.md'
             results += 'Build '+path+'  ...\n'
             text = open(path).read()    
@@ -74,10 +73,6 @@ def book_index():
         print('- [%s.md, "%s", "%s"]' % (category+'/'+path, category, title))
 
     print('site_name: Software Leverage\n\npages:\n')
-    for i in book_read_index('Book'):
-        print_index_entry('book', i, 'Part '+i)
-    for i in book_read_index('Chapters'):
-        print_index_entry('outline', i, 'Outline '+i)   
     for i in book_read_index('Chapters'):
         print_index_entry('chapters', i, i) 
 
@@ -137,18 +132,6 @@ def book_pdf():
         echo '     pdf $book/../Book.pdf'
          ''')
 
-def book_project():
-    '''Create the chapter content markdown'''
-    results = 'Build: Project.md\n'
-    project = [i for i in book_read_index('Project')] 
-    with open('Project.md','w') as output_file:
-        for p in project:
-            path = p+'.md'
-            results += 'Build '+path+'  ...\n'
-            text = open(path).read()    
-            output_file.write(text+'\n\n---\n\n\\newpage\n\n')
-    print(results)
-
 
 def book_read():
     '''Read the PDF for the book'''
@@ -158,7 +141,27 @@ def book_read():
 
 def book_read_index(name):
     '''Read an index from the book directory'''
-    topics = open(join(environ['book'], name+'.index')).read()
+    topics = '''Cover
+Abstract
+Contents
+Overview
+Summary
+Intro
+Leverage
+Debt
+Practices
+Technology
+Design
+Code
+Test
+Services
+Release
+Scaling
+Monitoring
+Knowledge
+Teamwork
+Learning
+Planning'''
     topics = [t for t in topics.split('\n') if t]
     return topics
 
