@@ -152,7 +152,6 @@ def book_read_index(part=None):
         topics = topics[part]
     else:
         topics = ';'.join(topics)
-
     topics = [t for t in topics.split(';') if t]
     return topics
 
