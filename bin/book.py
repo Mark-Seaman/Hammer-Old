@@ -152,6 +152,10 @@ def book_read_index(part=None):
         topics = topics[part]
     else:
         topics = ';'.join(topics)
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5c0dd892f01bb171fece708016b19a029680053c
     topics = [t for t in topics.split(';') if t]
     return topics
 
