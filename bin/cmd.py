@@ -41,6 +41,7 @@ def command_add(argv):
 	else:
 		with open(script_path,'w') as f:
 			f.write(command_content)
+		system('tst add ' + command)
 	#command_edit(argv)
 
 
@@ -53,8 +54,8 @@ def command_delete(argv):
 
 def command_edit(argv):
 	'''	Edit the content of a command.'''
-	print("Command:",argv[2])
-	print(shell('e bin/%s.py' % argv[2]))
+	print("Command edit: " + argv[2])
+	print(shell('e $p/bin/%s.py' % argv[2]))
 
 
 def command_help():

@@ -152,13 +152,6 @@ def book_read_index(part=None):
         topics = topics[part]
     else:
         topics = ';'.join(topics)
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
->>>>>>> 5c0dd892f01bb171fece708016b19a029680053c
-=======
->>>>>>> f746ed2e9806fd22553ae5d933bcfeb50bb6c2f0
     topics = [t for t in topics.split(';') if t]
     return topics
 
@@ -195,12 +188,13 @@ def book_calculate_words(label,files):
     total = 0
     for topic in files:
         if exists(topic):
-            count = chapter_words(topic)
+            count = chapter_words(topic) / 250
             total  += count
             topic = topic.replace('chapters/','').replace('.md','')
-            print('    %4d words  %-30s' % (count,topic))
+            print('    %4d pages  %-30s' % (count,topic))
     if topic != 'Book':
-        print('    %4d\n' % total)
+        print('\n    %4d pages total' % total)
+        print('    %4d hours to draft\n' % (total*1.5))
 
 
 def book_word_count(part):
