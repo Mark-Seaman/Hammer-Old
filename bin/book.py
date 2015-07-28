@@ -15,7 +15,7 @@ def book_build():
             path = p+'.md'
             results += 'Build '+path+'  ...\n'
             text = open(path).read()    
-            output_file.write(text+'\n\n\\newpage\n---\n\n')
+            output_file.write(text+'\n\n\\newpage\n![](images/water-strip.png)\n\n')
     print(results)
 
 
@@ -142,11 +142,11 @@ def book_read():
 def book_read_index(part=None):
     '''Read an index from the book directory'''
     topics = [
-        'Cover;Abstract;Contents;Overview;Summary',
-        'Intro;Leverage;Debt;Practices',
-        'Technology;Design;Code;Test',
-        'Services;Release;Scaling;Monitoring',
-        'Knowledge;Teamwork;Learning;Planning'
+        'Cover;Contents',
+        'Part1;Intro;Leverage;Debt;Practices',
+        'Part2;Technology;Design;Code;Test',
+        'Part3;Services;Release;Scaling;Monitoring',
+        'Part4;Knowledge;Teamwork;Learning;Planning'
     ]
     if part:
         topics = topics[part]
