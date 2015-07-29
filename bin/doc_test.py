@@ -22,7 +22,7 @@ def doc_status_test():
 
 
 def doc_list_test():
-	return limit_lines('doc list', 20, 25)
+	return limit_lines('doc list', 10, 25)
 
 
 def doc_path_test():
