@@ -143,10 +143,10 @@ def book_read_index(part=None):
     '''Read an index from the book directory'''
     topics = [
         'Cover;Contents',
-        'Part1;Intro;Leverage;Debt;Practices',
-        'Part2;Technology;Design;Code;Test',
-        'Part3;Services;Release;Scaling;Monitoring',
-        'Part4;Knowledge;Teamwork;Learning;Planning'
+        'Intro;Leverage;Debt;Practices',
+        'Technology;Design;Code;Test',
+        'Services;Release;Scaling;Monitoring',
+        'Knowledge;Teamwork;Learning;Planning'
     ]
     if part:
         topics = topics[part]
