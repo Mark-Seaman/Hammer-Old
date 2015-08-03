@@ -7,17 +7,35 @@ from tst import shell
 from book_test import book_checker
 
 
+def to_markdown(text):
+    '''Convert ascidoc text to markdown'''
+    mdtext = []
+    for line in text.split('\n'):
+        if line.startswith("="):
+            mdtext.append(line[1:].replace('=', '#'))
+        else:
+            mdtext.append(line)
+    return '\n'.join(mdtext)
+
+
+def asc_to_markdown():
+    '''Convert the book file to asciidoc'''
+    with open('Book.asc') as f:
+        open('Book.md','w').write(to_markdown(f.read()))
+
+
 def book_build():
     '''Put together a markdown file from the individual parts '''
     results = 'Build: Book.md\n'
     chapters = ['chapters/'+i for i in book_read_index()]
-    with open('Book.md','w') as output_file:
+    with open('Book.asc','w') as output_file:
         for p in chapters:
-            path = p+'.md'
+            path = p+'.asc'
             results += 'Build '+path+'  ...\n'
             text = open(path).read()    
             output_file.write(text+'\n\n\\newpage\n![](images/water-strip.png)\n\n')
-    print(results)
+    asc_to_markdown()
+    return results
 
 
 def book_changes():
@@ -44,6 +62,20 @@ def book_commit_comment(argv):
         return ' '.join(argv[2:])
     return 'Automatic book commit'
     
+
+def book_convert(path=None):
+    if not path:
+        for path in glob('chapters/*.md'):
+            book_convert(path)
+    else:
+        print ('convert to ASC: '+path)
+        text = open(path).read().replace('#', '=').split('\n')
+        with open(path.replace('.md','.asc'),'w') as f:
+            for line in text:
+                if line.startswith("="):
+                    line = '='+line 
+                f.write(line+'\n')
+
 
 def book_dired():
     '''Use directory editor in emacs to edit the book content'''
@@ -211,20 +243,6 @@ def book_words():
     print('\n')
     for part in range(4):
         book_word_count(part+1)
-
-
-def book_convert(path=None):
-    if not path:
-        for path in glob('chapters/*.md'):
-            book_convert(path)
-    else:
-        print ('convert to ASC: '+path)
-        text = open(path).read().replace('#', '=').split('\n')
-        with open(path.replace('.md','.asc'),'w') as f:
-            for line in text:
-                if line.startswith("="):
-                    line = '='+line 
-                f.write(line+'\n')
 
 
 def book_command(argv):
