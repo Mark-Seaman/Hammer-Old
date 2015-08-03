@@ -2,7 +2,7 @@
 
 from datetime import datetime
 from glob import glob
-from os import system, listdir, environ, mkdir, getcwd
+from os import system, listdir, environ, mkdir, getcwd, chdir
 from os.path import join, exists
 from subprocess import Popen,PIPE
 from sys import argv
@@ -311,6 +311,7 @@ def command_names():
 # Create a script that can be run from the tst
 if __name__=='__main__':
 
+    chdir(environ['p'])
     if len(argv)==1:
         reset_test_names()
         for c in command_names():
