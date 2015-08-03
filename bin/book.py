@@ -183,8 +183,11 @@ def book_read_index(part=None):
         'Services;Release;Scaling;Monitoring',
         'Knowledge;Teamwork;Learning;Planning'
     ]
+    if part:
+        topics = topics[part]
+    else:
+        topics = ';'.join(topics)
     
-    topics = ';'.join(topics)
     topics = [t for t in topics.split(';') if t]
     return topics
 
@@ -223,7 +226,7 @@ def book_calculate_words(label,files):
         if exists(topic):
             count = chapter_words(topic) / 250
             total  += count
-            topic = topic.replace('chapters/','').replace('.md','')
+            topic = topic.replace('chapters/','').replace('.asc','')
             print('    %4d pages  %-30s' % (count,topic))
     if topic != 'Book':
         print('\n    %4d pages total' % total)
@@ -231,8 +234,8 @@ def book_calculate_words(label,files):
 
 
 def book_word_count(part):
-    chapters = ['chapters/'+i+'.md' for i in book_read_index(part)]
-    book_calculate_words('Part %d' % part, chapters)
+    chapters = ['chapters/'+i+'.asc' for i in book_read_index(part+1)]
+    book_calculate_words('Part %d' % (part+1), chapters)
 
 
 def book_words():
@@ -241,7 +244,7 @@ def book_words():
     book_calculate_words('manuscript',['Book.md'] )
     print('\n')
     for part in range(4):
-        book_word_count(part+1)
+        book_word_count(part)
 
 
 def book_command(argv):
