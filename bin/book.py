@@ -1,3 +1,4 @@
+from glob import glob
 from os import system, listdir, environ, chdir
 from os.path import join, isfile, exists
 from sys import argv
@@ -87,6 +88,7 @@ def book_help():
 *     build                 -- Build the content of the book
 *     changes               -- List doc changes 
 *     commit [message args] -- Commit all changes to the book
+*     convert               -- Convert all Markdown files to Asciidoc
 *     dired                 -- Edit the book content directory
 *     edit                  -- Edit the book content
 *     files                 -- List all of the files
@@ -211,6 +213,20 @@ def book_words():
         book_word_count(part+1)
 
 
+def book_convert(path=None):
+    if not path:
+        for path in glob('chapters/*.md'):
+            book_convert(path)
+    else:
+        print ('convert to ASC: '+path)
+        text = open(path).read().replace('#', '=').split('\n')
+        with open(path.replace('.md','.asc'),'w') as f:
+            for line in text:
+                if line.startswith("="):
+                    line = '='+line 
+                f.write(line+'\n')
+
+
 def book_command(argv):
     '''Execute all of the book specific commands '''
     if len(argv)>1:
@@ -224,6 +240,9 @@ def book_command(argv):
 
         elif argv[1]=='commit':
             book_commit(argv)
+
+        elif argv[1]=='convert':
+            book_convert()
 
         elif argv[1]=='dired':
             book_dired()
