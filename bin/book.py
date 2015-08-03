@@ -12,7 +12,8 @@ def to_markdown(text):
     mdtext = []
     for line in text.split('\n'):
         if line.startswith("="):
-            mdtext.append(line[1:].replace('=', '#'))
+            line = line[1:].replace('=', '#').replace('Practice =', 'Practice #')
+            mdtext.append(line)
         else:
             mdtext.append(line)
     return '\n'.join(mdtext)
@@ -96,9 +97,9 @@ def book_edit(argv):
 
 def book_headlines():
     for i in book_read_index():
-        path = join(environ['book'],'chapters',i+'.md')
+        path = join(environ['book'],'chapters',i+'.asc')
         headline = open(path).read().split('\n')[0]
-        print('%-15s ' % i + headline)
+        print('%-15s ' % i + headline.replace('==',''))
 
 
 def book_index():
@@ -176,16 +177,14 @@ def book_read():
 def book_read_index(part=None):
     '''Read an index from the book directory'''
     topics = [
-        'Cover;Contents',
-        'Intro;Leverage;Debt;Practices',
+        'Cover',
+        'Leverage;Debt;Practices',
         'Technology;Design;Code;Test',
         'Services;Release;Scaling;Monitoring',
         'Knowledge;Teamwork;Learning;Planning'
     ]
-    if part:
-        topics = topics[part]
-    else:
-        topics = ';'.join(topics)
+    
+    topics = ';'.join(topics)
     topics = [t for t in topics.split(';') if t]
     return topics
 
@@ -203,9 +202,9 @@ def book_status():
     return 'List all pending changes to the book\n' +shell('git status')
 
 
-def book_text(chapter=1):
+def book_text(chapter='Leverage'):
     '''Display the raw text of one chapter'''
-    f = join(environ['book'], 'chapters', '%s.md'%chapter)
+    f = join(environ['book'], 'chapters', '%s.asc'%chapter)
     print(open(f).read())
 
 
