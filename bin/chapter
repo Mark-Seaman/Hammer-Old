@@ -1,5 +1,5 @@
 #!/bin/bash
 # Edit the requested chapter in the book
 
-book edit chapters/$1.md
+book edit chapters/$1.asc
 
