@@ -180,7 +180,7 @@ def book_read_index(part=None):
         'Cover',
         'Leverage;Debt;Practices',
         'Technology;Design;Code;Test',
-        'Services;Release;Scaling;Monitoring',
+        'Release;Services;Deployment;Monitoring',
         'Knowledge;Teamwork;Learning;Planning'
     ]
     if part:
