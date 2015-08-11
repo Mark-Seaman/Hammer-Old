@@ -88,6 +88,16 @@ def system_show(argv):
         system('cat '+f)
 
 
+def system_disk_usage():
+    '''Get the disk usage for the home directory'''
+    system ('du -s $HOME $HOME/* | sort -nr')
+
+
+def system_disk_free():
+    '''Get the disk usage for the home directory'''
+    system ('df -h $HOME')
+
+
 def system_command(argv):
     '''Execute all of the system specific systems'''
     if len(argv)>1:
@@ -103,6 +113,9 @@ def system_command(argv):
 
         elif argv[1]=='edit':
             system_edit(argv)
+        
+        elif argv[1]=='free':
+            system_disk_free()
 
         elif argv[1]=='list':
             system_list(argv)
@@ -112,6 +125,9 @@ def system_command(argv):
 
         elif argv[1]=='test':
             system_checker()
+
+        elif argv[1]=='usage':
+            system_disk_usage()
 
         else:
             print('No system command found, '+argv[1])
