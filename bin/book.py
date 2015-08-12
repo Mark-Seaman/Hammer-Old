@@ -308,3 +308,10 @@ def book_command(argv):
             book_help()
     else:   
         book_help()
+
+
+'''
+Create a script that can be run from the shell
+'''
+if __name__=='__main__':
+    book_command(argv)
