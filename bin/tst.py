@@ -229,7 +229,7 @@ def tst_add(command):
     '''Create a new test.'''
     print("Add new test:"+command)
     script_path = join(environ['pb'],'%s_test.py' % command)
-    template_path = join(environ['pb'],'prototypetest.py')
+    template_path = join(environ['pb'],'prototype_test.py')
     command_content = open(template_path).read().replace('prototype',command)
     if exists(script_path):
         print('File already exists: '+script_path)
