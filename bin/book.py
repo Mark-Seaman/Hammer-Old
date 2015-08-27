@@ -162,6 +162,7 @@ def book_pdf():
     system('''
         rm ../*.pdf
         pandoc Book.md    -o ../Book.pdf    2> /dev/null
+        rm Book.md
         ls -s ../Book.pdf
         echo Read file with:
         echo '     pdf $book/../Book.pdf'
