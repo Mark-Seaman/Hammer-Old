@@ -90,9 +90,17 @@ def book_edit(argv):
         system('book index > '+yml)
         system('e '+yml)
     elif len(argv)>2:
-        system('e '+join(environ['book'],argv[2]))
+        system('e '+join(environ['book'], 'chapters', argv[2]+'.asc'))
     else:
         system('e '+environ['book'])
+
+
+def book_find(words):
+    if not words:
+        print ('No string to search for')
+        return
+    chdir(join(environ['book'],'chapters'))
+    system('grep -n %s %s' % (words[0],'*.asc'))
 
 
 def book_headlines():
@@ -124,6 +132,7 @@ def book_help():
 *     convert               -- Convert all Markdown files to Asciidoc
 *     dired                 -- Edit the book content directory
 *     edit                  -- Edit the book content
+*     find pattern          -- Find the string in the book
 *     files                 -- List all of the files
 *     help                  -- Show the available commands
 *     list                  -- List the parts of the book
@@ -270,6 +279,9 @@ def book_command(argv):
 
         elif argv[1]=='edit':
             book_edit(argv)
+
+        elif argv[1]=='find':
+            book_find(argv[2:])
 
         elif argv[1]=='index':
             book_index()
