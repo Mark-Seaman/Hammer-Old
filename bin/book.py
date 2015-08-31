@@ -119,7 +119,7 @@ def book_headings(topic=None):
                     if title:
                         yield ((i-start,title))
                     start = i
-                    if line=='****':
+                    if '****' in line:
                         title = '--'
                     else:
                         title = line.replace('=','    ')[9:]
