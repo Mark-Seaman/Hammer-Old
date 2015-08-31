@@ -1,6 +1,7 @@
 from glob import glob
 from os import system, listdir, environ, chdir
 from os.path import join, isfile, exists
+from re import sub,compile,DOTALL,IGNORECASE
 from sys import argv
 
 from tst import shell
@@ -103,6 +104,42 @@ def book_find(words):
     system('grep -n %s %s' % (words[0],'*.asc'))
 
 
+def book_headings(topic=None):
+    '''Extract all of the functions from the source and count their length'''
+
+    def find_headings(text, pattern='='):
+        lines = text.split('\n')
+        start = 0
+        title = ''
+        for i,line in enumerate(lines):
+            if line.strip().startswith(pattern):
+                pat = compile(r"\=* (.*)")
+                name = pat.sub(r'\1',line)
+                if '====' != name:
+                    if title:
+                        yield ((i-start,title))
+                    start = i
+                    title = line.replace('=','    ')[8:]
+        yield((i-start,title))
+
+    def print_headings(topic):
+        path = join(environ['book'],'chapters',topic+'.asc')
+        print('\n'+topic)
+        text = open(path).read()
+        print('\n    major: ')
+        for heading in find_headings(text, '=== '):
+            print('    %3d : %-15s ' % heading)
+        print('\n    minor:')
+        for heading in find_headings(text):
+            print('    %3d : %-15s ' % heading)
+
+    if topic:
+        print_headings(topic)
+    else:
+        for topic in book_read_index():
+            print_headings(topic)
+
+
 def book_headlines():
     for i in book_read_index():
         path = join(environ['book'],'chapters',i+'.asc')
@@ -134,6 +171,8 @@ def book_help():
 *     edit                  -- Edit the book content
 *     find pattern          -- Find the string in the book
 *     files                 -- List all of the files
+*     headlines             -- List all chapter headlines
+*     headings              -- List length of all headings
 *     help                  -- Show the available commands
 *     list                  -- List the parts of the book
 *     outline               -- Show the outline for the book
@@ -288,6 +327,9 @@ def book_command(argv):
 
         elif argv[1]=='headlines':
             book_headlines()
+
+        elif argv[1]=='headings':
+            book_headings(argv[2:3])
 
         elif argv[1]=='list':
             print(book_list())
