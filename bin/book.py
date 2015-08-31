@@ -134,7 +134,7 @@ def book_headings(topic=None):
             print('    %3d : %-15s ' % heading)
 
     if topic:
-        print_headings(topic)
+        print_headings(topic[0])
     else:
         for topic in book_read_index():
             print_headings(topic)
