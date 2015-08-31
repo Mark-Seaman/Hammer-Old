@@ -112,14 +112,17 @@ def book_headings(topic=None):
         start = 0
         title = ''
         for i,line in enumerate(lines):
-            if line.strip().startswith(pattern):
+            if line.strip().startswith(pattern) or line=='****':
                 pat = compile(r"\=* (.*)")
                 name = pat.sub(r'\1',line)
                 if '====' != name:
                     if title:
                         yield ((i-start,title))
                     start = i
-                    title = line.replace('=','    ')[8:]
+                    if line=='****':
+                        title = '--'
+                    else:
+                        title = line.replace('=','    ')[9:]
         yield((i-start,title))
 
     def print_headings(topic):
