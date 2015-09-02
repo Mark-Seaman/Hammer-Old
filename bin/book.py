@@ -233,7 +233,8 @@ def book_read_index(part=None):
         'Leverage;Debt;Practices',
         'Technology;Design;Code;Test',
         'Release;Services;Deployment;Monitoring',
-        'Knowledge;Teamwork;Learning;Planning'
+        'Knowledge;Teamwork;Learning;Planning',
+        'AppendixA'
     ]
     if part:
         topics = topics[part]
