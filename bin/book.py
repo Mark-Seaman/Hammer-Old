@@ -234,7 +234,11 @@ def book_read_index(part=None):
         'Technology;Design;Code;Test',
         'Release;Services;Deployment;Monitoring',
         'Knowledge;Teamwork;Learning;Planning',
+<<<<<<< HEAD
         'AppendixA;AppendixB;AppendixC'
+=======
+        'AppendixA'
+>>>>>>> cf522f0740467071737ce556369034acb5b27194
     ]
     if part:
         topics = topics[part]
