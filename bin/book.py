@@ -179,6 +179,7 @@ def book_help():
 *     help                  -- Show the available commands
 *     list                  -- List the parts of the book
 *     outline               -- Show the outline for the book
+*     plan                  -- Open the planning spread sheet
 *     push                  -- Push the book to the dropbox
 *     test                  -- Run all system tests
 *     words                 -- Count the words
@@ -218,6 +219,17 @@ def book_pdf():
         echo Read file with:
         echo '     pdf $book/../Book.pdf'
          ''')
+
+def book_plan():
+    print ('book plan')
+    spreadsheet = '''#!/bin/bash
+        # Open the invoices spreadsheet
+
+        f="$HOME/Documents/Dropbox/Personal/2015/Book_Planner.ods"
+        open "$f" ||
+        o "$f"
+    '''
+    system(spreadsheet)
 
 
 def book_read():
@@ -340,6 +352,9 @@ def book_command(argv):
 
         elif len(argv)>2 and argv[1]=='outline':
             book_outline(argv[2])
+
+        elif argv[1]=='plan':
+            book_plan()
 
         elif argv[1]=='read':
             book_read()
