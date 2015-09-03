@@ -234,7 +234,7 @@ def book_read_index(part=None):
         'Technology;Design;Code;Test',
         'Release;Services;Deployment;Monitoring',
         'Knowledge;Teamwork;Learning;Planning',
-        'AppendixA'
+        'AppendixA;AppendixB;AppendixC'
     ]
     if part:
         topics = topics[part]
@@ -296,7 +296,7 @@ def book_words():
     chdir(environ['book'])
     book_calculate_words('manuscript',['Book.md'] )
     print('\n')
-    for part in range(4):
+    for part in range(5):
         book_word_count(part)
 
 
