@@ -392,3 +392,4 @@ Create a script that can be run from the shell
 '''
 if __name__=='__main__':
     book_command(argv)
+
