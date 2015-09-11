@@ -24,7 +24,7 @@ def tst_cases_test():
 
 
 def tst_lines_test():
-    return limit_lines ('cat bin/tst.py',200,350)
+    return limit_lines ('cat bin/tst.py',200,370)
 
 
 def tst_like_test():

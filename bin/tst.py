@@ -93,41 +93,26 @@ def show_differences(my_tests):
         show_diff(name)
 
 
-def execute_test(name, function):
-
-    start = datetime.now()
-    answer = function()
-    end   = datetime.now()
-
-    t     = end-start
-    seconds = "%d.%1d seconds"%(t.seconds, t.microseconds/100000)
-    duration = 10+t.seconds*100
-    print('    %-20s  ... %s '%(name,seconds))
-    
-    save_key('%s.out' % name, answer, duration)
-    return answer
-
-
-def run_check(name, function):
-    '''   Run the test and check the results   '''
-    cache = is_cached('%s.out' % name )
-    if cache and not diff(name):
-        print("    cached results %-20s  ... %d seconds" % (name,cache))
-        answer = recall_key(name+'.out')
-    else:
-        answer = execute_test(name, function)
-    correct = recall_key(name+'.correct')
-    if not correct:
-        save_key('%s.correct' % name, answer)
-    show_diff(name)
+# def run_check(name, function):
+#     '''   Run the test and check the results   '''
+#     cache = is_cached('%s.out' % name )
+#     if cache and not diff(name):
+#         print("    cached results %-20s  ... %d seconds" % (name,cache))
+#         answer = recall_key(name+'.out')
+#     else:
+#         answer = execute_test(name, function)
+#     correct = recall_key(name+'.correct')
+#     if not correct:
+#         save_key('%s.correct' % name, answer)
+#     show_diff(name)
 
 
-def run_all_checks(label, my_tests):
-    '''   Execute all of the tests defined in the dictionary.   '''
-    print('Testing %s:' % label)
-    for t in my_tests:
-       run_check(t, my_tests[t])
-    record_test_names(my_tests.keys())
+# def run_all_checks(label, my_tests):
+#     '''   Execute all of the tests defined in the dictionary.   '''
+#     print('Testing %s:' % label)
+#     for t in my_tests:
+#        run_check(t, my_tests[t])
+#     record_test_names(my_tests.keys())
 
 
 def tst_help():
@@ -172,8 +157,9 @@ def tst_help():
 
 
 def run_diff_checks(label, my_tests):
-    '''   Run the appropriate test command   '''
-    run_all_checks(label, my_tests)
+#     '''   Run the appropriate test command   '''
+#     run_all_checks(label, my_tests)
+    print("run_diff_checks is obsolete")
 
 
 def tst_add(command):
@@ -214,7 +200,8 @@ def execute_tst_command(argv):
         
         elif 'results'==t:
             print('Test differences: all tests')
-            show_differences(test_list())
+            #show_differences(test_list())
+            tst_results()
 
         elif 'names'==t:
             print('\n'.join(tst_modules()))
@@ -227,7 +214,7 @@ def execute_tst_command(argv):
             print('\n'.join(tst_modules()))
 
         elif 'test'==t:
-            tst_execute_module('tst_test.py')
+            tst_execute_all()
 
         elif 'help'==t:
             tst_help()
@@ -275,7 +262,7 @@ def tst_execute_all():
 
 def tst_execute_module(module):
     '''Execute all of the test functions for module'''
-    print('\nexecute module '+module)
+    print('\n'+module)
     from code import find_functions
     path = join(environ['pb'],module)
     for f in find_functions(path):
@@ -283,16 +270,52 @@ def tst_execute_module(module):
             tst_execute_test_case(module,f)
 
 
-def tst_execute_test_case(module, f):
-    print('exec (%s, %s)' % (module, f))
+def test_case_name(function):
+    '''Convert function name to test case name'''
+    return function.replace('_test','').replace('_','-')
+
+
+def tst_execute_test_case(module, function):
+    '''Run the selected test and process results'''
     import_name = module.replace('.py','')
+    testcase = test_case_name(function)
+    tst_run_case(testcase, import_name, function)
+
+
+def tst_execute_timed_test(testcase, import_name, function):
+    '''Execute the test and cache the results for an appropriate time'''
+    start = datetime.now()
     exec("import "+import_name)
-    exec("print(%s.%s())" % (import_name,f))
+    exec("answer = %s.%s()" % (import_name,function))
+    end   = datetime.now()
+
+    t     = end-start
+    seconds = "%d.%1d seconds"%(t.seconds, t.microseconds/100000)
+    duration = 10+t.seconds*100
+    print('    %-20s  ... %s '%(testcase,seconds))
+    
+    save_key('%s.out' % testcase, answer, duration)
+    return answer
+
+
+def tst_run_case(testcase, import_name, function):
+    '''   Run the test and check the results   '''
+    cache = is_cached('%s.out' % testcase )
+    if cache and not diff(testcase):
+        print("    cached results %-20s  ... %d seconds" % (testcase,cache))
+        answer = recall_key(testcase+'.out')
+    else:
+        tst_execute_timed_test(testcase, import_name, function)
+    correct = recall_key(testcase+'.correct')
+    if not correct:
+        save_key('%s.correct' % testcase, answer)
+    show_diff(testcase)
 
 
 def tst_modules():
     '''Enumerate all of the test command modules'''
-    return [c for c in listdir(environ['pb']) if c.endswith('_test.py')]
+    modules = [c for c in listdir(environ['pb']) if c.endswith('_test.py')]
+    return sorted(modules)
 
 
 def tst_functions():
@@ -313,7 +336,19 @@ def tst_cases():
         path = join(environ['pb'],m)
         for f in find_functions(path):
             if f.endswith('_test'):
-                print('    '+f.replace('_test','').replace('_','-'))
+                print('    '+test_case_name(f))
+
+
+def tst_results():
+    from code import find_functions
+    cases = []
+    for m in tst_modules():
+        path = join(environ['pb'],m)
+        for f in find_functions(path):
+            if f.endswith('_test'):
+                cases.append(test_case_name(f))
+    for t in cases:
+        show_diff(t)
 
 
 # Create a script that can be run from the tst
@@ -322,9 +357,6 @@ if __name__=='__main__':
     from shell import shell
     chdir(environ['p'])
     if len(argv)==1:
-        reset_test_names()
-        for c in tst_modules():
-            print(shell('python bin/'+c))
-        show_status()
+        tst_execute_all()
     else:
         execute_tst_command(argv)
