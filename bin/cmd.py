@@ -1,12 +1,13 @@
 #!/usr/bin/env python
 
+from glob import glob
 from os import system, listdir, environ
 from os.path import join, exists, isfile
 from os import chmod
 import stat
 from sys import argv
 
-from tst import shell
+from shell import shell
 from cmd_test import cmd_checker
 
 
@@ -78,13 +79,10 @@ def command_help():
 
 def command_list(argv):
 	'''List the parts of the command source code.'''
-	for d in ('bin',):
-		directory = join(environ['p'],d)
-		files = [join(d,f) for f in listdir(directory)]
-		files = [f for f in files if not f.endswith('.pyc') and not f.endswith('.py')]
-		files = [f for f in files if isfile(join(environ['p'],f))]
-		files = sorted(files)
-		print('\n'.join(files))
+	path = join(environ['p'],'bin')
+	files =  [f for f in glob(path+'/*.py') if not f.endswith('_test.py')]
+	files =  [f[len(path)+1:] for f in files]
+	print('\n'.join(files))
 
 
 def command_search(argv):

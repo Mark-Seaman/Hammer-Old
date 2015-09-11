@@ -7,7 +7,8 @@ from subprocess import Popen,PIPE
 from sys import argv
 from re import sub
 
-from tst import run_diff_checks, shell, lines, limit_lines
+from shell import shell, lines, limit_lines
+from tst import run_diff_checks
 
 
 def lines_test():

@@ -4,7 +4,7 @@ from os.path import join, isfile, exists
 from re import sub,compile,DOTALL,IGNORECASE
 from sys import argv
 
-from tst import shell
+from shell import shell
 from book_test import book_checker
 
 
