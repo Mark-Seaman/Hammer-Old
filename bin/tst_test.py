@@ -13,10 +13,6 @@ def tst_functions_test():
     return shell ('tst functions')
 
 
-def tst_cases_test():
-    return shell('tst cases')
-
-
 def tst_lines_test():
     return limit_lines ('cat bin/tst.py',200,370)
 
