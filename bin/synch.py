@@ -4,7 +4,6 @@ from os import system, listdir, environ
 from os.path import join
 from sys import argv
 
-from synch_test import synch_checker
 
 def synch_bin():
 	'''Copy the commands to the bin directory'''
@@ -72,9 +71,6 @@ def synch_command(argv):
 
 		elif argv[1]=='sync':
 			synch_sync(argv)
-
-		elif argv[1]=='test':
-			synch_checker()
 
 		else:
 			print('No synch command found, '+argv[1])

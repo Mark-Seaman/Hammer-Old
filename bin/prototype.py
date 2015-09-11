@@ -5,8 +5,6 @@ from os.path import join, exists
 from random import choice
 from sys import argv
 
-from prototype_test import prototype_checker
-
 
 def prototype_add(topic):
     '''Create a new prototype.'''
@@ -65,8 +63,6 @@ def prototype_help():
         list    [file] -- List all prototypes
         path    [file] -- Lookup the path for the file
         show    [file] -- Show a prototype
-        test           -- Self test
-      
             ''')
 
 
@@ -146,9 +142,6 @@ def prototype_command(argv):
 
         elif argv[1]=='show':
             prototype_show(get_topic(argv))
-
-        elif argv[1]=='test':
-            prototype_checker()
 
         else:
             print('No prototype command found, '+argv[1])

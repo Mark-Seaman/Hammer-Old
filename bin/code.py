@@ -6,8 +6,6 @@ from os.path import join, isdir
 from re import sub,compile,DOTALL,IGNORECASE
 from sys import argv
    
-from code_test import code_checker
-   
 
 def read_source(filename):
     '''Read the source code file, remove blanks and split lines'''
@@ -157,9 +155,6 @@ def code_command(argv):
 
         elif argv[1]=='show':
             code_show(argv[2:])
-
-        elif argv[1]=='test':
-            code_checker()
 
         else:
             print('No code command found, '+argv[1])

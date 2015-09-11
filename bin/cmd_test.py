@@ -12,7 +12,6 @@ from os.path import join
 from sys import argv
 
 from shell import shell, lines, limit_lines
-from tst import run_diff_checks
 
 
 def cmd_add_test():
@@ -33,17 +32,3 @@ def source_test():
         files = [f for f in glob(join(d,'*.py')) if '.pyc' not in f]
         result += sorted(files)
     return '\n'.join(result)+'\n'
-
-
-def cmd_checker():
-    my_tests = {
-        'cmd-add': cmd_add_test,
-        'cmd-list': cmd_list_test,
-        'cmd-source': source_test,
-    }
-    run_diff_checks('cmd', my_tests)
-
-
-# Create a script that can be run from the tst
-if __name__=='__main__':
-    cmd_checker()

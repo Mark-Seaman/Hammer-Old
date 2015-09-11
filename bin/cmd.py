@@ -8,7 +8,6 @@ import stat
 from sys import argv
 
 from shell import shell
-from cmd_test import cmd_checker
 
 
 def command_add_script(command):
@@ -127,9 +126,6 @@ def cmd_command(argv):
 
 		elif argv[1]=='show':
 			command_show(argv)
-
-		elif argv[1]=='test':
-			cmd_checker()
 
 		else:
 			print('No command command found, '+argv[1])

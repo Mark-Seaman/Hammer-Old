@@ -4,8 +4,6 @@ from os import system, listdir, environ
 from os.path import join,exists
 from sys import argv
 
-from system_test import system_checker
-
 
 def system_add(argv):
     '''Create a new system.'''
@@ -122,9 +120,6 @@ def system_command(argv):
 
         elif argv[1]=='show':
             system_show(argv)
-
-        elif argv[1]=='test':
-            system_checker()
 
         elif argv[1]=='usage':
             system_disk_usage()

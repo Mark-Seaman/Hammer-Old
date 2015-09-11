@@ -11,13 +11,13 @@ from store import save, recall, expire, expiration, save_key, recall_key
 from store import is_cached, clear_cache
 
 
-def approve_all_answers():
+def tst_approve_all_answers():
     '''Automatically accept any answer'''
     for name in test_list():
-        approve_results(name)
+        tst_approve_results(name)
 
 
-def approve_results(name):
+def tst_approve_results(name):
     '''   Approve the test results   '''
     answer = recall_key(name+'.out')
     if answer:
@@ -27,34 +27,40 @@ def approve_results(name):
         save_key('%s.correct' % name, 'No test script output')
 
 
-def reset_test_names():
-    '''Reset the list of available tests'''
-    open('.test','w').close()
+def tst_diff(name):
+    '''Find the differences'''
+    from shell import differences
+    answer = recall_key ('%s.out' % name)
+    correct = recall_key('%s.correct' % name)
+    if answer!=correct:
+        return differences(answer,correct)
+ 
+
+def tst_show_diff(name):
+    '''Show the results for one test case'''
+    answer = recall_key ('%s.out' % name)
+    correct = recall_key('%s.correct' % name)
+    d = tst_diff(name)
+    if d:
+        print('---------------------------------------------------------')
+        print('                      '+name)
+        print('---------------------------------------------------------')
+        print(d)
 
 
-def record_test_names(tests):
-    '''Add this test to the list of available tests'''
-    with open('.test','a') as openfile:
-        openfile.write('\n'.join(tests)+'\n')
+def tst_show_expected(name):
+    '''Lookup the expected correct result for this test'''
+    print('Expected correct output from %s\n-----------------' % name)
+    print(recall_key(name+'.correct'))
 
 
-def test_list():
-    '''Generate a list of test names'''
-    return [t for t in open('.test').read().split('\n') if t]
-
-
-def show_output(name):
+def tst_show_output(name):
     '''Show the output text for the last test run'''
     print('Output from %s\n-----------------' % name)
     print(recall_key(name+'.out'))
 
 
-def show_expected(name):
-    '''Lookup the expected correct result for this test'''
-    print('Expected correct output from %s\n-----------------' % name)
-    print(recall_key(name+'.correct'))
-
-def show_status():
+def tst_show_status():
     '''Display the tests that failed'''
     failures = []
     for name in test_list():
@@ -64,55 +70,6 @@ def show_status():
             failures.append('    %-20s FAIL' % name)
     print('\n\nTest Status: %d tests failed' % len(failures))
     print('  '+'\n  '.join(failures))
-      
-
-def diff(name):
-    '''Find the differences'''
-    from shell import differences
-    answer = recall_key ('%s.out' % name)
-    correct = recall_key('%s.correct' % name)
-    if answer!=correct:
-        return differences(answer,correct)
-
-
-def show_diff(name):
-    '''Show the results for one test'''
-    answer = recall_key ('%s.out' % name)
-    correct = recall_key('%s.correct' % name)
-    d = diff(name)
-    if d:
-        print('---------------------------------------------------------')
-        print('                      '+name)
-        print('---------------------------------------------------------')
-        print(d)
-
-
-def show_differences(my_tests):
-    '''   Display all of the unexpected results   '''
-    for name in my_tests:
-        show_diff(name)
-
-
-# def run_check(name, function):
-#     '''   Run the test and check the results   '''
-#     cache = is_cached('%s.out' % name )
-#     if cache and not diff(name):
-#         print("    cached results %-20s  ... %d seconds" % (name,cache))
-#         answer = recall_key(name+'.out')
-#     else:
-#         answer = execute_test(name, function)
-#     correct = recall_key(name+'.correct')
-#     if not correct:
-#         save_key('%s.correct' % name, answer)
-#     show_diff(name)
-
-
-# def run_all_checks(label, my_tests):
-#     '''   Execute all of the tests defined in the dictionary.   '''
-#     print('Testing %s:' % label)
-#     for t in my_tests:
-#        run_check(t, my_tests[t])
-#     record_test_names(my_tests.keys())
 
 
 def tst_help():
@@ -156,12 +113,6 @@ def tst_help():
             ''')
 
 
-def run_diff_checks(label, my_tests):
-#     '''   Run the appropriate test command   '''
-#     run_all_checks(label, my_tests)
-    print("run_diff_checks is obsolete")
-
-
 def tst_add(command):
     '''Create a new test.'''
     print("Add new test:"+command)
@@ -187,34 +138,32 @@ def execute_tst_command(argv):
         t = argv[1]
 
         if 'accept'==t:
-            approve_all_answers()
+            tst_approve_all_answers()
 
         elif 'cases'==t:
             tst_cases()
 
         elif 'functions'==t:
-            tst_functions()
+            print('\n'.join(tst_functions()))
 
         elif 'status'==t:
-            show_status()
+            tst_show_status()
         
         elif 'results'==t:
             print('Test differences: all tests')
-            #show_differences(test_list())
             tst_results()
 
         elif 'names'==t:
             print('\n'.join(tst_modules()))
 
         elif 'list'==t:
-            for t in sorted(test_list()):
-                print (t)
-
+            tst_cases()
+    
         elif 'modules'==t:
             print('\n'.join(tst_modules()))
 
         elif 'test'==t:
-            tst_execute_all()
+            tst_execute_module('tst_test.py')
 
         elif 'help'==t:
             tst_help()
@@ -237,17 +186,17 @@ def execute_tst_command(argv):
             tst_execute_module(t+'_test.py')
 
         elif 'like'==cmd:
-            approve_results(t)
+            tst_approve_results(t)
             
         elif 'output'==cmd:
-            show_output(t)
+            tst_show_output(t)
 
         elif 'correct'==cmd:
-            show_expected(t)
+            tst_show_expected(t)
 
         elif 'results'==cmd:
             print('Show results: %s' % t)
-            show_diff(t)
+            tst_show_diff(t)
 
         else:
             print('bad command: '+cmd)
@@ -301,15 +250,15 @@ def tst_execute_timed_test(testcase, import_name, function):
 def tst_run_case(testcase, import_name, function):
     '''   Run the test and check the results   '''
     cache = is_cached('%s.out' % testcase )
-    if cache and not diff(testcase):
+    if cache and not tst_diff(testcase):
         print("    cached results %-20s  ... %d seconds" % (testcase,cache))
         answer = recall_key(testcase+'.out')
     else:
-        tst_execute_timed_test(testcase, import_name, function)
+        answer = tst_execute_timed_test(testcase, import_name, function)
     correct = recall_key(testcase+'.correct')
     if not correct:
         save_key('%s.correct' % testcase, answer)
-    show_diff(testcase)
+    tst_show_diff(testcase)
 
 
 def tst_modules():
@@ -321,12 +270,12 @@ def tst_modules():
 def tst_functions():
     '''Enumerate all of the test command functions'''
     from code import find_functions
+    result = []
     for m in tst_modules():
         path = join(environ['pb'],m)
-        for f in find_functions(path):
-            if f.endswith('_test'):
-                print(f)
-
+        result += [f for f in find_functions(path) if f.endswith('_test')]
+    return result
+           
    
 def tst_cases():
     '''Enumerate all of the test command functions'''
@@ -340,15 +289,17 @@ def tst_cases():
 
 
 def tst_results():
-    from code import find_functions
-    cases = []
-    for m in tst_modules():
-        path = join(environ['pb'],m)
-        for f in find_functions(path):
-            if f.endswith('_test'):
-                cases.append(test_case_name(f))
+    cases = [test_case_name(c) for c in tst_functions()]
     for t in cases:
-        show_diff(t)
+        if tst_diff(t):
+            tst_show_diff(t)
+
+
+def tst_failed():
+    cases = [test_case_name(c) for c in tst_functions()]
+    for t in cases:
+        if tst_diff(t):
+            print (t+' Failed')
 
 
 # Create a script that can be run from the tst
@@ -358,5 +309,6 @@ if __name__=='__main__':
     chdir(environ['p'])
     if len(argv)==1:
         tst_execute_all()
+        tst_failed()
     else:
         execute_tst_command(argv)

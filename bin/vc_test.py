@@ -11,7 +11,6 @@ from os.path import join
 from sys import argv
 
 from shell import  shell, lines, limit_lines
-from tst import run_diff_checks
 
 
 def vc_commit_test():
@@ -41,19 +40,3 @@ def vc_status_test():
     '''Test the git status command'''
     return shell('vc status')
 
-
-def vc_checker():
-    '''   Test the vc command set   '''
-    my_tests = {
-        'vc-commit': vc_commit_test,
-        'vc-delete': vc_delete_test,
-        'vc-help': vc_help_test,
-        'vc-show': vc_show_test,
-        'vc-status': vc_status_test,
-    }
-    run_diff_checks('vc', my_tests)
-
-
-# Create a script that can be run from the tst
-if __name__=='__main__':
-    print(vc_checker())
