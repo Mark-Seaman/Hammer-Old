@@ -7,25 +7,114 @@ from os.path import join, exists
 from subprocess import Popen,PIPE
 from sys import argv
 
+from code import find_functions
 from shell import shell
 from store import save, recall, expire, expiration, save_key, recall_key
 from store import is_cached, clear_cache
 
 
-def tst_approve_all_answers():
-    '''Automatically accept any answer'''
-    for name in tst_cases():
-        tst_approve_results(name)
-
-
-def tst_approve_results(name):
-    '''   Approve the test results   '''
-    answer = recall_key(name+'.out')
-    if answer:
-        save_key('%s.correct' % name, answer)
+def tst_add(command):
+    '''Create a new test.'''
+    print("Add new test:"+command)
+    script_path = join(environ['pb'],'%s_test.py' % command)
+    template_path = join(environ['pb'],'prototype_test.py')
+    command_content = open(template_path).read().replace('prototype',command)
+    if exists(script_path):
+        print('File already exists: '+script_path)
     else:
-        print('No test script output: '+name)
-        save_key('%s.correct' % name, 'No test script output')
+        with open(script_path,'w') as f:
+            f.write(command_content)
+
+
+def tst_approve_results(testcases=None):
+    '''Approve the test results'''
+    if testcases:
+        for name in testcases:
+            answer = recall_key(name+'.out')
+            if answer:
+                save_key('%s.correct' % name, answer)
+            else:
+                print('No test script output: '+name)
+                save_key('%s.correct' % name, 'No test script output')
+    else:
+        for name in tst_cases():
+            print('TL'+name)
+            tst_approve_results([name])
+
+
+
+def test_case_name(function):
+    '''Convert function name to test case name'''
+    return function.replace('_test','').replace('_','-')
+
+
+def tst_cases():
+    '''Enumerate all of the test cases'''
+    return [test_case_name(c) for c in tst_functions()]
+
+
+def tst_command(argv):
+    '''Execute the appropriate test command'''
+    if len(argv)>1:
+        cmd = argv[1]
+
+        if 'like'==cmd:
+            tst_approve_results(argv[2:])
+            
+        elif 'functions'==cmd:
+            print('\n'.join(tst_functions(argv[2:])))
+
+        elif 'status'==cmd:
+            tst_show_status()
+
+        elif 'results'==cmd:
+            print('Test differences: all tests')
+            tst_results()      
+
+        elif 'names'==cmd:
+            print('\n'.join(tst_modules()))
+
+        elif 'list'==cmd:
+            tst_show_cases()
+    
+        elif 'modules'==cmd:
+            print('\n'.join(tst_modules()))
+
+        elif 'test'==cmd:
+            tst_execute_module('tst_test.py')
+
+        elif 'help'==cmd:
+            tst_help()
+
+        else:
+            print('no test found: '+cmd)
+            tst_help()
+
+    if len(argv)==3:
+        cmd = argv[1]
+        t = argv[2]
+
+        if 'add'==cmd:
+            tst_add(t)
+
+        elif 'edit'==cmd:
+            tst_edit(t)
+
+        elif 'execute'==cmd:
+            tst_execute_module(t+'_test.py')
+
+        elif 'output'==cmd:
+            tst_show_output(t)
+
+        elif 'correct'==cmd:
+            tst_show_expected(t)
+
+        elif 'results'==cmd:
+            print('Show results: %s' % t)
+            tst_show_diff(t)
+
+        else:
+            print('bad command: '+cmd)
 
 
 def tst_diff(name):
@@ -36,6 +125,10 @@ def tst_diff(name):
     if answer!=correct:
         return differences(answer,correct)
  
+def tst_edit(command):
+    '''Edit the content of a test.'''
+    print(shell('e bin/%s_test.py' % command))
+
 
 def tst_help():
     '''   Show the details of the 'tst' command   '''
@@ -58,7 +151,6 @@ def tst_help():
         status     # Show the failing tests
         results    # Show the unexpected results
         functions  # List the test functions for all modules
-        cases      # List all test cases
         modules    # List all test modules
 
     One test arg
@@ -78,109 +170,6 @@ def tst_help():
             ''')
 
 
-def tst_add(command):
-    '''Create a new test.'''
-    print("Add new test:"+command)
-    script_path = join(environ['pb'],'%s_test.py' % command)
-    template_path = join(environ['pb'],'prototype_test.py')
-    command_content = open(template_path).read().replace('prototype',command)
-    if exists(script_path):
-        print('File already exists: '+script_path)
-    else:
-        with open(script_path,'w') as f:
-            f.write(command_content)
-
-
-def tst_edit(command):
-    '''Edit the content of a test.'''
-    from shell import shell
-    print(shell('e bin/%s_test.py' % command))
-
-
-
-def tst_modules():
-    '''Enumerate all of the test command modules'''
-    modules = [c for c in listdir(environ['pb']) if c.endswith('_test.py')]
-    return sorted(modules)
-
-
-def test_case_name(function):
-    '''Convert function name to test case name'''
-    return function.replace('_test','').replace('_','-')
-
-
-def tst_cases():
-    '''Enumerate all of the test cases'''
-    return [test_case_name(c) for c in tst_functions()]
-
-
-def tst_command(argv):
-    '''Execute the appropriate test command'''
-    if len(argv)==2:
-        t = argv[1]
-
-        if 'accept'==t:
-            tst_approve_all_answers()
-
-        elif 'functions'==t:
-            print('\n'.join(tst_functions()))
-
-        elif 'status'==t:
-            tst_show_status()
-        
-        elif 'results'==t:
-            print('Test differences: all tests')
-            tst_results()
-
-        elif 'names'==t:
-            print('\n'.join(tst_modules()))
-
-        elif 'list'==t:
-            tst_show_cases()
-    
-        elif 'modules'==t:
-            print('\n'.join(tst_modules()))
-
-        elif 'test'==t:
-            tst_execute_module('tst_test.py')
-
-        elif 'help'==t:
-            tst_help()
-
-        else:
-            print('no test found: '+t)
-            tst_help()
-
-    elif len(argv)==3:
-        cmd = argv[1]
-        t = argv[2]
-
-        if 'add'==cmd:
-            tst_add(t)
-
-        elif 'edit'==cmd:
-            tst_edit(t)
-
-        elif 'execute'==cmd:
-            tst_execute_module(t+'_test.py')
-
-        elif 'like'==cmd:
-            tst_approve_results(t)
-            
-        elif 'output'==cmd:
-            tst_show_output(t)
-
-        elif 'correct'==cmd:
-            tst_show_expected(t)
-
-        elif 'results'==cmd:
-            print('Show results: %s' % t)
-            tst_show_diff(t)
-
-        else:
-            print('bad command: '+cmd)
-
-
 def tst_execute_all():
     '''Execute all of the test functions for module'''
     print('execute all')
@@ -193,11 +182,8 @@ def tst_execute_all():
 def tst_execute_module(module):
     '''Execute all of the test functions for module'''
     print('\n'+module)
-    from code import find_functions
-    path = join(environ['pb'],module)
-    for f in find_functions(path):
-        if f.endswith('_test'):
-            tst_execute_test_case(module,f)
+    for t in tst_functions([module]):
+        tst_execute_test_case(module,t)
 
 
 def tst_execute_test_case(module, function):
@@ -223,16 +209,25 @@ def tst_execute_timed_test(testcase, import_name, function):
     return answer
 
 
-def tst_functions():
+def tst_functions(module=None):
     '''Enumerate all of the test command functions'''
-    from code import find_functions
-    result = []
-    for m in tst_modules():
-        path = join(environ['pb'],m)
-        result += [f for f in find_functions(path) if f.endswith('_test')]
-    return result
+    if module:
+        path = join(environ['pb'], module[0])
+        return [f for f in find_functions(path) if f.endswith('_test')]
+    else:
+        result = []
+        for module in tst_modules():           
+            path = join(environ['pb'],module)
+            result += [f for f in find_functions(path) if f.endswith('_test')]
+        return result
            
    
+def tst_modules():
+    '''Enumerate all of the test command modules'''
+    modules = [c for c in listdir(environ['pb']) if c.endswith('_test.py')]
+    return sorted(modules)
+
+
 def tst_results():
     cases = [test_case_name(c) for c in tst_functions()]
     for t in cases:
