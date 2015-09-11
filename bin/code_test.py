@@ -18,7 +18,7 @@ def code_list_test():
 
 
 def code_show_test():
-    return shell('code show bin/code.py')
+    return limit_lines('code show bin/code.py',177,180)
 
 
 def code_complexity_test():

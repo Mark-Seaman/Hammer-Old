@@ -7,61 +7,10 @@ from os.path import join, exists
 from subprocess import Popen,PIPE
 from sys import argv
 
-#from shell import  shell, lines, limit_lines
 from store import save, recall, expire, expiration, save_key, recall_key
 from store import is_cached, clear_cache
 
 
-<<<<<<< HEAD
-=======
-#------------------------------------------------------
-# Shell command execution
-
-def limit_lines(shell_command, min=None, max=None):
-    '''Limit the lines to a certain number or echo all the output'''
-    text = shell (shell_command)
-    violation = lines(text,min,max)
-    if violation:
-        text = text.split('\n')
-        text = '\n'.join([line[:60] for line in text])
-        return violation+'\n'+text
-    return ''
-
-
-def lines(text, min=None, max=None):
-    '''Guarantee that there are the correct number of lines in the text.'''
-    num_lines_output = len(text.split('\n'))
-    if min and num_lines_output<min:
-        return('Min count lines: actual=%d, min=%d' % (num_lines_output, min))
-    if max and num_lines_output>max:
-        return('Max count lines: actual=%d, max=%d' % (num_lines_output, max))
-
-
-def shell(command):
-    '''   Execute a shell command and return its output   '''
-    output = Popen(command.split(' '), stdout=PIPE).stdout
-    return output.read().decode(encoding='UTF-8')
-
-
-def differences(answer,correct):
-    '''   Calculate the diff of two strings   '''
-    if answer!=correct:
-        t1 = '/tmp/diff1'
-        t2 = '/tmp/diff2'
-        with open(t1,'wt') as file1:
-            file1.write(str(answer)+'\n')
-        with open(t2,'wt') as file2:
-            file2.write(str(correct)+'\n')
-        diffs = shell('diff %s %s' %(t1, t2))
-        if diffs:
-            #print('Differences detected:     < actual     > expected')
-            #print (diffs)
-            return diffs
-
-
-#------------------------------------------------------
-
->>>>>>> 0af6a5403e6b4c74a4a884ef25c455bb7073bdae
 def approve_all_answers():
     '''Automatically accept any answer'''
     for name in test_list():
@@ -257,6 +206,12 @@ def execute_tst_command(argv):
         if 'accept'==t:
             approve_all_answers()
 
+        elif 'cases'==t:
+            tst_cases()
+
+        elif 'functions'==t:
+            tst_functions()
+
         elif 'status'==t:
             show_status()
         
@@ -265,11 +220,14 @@ def execute_tst_command(argv):
             show_differences(test_list())
 
         elif 'names'==t:
-            print('\n'.join(command_names()))
+            print('\n'.join(tst_modules()))
 
         elif 'list'==t:
             for t in sorted(test_list()):
                 print (t)
+
+        elif 'modules'==t:
+            print('\n'.join(tst_modules()))
 
         elif 'test'==t:
             from tst_test import tst_checker
@@ -309,9 +267,30 @@ def execute_tst_command(argv):
             print('bad command: '+cmd)
 
 
-def command_names():
-    '''Enumerate all of the commands'''
+def tst_modules():
+    '''Enumerate all of the test command modules'''
     return [c for c in listdir(environ['pb']) if c.endswith('_test.py')]
+
+
+def tst_functions():
+    '''Enumerate all of the test command functions'''
+    from code import find_functions
+    for m in tst_modules():
+        path = join(environ['pb'],m)
+        for f in find_functions(path):
+            if f.endswith('_test'):
+                print(f)
+
+   
+def tst_cases():
+    '''Enumerate all of the test command functions'''
+    from code import find_functions
+    for m in tst_modules():
+        print('\n'+m)
+        path = join(environ['pb'],m)
+        for f in find_functions(path):
+            if f.endswith('_test'):
+                print('    '+f.replace('_test','').replace('_','-'))
 
 
 # Create a script that can be run from the tst
@@ -321,7 +300,7 @@ if __name__=='__main__':
     chdir(environ['p'])
     if len(argv)==1:
         reset_test_names()
-        for c in command_names():
+        for c in tst_modules():
             print(shell('python bin/'+c))
         show_status()
     else:
