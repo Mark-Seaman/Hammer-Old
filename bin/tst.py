@@ -51,8 +51,8 @@ def differences(answer,correct):
             file2.write(str(correct)+'\n')
         diffs = shell('diff %s %s' %(t1, t2))
         if diffs:
-            print('Differences detected:     < actual     > expected')
-            print (diffs)
+            #print('Differences detected:     < actual     > expected')
+            #print (diffs)
             return diffs
 
 

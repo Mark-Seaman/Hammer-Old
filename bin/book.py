@@ -270,9 +270,12 @@ def book_status():
     return 'List all pending changes to the book\n' +shell('git status')
 
 
-def book_text(chapter='Leverage'):
+def book_text(chapter=None):
     '''Display the raw text of one chapter'''
-    f = join(environ['book'], 'chapters', '%s.asc'%chapter)
+    if chapter:
+        f = join(environ['book'], 'chapters', '%s.asc'%chapter)
+    else:
+        f = join(environ['book'], 'Book.asc')
     print(open(f).read())
 
 
@@ -389,3 +392,4 @@ Create a script that can be run from the shell
 '''
 if __name__=='__main__':
     book_command(argv)
+
