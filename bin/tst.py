@@ -150,6 +150,9 @@ def tst_help():
         list       # List the tests to run
         status     # Show the failing tests
         results    # Show the unexpected results
+        functions  # List the test functions for all modules
+        cases      # List all test cases
+        modules    # List all test modules
 
     One test arg
         output     # Show the output
@@ -164,12 +167,6 @@ def tst_help():
         tcorrect   # tst correct
         tst        # systest
         nose       # nosetests
-
-    Scripts
-        doc        # Documents
-        cmd        # Executable commands
-        vc         # Version control with git
-        tst        # Testing script
 
             ''')
 
@@ -230,8 +227,7 @@ def execute_tst_command(argv):
             print('\n'.join(tst_modules()))
 
         elif 'test'==t:
-            from tst_test import tst_checker
-            tst_checker()
+            tst_execute_module('tst_test.py')
 
         elif 'help'==t:
             tst_help()
@@ -250,6 +246,9 @@ def execute_tst_command(argv):
         elif 'edit'==cmd:
             tst_edit(t)
 
+        elif 'execute'==cmd:
+            tst_execute_module(t+'_test.py')
+
         elif 'like'==cmd:
             approve_results(t)
             
@@ -265,6 +264,30 @@ def execute_tst_command(argv):
 
         else:
             print('bad command: '+cmd)
+
+def tst_execute_all():
+    '''Execute all of the test functions for module'''
+    print('execute all')
+    from code import find_functions
+    for m in tst_modules():
+        tst_execute_module(m)
+
+
+def tst_execute_module(module):
+    '''Execute all of the test functions for module'''
+    print('\nexecute module '+module)
+    from code import find_functions
+    path = join(environ['pb'],module)
+    for f in find_functions(path):
+        if f.endswith('_test'):
+            tst_execute_test_case(module,f)
+
+
+def tst_execute_test_case(module, f):
+    print('exec (%s, %s)' % (module, f))
+    import_name = module.replace('.py','')
+    exec("import "+import_name)
+    exec("print(%s.%s())" % (import_name,f))
 
 
 def tst_modules():
