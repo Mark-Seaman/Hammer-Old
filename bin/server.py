@@ -5,7 +5,7 @@ from os.path import join
 from sys import argv
 
 from server_test import server_checker
-from tst import shell
+from shell import shell
 
 
 def server_changes():

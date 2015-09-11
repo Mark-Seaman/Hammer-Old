@@ -10,7 +10,8 @@ from os import listdir, environ, system
 from os.path import join
 from glob import glob
 
-from tst import run_diff_checks, shell, lines, limit_lines
+from shell import shell, lines, limit_lines
+from tst import run_diff_checks
 
 
 def cmd_python_pip_test():

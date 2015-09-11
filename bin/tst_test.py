@@ -7,16 +7,27 @@ from subprocess import Popen,PIPE
 from sys import argv
 from re import sub
 
-from tst import run_diff_checks, shell, lines, limit_lines
+from shell import shell, lines, limit_lines
+from tst import run_diff_checks
 
 
-def lines_test():
-    '''   Count the lines of source code in the tst.py file   '''
+def tst_modules_test():
+    return shell ('tst modules')
+
+
+def tst_functions_test():
+    return shell ('tst functions')
+
+
+def tst_cases_test():
+    return shell('tst cases')
+
+
+def tst_lines_test():
     return limit_lines ('cat bin/tst.py',200,350)
 
 
-def like_test():
-    '''   Test the like switch to approve the correct answer   '''
+def tst_like_test():
     system('''
         echo do not like this > test/dummy.correct
         tst like dummy > /dev/null
@@ -24,33 +35,35 @@ def like_test():
     return ''
 
  
-def list_tests():
+def tst_list_tests():
      '''Make a list of all tests to run'''
      return shell('tst list')
 
-def list_names():
+def tst_list_names():
      '''Make a list of all tests to run'''
      return shell('tst list')
 
 
-def output_test():
+def tst_output_test():
     '''   Display the output from the last test run   '''
     return shell('tst output cmd_add')
 
 
-def help_test():
+def tst_help_test():
     return shell('tst help')
 
 
 def tst_checker():
-    '''Execute all tests for the tst command'''
     my_tests = {
-        'tst-like': like_test,
-        'tst-lines': lines_test,
-        'tst-names': list_names,
-        'tst-list': list_tests,
-        'tst-help': help_test,
-        'tst-output': output_test,
+        'tst-modules': tst_modules_test,
+        'tst-functions': tst_functions_test,
+        'tst-cases': tst_cases_test,
+        'tst-like': tst_like_test,
+        'tst-lines': tst_lines_test,
+        'tst-names': tst_list_names,
+        'tst-list': tst_list_tests,
+        'tst-help': tst_help_test,
+        'tst-output': tst_output_test,
     }
     run_diff_checks('tst', my_tests)
 

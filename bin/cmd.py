@@ -7,7 +7,7 @@ from os import chmod
 import stat
 from sys import argv
 
-from tst import shell
+from shell import shell
 from cmd_test import cmd_checker
 
 
