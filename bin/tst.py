@@ -15,10 +15,10 @@ from store import is_cached, clear_cache
 
 def tst_add(command):
     '''Create a new test.'''
-    print("Add new test:"+command)
-    script_path = join(environ['pb'],'%s_test.py' % command)
+    print("Add new test:"+command[0])
+    script_path = join(environ['pb'],'%s_test.py' % command[0])
     template_path = join(environ['pb'],'prototype_test.py')
-    command_content = open(template_path).read().replace('prototype',command)
+    command_content = open(template_path).read().replace('prototype',command[0])
     if exists(script_path):
         print('File already exists: '+script_path)
     else:
@@ -58,18 +58,29 @@ def tst_command(argv):
     if len(argv)>1:
         cmd = argv[1]
 
-        if 'like'==cmd:
+        if 'add'==cmd:
+            tst_add(argv[2:])
+
+        elif 'correct'==cmd:
+            tst_show_expected(argv[2])
+
+        elif 'edit'==cmd:
+            tst_edit(argv[2])
+
+        elif 'execute'==cmd:
+            tst_execute_module(argv[2]+'_test.py')
+
+        elif 'like'==cmd:
             tst_approve_results(argv[2:])
             
         elif 'functions'==cmd:
             print('\n'.join(tst_functions(argv[2:])))
 
+        elif 'output'==cmd:
+            tst_show_output(argv[2:])
+
         elif 'status'==cmd:
             tst_show_status()
-
-        elif 'results'==cmd:
-            print('Test differences: all tests')
-            tst_results()      
 
         elif 'names'==cmd:
             print('\n'.join(tst_modules()))
@@ -80,6 +91,9 @@ def tst_command(argv):
         elif 'modules'==cmd:
             print('\n'.join(tst_modules()))
 
+        elif 'results'==cmd:
+            tst_show_diff(argv[2:])
+
         elif 'test'==cmd:
             tst_execute_module('tst_test.py')
 
@@ -87,34 +101,8 @@ def tst_command(argv):
             tst_help()
 
         else:
-            print('no test found: '+cmd)
+            print('no test command found: '+cmd)
             tst_help()
-
-    if len(argv)==3:
-        cmd = argv[1]
-        t = argv[2]
-
-        if 'add'==cmd:
-            tst_add(t)
-
-        elif 'edit'==cmd:
-            tst_edit(t)
-
-        elif 'execute'==cmd:
-            tst_execute_module(t+'_test.py')
-
-        elif 'output'==cmd:
-            tst_show_output(t)
-
-        elif 'correct'==cmd:
-            tst_show_expected(t)
-
-        elif 'results'==cmd:
-            print('Show results: %s' % t)
-            tst_show_diff(t)
-
-        else:
-            print('bad command: '+cmd)
 
 
 def tst_diff(name):
@@ -228,13 +216,6 @@ def tst_modules():
     return sorted(modules)
 
 
-def tst_results():
-    cases = [test_case_name(c) for c in tst_functions()]
-    for t in cases:
-        if tst_diff(t):
-            tst_show_diff(t)
-
-
 def tst_run_case(testcase, import_name, function):
     '''   Run the test and check the results   '''
     cache = is_cached('%s.out' % testcase )
@@ -246,7 +227,7 @@ def tst_run_case(testcase, import_name, function):
     correct = recall_key(testcase+'.correct')
     if not correct:
         save_key('%s.correct' % testcase, answer)
-    tst_show_diff(testcase)
+    tst_show_diff([testcase])
 
 
 def tst_show_cases():
@@ -260,16 +241,21 @@ def tst_show_cases():
                 print('    '+test_case_name(f))
 
 
-def tst_show_diff(name):
+def tst_show_diff(tests=None):
     '''Show the results for one test case'''
-    answer = recall_key ('%s.out' % name)
-    correct = recall_key('%s.correct' % name)
-    d = tst_diff(name)
-    if d:
-        print('---------------------------------------------------------')
-        print('                      '+name)
-        print('---------------------------------------------------------')
-        print(d)
+    if tests:
+        name = tests[0]
+        answer = recall_key ('%s.out' % name)
+        correct = recall_key('%s.correct' % name)
+        d = tst_diff(name)
+        if d:
+            print('---------------------------------------------------------')
+            print('                      '+name)
+            print('---------------------------------------------------------')
+            print(d)
+    else:
+        for t in tst_cases():
+            tst_show_diff([t])
 
 
 def tst_show_expected(name):
@@ -280,8 +266,11 @@ def tst_show_expected(name):
 
 def tst_show_output(name):
     '''Show the output text for the last test run'''
-    print('Output from %s\n-----------------' % name)
-    print(recall_key(name+'.out'))
+    if name:
+        print('Output from %s\n-----------------' % name[0])
+        print(recall_key(name[0]+'.out'))
+    else:
+        print ('No test selected ')
 
 
 def tst_show_status():
