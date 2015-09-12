@@ -38,9 +38,8 @@ def tst_approve_results(testcases=None):
                 save_key('%s.correct' % name, 'No test script output')
     else:
         for name in tst_cases():
-            print('TL'+name)
+            print('like results: '+name)
             tst_approve_results([name])
-
 
 
 def test_case_name(function):
@@ -82,9 +81,6 @@ def tst_command(argv):
         elif 'status'==cmd:
             tst_show_status()
 
-        elif 'names'==cmd:
-            print('\n'.join(tst_modules()))
-
         elif 'list'==cmd:
             tst_show_cases()
     
@@ -113,6 +109,7 @@ def tst_diff(name):
     if answer!=correct:
         return differences(answer,correct)
  
+
 def tst_edit(command):
     '''Edit the content of a test.'''
     print(shell('e bin/%s_test.py' % command))
@@ -123,28 +120,19 @@ def tst_help():
     print('''
     usage: tst [command] [testname]
 
-    examples:
-        tst                 # runs all the tests
-        tst results         # display the differences from expected
-        tst name            # runs a single test
-        tst like name       # set the correct results
-        tst output name     # show the output results
-        tst correct name    # show the correct results
-      
-    subcommands of tst:
+        tst                  # runs all the tests
 
-    No args
-        accept     # Accept every answer
-        list       # List the tests to run
-        status     # Show the failing tests
-        results    # Show the unexpected results
-        functions  # List the test functions for all modules
-        modules    # List all test modules
-
-    One test arg
-        output     # Show the output
-        correct    # Show the correct output
-        results    # Show the unexpected results
+    commands:
+        add       module     # Add a new test module
+        edit      module     # Edit a test module
+        functions            # List the test functions for all modules
+        like      [testcase] # Accept an answer
+        list                 # List the tests to run
+        modules              # List all test modules
+        output    testcase   # Show the output
+        correct   testcase   # Show the correct output
+        results   [testcase] # Show the unexpected results
+        status              # Show the failing tests
 
     Shortcut commands
         tlike      # tst like
@@ -152,8 +140,6 @@ def tst_help():
         tstatus    # tst status
         tout       # tst output
         tcorrect   # tst correct
-        tst        # systest
-        nose       # nosetests
 
             ''')
 
