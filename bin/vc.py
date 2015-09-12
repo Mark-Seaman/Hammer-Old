@@ -4,8 +4,6 @@ from os import system, listdir, environ
 from os.path import join
 from sys import argv
 
-from vc_test import vc_checker
-
 
 
 def vc_changes():
@@ -91,9 +89,6 @@ def vc_command(argv):
 
 		elif argv[1]=='show':
 			vc_show(argv)
-
-		elif argv[1]=='test':
-			vc_checker()
 
 		else:
 			print('No vc command found, '+argv[1])

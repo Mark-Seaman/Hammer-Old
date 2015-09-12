@@ -4,8 +4,7 @@ from os.path import join, isfile, exists
 from re import sub,compile,DOTALL,IGNORECASE
 from sys import argv
 
-from tst import shell
-from book_test import book_checker
+from shell import shell
 
 
 def to_markdown(text):
@@ -181,7 +180,6 @@ def book_help():
 *     outline               -- Show the outline for the book
 *     plan                  -- Open the planning spread sheet
 *     push                  -- Push the book to the dropbox
-*     test                  -- Run all system tests
 *     words                 -- Count the words
             ''')
 
@@ -367,9 +365,6 @@ def book_command(argv):
 
         elif argv[1]=='status':
             print(book_status())
-
-        elif argv[1]=='test':
-            book_checker()
 
         elif argv[1]=='text':
             if len(argv)>2:

@@ -4,8 +4,7 @@ from os import system, listdir, environ
 from os.path import join
 from sys import argv
 
-from server_test import server_checker
-from tst import shell
+from shell import shell
 
 
 def server_changes():
@@ -58,7 +57,6 @@ def server_help():
         host     	-- get the hostname of the server
         restart		-- restart the web server
         status		-- show the remote server status
-        test        -- Self test
       
 			''')
 
@@ -125,9 +123,6 @@ def server_command(argv):
 
 		elif argv[1]=='status':
 			server_status()
-
-		elif argv[1]=='test':
-			server_checker()
 
 		else:
 			print('No server command found, '+argv[1])

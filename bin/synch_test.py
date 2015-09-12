@@ -9,7 +9,7 @@ Run all of the tests for the 'synch' objects.  Output the test results.
 from os import listdir, environ, system
 from os.path import join
 
-from tst import run_diff_checks, shell, lines, limit_lines
+from shell import shell, lines, limit_lines
 
 
 def clean_up():
@@ -45,20 +45,3 @@ def synch_sync_test():
 
 def synch_help_test():
     return shell('synch help')
-
-
-def synch_checker():
-    my_tests = {
-        'synch-bin': synch_bin_test,
-        'synch-copy': synch_copy_test,
-        'synch-preview': synch_preview_test,
-        'synch-mirror': synch_mirror_test,
-        'synch-sync': synch_sync_test,
-        'synch-help': synch_help_test,
-    }
-    run_diff_checks('synch', my_tests)
-
-
-# Create a script that can be run from the tst
-if __name__=='__main__':
-    synch_checker()

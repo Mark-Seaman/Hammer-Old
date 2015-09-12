@@ -1,7 +1,6 @@
 from time import sleep
 
 from store import save, recall, expire, expiration, save_key, recall_key
-from tst import run_diff_checks
 
 
 def store_redis_test():
@@ -42,19 +41,3 @@ def store_missing_test():
 def store_key_test():
     save_key('store_key_test', 42)
     return recall_key('store_key_test')
-
-
-def store_checker():
-    '''Execute all the desired diff tests'''
-    my_tests = {
-        'store-expiration': store_expiration_test,
-        'store-key': store_key_test,
-        'store-missing': store_missing_test,
-        'store-redis': store_redis_test,
-    }
-    run_diff_checks('store', my_tests)
-
-
-# Create a script that can be run from the tst
-if __name__=='__main__':
-    store_checker()

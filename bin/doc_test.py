@@ -10,7 +10,7 @@ from os import listdir, environ, system
 from os.path import join, exists
 from sys import argv
 
-from tst import run_diff_checks, shell, lines, limit_lines
+from shell import shell, lines, limit_lines
 
 
 def doc_add_test():
@@ -33,19 +33,3 @@ def doc_show_test():
 	text = limit_lines('doc show', 99, 99)
 	return text
 
-
-def doc_checker():
-	'''Execute all the desired diff tests'''
-	my_tests = {
-        'doc-add': doc_add_test,
-        'doc-status': doc_status_test,
-        'doc-list': doc_list_test,
-        'doc-path': doc_path_test,
-        'doc-show': doc_show_test,
-    }
-	run_diff_checks('doc', my_tests)
-
-
-# Create a script that can be run from the tst
-if __name__=='__main__':
-    doc_checker()

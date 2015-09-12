@@ -4,8 +4,6 @@ from os import system, listdir, environ, chdir
 from os.path import join, exists, isdir
 from sys import argv
 
-from doc_test import doc_checker, shell
-
 
 def doc_path(doc=''):
     '''Return the path name that corresponds to this document.'''
@@ -173,9 +171,6 @@ def doc_command(argv):
 
         elif argv[1]=='web':
             doc_web()
-
-        elif argv[1]=='test':
-            doc_checker()
 
         else:
             print('No doc doc found, '+argv[1])
