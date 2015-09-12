@@ -38,8 +38,9 @@ def tst_approve_results(testcases=None):
                 save_key('%s.correct' % name, 'No test script output')
     else:
         for name in tst_cases():
-            print('like results: '+name)
-            tst_approve_results([name])
+            if tst_diff(name):
+                print('like results: '+name)
+                tst_approve_results([name])
 
 
 def test_case_name(function):
@@ -206,7 +207,7 @@ def tst_run_case(testcase, import_name, function):
     '''   Run the test and check the results   '''
     cache = is_cached('%s.out' % testcase )
     if cache and not tst_diff(testcase):
-        print("    cached results %-20s  ... %d seconds" % (testcase,cache))
+        print("    %-20s  ... %d seconds [cached results]" % (testcase,cache))
         answer = recall_key(testcase+'.out')
     else:
         answer = tst_execute_timed_test(testcase, import_name, function)
