@@ -39,6 +39,7 @@ def tst_approve_results(testcases=None):
     else:
         for name in tst_cases():
 <<<<<<< HEAD
+<<<<<<< HEAD
             if tst_diff(name):
                 print('like results: '+name)
                 tst_approve_results([name])
@@ -46,6 +47,11 @@ def tst_approve_results(testcases=None):
             print('like results: '+name)
             tst_approve_results([name])
 >>>>>>> 719abcf93300d6e965436d775b933065c1c38ac8
+=======
+            if tst_diff(name):
+                print('like results: '+name)
+                tst_approve_results([name])
+>>>>>>> d5c4991d459094715a234ec26aa629484a1200cf
 
 
 def test_case_name(function):
@@ -213,10 +219,14 @@ def tst_run_case(testcase, import_name, function):
     cache = is_cached('%s.out' % testcase )
     if cache and not tst_diff(testcase):
 <<<<<<< HEAD
+<<<<<<< HEAD
         print("    %-20s  ... %d seconds [cached results]" % (testcase,cache))
 =======
         print("    cached results %-20s  ... %d seconds" % (testcase,cache))
 >>>>>>> 719abcf93300d6e965436d775b933065c1c38ac8
+=======
+        print("    %-20s  ... %d seconds [cached results]" % (testcase,cache))
+>>>>>>> d5c4991d459094715a234ec26aa629484a1200cf
         answer = recall_key(testcase+'.out')
     else:
         answer = tst_execute_timed_test(testcase, import_name, function)
