@@ -80,7 +80,7 @@ def command_list(argv):
 	'''List the parts of the command source code.'''
 	path = join(environ['p'],'bin')
 	files =  [f for f in glob(path+'/*.py') if not f.endswith('_test.py')]
-	files =  [f[len(path)+1:] for f in files]
+	files =  [f[len(path)+1:] for f in sorted(files)]
 	print('\n'.join(files))
 
 

@@ -3,7 +3,7 @@
 
 # Vars
 export p=$HOME/Projects/Hammer
-export book=$HOME/Projects/Atlas/reusable-software-systems
+export book=$HOME/Projects/Atlas/Leverage
 export mb=$HOME/Documents/book
 export gh='Shrinking-World/Hammer'
 export phip=54.244.95.205
