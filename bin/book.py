@@ -127,7 +127,7 @@ def book_headings(topic=None):
     def print_headings(topic):
         path = join(environ['book'],'chapters',topic+'.asc')
         print('\n'+topic)
-        words = shell ('wc -w ' + path).split(' ')[0]
+        words = shell ('wc -w ' + path).strip().split(' ')[0]
         print ('    %s.asc:  %s words' %(topic,words))
         text = open(path).read()
         print('\n    major: ')
