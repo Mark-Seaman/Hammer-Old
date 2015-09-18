@@ -225,7 +225,7 @@ def book_plan():
     spreadsheet = '''#!/bin/bash
         # Open the invoices spreadsheet
 
-        f="$HOME/Documents/Dropbox/Personal/2015/Book_Planner.ods"
+        f="$HOME/Documents/Dropbox/Personal/Book_Planner.ods"
         open "$f" ||
         o "$f"
     '''
