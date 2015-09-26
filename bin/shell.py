@@ -39,6 +39,7 @@ def differences(answer,correct):
         t1 = '/tmp/diff1'
         t2 = '/tmp/diff2'
         with open(t1,'wt') as file1:
+            #print (answer)
             file1.write(str(answer)+'\n')
         with open(t2,'wt') as file2:
             file2.write(str(correct)+'\n')
