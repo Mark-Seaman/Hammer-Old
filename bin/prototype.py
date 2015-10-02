@@ -50,22 +50,6 @@ def prototype_edit(topic):
         print('File does not exist: '+path)
 
 
-def prototype_help():
-    '''Show all the prototype prototypes and their usage.'''
-    print('''
-    usage: cmd prototype [args]
-
-    prototype:
-
-        add     [file] -- Add a new prototype
-        delete  [file] -- Delete a prototype
-        edit    [file] -- Edit the prototype
-        list    [file] -- List all prototypes
-        path    [file] -- Lookup the path for the file
-        show    [file] -- Show a prototype
-            ''')
-
-
 def prototype_enumerate():
     '''Generator to produce a list of all topics'''
     root_dir = prototype_path()
@@ -114,6 +98,22 @@ def get_topic(argv):
     if len(argv)>2:
         return argv[2]
     
+
+def prototype_help():
+    '''Show all the prototype prototypes and their usage.'''
+    print('''
+    usage:  prototype cmd [args]
+
+    cmd:
+
+        add     [file] -- Add a new prototype
+        delete  [file] -- Delete a prototype
+        edit    [file] -- Edit the prototype
+        list    [file] -- List all prototypes
+        path    [file] -- Lookup the path for the file
+        show    [file] -- Show a prototype
+            ''')
+
 
 def prototype_command(argv):
     '''Execute all of the prototype specific prototypes'''
