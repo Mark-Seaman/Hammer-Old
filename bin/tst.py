@@ -13,6 +13,10 @@ from store import save, recall, expire, expiration, save_key, recall_key
 from store import is_cached, clear_cache
 
 
+def print_banner(name):
+    print('\n%s\n%s%s\n%s\n' % ('-'*80, ' '*30, name,'-'*80))
+
+
 def tst_add(command):
     '''Create a new test.'''
     print("Add new test:"+command[0])
@@ -236,9 +240,7 @@ def tst_show_diff(tests=None):
         correct = recall_key('%s.correct' % name)
         d = tst_diff(name)
         if d:
-            print('---------------------------------------------------------')
-            print('                      '+name)
-            print('---------------------------------------------------------')
+            print_banner (name)
             print(d)
     else:
         for t in tst_cases():
