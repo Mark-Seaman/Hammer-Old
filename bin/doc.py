@@ -1,13 +1,9 @@
 #!/usr/bin/env python
 
-from os import system, listdir, environ, chdir
+from os import system, listdir, environ, chdir, walk
 from os.path import join, exists, isdir
 from sys import argv
 
-
-def doc_path(doc=''):
-    '''Return the path name that corresponds to this document.'''
-    return join(environ['pd'],doc)
 
 
 def doc_add(argv):
@@ -85,29 +81,44 @@ def doc_help():
             ''')
 
 
-def doc_list(argv):
+def doc_print_list(argv):
     '''List the parts of the doc source code.'''
-    print("List the contents of this doc - "+doc_path())
-    directories = [d for d in listdir(doc_path()) if isdir(join(doc_path(),d))]
+    print("List the contents of this doc - "+doc_path(argv))
+    directories = [d for d in listdir(doc_path(argv)) if isdir(doc_path([d]))]
     for d in directories:
         print(d+':')
-        files = [join(d,f) for f in listdir(doc_path(d))]
+        files = [join(d,f) for f in listdir(doc_path([d]))]
         print('    '+'\n    '.join(files))
 
 
-def doc_path(filename=''):
-    '''Form the path to the document source'''
-    return join(environ['mb'], filename)
+def doc_list(argv):
+    '''List the parts of the doc source code.'''
+    print("List the document contents")
+    root_dir = doc_path(argv)
+    for root, dirnames, filenames in walk(root_dir):
+        for filename in filenames:
+            print(join(root, filename).replace(doc_path()+'/',''))
+
+
+
+def doc_path(doc=None):
+    '''Return the path name that corresponds to this document.'''
+    path = join(environ['ocean'],'user_doc')
+    if doc:
+        return join(path,doc[0])
+    else:
+        return path
 
 
 def doc_publish():
     '''Update all of the documents from the source'''
-    system('''# Build the HTML from markdown
-        cd $mb/Hammer &&
-        mkdocs build &&
-        merge site ../website/Hammer
-        server publish
-        ''')
+    pass
+    # system('''# Build the HTML from markdown
+    #     cd $mb/Hammer &&
+    #     mkdocs build &&
+    #     merge site ../website/Hammer
+    #     server publish
+    #     ''')
 
 
 def doc_show(docs):
@@ -155,10 +166,10 @@ def doc_command(argv):
             doc_edit(argv)
 
         elif argv[1]=='list':
-            doc_list(argv)
+            doc_list(argv[2:])
 
         elif argv[1]=='path':
-            print('path:'+doc_path(argv[2]))
+            print('path:'+doc_path(argv[2:]))
 
         elif argv[1]=='publish':
             doc_publish()
