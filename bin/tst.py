@@ -58,7 +58,7 @@ def tst_cases():
 
 
 def tst_command(argv):
-    '''Execute the appropriate test command'''
+    '''run the appropriate test command'''
     if len(argv)>1:
         cmd = argv[1]
 
@@ -71,8 +71,8 @@ def tst_command(argv):
         elif 'edit'==cmd:
             tst_edit(argv[2])
 
-        elif 'execute'==cmd:
-            tst_execute_module(argv[2]+'_test.py')
+        elif 'run'==cmd:
+            tst_run_module(argv[2]+'_test.py')
 
         elif 'like'==cmd:
             tst_approve_results(argv[2:])
@@ -96,7 +96,7 @@ def tst_command(argv):
             tst_show_diff(argv[2:])
 
         elif 'test'==cmd:
-            tst_execute_module('tst_test.py')
+            tst_run_module('tst_test.py')
 
         elif 'help'==cmd:
             tst_help()
@@ -149,31 +149,31 @@ def tst_help():
             ''')
 
 
-def tst_execute_all():
-    '''Execute all of the test functions for module'''
-    print('execute all')
+def tst_run_all():
+    '''run all of the test functions for module'''
+    print('run all')
     from code import find_functions
     for m in tst_modules():
-        tst_execute_module(m)
+        tst_run_module(m)
     tst_show_status()
 
 
-def tst_execute_module(module):
-    '''Execute all of the test functions for module'''
+def tst_run_module(module):
+    '''run all of the test functions for module'''
     print('\n'+module)
     for t in tst_functions([module]):
-        tst_execute_test_case(module,t)
+        tst_run_test_case(module,t)
 
 
-def tst_execute_test_case(module, function):
+def tst_run_test_case(module, function):
     '''Run the selected test and process results'''
     import_name = module.replace('.py','')
     testcase = test_case_name(function)
     tst_run_case(testcase, import_name, function)
 
 
-def tst_execute_timed_test(testcase, import_name, function):
-    '''Execute the test and cache the results for an appropriate time'''
+def tst_run_timed_test(testcase, import_name, function):
+    '''run the test and cache the results for an appropriate time'''
     start = datetime.now()
     exec("import "+import_name)
     exec("answer = %s.%s()" % (import_name,function))
@@ -214,7 +214,7 @@ def tst_run_case(testcase, import_name, function):
         print("    %-20s  ... %d seconds [cached results]" % (testcase,cache))
         answer = recall_key(testcase+'.out')
     else:
-        answer = tst_execute_timed_test(testcase, import_name, function)
+        answer = tst_run_timed_test(testcase, import_name, function)
     correct = recall_key(testcase+'.correct')
     if not correct:
         save_key('%s.correct' % testcase, answer)
@@ -274,6 +274,6 @@ if __name__=='__main__':
 
     chdir(environ['p'])
     if len(argv)==1:
-        tst_execute_all()
+        tst_run_all()
     else:
         tst_command(argv)

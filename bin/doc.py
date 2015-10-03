@@ -91,14 +91,19 @@ def doc_print_list(argv):
         print('    '+'\n    '.join(files))
 
 
-def doc_list(argv):
+def doc_find(argv):
     '''List the parts of the doc source code.'''
-    print("List the document contents")
     root_dir = doc_path(argv)
     for root, dirnames, filenames in walk(root_dir):
         for filename in filenames:
-            print(join(root, filename).replace(doc_path()+'/',''))
+            yield join(root, filename)
 
+
+def doc_list(argv):
+    '''List the parts of the doc source code.'''
+    print("List the document contents")
+    for f in doc_find(argv):
+        print f.replace(doc_path()+'/','')
 
 
 def doc_path(doc=None):
@@ -120,26 +125,14 @@ def doc_publish():
     #     server publish
     #     ''')
 
+from tst import print_banner
 
-def doc_show(docs):
+def doc_show(argv):
     ''' Show the content of a doc.'''
-    if docs:
-        for d in docs:
-            d = doc_path(d)
-            if not exists(d):
-                print('File not found, '+d)
-                return
-            print("doc:"+d)
-            system('cat '+d)
-    else:
-        d = doc_path('Hammer/docs')
-        for f in listdir(d):
-            path = join(d,f)
-            if not exists(path):
-                print('File not found, '+d)
-                return
-            print("# doc:"+path)    
-            system('cat '+path)
+    print("List the document contents")
+    for f in doc_find(argv):
+        print_banner (f.replace(doc_path()+'/',''))
+        print (open(f).read())
 
 
 def doc_web():  
