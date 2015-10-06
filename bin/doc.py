@@ -108,7 +108,7 @@ def doc_list(argv):
 
 def doc_path(doc=None):
     '''Return the path name that corresponds to this document.'''
-    path = join(environ['ocean'],'user_doc')
+    path = join(environ['mybook'])
     if doc:
         return join(path,doc[0])
     else:

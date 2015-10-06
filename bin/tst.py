@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-
 from datetime import datetime
 from glob import glob
 from os import system, listdir, environ, mkdir, getcwd, chdir
@@ -109,10 +108,15 @@ def tst_command(argv):
 def tst_diff(name):
     '''Find the differences'''
     from shell import differences
-    answer = recall_key ('%s.out' % name)
-    correct = recall_key('%s.correct' % name)
-    if answer!=correct:
-        return differences(answer,correct)
+    try:
+        answer = recall_key ('%s.out' % name).decode(encoding='utf-8')
+        correct = recall_key('%s.correct' % name) #.decode('ascii','ignore')
+        if correct and answer and answer!=correct:
+            return differences(answer,correct)
+    except:
+        print ("BAD DATA in TEST "+name)
+        #print ('ANSWER '+answer)
+        #print ('CORRECT: '+correct)
  
 
 def tst_edit(command):
