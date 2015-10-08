@@ -53,11 +53,15 @@ def doc_delete(argv):
         system('rm '+d)
 
 
-def doc_edit(argv):
+def doc_edit(name):
     ''' Edit the content of a doc.'''
-    d = doc_path(argv[2])
-    print("edit:",d)
-    system('e '+d)
+    print('DOC EDIT ',name)
+    if name:
+        d = doc_path(name)
+        print("edit:",d)
+        system('e '+d)
+    else:
+        print ('No name given')
 
 
 def doc_help():
@@ -156,7 +160,7 @@ def doc_command(argv):
             doc_delete(argv)
 
         elif argv[1]=='edit':
-            doc_edit(argv)
+            doc_edit(argv[2:])
 
         elif argv[1]=='list':
             doc_list(argv[2:])
