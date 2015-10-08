@@ -15,9 +15,16 @@ def domain_map():
     map = {}
     for d in open(join(DOC_ROOT,'Domains')).read().split('\n'):
         d = d.split(' ')
-        if len(d)==2:
+        if len(d)>1:
             map[d[0]] = d[1]
     return map
+
+# Read the domain mapping from a file
+def domain_title(domain):
+    for d in open(join(DOC_ROOT,'Domains')).read().split('\n'):
+        d = d.split(' ')
+        if len(d)>2 and d[0]==domain:
+             return d[2]
 
 
 # Map the domain to a document directory
