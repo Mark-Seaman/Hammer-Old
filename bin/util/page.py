@@ -42,7 +42,7 @@ def page_redirect (host,user,path,allow_public=True):
         if exists(doc) and isdir(doc) and exists(index):
             return path+'/Index'
        
-    doc = doc_path(host,user,path)
+    doc = doc_path(host,'Notes',path)
     index = join(doc,'Index')
     if exists(doc) and isfile(doc):
         return
