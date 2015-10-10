@@ -70,10 +70,10 @@ def prototype_list(root_dir,topic=None):
 
 
 def prototype_path(topic=None):
+    path = environ['prototype']
     if topic:
-        return join(environ['prototype'],topic)
-    else:
-        return environ['prototype']
+        path = join(path,topic)
+    return path
 
 
 def prototype_pick(topic):
