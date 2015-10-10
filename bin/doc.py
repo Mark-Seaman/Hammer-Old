@@ -136,7 +136,7 @@ def doc_show(argv):
     print("List the document contents")
     for f in doc_find(argv):
         print_banner (f.replace(doc_path()+'/',''))
-        print (open(f).read())
+        print (open(f).read().decode('ascii','ignore'))
 
 
 def doc_web():  

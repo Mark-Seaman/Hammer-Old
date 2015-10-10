@@ -2,15 +2,19 @@
 # Setup the Python Evironment
 
 # Create a Python virtualenv for Python 2.7
-virtualenv --no-site-packages --distribute -p python2.7 env
+[ ! -d ~/Tools/env-python27 ] &&
+cd ~/Tools &&
+virtualenv --no-site-packages --distribute -p python2.7 env-python27 &&
 
 # Activate the virutalenv
-. env/bin/activate
+. ~/Tools/env-python27/bin/activate
 
 
 # Install Django and support libraries
 pip install --upgrade pip
-pip install celery redis nose
+pip install celery 
+pip install redis 
+pip install nose
 pip install cookiecutter
 pip install django-floppyforms
 pip install Django==1.7.3 
@@ -19,4 +23,5 @@ pip install mkdocs
 pip install pandoc
 pip install requests
 pip install tox
+pip install Selenium
 
