@@ -7,6 +7,11 @@ from subprocess import Popen,PIPE
 from sys import argv
 
 
+def print_banner(name):
+    '''Show a banner for this file in the output'''
+    print('\n%s\n%s%s\n%s\n' % ('-'*80, ' '*30, name,'-'*80))
+
+
 def limit_lines(shell_command, min=None, max=None):
     '''Limit the lines to a certain number or echo all the output'''
     text = shell (shell_command)

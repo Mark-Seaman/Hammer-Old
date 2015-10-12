@@ -3,6 +3,7 @@
 from os import system, listdir, environ, chdir, walk
 from os.path import join, exists, isdir
 from sys import argv
+from tst import print_banner
 
 
 
@@ -129,7 +130,6 @@ def doc_publish():
     #     server publish
     #     ''')
 
-from tst import print_banner
 
 def doc_show(argv):
     ''' Show the content of a doc.'''

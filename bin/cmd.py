@@ -58,6 +58,35 @@ def command_edit(argv):
 	print(shell('e $p/bin/%s.py' % argv[2]))
 
 
+def command_function(argv):
+	if not argv:
+		print 'No function requested'
+	path = join(environ['pb'],argv[0]+'.py')
+	if not exists(path):
+		print('Command not found: '+path)
+	else:
+		print("Command:",path)
+		text = """
+
+# New code for function
+
+		yyy  -- Do it
+
+		elif argv[1]=='yyy':
+			xxx_yyy(argv[2:])
+
+
+def xxx_yyy(argv):
+	'''	Edit the content of a command.'''
+	print("xxx yyy: " + argv[0])
+	print(shell('echo $p/bin/%s.py %s' % (argv[0], argv[1])))
+
+
+		""".replace('xxx', argv[0]).replace('yyy', argv[1])
+		open(path, 'a').write(text)
+
+
+
 def command_help():
 	'''Show all the command commands and their usage.'''
 	print('''
@@ -117,6 +146,9 @@ def cmd_command(argv):
 
 		elif argv[1]=='edit':
 			command_edit(argv)
+
+		elif argv[1]=='function':
+			command_function(argv[2:])
 
 		elif argv[1]=='list':
 			command_list(argv)

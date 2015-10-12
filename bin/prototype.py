@@ -1,9 +1,11 @@
 #!/usr/bin/env python
 
 from os import environ, listdir, remove, system,  walk
-from os.path import join, exists
+from os.path import exists, isfile, join
 from random import choice
 from sys import argv
+
+from shell import print_banner
 
 
 def prototype_add(topic):
@@ -82,16 +84,12 @@ def prototype_pick(topic):
 
 
 def prototype_show(topic):
-    '''Show the content of a prototype.'''
-    if topic:
-        path = prototype_path(topic)
-        print("Show prototype: "+path)
-        if exists(path):
-            print(open(path).read())
-            return
-        print('File does not exists: '+path)
-    else:
-        print('No topic listed')
+    ''' Show the content of a doc.'''
+    path = prototype_path(topic)
+    for f in prototype_enumerate():
+        if isfile(join(path,f)):
+            print_banner (f)
+            print (open(join(path,f)).read().decode('ascii','ignore'))
 
 
 def get_topic(argv):
