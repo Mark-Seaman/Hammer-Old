@@ -3,7 +3,7 @@
 from os import system, listdir, environ, chdir, walk
 from os.path import join, exists, isdir
 from sys import argv
-from tst import print_banner
+from shell import print_banner
 
 
 

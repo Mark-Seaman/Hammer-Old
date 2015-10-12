@@ -7,13 +7,9 @@ from subprocess import Popen,PIPE
 from sys import argv
 
 from code import find_functions
-from shell import shell
+from shell import shell, print_banner
 from store import save, recall, expire, expiration, save_key, recall_key
 from store import is_cached, clear_cache
-
-
-def print_banner(name):
-    print('\n%s\n%s%s\n%s\n' % ('-'*80, ' '*30, name,'-'*80))
 
 
 def tst_add(command):
