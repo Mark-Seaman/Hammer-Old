@@ -22,6 +22,11 @@ def read_file(path):
     return open(path).read().decode('ascii','ignore')
 
 
+def write_file(path,text):
+    '''Write text to a file'''
+    return open(path, 'w').write(text)
+
+
 def limit_lines(shell_command, min=None, max=None):
     '''Limit the lines to a certain number or echo all the output'''
     text = shell (shell_command)
