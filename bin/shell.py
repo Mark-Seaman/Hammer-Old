@@ -12,6 +12,21 @@ def print_banner(name):
     print('\n%s\n%s%s\n%s\n' % ('-'*80, ' '*30, name,'-'*80))
 
 
+def print_file(path):
+    '''Print text from a file'''
+    print (read_file(path))
+
+
+def read_file(path):
+    '''Read text from a file'''
+    return open(path).read().decode('ascii','ignore')
+
+
+def write_file(path,text):
+    '''Write text to a file'''
+    return open(path, 'w').write(text)
+
+
 def limit_lines(shell_command, min=None, max=None):
     '''Limit the lines to a certain number or echo all the output'''
     text = shell (shell_command)

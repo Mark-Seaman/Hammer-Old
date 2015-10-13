@@ -7,8 +7,15 @@ from re         import compile, IGNORECASE, DOTALL
 
 # Create bold text if needed
 def make_heading(line):
-    pat = compile(r"\* (.*) \*", IGNORECASE | DOTALL)
-    return pat.sub(r'<h1>\1</h1>', line)
+    tag = 'h1'  
+    if line.startswith('** '):
+        tag = 'h2'
+    if line.startswith('*** '):
+        tag = 'h3'
+    if line.startswith('**** '):
+        tag = 'h4'
+    pat = compile(r"\*+ (.*)", IGNORECASE | DOTALL)
+    return pat.sub(r'<h1>\1</h1>', line).replace('h1',tag)
 
 # Create bold text if needed
 def make_bold(line):
@@ -22,7 +29,7 @@ def make_italic(line):
 
 # Add paragraph breaks if needed
 def break_paragraphs(line):
-    if line=='': return '</p><p>'
+    if line=='': return '<br>'
     else: return line
 
 # Remove the muse tag from the first line
@@ -35,7 +42,7 @@ def preserve_spaces(line):
 
 # Break lines for <space> at beginning
 def space_breaks(line):
-    always_break = True
+    always_break = False
     if always_break or (len(line)>0 and line[0]==' '):
         return  '<br/> '+line
     return line
@@ -103,8 +110,6 @@ def convert_links(text1):
     text = url_to_image(text)
     text = url_to_anchor(text)
     text = muse_anchor(text)
-    #-JRE- Disabled in this project because it causes Company name/paths to convert into links
-    #if text==text1: text = wiki_words(text)
     return text
 
 # Convert a single text line to html
@@ -135,3 +140,7 @@ def get_title(text):
 # Turn a wiki word into a title, format the title with spaces to break each word.
 def title_text(title):
     return title[0] + ''.join([ " "+c if c.isupper() else c  for c in title[1:] ])
+
+# Convert from text block to HTML
+def muse_to_html(text):
+    return convert_html(text.split('\n'))
