@@ -52,23 +52,9 @@ def prototype_edit(topic):
         print('File does not exist: '+path)
 
 
-def prototype_enumerate():
-    '''Generator to produce a list of all topics'''
-    root_dir = prototype_path()
-    for root, dirnames, filenames in walk(root_dir):
-        for filename in filenames:
-            yield join(root, filename).replace(root_dir+'/','')
-
-
-def prototype_list(root_dir,topic=None):
+def prototype_list(topic=None):
     '''List the parts of the prototype source code.'''
-    print("List the contents of this prototype")
-    for root, dirnames, filenames in walk(root_dir):
-        for filename in filenames:
-            if topic:
-                if not topic == filename:
-                    continue
-            print(join(root, filename).replace(root_dir+'/',''))
+    print_file_list(prototype_path(),topic)
 
 
 def prototype_path(topic=None):
@@ -130,7 +116,7 @@ def prototype_command(argv):
             prototype_edit(get_topic(argv))
 
         elif argv[1]=='list':
-            prototype_list(prototype_path(), get_topic(argv))
+            prototype_list(get_topic(argv))
 
         elif argv[1]=='path':
             print(prototype_path(get_topic(argv)))

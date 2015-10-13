@@ -7,6 +7,21 @@ from subprocess import Popen,PIPE
 from sys import argv
 
 
+def enumerate_files(base, topic=None):
+    '''Generator to produce a list of all files in a tree'''
+    path = base
+    if topic:
+        path = join(path,topic)
+    for root, dirnames, filenames in walk(path):
+        for filename in filenames:
+            yield join(root, filename).replace(base+'/','')
+
+
+def print_file_list(base, topic=None):
+    '''List the files of a subdirectory.'''
+    print ('\n'.join(sorted(enumerate_files(base,topic))))
+
+
 def print_banner(name):
     '''Show a banner for this file in the output'''
     print('\n%s\n%s%s\n%s\n' % ('-'*80, ' '*30, name,'-'*80))
