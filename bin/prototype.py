@@ -5,7 +5,7 @@ from os.path import exists, isfile, join
 from random import choice
 from sys import argv
 
-from shell import print_banner
+from shell import print_banner, print_file_list, enumerate_files
 
 
 def prototype_add(topic):
@@ -72,10 +72,11 @@ def prototype_pick(topic):
 def prototype_show(topic):
     ''' Show the content of a doc.'''
     path = prototype_path(topic)
-    for f in prototype_enumerate():
+    for f in enumerate_files(path,topic):
         if isfile(join(path,f)):
-            print_banner (f)
-            print (open(join(path,f)).read().decode('ascii','ignore'))
+            print(f)
+            #print_banner (f)
+            #print (open(join(path,f)).read().decode('ascii','ignore'))
 
 
 def get_topic(argv):
