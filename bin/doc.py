@@ -120,17 +120,6 @@ def doc_path(doc=None):
         return path
 
 
-def doc_publish():
-    '''Update all of the documents from the source'''
-    pass
-    # system('''# Build the HTML from markdown
-    #     cd $mb/Hammer &&
-    #     mkdocs build &&
-    #     merge site ../website/Hammer
-    #     server publish
-    #     ''')
-
-
 def doc_show(argv):
     ''' Show the content of a doc.'''
     print("List the document contents")
@@ -167,9 +156,6 @@ def doc_command(argv):
 
         elif argv[1]=='path':
             print('path:'+doc_path(argv[2:]))
-
-        elif argv[1]=='publish':
-            doc_publish()
 
         elif argv[1]=='show':
             doc_show(argv[2:])
