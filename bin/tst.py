@@ -105,8 +105,8 @@ def tst_diff(name):
     '''Find the differences'''
     from shell import differences
     try:
-        answer = recall_key ('%s.out' % name).decode(encoding='utf-8')
-        correct = recall_key('%s.correct' % name) #.decode('ascii','ignore')
+        answer = recall_key ('%s.out' % name).decode('ascii','ignore')
+        correct = recall_key('%s.correct' % name).decode('ascii','ignore')
         if correct and answer and answer!=correct:
             return differences(answer,correct)
     except:

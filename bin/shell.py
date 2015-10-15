@@ -49,7 +49,8 @@ def limit_lines(shell_command, min=None, max=None):
     if violation:
         text = text.split('\n')
         text = '\n'.join([line[:60] for line in text])
-        return violation+'\n'+text
+        #return violation+'\n'+text
+        return violation
     return ''
 
 
