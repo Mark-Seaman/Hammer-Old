@@ -57,35 +57,3 @@ def convert_to_muse(d1,d2):
             f1 = join(d1,f)
             f2 = join(d2,f.replace('.md',''))
             markdown_to_muse(f1,f2)
-#-----------------------------------------------------------------------------
-# To Markdown
-
-# Convert one muse line
-def map_muse_to_markdown(line):
-    line = sub(r'^\* ', r'# ', line)
-    line = sub(r'^\*\* ', r'## ', line)
-    line = sub(r'^\s*\* ', r'* ', line)
-    #line = sub(r'\[\[(LinkText)\]\]', r'\[\[\2\]\]', line)
-    return line
-
-
-# Convert a text block
-def text_to_markdown(text):
-    text = map(map_muse_to_markdown, text.split('\n'))
-    return '\n'.join(text)
-
-
-# Convert one file to markdown
-def muse_to_markdown(f1,f2):
-    text = open(f1).read().split('\n')[2:]
-    text = text_to_markdown (text)
-    open(f2,'wt').write('\r\n'.join(text))
-
-
-# Convert muse files to markdown
-def convert_to_markdown(d1,d2):
-    for f in listdir(d1):
-        f1 = join(d1,f)
-        f2 = join(d2,f+'.md')
-        muse_to_markdown(f1,f2)
-
