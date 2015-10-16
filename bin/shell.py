@@ -34,8 +34,11 @@ def print_file(path):
 
 def read_file(path):
     '''Read text from a file'''
-    return open(path).read().decode('ascii','ignore')
-
+    if exists(path):
+        return open(path).read().decode('ascii','ignore')
+    else:
+        return ''
+        
 
 def write_file(path,text):
     '''Write text to a file'''

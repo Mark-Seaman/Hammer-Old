@@ -30,6 +30,6 @@ def doc_path_test():
 
 
 def doc_show_test():
-	text = limit_lines('doc show', 22000, 25000)
+	text = limit_lines('doc show', 22000, 26000)
 	return text
 
