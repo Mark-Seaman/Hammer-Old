@@ -1,9 +1,20 @@
-#!/bin/bash
-# Run the default web browser
-echo Run the default web browser
+#!/usr/bin/env python
 
-[ `hostname` == 'seaman-hammer' ] &&
-rbg google-chrome $* &&
-exit 0
+from platform import node
+from os import system
+from sys import argv
 
-open -a "Google Chrome" $*
+
+# Setup argument
+if len(argv)>1:
+    page = argv[1]
+    if not page.startswith('http://'):
+        page = 'http://' + page
+else:
+    page = 'http://seamanslog.com'
+
+# Use the correct invocation
+if 'mac' in node():
+    system('open -a "Google Chrome" '+page)
+else:
+    system('rbg google-chrome '+page)
