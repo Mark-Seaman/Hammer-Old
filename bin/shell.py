@@ -1,10 +1,42 @@
 #!/usr/bin/env python
 
 from os import environ, listdir, remove, system,  walk
-from os.path import join, exists
+from os.path import dirname, exists, isdir, isfile, join
 from random import choice
 from subprocess import Popen,PIPE
 from sys import argv
+
+
+
+def add_file(path,topic):
+    '''Create a new notes.'''
+    if topic:
+        path = join(path,topic)
+        print("New file:"+path)
+        dir = dirname(path)
+        if not exists(dir):
+            print('creating directory, '+dir)
+            mkdir (dir)
+        if not exists(path):
+            with open(path,'w') as f:
+                f.write('# '+topic)
+        else:
+            print('File already exists: '+path)
+        return path
+    else:
+        print('Must give a file name')
+
+
+def edit_file(path):
+    '''Edit the content of a file.'''
+    if path:
+        print("Edit task:",path)
+        if exists(path):
+            system('e '+path)
+        else:
+            print('File does not exist: '+path)
+    else:
+        print('No topic specified')
 
 
 def enumerate_files(base, topic=None):
@@ -30,6 +62,21 @@ def print_banner(name):
 def print_file(path):
     '''Print text from a file'''
     print (read_file(path))
+
+
+def show_files(root_dir, topic=None):
+    ''' Show the content of one file or directory'''
+    selection = root_dir
+    if topic:
+        selection = join(selection,topic)
+    if isdir(selection):
+        for f in enumerate_files(root_dir, topic):
+            path = join(root_dir,f)
+            if isfile(path):
+                print_banner (f)
+                print_file(path)
+    elif isfile(selection):
+        print_file(selection)
 
 
 def read_file(path):
