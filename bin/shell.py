@@ -7,6 +7,14 @@ from subprocess import Popen,PIPE
 from sys import argv
 
 
+def delete_file(path):
+    '''Delete the notes.'''
+    print("Delete file: "+path)
+    if exists(path):
+        remove(path)
+    else:
+        print('File does not exist: '+path)
+
 
 def add_file(path,topic):
     '''Create a new notes.'''
