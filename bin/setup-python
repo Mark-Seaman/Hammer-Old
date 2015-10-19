@@ -17,6 +17,9 @@ pip install redis
 pip install nose
 pip install cookiecutter
 pip install django-floppyforms
+pip install django-extensions
+pip install django-ses
+pip install djangorestframework
 pip install Django==1.7.3 
 pip install docopt
 pip install mkdocs
