@@ -8,7 +8,7 @@ from sys import argv
 # Setup argument
 if len(argv)>1:
     page = argv[1]
-    if not page.startswith('http://'):
+    if not page.startswith('http://') and not page.startswith('https://'):
         page = 'http://' + page
 else:
     page = 'http://seamanslog.com'
