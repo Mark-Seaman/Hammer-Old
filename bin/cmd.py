@@ -27,12 +27,11 @@ python $p/bin/%s.py $*
 	chmod (path, stat.S_IRWXU|stat.S_IRGRP|stat.S_IROTH)
 
 
-def command_add(argv):
-	'''Create a new command.'''
-	print("Add new command:"+argv[2])
-	command = argv[2]
-	command_add_script(command)
-	script_path = join(environ['pb'],'%s.py' % command)
+def command_write_script(command, proto=False):
+	if proto:
+		script_path = join(environ['pb'],'_%s.py_' % command)
+	else:
+		script_path = join(environ['pb'],'%s.py' % command)
 	template_path = join(environ['pb'],'prototype.py')
 	command_content = open(template_path).read().replace('prototype',command)
 	#print('Content: %s.py \n %s' % (command,command_content))
@@ -42,7 +41,23 @@ def command_add(argv):
 		with open(script_path,'w') as f:
 			f.write(command_content)
 		system('tst add ' + command)
-	#command_edit(argv)
+	return script_path
+
+
+def command_add(argv):
+	'''Create a new command.'''
+	print("Add new command:"+argv[2])
+	command = argv[2]
+	command_add_script(command)
+	command_write_script(command)
+
+
+def command_proto(command):
+	'''Create a new command.'''
+	print("Add new prototype:"+command)	
+	path = command_write_script(command, True)
+	system ('e %s' % path)
+	system ('diff %s %s' % (path,path.replace('_','')))
 
 
 def command_delete(argv):
@@ -149,6 +164,9 @@ def cmd_command(argv):
 
 		elif argv[1]=='function':
 			command_function(argv[2:])
+
+		elif argv[1]=='proto':
+			command_proto(argv[2])
 
 		elif argv[1]=='list':
 			command_list(argv)
