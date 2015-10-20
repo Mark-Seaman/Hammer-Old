@@ -9,7 +9,7 @@ from sys import argv
 
 def delete_file(path):
     '''Delete the notes.'''
-    print("Delete file: "+path)
+    #print("Delete file: "+path)
     if exists(path):
         remove(path)
     else:
@@ -20,7 +20,7 @@ def add_file(path,topic):
     '''Create a new notes.'''
     if topic:
         path = join(path,topic)
-        print("New file:"+path)
+        #print("New file:"+path)
         dir = dirname(path)
         if not exists(dir):
             print('creating directory, '+dir)
