@@ -1,30 +1,38 @@
 #!/usr/bin/env python
 
-from os import system, listdir, environ
+from os import chdir, system, listdir, environ
 from os.path import join
 from sys import argv
 
-# Read in shell variables
-ON_INTERNET = environ['ON_INTERNET']=="True"
+from shell import on_internet
 
 
 def vc_changes():
     '''Form the shell script for the commit command. '''
-    print('List all pending changes to the book')
-    system('cd $p; git diff --color-words --word-diff')
+    print('List all pending changes to the tracked files')
+    system('cd $p; git diff --no-color --word-diff')
 
 
-def vc_commit(argv):
+def vc_commit(comment):
 	'''	
 	Commit all changes and share with others.
 	'''
-	comment = argv[2:]
-	if not comment:
-		comment = 'Automatic commit of Hammer changes'
+	commit_command = '''#!/bin/bash
+	# Commit all changes to the remote repo
+	cd $p
+	git add -A .        &&  
+	git commit -m"%s"   
+	git pull            &&
+	git push
+	'''
+
+	if not on_internet():
+		print ("Need an internet connection")
+	elif not comment:
+		print ("Must have a comment") 
 	else:
-		comment = ' '.join(argv[2:])
-	print("vc commit:"+comment)
-	system('commit %s "%s"' % (environ['p'], comment))
+		#chdir(environ['p'])
+		system(commit_command % ' '.join(comment))
 
 
 def vc_delete(argv):
@@ -48,8 +56,7 @@ def vc_help():
         commit  [file] -- Add a new vc
         delete  [file] -- Delete a vc
         help    [file] -- See the vc commands
-        status  [file] -- List all vcs
-        show    [file] -- Show a vc
+        status  [file] -- List all files with pending changes
       
 			''')
 
@@ -61,13 +68,6 @@ def vc_status(argv):
 	system('git status')
 
 
-def vc_show(argv):
-	'''	
-	Show the content of a vc.
-	'''
-	system('git diff')
-	
-
 def vc_command(argv):
 	'''
 	Execute all of the vc specific vcs
@@ -78,7 +78,7 @@ def vc_command(argv):
 			vc_changes()
 
 		elif argv[1]=='commit':
-			vc_commit(argv)
+			vc_commit(argv[2:])
 
 		elif argv[1]=='delete':
 			vc_delete(argv)
@@ -89,14 +89,10 @@ def vc_command(argv):
 		elif argv[1]=='status':
 			vc_status(argv)
 
-		elif argv[1]=='show':
-			vc_show(argv)
-
 		else:
-			print('No vc command found, '+argv[1])
-			vc_commit(['commit']+argv)
+			vc_commit(argv[2:])
 	else:
-		vc_commit(['commit'])
+		vc_help()
 
 
 '''
