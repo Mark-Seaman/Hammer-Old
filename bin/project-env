@@ -3,8 +3,6 @@
 
 # Vars
 export p=$HOME/Projects/Hammer
-export book=$HOME/Projects/Atlas/Leverage
-export mb=$HOME/Documents/book
 export gh='Shrinking-World/Hammer'
 export phip=54.244.95.205
 export ph=ubuntu@$phip
@@ -70,7 +68,6 @@ alias ts='tst show'
 export PATH=\
 $p/bin:\
 $p/test:\
-$p/socket:\
 /bin:\
 /sbin:\
 /usr/bin:\
@@ -88,7 +85,7 @@ cd $p
 echo "Project: $p"
 
 # Show the banner
-welcome
+cat bin/welcome
 
 # Use virtualenv
 . $p/env/bin/activate

@@ -4,6 +4,8 @@ from os import system, listdir, environ
 from os.path import join
 from sys import argv
 
+# Read in shell variables
+ON_INTERNET = environ['ON_INTERNET']=="True"
 
 
 def vc_changes():

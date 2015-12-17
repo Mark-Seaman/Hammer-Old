@@ -16,14 +16,6 @@ def tst_functions_test():
 def tst_lines_test():
     return limit_lines ('cat bin/tst.py',200,370)
 
-
-def tst_like_test():
-    system('''
-        echo do not like this > test/dummy.correct
-        tst like dummy > /dev/null
-        ''')
-    return ''
-
  
 def tst_list_tests():
      '''Make a list of all tests to run'''

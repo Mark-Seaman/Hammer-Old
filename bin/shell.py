@@ -6,6 +6,16 @@ from random import choice
 from subprocess import Popen,PIPE
 from sys import argv
 
+# Read in shell variables
+ON_INTERNET = environ['ON_INTERNET']=="True"
+
+
+def on_internet():
+    if ON_INTERNET:
+        return True
+    else:
+        print ('No internet connection')
+        
 
 def delete_file(path):
     '''Delete the notes.'''

@@ -10,5 +10,6 @@ cd $dir
 git add -A .        &&  
 git commit -m"$comment"   
 
+[ "$ON_INTERNET" == "True" ] &&
 git pull            &&
 git push

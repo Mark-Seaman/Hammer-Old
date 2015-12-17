@@ -1,20 +1,5 @@
-#!/usr/bin/env python
+#!/bin/bash
+# Execute a script command
 
-from platform import node
-from os import system
-from sys import argv
+python $p/bin/web.py $*
 
-
-# Setup argument
-if len(argv)>1:
-    page = argv[1]
-    if not page.startswith('http://') and not page.startswith('https://'):
-        page = 'http://' + page
-else:
-    page = 'http://seamanslog.com'
-
-# Use the correct invocation
-if 'mac' in node():
-    system('open -a "Google Chrome" '+page)
-else:
-    system('rbg google-chrome '+page)

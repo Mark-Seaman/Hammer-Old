@@ -13,32 +13,22 @@ from shell import shell, lines, limit_lines
 
 
 def clean_up():
-    system('rm -rf test-xxx')
+    system('rm -rf bin-xxx')
     
 
 def synch_bin_test():
     return limit_lines('synch bin', 2, 10)
 
 
-def synch_copy_test():
-    x = limit_lines('synch copy test test-xxx',130,300)
-    clean_up()
-    return x
-
-
-def synch_preview_test():
-	return limit_lines('synch preview test test-xxx',130, 300)
-
-
 def synch_mirror_test():
-    shell('synch mirror test test-xxx')
-    x = limit_lines('synch mirror test test-xxx', 6, 6)
+    shell('synch mirror bin bin-xxx')
+    x = limit_lines('synch mirror bin bin-xxx', 6, 6)
     clean_up()
     return x
 
 
 def synch_sync_test():
-    x = limit_lines('synch sync test test-xxx', 120, 300)
+    x = limit_lines('synch sync bin bin-xxx', 120, 300)
     clean_up()
     return x
 

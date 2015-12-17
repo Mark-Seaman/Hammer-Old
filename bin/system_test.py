@@ -26,7 +26,7 @@ def system_nose_test_execution():
 
 def system_process_status_test():
     '''Make sure that there are not too many processes running'''
-    return limit_lines ('ps -e',150,260)
+    return limit_lines ('ps -e',190,280)
 
 
 def system_pwd_test():

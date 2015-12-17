@@ -4,7 +4,8 @@ from os import system, listdir, environ
 from os.path import join
 from sys import argv
 
-from shell import shell
+from shell import shell,on_internet
+
 
 
 def server_changes():
@@ -22,25 +23,28 @@ def server_console():
 def server_deploy(argv):
 	'''Deploy code to the server'''
 	print("server deploy:")
-	system('''# Local operations
-		cd ~/Projects/seamantech
-		git add -A . 
-		git commit -m 'Deploy the Hammer code'
-		git pull && git push
-		''')
-	server_do('''# Remote operations
-		cd ~/Projects/seamantech
-		hostname &&
-		pwd &&
-		git pull
-		''')
-	server_restart()
+	if on_internet():
+		system('''# Local operations
+			cd ~/Projects/seamantech
+			git add -A . 
+			git commit -m 'Deploy the Hammer code'
+			git pull && git push
+			''')
+		server_do('''# Remote operations
+			cd ~/Projects/seamantech
+			hostname &&
+			pwd &&
+			git pull
+			''')
+		server_restart()
 	
 	
 def server_do(command):
 	'''Run a command on the server'''
-	#print("server do: "+command)
-	system('ssh '+environ['ph']+' "'+command+'"')
+	if on_internet():
+		#print("server do: "+command)
+		system('ssh '+environ['ph']+' "'+command+'"')
+	
 
 	
 def server_help():

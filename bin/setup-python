@@ -27,4 +27,5 @@ pip install pandoc
 pip install requests
 pip install tox
 pip install Selenium
+pip install jupyter
 
