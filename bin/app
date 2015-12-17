@@ -1,0 +1,6 @@
+#!/bin/bash
+# Execute a app script command
+
+python $p/bin/app.py $*
+
+	
