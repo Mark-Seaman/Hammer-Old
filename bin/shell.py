@@ -15,7 +15,11 @@ def on_internet():
         return True
     else:
         print ('No internet connection')
-        
+ 
+
+def select_lines(text, first, last):
+    return '\n'.join(text.split('\n')[first:last])
+
 
 def delete_file(path):
     '''Delete the notes.'''
@@ -63,8 +67,9 @@ def enumerate_files(base, topic=None):
     if topic:
         path = join(path,topic)
     for root, dirnames, filenames in walk(path):
-        for filename in filenames:
-            yield join(root, filename).replace(base+'/','')
+        if not '.git' in root: 
+            for filename in filenames:
+                yield join(root, filename).replace(base+'/','')
 
 
 def print_file_list(base, topic=None):
@@ -236,9 +241,9 @@ def shell_list(root_dir,topic=None):
 
 def shell_path(topic=None):
     if topic:
-        return join(environ['b'],topic)
+        return join(environ['pb'],topic)
     else:
-        return environ['b']
+        return environ['pb']
 
 
 def shell_pick(topic):

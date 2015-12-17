@@ -9,19 +9,7 @@ Run all of the tests for the 'shell' objects.  Output the test results.
 from os import listdir, environ, system
 from os.path import join
 
-
-def shell_add_delete_test():
-    from shell import shell
-    results = [
-        shell('shell list xxx'),
-        shell('shell show xxx'),
-        shell('shell add_test xxx'),
-        shell('shell list xxx'),
-        shell('shell show xxx'),
-        shell('shell delete xxx'),
-        shell('shell list xxx'),
-    ]
-    return '\n'.join(results)
+from shell import on_internet, shell
 
 
 def shell_list_test():
@@ -37,3 +25,8 @@ def shell_path_test():
 def shell_show_test():
     from shell import shell
     return shell('shell show')
+
+
+def shell_internet_test():
+    if on_internet():
+        return shell('git pull')
