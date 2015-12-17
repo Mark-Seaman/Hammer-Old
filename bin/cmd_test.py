@@ -14,21 +14,14 @@ from sys import argv
 from shell import shell, lines, limit_lines
 
 
-def cmd_add_test():
-    '''Add and delete commands from the system'''
-    return shell('cmd add-test xxx') + shell('cmd show xxx') + shell('cmd delete xxx')
+def cmd_show_test():
+    return(shell('cmd show cmd') + '\n' + shell('cmd show xxx'))
 
 
 def cmd_list_test():
-    '''List the available commands'''
-    return shell('cmd list') + shell('cmd show xxx')
+    return(shell('cmd list'))
 
 
-def source_test():
-    '''   List the source files from several directories   '''
-    dirs = ['','bin','test']
-    result = []
-    for d in dirs:
-        files = [f for f in glob(join(d,'*.py')) if '.pyc' not in f]
-        result += sorted(files)
-    return '\n'.join(result)+'\n'
+def cmd_source_test():
+    files = glob('bin/*.py')
+    return '\n'.join(sorted(files))

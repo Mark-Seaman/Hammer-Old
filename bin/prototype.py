@@ -10,7 +10,7 @@ from shell import delete_file, edit_file, add_file, show_files
 
 
 def prototype_path(topic=None):
-    path = join(environ['HOME'],'Documents', 'MyBook', 'notes', 'Hammer')
+    path = environ['pb']
     if topic:
         path = join(path,topic)
     return path

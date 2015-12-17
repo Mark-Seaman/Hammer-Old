@@ -1,0 +1,5 @@
+#!/bin/bash
+# Execute a atlas script command
+
+python $p/bin/prototype.py $*
+
