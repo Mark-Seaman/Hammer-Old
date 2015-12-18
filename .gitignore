@@ -1,46 +1,46 @@
 # Hammer Config Files
-env
-test/
-.idea
-.test
+
 *.db
+*.egg
+*.egg-info
+*.mo
 *.py[cod]
 *.so
 
-# Packages
-*.egg
-*.egg-info
-dist
-build
-eggs
-parts
-var
-sdist
-develop-eggs
-.installed.cfg
-lib
-lib64
-
-# Installer logs
-pip-log.txt
-
-# Unit test / coverage reports
 .coverage
-.tox
-nosetests.xml
-
-# Translations
-*.mo
-
-# Mr Developer
+.idea
+.installed.cfg
 .mr.developer.cfg
 .project
 .pydevproject
+.test
+.tox
 
-# Complexity
+bin/settings-private
+build
+
+develop-eggs
+dist
+docs/_build
+
+eggs
+env
+
+lib
+lib64
+
+nosetests.xml
+
 output/*.html
 output/*/index.html
 
-# Sphinx
-docs/_build
+parts
+pip-log.txt
+
 README.html
+
+sdist
+
+test/
+
+var
