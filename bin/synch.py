@@ -16,7 +16,7 @@ def synch_bin():
 def synch_copy(argv):
 	'''Create a new synch.'''
 	print("synch copy: %s %s" % (argv[2],argv[3]))
-	system('rsync -auvq --existing %s/ %s' % (argv[2],argv[3]))
+	system('rsync -auvq --existing --exclude bin/settings-private %s/ %s' % (argv[2],argv[3]))
 
 
 def synch_mirror(argv):

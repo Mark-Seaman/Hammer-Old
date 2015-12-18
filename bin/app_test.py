@@ -22,3 +22,7 @@ def app_path_test():
 
 def app_show_test():
     return shell('app show app.py')
+
+
+def app_syncdb_test():
+    return shell('app syncdb')

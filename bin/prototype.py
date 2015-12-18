@@ -23,12 +23,12 @@ def prototype_help():
 
     cmd:
 
-        add     [file] -- Add a new prototype
-        delete  [file] -- Delete a prototype
-        edit    [file] -- Edit the prototype
-        list    [file] -- List all prototypes
-        path    [file] -- Lookup the path for the file
-        show    [file] -- Show a prototype
+        add     [file] - Add a new prototype
+        delete  [file] - Delete a prototype
+        edit    [file] - Edit the prototype
+        list    [file] - List all prototypes
+        path    [file] - Lookup the path for the file
+        show    [file] - Show a prototype
             ''')
 
 

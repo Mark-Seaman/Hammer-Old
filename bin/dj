@@ -1,6 +1,6 @@
-!#/bin/bash
-# Run a single Django command
+#!/bin/bash
+# Execute a Django script
 
-cd $pa
-python manage.py $*
+cd $pa && 
+python ./manage.py $*
 

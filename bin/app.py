@@ -32,6 +32,12 @@ def app_help():
             ''')
 
 
+def kill_server():
+    cmd = '''x=`ps -ef | grep -v grep | grep runserver | awk '{ print $2 }'`
+        [ ! -z "$x" ]  && echo kill $x   && kill $x'''
+    system(cmd)
+
+
 def list_files(topic):
     '''List the source code for the app'''
     files =enumerate_files(app_path(),topic)
@@ -72,6 +78,9 @@ def app_command(argv):
 
         elif argv[1]=='edit':
             edit_file(app_path(argv[2]))
+
+        elif argv[1]=='kill':
+            kill_server()
 
         elif argv[1]=='list':
             list_files(topic)

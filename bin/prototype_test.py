@@ -12,19 +12,6 @@ from os.path import join
 from shell import shell, lines, limit_lines
 
 
-def prototype_add_delete_test():
-    results = [
-        shell('prototype list xxx'),
-        shell('prototype show xxx'),
-        shell('prototype add_test xxx'),
-        shell('prototype list xxx'),
-        shell('prototype show xxx'),
-        shell('prototype delete xxx'),
-        shell('prototype list xxx'),
-    ]
-    return '\n'.join(results)
-
-
 def prototype_list_test():
     return shell('prototype list')
 

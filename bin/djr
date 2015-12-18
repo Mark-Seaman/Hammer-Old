@@ -2,5 +2,5 @@
 # Execute a Django script
 
 cd $pa && 
-./manage.py runscript "$*"
+python ./manage.py runscript $*
 

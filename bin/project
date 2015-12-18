@@ -1,10 +1,10 @@
 #!/bin/bash
 # Start working on the simple project
 
-. $HOME/Projects/Hammer/bin/settings-private
+echo "PROJECT: $p"; echo
+. $p/bin/settings-private
 
 # Vars
-export p=$HOME/Projects/Hammer
 export pa=$p/app
 export pb=$p/bin
 export pd=$p/docs
@@ -29,14 +29,13 @@ alias grh='git reset --hard'
 alias grm='git rm'
 alias gs='git status'
 alias h='history|tail -40'
-alias home='. ~/.profile'
 alias ls='ls -FG'
 alias ll='ls -lF'
 alias le='less'
 alias pull='git pull'
 alias push='git pull && git push'
 alias qt='python $pb/qt.py'
-alias run='ocean runserver'
+alias run='app kill && sleep 1 && app run'
 alias te='tst edit'
 alias tl='tst like'
 alias tres='tst results|less'
@@ -67,3 +66,4 @@ echo
 
 path
 
+echo; echo "PROJECT: $p"

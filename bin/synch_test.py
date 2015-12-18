@@ -16,10 +16,6 @@ def clean_up():
     system('rm -rf bin-xxx')
     
 
-def synch_bin_test():
-    return limit_lines('synch bin', 2, 10)
-
-
 def synch_mirror_test():
     shell('synch mirror bin bin-xxx')
     x = limit_lines('synch mirror bin bin-xxx', 6, 6)
