@@ -90,6 +90,9 @@ def tst_command(argv):
         elif 'results'==cmd:
             tst_show_diff(argv[2:])
 
+        elif 'reset'==cmd:
+            tst_reset()
+
         elif 'test'==cmd:
             tst_run_module('tst_test.py')
 
@@ -110,9 +113,9 @@ def tst_diff(name):
         if correct and answer and answer!=correct:
             return differences(answer,correct)
     except:
-        print ("BAD DATA in TEST "+name)
-        #print ('ANSWER '+answer)
-        #print ('CORRECT: '+correct)
+        print ("FIX BAD DATA in TEST "+name)
+        save_key('%s.correct' % name, 'Bad Data Read')
+        save_key('%s.out' % name, 'Bad Data Read')
  
 
 def tst_edit(command):
@@ -137,7 +140,8 @@ def tst_help():
         output    testcase   # Show the output
         correct   testcase   # Show the correct output
         results   [testcase] # Show the unexpected results
-        status              # Show the failing tests
+        reset                # Forget all cached test results
+        status               # Show the failing tests
 
     Shortcut commands
         tlike      # tst like
@@ -149,9 +153,19 @@ def tst_help():
             ''')
 
 
+def tst_reset():
+    print ('Reset all cached test results')
+    from code import find_functions
+    for m in tst_modules():
+        print ('reset '+m)
+        for t in tst_functions([m]):
+            print ('   '+test_case_name(t))
+            save_key('%s.out' % test_case_name(t), 'RESET', 1)
+
+
+
 def tst_run_all():
     '''run all of the test functions for module'''
-    print('run all')
     from code import find_functions
     for m in tst_modules():
         tst_run_module(m)

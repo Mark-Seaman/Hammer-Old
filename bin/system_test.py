@@ -53,7 +53,7 @@ def system_list_test():
 
 
 def system_show_test():
-    return shell('system show project-env')
+    return shell('system show project')
 
 
 def system_shell_test():

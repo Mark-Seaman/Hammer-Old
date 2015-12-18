@@ -39,6 +39,15 @@ def list_files(topic):
     print ('\n'.join(sorted(files)))
 
 
+def run_server():
+    system('''
+            cd $pa;
+            rbg python manage.py runserver;
+            sleep 2
+            web http://127.0.0.1:8000/;
+           ''')
+
+
 def app_command(argv):
     '''Execute all of the app specific apps'''
     if len(argv)>1:
@@ -72,6 +81,9 @@ def app_command(argv):
 
         elif argv[1]=='pick':
             system('e '+app_path(choice(list(app_enumerate()))))
+
+        elif argv[1]=='run':
+            run_server()
 
         elif argv[1]=='search':
             system('grep %s $pa/*/*.py' % argv[2])

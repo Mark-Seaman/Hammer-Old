@@ -1,0 +1,4 @@
+#!/bin/bash
+# Create a Django admin user
+
+python manage.py createsuperuser

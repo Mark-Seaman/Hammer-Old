@@ -1,0 +1,10 @@
+#!/usr/bin/env python
+# Commit all changes from the book project
+
+from sys import argv
+
+from store import store_command
+
+
+store_command(argv)
+

@@ -1,6 +1,6 @@
 # Use Redis to set up a store for key-value pairs
 
-from os import getcwd
+from os import getcwd, environ
 from os.path import join
 from redis      import Redis
 
@@ -66,6 +66,10 @@ def is_cached(key):
         #print("Used Cached results for %s seconds"%(expiration(cache)))
         return expiration(cache)
     
+
+def key_name(key):
+    return join(environ['REDIS_KEY'], key)
+
 
 def clear_cache(key):
     '''Clear the cache for all tests'''

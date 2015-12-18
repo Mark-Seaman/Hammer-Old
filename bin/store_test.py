@@ -1,6 +1,6 @@
 from time import sleep
 
-from store import save, recall, expire, expiration, save_key, recall_key
+from store import save, recall, expire, expiration, key_name, save_key, recall_key
 
 
 def store_redis_test():
@@ -41,3 +41,7 @@ def store_missing_test():
 def store_key_test():
     save_key('store_key_test', 42)
     return recall_key('store_key_test')
+
+
+def store_key_name_test():
+    return key_name("xyz")
