@@ -23,12 +23,14 @@ def app_help():
 
     cmd:
 
-        db             -- Do a syncdb operation
         edit    file   -- Edit the app
+        kill           -- Kill the local web server
         list    [file] -- List all app source code files
         path    [file] -- Lookup the path for the file
+        run            -- Run the local web server
         search  text   -- Find text in the source code
         show    [file] -- Show a app source code file
+        syncdb         -- Update the database to match the code
             ''')
 
 
@@ -63,20 +65,7 @@ def app_command(argv):
         else:
             topic = None
          
-        if argv[1]=='add':
-            add_file(app_path(), argv[2])    
-            app_edit(topic)
-
-        elif argv[1]=='add_test':
-            add_file(app_path(), argv[2])    
-
-        elif argv[1]=='db':
-            system('cd $pa; python manage.py syncdb')
-
-        elif argv[1]=='delete':
-            delete_file(app_path(argv[2]))
-
-        elif argv[1]=='edit':
+        if argv[1]=='edit':
             edit_file(app_path(argv[2]))
 
         elif argv[1]=='kill':
@@ -87,10 +76,7 @@ def app_command(argv):
 
         elif argv[1]=='path':
             print(app_path(topic))
-
-        elif argv[1]=='pick':
-            system('e '+app_path(choice(list(app_enumerate()))))
-
+        
         elif argv[1]=='run':
             run_server()
 
@@ -99,6 +85,9 @@ def app_command(argv):
 
         elif argv[1]=='show':
             show_files(app_path(),topic)
+
+        elif argv[1]=='syncdb':
+            system('dj syncdb')
 
         else:
             print('No app command found, '+argv[1])
